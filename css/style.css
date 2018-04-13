@@ -1,0 +1,11 @@
+.right-align-text{
+    text-align: right;
+}
+
+.right-float{
+    float: right;
+}
+
+.right-dir{
+    direction: rtl;
+}

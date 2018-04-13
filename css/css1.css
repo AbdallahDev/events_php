@@ -1,0 +1,34 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    direction: rtl;
+    align-items: center;
+}
+
+th{
+    background-color:#741f1a;
+    color: white;
+    font-size: medium;
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+td {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: medium;
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+input{
+    direction: rtl;
+    width: 354px;
+}
+
+body{
+    text-align: center;
+}

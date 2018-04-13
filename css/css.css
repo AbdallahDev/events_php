@@ -1,0 +1,89 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #baa56c;
+    width: 100%;
+    direction: rtl;
+}
+
+th{
+    background-color:#951a1d;
+    color: white;
+    border: 3px solid #baa56c;
+    padding: 8px;
+}
+
+td {
+    color: black;
+    border: 3px solid #baa56c;
+    padding: 8px;
+}
+
+input{
+    direction: rtl;
+    width: 354px;
+}
+
+body{
+    text-align: center;
+}
+
+#event_show{
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+#weather{
+    position: absolute;
+    bottom: 4%; 
+    right: 0;
+    color: red;
+    direction: rtl;
+    text-align: center;
+}
+
+#date{
+    position: absolute;
+    left:  -1%;
+    top: 1%;
+    direction: ltr;
+    width:25%;
+}
+
+#iframe_date{
+    margin-right: 9%;
+}
+
+#session{
+    width: 45%;
+    height: 70%;
+    margin-top: 1%;
+    margin-left: 25%;
+    text-align: right;
+    overflow-wrap: break-word;
+    font-size: 105%;
+    font-weight: bold;
+    color: white;
+    direction: rtl;
+}
+
+#bottom_container{
+    width: 100%;
+    /*width: 1366px;*/
+    height: 23%;
+    /*height: 170px;*/
+    background: black;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-decoration: none;
+    background-image: url(../imgs/bottom.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat; 
+    z-index: 1;
+}

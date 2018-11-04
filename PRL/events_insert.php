@@ -46,4 +46,8 @@ if (isset($_POST['committee']) && !empty(trim($_POST['committee']))) {//here i c
 $event1 = new events();
 $event1->insert_event($event_entity, $event_entity_name, $event_time, $event_appointment, $hall_id, $event_place, nl2br($_POST['subject']), $_POST['event_date'], $event_status, $_SESSION['directorate'], $_SESSION['user_id']);
 
+/*this inclusion for the eventNotificatoin file to send notifications when the 
+event inserted in the db*/
+include_once '../android/eventNotification.php';
+
 header('location: events_preview_current_future.php');

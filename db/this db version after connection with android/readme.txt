@@ -1,0 +1,1 @@
+in this version of db file i've added new table called device_token coz it's needed by the andorid app

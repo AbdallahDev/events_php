@@ -1,6 +1,6 @@
 <?php
 
-include_once '../DAL/my_db.php';
+include_once '../../DAL/my_db.php';
 
 //this class to make modifications on the user_token table.
 class device_token extends my_db {

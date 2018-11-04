@@ -1,6 +1,6 @@
 <?php
 
-include_once '../../BLL/android/events.php';
+include_once '../BLL/events.php';
 
 $events = new events();
 

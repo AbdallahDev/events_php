@@ -1,9 +1,4 @@
 # events_php
-this is a project for the JHR events i've started this project in 2017 and 
-finished the working on the php project for the screens on the same year.
-but in 2018 i've started a new android project depend on this one, and after i 
-made a separate project called EventsNotifyPHP, i've moved to the original 
-project here to make the work more centralized for the php events web app and the 
-android app.
-so in the future this project will be for both the events web app and the 
-android app.
+this is a php project for the JHR screens to view the events on them, i've started this project in 2017 and finished on the same year.
+but in 2018 i've started new android project depend on this one, so i'll not continue coding on this project,
+coz i took this original project and continued on it for the android app with a project name <a href="https://github.com/AbdallahDev/EventsNotifyPHP">EventsNotifyPHP</a>.

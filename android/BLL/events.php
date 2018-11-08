@@ -1,6 +1,6 @@
 <?php
 
-include_once '../../DAL/my_db.php';
+include_once '../DAL/my_db.php';
 
 class events extends my_db {
 

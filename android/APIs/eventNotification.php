@@ -19,7 +19,7 @@ define('API_ACCESS_KEY'
         , 'AAAAysijQG4:APA91bEVna5UC6cvLu8zFogm5m2F0GMCgK7LQhyaUpPuS840I6nCKIeytCtlvssjB6Vhsahc1cVZBnhtR73ZYD0lsa8urcdoqwc8ssXmwY-hJdFZgkV9UYIjGgxPL9yACi7FWBP0LOTk');
 
 //bellow i'll select all the device tokens in the db to send them notifications
-include_once 'BLL/device_token.php';
+include_once '../android/BLL/device_token.php';
 $device_token = new device_token();
 $rs_device_token = $device_token->get_all_device_token();
 while ($row_device_token = $rs_device_token->fetch_assoc()) {

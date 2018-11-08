@@ -50,4 +50,4 @@ $event1->insert_event($event_entity, $event_entity_name, $event_time, $event_app
 event inserted in the db*/
 include_once '../android/apis/eventNotification.php';
 
-//header('location: events_preview_current_future.php');
+header('location: events_preview_current_future.php');

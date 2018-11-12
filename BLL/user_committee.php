@@ -6,10 +6,13 @@ class user_committee extends my_db {
 
     //this function bring the committees that belong to specific user
     public function user_committees_get($user_id) {
-        return $this->get_data('SELECT committees.committee_name
-            , committees.committee_id FROM committees INNER JOIN user_committee 
-            ON committees.committee_id = user_committee.committee_id 
-            WHERE user_committee.user_id = ?', 'i', array(&$user_id));
+        return $this->get_data('SELECT committees.committee_name, '
+                        . 'committees.committee_id, committees.committee_rank '
+                        . 'FROM committees INNER JOIN user_committee ON '
+                        . 'committees.committee_id = user_committee.committee_id '
+                        . 'WHERE user_committee.user_id = 30566 '
+                        . 'ORDER by committees.committee_rank ASC'
+                        , 'i', array(&$user_id));
     }
 
     //this function insert committees for a specific user

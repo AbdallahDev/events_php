@@ -1,6 +1,6 @@
 <?php
 include_once 'include/check_session.php';
-include '../BLL/committees.php';
+include_once '../BLL/committees.php';
 $committee = new committees();
 $rs_committee = $committee->committee_get($_GET['committee_id']);
 $row_committee = $rs_committee->fetch_assoc();

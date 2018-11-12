@@ -8,7 +8,7 @@
 //bellow i'll select the committee name to send it with the notificaiton
 include_once '../BLL/committees.php';
 $committee = new committees();
-$rs_committee = $committee->committee_get(16);
+$rs_committee = $committee->committee_get($_POST['committee']);
 $row_committee = $rs_committee->fetch_assoc();
 $committee_name = $row_committee['committee_name'];
 

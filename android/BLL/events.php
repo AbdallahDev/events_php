@@ -10,7 +10,8 @@ class events extends my_db {
         return $this->get_all_data("SELECT committees.committee_name, "
                         . "events.subject, events.event_date, events.time "
                         . "FROM committees, events "
-                        . "WHERE committees.committee_id = events.committee_id");
+                        . "WHERE committees.committee_id = events.committee_id "
+                        . "ORDER by events.event_date DESC, events.time DESC");
     }
 
     //this function get all the events for specific committee
@@ -18,7 +19,8 @@ class events extends my_db {
         return $this->get_data('SELECT committees.committee_name, events.subject, '
                         . 'events.event_date, events.time FROM committees, events '
                         . 'WHERE committees.committee_id = events.committee_id '
-                        . 'AND events.committee_id = ?', 'i'
+                        . 'AND events.committee_id = ? '
+                        . 'ORDER by events.event_date DESC, events.time DESC', 'i'
                         , array(&$committee_id));
     }
 

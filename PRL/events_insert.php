@@ -48,6 +48,9 @@ $event1->insert_event($event_entity, $event_entity_name, $event_time, $event_app
 
 /* this inclusion for the eventNotificatoin file to send notifications when the 
   event inserted in the db */
+//and i've made the inclusion directory like this because this file will be
+//included in the event_insert.php file
+include_once '../android/BLL/device_token.php';
 include_once '../android/apis/event_notification.php';
 
 header('location: events_preview_current_future.php');

@@ -9,4 +9,10 @@ class committees extends my_db {
                         , 'i', array(&$committee_id));
     }
 
+    //here i'll get the committee_id and the committee_name for all the 
+    //committees in the database
+    function committees_get() {
+        return $this->get_all_data("SELECT committee_id, committee_name FROM `committees` WHERE `committee_name` != ''");
+    }
+
 }

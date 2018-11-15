@@ -16,7 +16,8 @@ class events extends my_db {
 
     //this function get all the events for specific committee
     function get_committee_events($committee_id) {
-        return $this->get_data('SELECT committees.committee_name, events.subject, '
+        return $this->get_data('SELECT committees.committee_name, '
+                        . 'events.event_entity_name, events.subject, '
                         . 'events.event_date, events.time FROM committees, events '
                         . 'WHERE committees.committee_id = events.committee_id '
                         . 'AND events.committee_id = ? '

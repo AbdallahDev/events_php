@@ -5,12 +5,25 @@
 //applied to it above, like the appointment time and event date.
 //
 //here i'll send notification with the event details
-//bellow i'll select the committee name to send it with the notificaiton
-include_once '../BLL/committees.php';
-$committee = new committees();
-$rs_committee = $committee->committee_get($_POST['committee']);
-$row_committee = $rs_committee->fetch_assoc();
-$committee_name = $row_committee['committee_name'];
+//
+//bellow i'll check if the user choosed the entity name from the event entity 
+//dropdwon menu or typed it the event entity textbox
+if (empty(trim($event_entity_name))) {
+    //this means here that the user choosed the event entity name from the 
+    //dropdown menu, coz the $event_entity_name variable value is empty, 
+    //that means the value in the event entity textbox is empty.
+    //
+    //bellow i'll select the committee name to send it with the notificaiton
+    include_once '../BLL/committees.php';
+    $committee = new committees();
+    $rs_committee = $committee->committee_get($_POST['committee']);
+    $row_committee = $rs_committee->fetch_assoc();
+    $committee_name = $row_committee['committee_name'];
+} else {
+    //this means here that the user typed the event entity name in the 
+    //event entity textbox.
+    $committee_name = $event_entity_name;
+}
 
 //this api key for the firebase server, this api key has been taken from the firebase
 //console to send push notification

@@ -13,6 +13,7 @@ if (isset($_POST['event_appointment']) &&
     //the event that it should come after it
     $event_time = date("H:i:s", strtotime($_POST['time']) + 1);
 }
+
 //here when the event appointment is empty
 else {
     //here the event appointment will be empty
@@ -28,6 +29,7 @@ if (isset($_POST['event_status'])) {
 } else {
     $event_status = 0;
 }
+
 //here i check if the hall has been choosed
 if ((isset($_POST['hall'])) && !empty(trim($_POST['hall']))) {
     $hall_id = $_POST['hall'];
@@ -43,6 +45,7 @@ if ((isset($_POST['hall'])) && !empty(trim($_POST['hall']))) {
         $hall_id = 0;
     }
 }
+
 //bellow i'll check if the user choosed the event entity name (like committee) 
 //from the dropdown menu or typed it's name in the textbox
 //here i check the event entity has been choosed form the dropdown menu

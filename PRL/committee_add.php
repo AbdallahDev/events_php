@@ -89,6 +89,7 @@
                         </select>
                     </div>
 
+                    <!--this div for the event entity name text box -->
                     <div class="w3-section">
                         <input type="text" name="committee_name" <?php
                         //bellow i'll set the placeholder value based on the user directorate

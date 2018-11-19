@@ -91,16 +91,7 @@
 
                     <!--this div for the event entity name text box -->
                     <div class="w3-section">
-                        <input type="text" name="committee_name" <?php
-                        //bellow i'll set the placeholder value based on the user directorate
-                        if (($_SESSION['directorate'] == 2) || ($_SESSION['user_type'] == 0)) {//here i check if the directorate is legislative affairs with the id 2, or the user type is super admin
-                            ?> placeholder = "اسم اللجنة" <?php
-                               } elseif ($_SESSION['directorate'] == 3) {//here i check if the directorate is foreign affairs with the id 3
-                                   ?> placeholder = "اسم اللجنة الدبلوماسية" <?php
-                               } elseif ($_SESSION['directorate'] == 4) {//here i check if the directorate is blocs with the id 4
-                                   ?> placeholder = "اسم الكتلة / الائتلاف" <?php
-                               }
-                               ?> class="w3-input w3-border right-dir">
+                        <input type="text" name="committee_name" placeholder="جهة النشاط" class="w3-input w3-border right-dir">
                     </div>
                     <button class="w3-button w3-right w3-theme" type="submit" name="add">انشاء</button>
                 </form>

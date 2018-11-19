@@ -71,14 +71,9 @@
                             <option value="">فئة جهة النشاط</option>
                             <?PHP
                             //bellow i'll view all the event entity catigories
-                            include_once '../BLL/user_committee.php';
-                            $user_committee = new user_committee();
-                            $rs_user_committee = $user_committee->user_committees_get($_SESSION['user_id']);
-                            while ($row_user_committee = $rs_user_committee->fetch_assoc()) {
-                                echo '<option value="' . $row_user_committee['committee_id'] . '">'
-                                . $row_user_committee['committee_name']
-                                . '</option><br>';
-                            }
+                            //
+                            //here is the php code to view the event entity 
+                            //categories in the drop down list
                             ?>
                         </select>
                     </div>

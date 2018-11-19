@@ -67,16 +67,6 @@
             <div class="right-align-text">
                 <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="committee_add_ctl.php" method="post">
                     <div class="w3-section">
-                        <label><?php
-                            //bellow i'll set the the input field label based on the user directorate
-                            if (($_SESSION['directorate'] == 2) || ($_SESSION['user_type'] == 0)) {//here i check if the directorate is legislative affairs with the id 2, or the user type is super admin
-                                echo 'اسم اللجنة';
-                            } elseif ($_SESSION['directorate'] == 3) {//here i check if the directorate is foreign affairs with the id 3
-                                echo "اسم اللجنة الدبلوماسية";
-                            } elseif ($_SESSION['directorate'] == 4) {//here i check if the directorate is blocs with the id 4
-                                echo "اسم الكتلة / الائتلاف";
-                            }
-                            ?></label>
                         <input type="text" name="committee_name" <?php
                         //bellow i'll set the placeholder value based on the user directorate
                         if (($_SESSION['directorate'] == 2) || ($_SESSION['user_type'] == 0)) {//here i check if the directorate is legislative affairs with the id 2, or the user type is super admin

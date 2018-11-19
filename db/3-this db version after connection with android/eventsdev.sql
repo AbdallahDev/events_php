@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2018 at 10:35 AM
+-- Generation Time: Nov 19, 2018 at 01:54 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -55,7 +55,7 @@ CREATE TABLE `committees` (
   `committee_name` varchar(100) NOT NULL,
   `event_entity_category_id` int(11) NOT NULL COMMENT 'this column to add event_entity_category_id so that the system can know to which category the event belongs',
   `committee_rank` int(11) NOT NULL DEFAULT '1' COMMENT 'this row to give committees rank as the one in the internal JHR rules of procedure, and i made the default value as 1 coz most of the event entities dosen''t need a rank',
-  `directorate_id` int(11) NOT NULL
+  `directorate_id` int(11) NOT NULL DEFAULT '2' COMMENT 'i''ve made the default value for the directorate_id as 2 coz all the users are from this directorate so i''ll not need to change it using the code'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -80,7 +80,7 @@ INSERT INTO `committees` (`committee_id`, `committee_name`, `event_entity_catego
 (21, 'لجنة الاخورة الاردنية الجزائرية', 3, 1, 3),
 (22, 'لجنة الاخوة الاردنية القطرية', 3, 1, 3),
 (23, 'لجنة الاخوة البرلمانية الاردنية اللبنانية', 3, 1, 3),
-(24, 'كتلة الوفاء والعهد', 0, 400, 4),
+(24, 'كتلة الوفاء والعهد', 2, 400, 4),
 (28, 'كتلة التجديد', 2, 1, 4),
 (31, 'لجنة الطاقة والثروة المعدنية', 1, 12, 2),
 (38, 'اللجنة المالية', 1, 2, 2),
@@ -92,7 +92,10 @@ INSERT INTO `committees` (`committee_id`, `committee_name`, `event_entity_catego
 (44, 'لجنة الريف والبادية', 1, 17, 2),
 (45, 'لجنة النظام والسلوك', 1, 18, 2),
 (46, 'لجنة المرأة وشؤون الأسرة', 1, 20, 2),
-(47, 'كتلة العدالة', 0, 400, 2);
+(47, 'كتلة العدالة', 2, 400, 2),
+(49, 'لجنة الاخوة الاردنية الاماراتية', 3, 1, 2),
+(50, 'لجنة الاخوة الاردنية المصرية', 3, 1, 2),
+(51, 'لجنة اختبار', 1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -577,7 +580,7 @@ ALTER TABLE `backgrounds`
 -- AUTO_INCREMENT for table `committees`
 --
 ALTER TABLE `committees`
-  MODIFY `committee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `committee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `device_token`

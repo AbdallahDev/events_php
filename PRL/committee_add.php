@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        <!--this form to choose and upload an image-->
+        <!--this form to add a new event entity-->
         <div class="w3-container w3-padding-64" id="contact">
             <div class="right-align-text">
                 <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="committee_add_ctl.php" method="post">

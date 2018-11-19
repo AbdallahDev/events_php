@@ -39,6 +39,7 @@
                     event entities belong to the committees directorate so i'll 
                     always send the 2 as the id-->
                     <a class="w3-bar-item w3-button" href='committees.php?directorate=2'>جهات النشاطات</a>
+
                     <!--bellow i send with the url the id of the directorate-->
                     <?php
                     if ($_SESSION['user_type'] == 2) {//here if the user type is regular user

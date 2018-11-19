@@ -33,11 +33,11 @@
                         <i class="fa fa-remove"></i>
                     </a>
                     <hr>
-                    <!--bellow i'll send the directorate id coz i need to 
+                    <!--bellow i'll send the directorate number coz i need to 
                     differentiate in the database to which directorate 
                     the event entities belong, and by the way now all the 
-                    event entities belong to the committees directorate so i'll 
-                    always send the 2 as the id-->
+                    event entities belong to the committees directorate, so i'll 
+                    always send the 2 as the number-->
                     <a class="w3-bar-item w3-button" href='committees.php?directorate=2'>جهات النشاطات</a>
 
                     <!--bellow i send with the url the id of the directorate-->

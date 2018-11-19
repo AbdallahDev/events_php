@@ -74,6 +74,16 @@
                             //
                             //here is the php code to view the event entity 
                             //categories in the drop down list
+                            include_once '../BLL/event_entity_category.php';
+                            $event_entity_category = new event_entity_category();
+                            $rs_event_entity_category = $event_entity_category->event_entity_category_get_all();
+                            while ($row_event_entity_category = $rs_event_entity_category->fetch_assoc()) {
+                                ?>
+                                <option value="
+                                        <?php echo $row_event_entity_category['event_entity_category_id']; ?>">
+                                            <?php echo $row_event_entity_category['event_entity_category_name']; ?>
+                                </option>
+                            <?php }
                             ?>
                         </select>
                     </div>

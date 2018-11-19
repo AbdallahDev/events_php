@@ -68,7 +68,7 @@
                 <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="committee_add_ctl.php" method="post">
                     <!--this div for the event entity categories drop down list -->
                     <div class="w3-section">
-                        <select class="w3-input w3-border right-dir" id="event_entity" name="event_entity">
+                        <select class="w3-input w3-border right-dir" name="event_entity_category_id">
                             <option value="">فئة جهة النشاط</option>
                             <?PHP
                             //bellow i'll view all the event entity catigories

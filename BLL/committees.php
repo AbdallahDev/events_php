@@ -5,8 +5,7 @@ include_once '../DAL/my_db.php';
 class committees extends my_db {
 
     public function committee_add($committee_name, $directorate_id) {
-        $this->mod_data('insert into committees(committee_name, directorate_id) '
-                . 'values(?,?)', 'si'
+        $this->mod_data('INSERT INTO `committees` (`committee_name`, `event_entity_category_id`) VALUES (?,?)', 'si'
                 , array(&$committee_name, &$directorate_id));
     }
 

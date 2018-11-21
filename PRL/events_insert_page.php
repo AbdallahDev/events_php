@@ -8,6 +8,23 @@
         <script src="../js/jquery-3.2.1.min.js" type="text/javascript"></script>
         <script>
             $(document).ready(function () {
+                //this event runs when the event entity categories dropdown value changes
+                $("#event_entity_category_id").change(function () {
+                    var event_entity_category_id = $("#event_entity_category_id").val();
+                    $.ajax({
+                        url: 'event_entities_get_category.php',
+                        method: 'post',
+                        data: "id=" + event_entity_category_id
+                    }).done(function (entities) {
+                        console.log(entities);
+                        entities = JSON.parse(entities);
+                        $("#committee").empty();
+                        entities.forEach(function (entities) {
+                            $("#committee").append('<option>' + entities.committee_name + '</option>')
+                        })
+                    })
+                });
+
                 //this event run when the event entity name dropdown value changes
                 $("#committee").change(function () {
                     //if the user choosed nothing from the dropdown the event entity name textbox will be enabled
@@ -17,10 +34,12 @@
                         $("#event_entity_name").prop("disabled", true);//i make the event entity textbox disabled
                     }
                 });
+
                 //bellow when the user focusin the event entity textbox the committe dropdown will be disabled, and that to prevent the user from choosing duplicated values
                 $("#event_entity_name").focusin(function () {
                     $("#committee").prop("disabled", true);
                 });
+
                 //here when the user focusout the event entity textbox, if it's has a value the dropdown will kept disabled but if it's empty the dropdown will be enabled
                 $("#event_entity_name").focusout(function () {
                     if ($("#event_entity_name").val() == '') {
@@ -29,6 +48,7 @@
                         $("#committee").prop("disabled", true);
                     }
                 });
+
                 //this event run when the dropdown value changes
                 $("#hall").change(function () {
                     //if the user choosed nothing from the dropdown
@@ -42,11 +62,13 @@
                         $("#event_place_textbox").prop("disabled", true);
                     }
                 });
+
                 //here when the user focusin the event place textbox
                 //the hall dropdown will be disabled
                 $("#event_place_textbox").focusin(function () {
                     $("#hall").prop("disabled", true);
                 });
+
                 //here when the user focusout the event place textbox
                 //if it's has a value the dropdown will kept disabled
                 //but if it's empty the dropdown will be enabled
@@ -64,7 +86,8 @@
                         $("#form_div").show();
                     }
                 });
-            });
+            }
+            );
         </script>
     </head>
     <body>
@@ -100,42 +123,39 @@
         <div class="w3-container w3-padding-64" id="contact">
             <div class="right-align-text">
                 <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="events_insert.php" method="post">
+                    <!--this div for the event entity categories drop down list -->
                     <div class="w3-section">
-                        <label>جهة النشاط</label>
-                        <!--this select for the committees that the user can choose from-->
-                        <select class="w3-input w3-border right-dir" id="committee" name="committee">
-                            <option value="">اختر جهة النشاط</option>
+                        <select class="w3-input w3-border right-dir" id="event_entity_category_id" 
+                                name="event_entity_category_id">
+                            <option value="">فئة جهة النشاط</option>
                             <?PHP
-                            //here view the committees that belong to
-                            //the legislative affairs directorate
-                            if ($_SESSION['directorate'] == 2) {
-                                include_once '../BLL/user_committee.php';
-                                $user_committee = new user_committee();
-                                $rs_user_committee = $user_committee->user_committees_get($_SESSION['user_id']);
-                                while ($row_user_committee = $rs_user_committee->fetch_assoc()) {
-                                    echo '<option value="' . $row_user_committee['committee_id'] . '">'
-                                    . $row_user_committee['committee_name']
-                                    . '</option><br>';
-                                }
-                            }
-                            //here view the committees that belong to
-                            //the public relations directorate
-                            //or for the blocs depend on the directorate
-                            else {
-                                include_once '../BLL/committees.php';
-                                $committees = new committees();
-                                $rs_committees = $committees->committees_all_get($_SESSION['directorate'], $_SESSION['directorate']);
-                                while ($row_committees = $rs_committees->fetch_assoc()) {
-                                    echo '<option value="' . $row_committees['committee_id'] . '">'
-                                    . $row_committees['committee_name']
-                                    . '</option><br>';
-                                }
-                            }
+                            //bellow i'll view all the event entity catigories
+                            //
+                            //here is the php code to view the event entity 
+                            //categories in the drop down list
+                            include_once '../BLL/event_entity_category.php';
+                            $event_entity_category = new event_entity_category();
+                            $rs_event_entity_category = $event_entity_category->event_entity_category_get_all();
+                            while ($row_event_entity_category = $rs_event_entity_category->fetch_assoc()) {
+                                ?>
+                                <option value="
+                                        <?php echo $row_event_entity_category['event_entity_category_id']; ?>">
+                                            <?php echo $row_event_entity_category['event_entity_category_name']; ?>
+                                </option>
+                            <?php }
                             ?>
                         </select>
                     </div>
+
+                    <!--this div for the event entities drop down list -->
                     <div class="w3-section">
-                        <label>جهة النشاط</label>
+                        <!--this select for the committees that the user can choose from-->
+                        <select class="w3-input w3-border right-dir" id="committee" name="committee">
+                            <option value="">اختر جهة النشاط</option>
+
+                        </select>
+                    </div>
+                    <div class="w3-section">
                         <!--this is the name of the event entity-->
                         <input type="text" id="event_entity_name" name="event_entity_name" placeholder="جهة النشاط" class="w3-input w3-border right-dir">
                     </div>
@@ -145,7 +165,6 @@
                         <input type="time" id="time" name="time" value="<?php echo date('H:i') ?>" class="w3-input w3-border right-align-text">
                     </div>
                     <div class="w3-section">
-                        <label>موعد النشاط</label>
                         <!--this is the name of the event entity-->
                         <input type="text" id="event_appointment" name="event_appointment" placeholder="موعد النشاط" class="w3-input w3-border right-dir">
                     </div>

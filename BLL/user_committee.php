@@ -2,6 +2,7 @@
 
 include_once '../DAL/my_db.php';
 
+//this class to manage the user_committee table in the database
 class user_committee extends my_db {
 
     //this function bring the committees that belong to specific user

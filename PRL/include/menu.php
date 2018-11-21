@@ -125,7 +125,7 @@ else {
                                 <a href="sessions_current_future.php" class="w3-bar-item w3-button">الجلسات</a>
                             </div>
                         </div>
-                        <a href="committees.php?directorate=2" style="float: right" class="w3-bar-item w3-button">لجان شؤون التشريع</a>
+                        <a href="committees.php?directorate=2" style="float: right" class="w3-bar-item w3-button w3-hide-small w3-hover-white">جهات النشاطات</a>
                         <a href="users.php" style="float: right" class="w3-bar-item w3-button w3-hide-small w3-hover-white">المستخدمون</a>
                         <a href="logout_page.php" style="float: right" class="w3-bar-item w3-button w3-hide-small w3-hover-white">تسجيل الخروج</a>
                     </div>
@@ -134,6 +134,7 @@ else {
                         <a href="events_show.php" target="_blank" style="text-align: right" class="w3-bar-item w3-button">شاشة النشاطات</a>
                         <a href="events_preview_current_future.php" style="text-align: right" class="w3-bar-item w3-button">نشاطات اللجان</a>
                         <a href="sessions_current_future.php" style="text-align: right" class="w3-bar-item w3-button">الجلسات</a>
+                        <a href="committees.php?directorate=2" style="text-align: right" class="w3-bar-item w3-button">جهات النشاطات</a>
                         <a href="users.php" style="text-align: right" class="w3-bar-item w3-button">المستخدمون</a>
                         <a href="logout_page.php" style="text-align: right" class="w3-bar-item w3-button">تسجيل الخروج</a>
                     </div>

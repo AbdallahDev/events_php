@@ -1,9 +1,9 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.7.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2018 at 01:54 PM
+-- Generation Time: Nov 21, 2018 at 08:22 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -56,7 +56,7 @@ CREATE TABLE `committees` (
   `event_entity_category_id` int(11) NOT NULL COMMENT 'this column to add event_entity_category_id so that the system can know to which category the event belongs',
   `committee_rank` int(11) NOT NULL DEFAULT '1' COMMENT 'this row to give committees rank as the one in the internal JHR rules of procedure, and i made the default value as 1 coz most of the event entities dosen''t need a rank',
   `directorate_id` int(11) NOT NULL DEFAULT '2' COMMENT 'i''ve made the default value for the directorate_id as 2 coz all the users are from this directorate so i''ll not need to change it using the code'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='this table to store event entities, but it called committees coz i started the project with it, but i''ll try to change it in the future to event_entities';
 
 --
 -- Dumping data for table `committees`
@@ -95,7 +95,8 @@ INSERT INTO `committees` (`committee_id`, `committee_name`, `event_entity_catego
 (47, 'كتلة العدالة', 2, 400, 2),
 (49, 'لجنة الاخوة الاردنية الاماراتية', 3, 1, 2),
 (50, 'لجنة الاخوة الاردنية المصرية', 3, 1, 2),
-(51, 'لجنة اختبار', 1, 1, 2);
+(51, 'لجنة اختبار', 1, 1, 2),
+(52, 'لجنة العمل', 1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -580,7 +581,7 @@ ALTER TABLE `backgrounds`
 -- AUTO_INCREMENT for table `committees`
 --
 ALTER TABLE `committees`
-  MODIFY `committee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `committee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `device_token`

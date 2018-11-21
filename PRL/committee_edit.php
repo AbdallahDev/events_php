@@ -81,8 +81,14 @@ $row_committee = $rs_committee->fetch_assoc();
                             $rs_event_entity_category = $event_entity_category->event_entity_category_get_all();
                             while ($row_event_entity_category = $rs_event_entity_category->fetch_assoc()) {
                                 ?>
-                                <option value="
-                                        <?php echo $row_event_entity_category['event_entity_category_id']; ?>">
+                                <option value="<?php echo $row_event_entity_category['event_entity_category_id']; ?>" 
+                                <?php
+                                //here i'll make the event category related to the event entity selected 
+                                //in the drop down list
+                                if ($row_event_entity_category['event_entity_category_id'] == $row_committee['event_entity_category_id']) {
+                                    echo 'selected';
+                                }
+                                ?>>
                                             <?php echo $row_event_entity_category['event_entity_category_name']; ?>
                                 </option>
                             <?php }
@@ -97,7 +103,7 @@ $row_committee = $rs_committee->fetch_assoc();
                                class="w3-input w3-border right-dir" 
                                value = "<?php echo $row_committee['committee_name'] ?>">
                     </div>
-                    
+
                     <button class="w3-button w3-right w3-theme" type="submit" name="edit">تعديل</button>
                 </form>
             </div>

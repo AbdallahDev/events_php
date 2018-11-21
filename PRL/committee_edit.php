@@ -97,6 +97,7 @@ $row_committee = $rs_committee->fetch_assoc();
                                class="w3-input w3-border right-dir" 
                                value = "<?php echo $row_committee['committee_name'] ?>">
                     </div>
+                    
                     <button class="w3-button w3-right w3-theme" type="submit" name="edit">تعديل</button>
                 </form>
             </div>

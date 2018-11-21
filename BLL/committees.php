@@ -4,9 +4,9 @@ include_once '../DAL/my_db.php';
 
 class committees extends my_db {
 
-    public function committee_add($committee_name, $directorate_id) {
+    public function committee_add($committee_name, $event_entity_category_id) {
         $this->mod_data('INSERT INTO `committees` (`committee_name`, `event_entity_category_id`) VALUES (?,?)', 'si'
-                , array(&$committee_name, &$directorate_id));
+                , array(&$committee_name, &$event_entity_category_id));
     }
 
     public function committee_get($committee_id) {
@@ -19,10 +19,10 @@ class committees extends my_db {
         return $this->get_data('select * from committees where directorate_id = ? AND committee_id != ?', 'ii', array(&$directorate_id1, &$directorate_id2));
     }
 
-    public function committee_edit($committee_name, $committee_id) {
-        $this->mod_data('update committees set committee_name = ? '
-                . 'where committee_id = ?', 'si'
-                , array(&$committee_name, &$committee_id));
+    public function committee_edit($committee_name, $event_entity_category_id, $committee_id) {
+        $this->mod_data('UPDATE `committees` SET `committee_name`= ?,`event_entity_category_id`= ? '
+                . 'WHERE committees.committee_id = ?', 'sii'
+                , array(&$committee_name, $event_entity_category_id, &$committee_id));
     }
 
     public function committee_delete($committee_id) {

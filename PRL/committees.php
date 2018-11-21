@@ -2,19 +2,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <?php if ($_SESSION['directorate'] == 2) {
-            ?>
-            <title>لجان شؤون التشريع</title>
-        <?php } elseif ($_SESSION['directorate'] == 3) {
-            ?>
-            <title>اللجان الدبلوماسية</title>
-            <?php
-        } elseif ($_SESSION['directorate'] == 4) {
-            ?>
-            <title>الكتل والائتلافات</title>
-            <?php
-        }
-        ?>
+        <title>جهات النشاطات</title>
+
         <!--header file inclusion-->
         <?php include_once 'include/header.php'; ?>
         <script src="../js/jquery-3.2.1.min.js" type="text/javascript"></script>

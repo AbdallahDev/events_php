@@ -100,8 +100,31 @@
         <div class="w3-container w3-padding-64" id="contact">
             <div class="right-align-text">
                 <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="events_insert.php" method="post">
+                    <!--this div for the event entity categories drop down list -->
                     <div class="w3-section">
-                        <label>جهة النشاط</label>
+                        <select class="w3-input w3-border right-dir" name="event_entity_category_id">
+                            <option value="">فئة جهة النشاط</option>
+                            <?PHP
+                            //bellow i'll view all the event entity catigories
+                            //
+                            //here is the php code to view the event entity 
+                            //categories in the drop down list
+                            include_once '../BLL/event_entity_category.php';
+                            $event_entity_category = new event_entity_category();
+                            $rs_event_entity_category = $event_entity_category->event_entity_category_get_all();
+                            while ($row_event_entity_category = $rs_event_entity_category->fetch_assoc()) {
+                                ?>
+                                <option value="
+                                        <?php echo $row_event_entity_category['event_entity_category_id']; ?>">
+                                            <?php echo $row_event_entity_category['event_entity_category_name']; ?>
+                                </option>
+                            <?php }
+                            ?>
+                        </select>
+                    </div>
+
+                    <!--this div for the event entities drop down list -->
+                    <div class="w3-section">
                         <!--this select for the committees that the user can choose from-->
                         <select class="w3-input w3-border right-dir" id="committee" name="committee">
                             <option value="">اختر جهة النشاط</option>
@@ -135,7 +158,6 @@
                         </select>
                     </div>
                     <div class="w3-section">
-                        <label>جهة النشاط</label>
                         <!--this is the name of the event entity-->
                         <input type="text" id="event_entity_name" name="event_entity_name" placeholder="جهة النشاط" class="w3-input w3-border right-dir">
                     </div>
@@ -145,7 +167,6 @@
                         <input type="time" id="time" name="time" value="<?php echo date('H:i') ?>" class="w3-input w3-border right-align-text">
                     </div>
                     <div class="w3-section">
-                        <label>موعد النشاط</label>
                         <!--this is the name of the event entity-->
                         <input type="text" id="event_appointment" name="event_appointment" placeholder="موعد النشاط" class="w3-input w3-border right-dir">
                     </div>

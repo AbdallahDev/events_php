@@ -1,5 +1,7 @@
 <?php
 
+//this file to edit the event entity, and it's called committee_edit_ctl coz 
+//it's still with the old name, and i'll try to change it in the future
 include_once 'include/check_session.php';
 include '../BLL/committees.php';
 $committee = new committees();

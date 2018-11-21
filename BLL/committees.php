@@ -27,6 +27,12 @@ class committees extends my_db {
                         . 'ORDER BY committees.event_entity_category_id ASC, `committees`.`committee_rank` ASC');
     }
 
+    //this function get all the event entities related to a specific category
+    public function event_entities_category_all_get($event_entity_category_id) {
+        return $this->get_data('SELECT `committee_id`, `committee_name`, committees.`event_entity_category_id`, committees.committee_rank FROM `committees` WHERE committees.event_entity_category_id != 0 AND committees.event_entity_category_id = ? ORDER BY `committees`.`committee_rank` ASC'
+                        , 'i', array(&$event_entity_category_id));
+    }
+
     public function committee_edit($committee_name, $event_entity_category_id, $committee_id) {
         $this->mod_data('UPDATE `committees` SET `committee_name`= ?,`event_entity_category_id`= ? '
                 . 'WHERE committees.committee_id = ?', 'sii'

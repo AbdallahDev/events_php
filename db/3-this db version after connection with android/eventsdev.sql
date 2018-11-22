@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2018 at 08:28 AM
+-- Generation Time: Nov 22, 2018 at 12:20 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -80,7 +80,7 @@ INSERT INTO `committees` (`committee_id`, `committee_name`, `event_entity_catego
 (21, 'لجنة الاخورة الاردنية الجزائرية', 3, 1, 3),
 (22, 'لجنة الاخوة الاردنية القطرية', 3, 1, 3),
 (23, 'لجنة الاخوة البرلمانية الاردنية اللبنانية', 3, 1, 3),
-(24, 'كتلة الوفاء والعهد', 2, 400, 4),
+(24, 'كتلة الوفاء والعهد', 2, 1, 4),
 (28, 'كتلة التجديد', 2, 1, 4),
 (31, 'لجنة الطاقة والثروة المعدنية', 1, 12, 2),
 (38, 'اللجنة المالية', 1, 2, 2),
@@ -92,11 +92,9 @@ INSERT INTO `committees` (`committee_id`, `committee_name`, `event_entity_catego
 (44, 'لجنة الريف والبادية', 1, 17, 2),
 (45, 'لجنة النظام والسلوك', 1, 18, 2),
 (46, 'لجنة المرأة وشؤون الأسرة', 1, 20, 2),
-(47, 'كتلة العدالة', 2, 400, 2),
+(47, 'كتلة العدالة', 2, 1, 2),
 (49, 'لجنة الاخوة الاردنية الاماراتية', 3, 1, 2),
-(50, 'لجنة الاخوة الاردنية المصرية', 3, 1, 2),
-(51, 'لجنة اختبار', 1, 1, 2),
-(52, 'لجنة العمل', 1, 1, 2);
+(50, 'لجنة الاخوة الاردنية المصرية', 3, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -152,7 +150,9 @@ INSERT INTO `events` (`id`, `committee_id`, `event_entity_name`, `time`, `event_
 (820, 2, 'لجنة مشتركة', '10:16:00', '', '', '2018-11-15', 0, '', '2018-11-15 10:16:50', 30566, '0000-00-00 00:00:00', -1, 2, 0),
 (821, 2, 'لجنة ذاتية', '10:17:00', '', 'لجنة ذاتية', '2018-11-15', 0, '', '2018-11-15 10:17:17', 30566, '0000-00-00 00:00:00', -1, 2, 0),
 (822, 10, '', '11:18:00', '', '', '2018-11-15', 0, '', '2018-11-15 11:18:25', 30566, '0000-00-00 00:00:00', -1, 2, 0),
-(823, 13, '', '15:05:00', '', '', '2018-11-15', 0, '', '2018-11-15 15:05:23', 30566, '0000-00-00 00:00:00', -1, 2, 0);
+(823, 13, '', '15:05:00', '', '', '2018-11-15', 0, '', '2018-11-15 15:05:23', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(824, 10, '', '09:46:00', '', '', '2018-11-22', 0, '', '2018-11-22 09:46:53', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(825, 17, '', '09:55:00', '', '', '2018-11-22', 0, '', '2018-11-22 09:57:30', 30566, '0000-00-00 00:00:00', -1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -176,6 +176,17 @@ INSERT INTO `event_entity_category` (`event_entity_category_id`, `event_entity_c
 (4, 'لجنة صداقة'),
 (5, 'مكتب دائم'),
 (6, 'مكتب تنفيذي');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event_event_entity`
+--
+
+CREATE TABLE `event_event_entity` (
+  `event_id` int(11) NOT NULL,
+  `event_entity_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='this table to store the events with the event entities related to them';
 
 -- --------------------------------------------------------
 
@@ -581,7 +592,7 @@ ALTER TABLE `backgrounds`
 -- AUTO_INCREMENT for table `committees`
 --
 ALTER TABLE `committees`
-  MODIFY `committee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `committee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `device_token`
@@ -593,7 +604,7 @@ ALTER TABLE `device_token`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=824;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=826;
 
 --
 -- AUTO_INCREMENT for table `event_entity_category`

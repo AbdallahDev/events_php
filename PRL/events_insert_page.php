@@ -106,7 +106,6 @@
                     } else {
                         $("#time_div").show();
                     }
-
                 })
 
                 //here when the user focus in the event place textbox

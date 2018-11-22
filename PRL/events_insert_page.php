@@ -119,17 +119,10 @@
                 //if it's has a value the dropdown will kept disabled
                 //but if it's empty the dropdown will be enabled
                 $("#event_place_textbox").focusout(function () {
-                    if ($("#event_place_textbox").val() == '') {
+                    if ($("#event_place_textbox").val() === '') {
                         $("#hall").prop("disabled", false);
                     } else {
                         $("#hall").prop("disabled", true);
-                    }
-                });
-                $("#new_event").click(function () {
-                    if (($("#form_div").is(":visible")) === true) {
-                        $("#form_div").hide();
-                    } else {
-                        $("#form_div").show();
                     }
                 });
             }

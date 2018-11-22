@@ -98,6 +98,17 @@
                     }
                 });
 
+                //here i'll hide or show the time div if the user typed the event appointment in the text box or not
+                //coz if he typed that he dosen't need to chose the time.
+                $("#event_appointment").focusout(function () {
+                    if ($("#event_appointment").val() !== "") {
+                        $("#time_div").hide();
+                    } else {
+                        $("#time_div").show();
+                    }
+
+                })
+
                 //here when the user focus in the event place textbox
                 //the hall dropdown will be disabled
                 $("#event_place_textbox").focusin(function () {
@@ -206,15 +217,19 @@
                         <ul class="chk" id="event_entity_checkboxes_ul"></ul>
                     </div>
 
-                    <div class="w3-section">
+                    <!--this is the time of the event element, and the user use it
+                    when there is specific time for the event-->
+                    <div class="w3-section" id="time_div">
                         <label>وقت النشاط</label>
-                        <!--this is the time of the event-->
                         <input type="time" id="time" name="time" value="<?php echo date('H:i') ?>" class="w3-input w3-border right-align-text">
                     </div>
-                    <div class="w3-section">
-                        <!--this is the name of the event entity-->
+
+                    <!--this element for the event entity appontiment, 
+                    and it's needed when the event dosen't have specific time-->
+                    <div class="w3-section" id="event_appointment_div">
                         <input type="text" id="event_appointment" name="event_appointment" placeholder="موعد النشاط" class="w3-input w3-border right-dir">
                     </div>
+
                     <div class="w3-section">
                         <label>تاريخ النشاط</label>
                         <!--this is event date, when the event will be hold in-->
@@ -226,6 +241,7 @@
                         <!--this is event subject, it means what the event hold for-->
                         <textarea rows="5" cols="48" id="subject" name="subject" placeholder="الموضوع" class="w3-input w3-border right-dir right-align-text"></textarea>
                     </div>
+
                     <div class="w3-section">
                         <label>القاعة</label>
                         <!--this select for the hall that the event will be in-->

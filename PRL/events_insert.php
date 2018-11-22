@@ -3,49 +3,6 @@
 include_once 'include/check_session.php';
 include_once '../BLL/events.php';
 
-//bellow i'll check if the event appointment is set in the event appointemnt 
-//textbox, to view it in the live screen instead of the event time.
-if (isset($_POST['event_appointment']) &&
-        !empty(trim($_POST['event_appointment']))) {
-    $event_appointment = $_POST['event_appointment'];
-    //here i set the value of the time from the form to the event_time variable 
-    //and increase it with one second so it can come on the live screen after 
-    //the event that it should come after it
-    $event_time = date("H:i:s", strtotime($_POST['time']) + 1);
-}
-
-//here when the event appointment is empty
-else {
-    //here the event appointment will be empty
-    $event_appointment = $_POST['event_appointment'];
-    //here i set the value of the time from the form to the event_time variable 
-    //as it's, because the events appointment has not set, so i won't need the 
-    //increase the event time by one second
-    $event_time = $_POST['time'];
-}
-
-if (isset($_POST['event_status'])) {
-    $event_status = $_POST['event_status'];
-} else {
-    $event_status = 0;
-}
-
-//here i check if the hall has been choosed
-if ((isset($_POST['hall'])) && !empty(trim($_POST['hall']))) {
-    $hall_id = $_POST['hall'];
-    $event_place = '';
-} elseif (isset($_POST['event_place_textbox'])) {
-    //here i check if the hall hasn't been choosen, instead the text box filled 
-    //with the place of the event
-    if (!empty(trim($_POST['event_place_textbox']))) {
-        $event_place = $_POST['event_place_textbox'];
-        $hall_id = 0;
-    } else {
-        $event_place = '';
-        $hall_id = 0;
-    }
-}
-
 //bellow i'll check if the user choosed the event entity name (like committee) 
 //from the dropdown menu or typed it's name in the textbox
 //here i check the event entity has been choosed form the dropdown menu
@@ -77,6 +34,50 @@ if (isset($_POST['committee']) && !empty(trim($_POST['committee']))) {
         $event_entity = 4;
     }
 }
+
+//bellow i'll check if the event appointment is set in the event appointemnt 
+//textbox, to view it in the live screen instead of the event time.
+if (isset($_POST['event_appointment']) &&
+        !empty(trim($_POST['event_appointment']))) {
+    $event_appointment = $_POST['event_appointment'];
+    //here i set the value of the time from the form to the event_time variable 
+    //and increase it with one second so it can come on the live screen after 
+    //the event that it should come after it
+    $event_time = date("H:i:s", strtotime($_POST['time']) + 1);
+}
+//here when the event appointment is empty
+else {
+    //here the event appointment will be empty
+    $event_appointment = $_POST['event_appointment'];
+    //here i set the value of the time from the form to the event_time variable 
+    //as it's, because the events appointment has not set, so i won't need the 
+    //increase the event time by one second
+    $event_time = $_POST['time'];
+}
+
+//here i check if the hall has been choosed
+if ((isset($_POST['hall'])) && !empty(trim($_POST['hall']))) {
+    $hall_id = $_POST['hall'];
+    $event_place = '';
+} elseif (isset($_POST['event_place_textbox'])) {
+    //here i check if the hall hasn't been choosen, instead the text box filled 
+    //with the place of the event
+    if (!empty(trim($_POST['event_place_textbox']))) {
+        $event_place = $_POST['event_place_textbox'];
+        $hall_id = 0;
+    } else {
+        $event_place = '';
+        $hall_id = 0;
+    }
+}
+
+//here i check the status of the event, coz the status decide if the event will be shown on the screen or not
+if (isset($_POST['event_status'])) {
+    $event_status = $_POST['event_status'];
+} else {
+    $event_status = 0;
+}
+
 $event1 = new events();
 $event1->insert_event($event_entity, $event_entity_name, $event_time
         , $event_appointment, $hall_id, $event_place, nl2br($_POST['subject'])

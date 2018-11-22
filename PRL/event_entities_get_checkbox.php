@@ -1,8 +1,7 @@
 <?php
 
-//this file gets the event entities related to a specific category, then send the 
-//result to the events_insert_page.php file to view them in the event entities 
-//dropdown list
+//this file gets all the event entities, then send the result to the events_insert_page.php file 
+//to render them as checkboxes
 
 include_once 'include/check_session.php';
 include_once '../BLL/committees.php';

@@ -85,14 +85,16 @@
                 //this event run when the dropdown value changes
                 $("#hall").change(function () {
                     //if the user choosed nothing from the dropdown
-                    //the event place textbox will be enabled
+                    //the event place textbox will be enabled and showed
                     if ($("#hall").val() == '') {
                         $("#event_place_textbox").prop("disabled", false);
+                        $("#event_place_textbox_div").show();
                     }
                     //if the user choosed a hall from the dropdown
-                    //the event place textbox will be diabled if it's empty
+                    //the event place textbox will be diabled and hiden if it's empty
                     else {
                         $("#event_place_textbox").prop("disabled", true);
+                        $("#event_place_textbox_div").hide();
                     }
                 });
 
@@ -244,7 +246,9 @@
                         </select>
                     </div>
 
-                    <div class="w3-section">
+                    <!--this div for the event place text box, and the user need it
+                    when there is no specific place in the dropdown menu-->
+                    <div class="w3-section" id="event_place_textbox_div">
                         <label>مكان الاجتماع</label>
                         <!--this is event place, and that when the event dosen't hold in a hall-->
                         <input id="event_place_textbox" name="event_place_textbox" class="w3-input w3-border right-dir" type="text" placeholder="مكان الاجتماع">

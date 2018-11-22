@@ -52,6 +52,10 @@
                 //can chose the event entity that the event belong to.
                 $("#event_entity_name").focusout(function () {
                     if ($("#event_entity_name").val() !== '') {
+                        //here i'll hide the event entity category id dropdown menu
+                        //coz the user can't chose from it if he decided to write 
+                        //the event entity name in the textbox
+                        $("#event_entity_category_id").hide();
                         $("#event_entity_checkboxes").show();
                         //bellow i'll get all the event entites to render them as 
                         //check boxes so the user can chose the right one for the event,
@@ -70,6 +74,10 @@
                             })
                         })
                     } else {
+                        //here i'll show the event entity category id dropdown menu
+                        //coz the user didn't write the event entity name in the textbox
+                        //so he will chose it from the dropdown menu
+                        $("#event_entity_category_id").show();
                         $("#event_entity_checkboxes").hide();
                     }
                 });

@@ -148,7 +148,7 @@
             </div>
         </div>
 
-        <!--this form to choose and upload an image-->
+        <!--this form to insert new event-->
         <div class="w3-container w3-padding-64" id="contact">
             <div class="right-align-text">
                 <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="events_insert.php" method="post">

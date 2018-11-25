@@ -14,9 +14,10 @@ if (isset($_POST['committee'])) {
     //event entity dropdown menu
     $event_entity_name = '';
 } else {
-    //here i choose the event entity name that typed in the event entity textbox 
-    //to be inserted
+    
+    //here i chose the event entity name that typed in the event entity textbox
     $event_entity_name = $_POST['event_entity_name'];
+    
     //here i check if the directorate of the user is legislate affiars with 
     //value 2, to store 2 in the committee id
     if ($_SESSION['directorate'] == 2) {

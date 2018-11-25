@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2018 at 12:20 PM
+-- Generation Time: Nov 25, 2018 at 09:30 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -125,7 +125,7 @@ INSERT INTO `device_token` (`device_token_id`, `device_token`) VALUES
 
 CREATE TABLE `events` (
   `id` int(11) NOT NULL,
-  `committee_id` int(11) NOT NULL,
+  `committee_id` int(11) NOT NULL DEFAULT '2' COMMENT 'i''ll make the default valus as 2 coz i''m intending to delete this column in the future',
   `event_entity_name` varchar(150) NOT NULL,
   `time` time NOT NULL,
   `event_appointment` varchar(30) DEFAULT NULL,
@@ -140,19 +140,6 @@ CREATE TABLE `events` (
   `directorate_id` int(11) NOT NULL,
   `event_status` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
---
--- Dumping data for table `events`
---
-
-INSERT INTO `events` (`id`, `committee_id`, `event_entity_name`, `time`, `event_appointment`, `subject`, `event_date`, `hall_id`, `event_place`, `event_insertion_date`, `user_id_insert`, `event_edit_date`, `user_id_edit`, `directorate_id`, `event_status`) VALUES
-(819, 2, 'events', '10:16:00', '', '', '2018-11-15', 0, '', '2018-11-15 10:16:32', 30566, '0000-00-00 00:00:00', -1, 2, 0),
-(820, 2, 'لجنة مشتركة', '10:16:00', '', '', '2018-11-15', 0, '', '2018-11-15 10:16:50', 30566, '0000-00-00 00:00:00', -1, 2, 0),
-(821, 2, 'لجنة ذاتية', '10:17:00', '', 'لجنة ذاتية', '2018-11-15', 0, '', '2018-11-15 10:17:17', 30566, '0000-00-00 00:00:00', -1, 2, 0),
-(822, 10, '', '11:18:00', '', '', '2018-11-15', 0, '', '2018-11-15 11:18:25', 30566, '0000-00-00 00:00:00', -1, 2, 0),
-(823, 13, '', '15:05:00', '', '', '2018-11-15', 0, '', '2018-11-15 15:05:23', 30566, '0000-00-00 00:00:00', -1, 2, 0),
-(824, 10, '', '09:46:00', '', '', '2018-11-22', 0, '', '2018-11-22 09:46:53', 30566, '0000-00-00 00:00:00', -1, 2, 0),
-(825, 17, '', '09:55:00', '', '', '2018-11-22', 0, '', '2018-11-22 09:57:30', 30566, '0000-00-00 00:00:00', -1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -604,7 +591,7 @@ ALTER TABLE `device_token`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=826;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=857;
 
 --
 -- AUTO_INCREMENT for table `event_entity_category`

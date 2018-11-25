@@ -12,6 +12,7 @@
                 //at the begining, i'll view them just when the user type something
                 //in the event entity text box, so at that time he can chose from the check boxes
                 $("#event_entity_checkboxes").hide();
+                
                 //this event runs when the event entity categories dropdown value changes
                 //bellow i'll hide the committees dropdownlist, coz the user 
                 //has not yet chosen any category
@@ -97,16 +98,6 @@
                         $("#event_place_textbox_div").hide();
                     }
                 });
-
-                //here i'll hide or show the time div if the user typed the event appointment in the text box or not
-                //coz if he typed that he dosen't need to chose the time.
-                $("#event_appointment").focusout(function () {
-                    if ($("#event_appointment").val() !== "") {
-                        $("#time_div").hide();
-                    } else {
-                        $("#time_div").show();
-                    }
-                })
 
                 //here when the user focus in the event place textbox
                 //the hall dropdown will be disabled

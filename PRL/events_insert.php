@@ -6,9 +6,10 @@ include_once '../BLL/events.php';
 //bellow i'll check if the user chose the event entity name (like committee) 
 //from the dropdown menu or typed it's name in the textbox
 if (isset($_POST['committee'])) {
+    
     //here i choose the event entity name that chosen from the dropdown to be 
     //inserted
-    $event_entity = $_POST['committee'];
+    $event_entity_id = $_POST['committee'];
     
     //here i make the event entity name empty, because the name chosen from the 
     //event entity dropdown menu
@@ -21,17 +22,17 @@ if (isset($_POST['committee'])) {
     //value 2, to store 2 in the committee id
     if ($_SESSION['directorate'] == 2) {
         //here i make the event entity to 2, because the name typed in the textbox
-        $event_entity = 2;
+        $event_entity_id = 2;
         //here i check if the directorate of the user is general affairs with 
         //value 3, to store 3 in the committee id
     } elseif ($_SESSION['directorate'] == 3) {
         //here i make the event entity to 3, because the name typed in the textbox
-        $event_entity = 3;
+        $event_entity_id = 3;
         //here i check if the directorate of the user is blocs with value 4, to 
         //store 4 in the entity event id
     } elseif ($_SESSION['directorate'] == 4) {
         //here i make the event entity to 4, because the name typed in the textbox
-        $event_entity = 4;
+        $event_entity_id = 4;
     }
 }
 
@@ -81,7 +82,7 @@ if (isset($_POST['event_status'])) {
 //this code insert 
 
 $event1 = new events();
-$event1->insert_event($event_entity, $event_entity_name, $event_time
+$event1->insert_event($event_entity_id, $event_entity_name, $event_time
         , $event_appointment, $hall_id, $event_place, nl2br($_POST['subject'])
         , $_POST['event_date'], $event_status, $_SESSION['directorate']
         , $_SESSION['user_id']);

@@ -10,6 +10,8 @@ if (isset($_POST['committee']) && !empty(trim($_POST['committee']))) {
     //here i choose the event entity name that chosen from the dropdown to be 
     //inserted
     $event_entity = $_POST['committee'];
+    //here i make the event entity name empty, because the name chosen from the dropdown
+    $event_entity_name = '';
 } else {
     //here i choose the event entity name that typed in the event entity textbox 
     //to be inserted

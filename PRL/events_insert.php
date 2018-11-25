@@ -3,16 +3,13 @@
 include_once 'include/check_session.php';
 include_once '../BLL/events.php';
 
-//bellow i'll check if the user choosed the event entity name (like committee) 
+//bellow i'll check if the user chose the event entity name (like committee) 
 //from the dropdown menu or typed it's name in the textbox
-//here i check the event entity has been choosed form the dropdown menu
+//here i check if the event entity name has been chosen form the dropdown menu
 if (isset($_POST['committee']) && !empty(trim($_POST['committee']))) {
-    //here i choose the event entity name that choosen from the dropdown to be 
+    //here i choose the event entity name that chosen from the dropdown to be 
     //inserted
     $event_entity = $_POST['committee'];
-    //here i make the event entity name empty, because the name choosed from the 
-    //dropdown
-    $event_entity_name = '';
 } else {
     //here i choose the event entity name that typed in the event entity textbox 
     //to be inserted
@@ -78,6 +75,8 @@ if (isset($_POST['event_status'])) {
     $event_status = 0;
 }
 
+//this code insert 
+
 $event1 = new events();
 $event1->insert_event($event_entity, $event_entity_name, $event_time
         , $event_appointment, $hall_id, $event_place, nl2br($_POST['subject'])
@@ -92,3 +91,4 @@ include_once '../android/BLL/device_token.php';
 include_once '../android/apis/event_notification.php';
 
 header('location: events_preview_current_future.php');
+

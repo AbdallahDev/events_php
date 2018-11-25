@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2018 at 09:30 AM
+-- Generation Time: Nov 25, 2018 at 12:49 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -126,7 +126,7 @@ INSERT INTO `device_token` (`device_token_id`, `device_token`) VALUES
 CREATE TABLE `events` (
   `id` int(11) NOT NULL,
   `committee_id` int(11) NOT NULL DEFAULT '2' COMMENT 'i''ll make the default valus as 2 coz i''m intending to delete this column in the future',
-  `event_entity_name` varchar(150) NOT NULL,
+  `event_entity_name` varchar(150) NOT NULL DEFAULT '' COMMENT 'here i made the default value empty coz it''s not always filled',
   `time` time NOT NULL,
   `event_appointment` varchar(30) DEFAULT NULL,
   `subject` text NOT NULL,
@@ -137,9 +137,19 @@ CREATE TABLE `events` (
   `user_id_insert` int(11) NOT NULL,
   `event_edit_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `user_id_edit` int(11) NOT NULL DEFAULT '-1',
-  `directorate_id` int(11) NOT NULL,
+  `directorate_id` int(11) NOT NULL DEFAULT '2' COMMENT 'the default value of this column is 2 coz all the users are from the legislative affairs directorate, so i wan''t need to change the value by code later.',
   `event_status` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`id`, `committee_id`, `event_entity_name`, `time`, `event_appointment`, `subject`, `event_date`, `hall_id`, `event_place`, `event_insertion_date`, `user_id_insert`, `event_edit_date`, `user_id_edit`, `directorate_id`, `event_status`) VALUES
+(857, 9, '', '02:00:00', NULL, 'اجتماع', '2018-11-25', 3, '', '2018-11-25 13:12:28', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(859, 10, '', '13:39:00', '', '', '2018-11-25', 0, '', '2018-11-25 13:40:54', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(860, 38, '', '13:41:00', '', '', '2018-11-25', 0, '', '2018-11-25 13:42:00', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(861, 24, '', '13:42:00', '', '', '2018-11-25', 0, '', '2018-11-25 13:42:27', 30566, '0000-00-00 00:00:00', -1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -174,6 +184,14 @@ CREATE TABLE `event_event_entity` (
   `event_id` int(11) NOT NULL,
   `event_entity_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='this table to store the events with the event entities related to them';
+
+--
+-- Dumping data for table `event_event_entity`
+--
+
+INSERT INTO `event_event_entity` (`event_id`, `event_entity_id`) VALUES
+(857, 9),
+(2, 9);
 
 -- --------------------------------------------------------
 
@@ -591,7 +609,7 @@ ALTER TABLE `device_token`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=857;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=862;
 
 --
 -- AUTO_INCREMENT for table `event_entity_category`

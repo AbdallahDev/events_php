@@ -6,7 +6,6 @@ include_once '../BLL/events.php';
 //bellow i'll check if the user chose the event entity name (like committee) 
 //from the dropdown menu or typed it's name in the textbox
 if (isset($_POST['committee'])) {
-
     //here i choose the event entity id that chosen from the event entity dropdown
     $event_entity_id = $_POST['committee'];
 

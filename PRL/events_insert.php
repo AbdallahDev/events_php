@@ -14,26 +14,8 @@ if (isset($_POST['committee'])) {
     //event entity dropdown menu
     $event_entity_name = '';
 } else {
-    
     //here i chose the event entity name that typed in the event entity textbox
     $event_entity_name = $_POST['event_entity_name'];
-    
-    //here i check if the directorate of the user is legislate affiars with 
-    //value 2, to store 2 in the committee id
-    if ($_SESSION['directorate'] == 2) {
-        //here i make the event entity to 2, because the name typed in the textbox
-        $event_entity_id = 2;
-        //here i check if the directorate of the user is general affairs with 
-        //value 3, to store 3 in the committee id
-    } elseif ($_SESSION['directorate'] == 3) {
-        //here i make the event entity to 3, because the name typed in the textbox
-        $event_entity_id = 3;
-        //here i check if the directorate of the user is blocs with value 4, to 
-        //store 4 in the entity event id
-    } elseif ($_SESSION['directorate'] == 4) {
-        //here i make the event entity to 4, because the name typed in the textbox
-        $event_entity_id = 4;
-    }
 }
 
 //bellow i'll check if the event appointment is set in the event appointemnt 

@@ -25,7 +25,7 @@ elseif (isset($_POST['event_entity_name']) && trim($_POST['event_entity_name']) 
     //here i chose the event entity name that typed in the event entity textbox
     $event_entity_name = $_POST['event_entity_name'];
 
-    //bellow i'll check if the user choose any event entity from the event entities check boxes
+    //bellow i'll check if the user choose any event entity from the event entity check boxes
     if (isset($_POST['event_entity_checkbox'])) {
         foreach ($_POST['event_entity_checkbox'] as $value) {
             $event_entities_id[] = $value;

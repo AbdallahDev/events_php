@@ -12,7 +12,7 @@
                 //at the begining, i'll view them just when the user type something
                 //in the event entity text box, so at that time he can chose from the check boxes
                 $("#event_entity_checkboxes").hide();
-                
+
                 //this event runs when the event entity categories dropdown value changes
                 //bellow i'll hide the committees dropdownlist, coz the user 
                 //has not yet chosen any category
@@ -156,7 +156,9 @@
                     <div class="w3-section">
                         <select class="w3-input w3-border right-dir" id="event_entity_category_id" 
                                 name="event_entity_category_id">
-                            <option value="">فئة جهة النشاط</option>
+                            <!--bellow i've added this option with value 0 so i can 
+                            in the logic page decide if the user did not chose anything-->
+                            <option value="0">فئة جهة النشاط</option>
                             <?PHP
                             //bellow i'll view all the event entity catigories
                             //

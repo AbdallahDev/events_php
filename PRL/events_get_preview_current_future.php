@@ -51,14 +51,23 @@ if ($events_rs->num_rows != 0) {
                     ?>
                     <tr>
                         <td data-label="جهة النشاط"><?php
-                            //i need to make an object for the event_event_entity class 
-                            //to get the proper event entity name
-                            if ($events_row['committee_id'] > 4) {
-                                echo $events_row['committee_name'];
+                            //i need to make an object for the committees class 
+                            //to get the proper event entity name for the event
+                            include_once '../BLL/committees.php';
+                            $event_entities = new committees();
+                            if ($event_entities->event_entity_name_get($events_row['id']) != NULL) {
+                                $event_entities_rs = $event_entities->event_entity_name_get($events_row['id']);
+                                $event_entities_row = $event_entities_rs->fetch_assoc();
+                                //bellow i'll check if the name of the event entity exist
+                                //coz if it's not i'll just view an empty line, coz i suppose the user
+                                //meant to do that
+                                if ($event_entities_row['committee_name'] != "") {
+                                    echo $event_entities_row['committee_name'];
+                                } else {
+                                    echo 'ـــــــــــــــ';
+                                }
                             } elseif ($events_row['event_entity_name'] != '') {
                                 echo $events_row['event_entity_name'];
-                            } else {
-                                echo 'ـــــــــــــــ';
                             }
                             ?></td>
                         <td data-label="الوقت"><?php echo date('h:i A', strtotime($events_row['time'])); ?></td>

@@ -16,7 +16,7 @@ class events extends my_db {
 
     //this function get the id of the event after it has been inserted, to take it and inserted again
     //in the event_event_entity table with the related even entities
-    function event_id() {
+    function event_get_id() {
         return $this->get_all_data("SELECT MAX(events.id) FROM `events`");
     }
 

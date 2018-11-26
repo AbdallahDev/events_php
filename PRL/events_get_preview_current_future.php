@@ -16,7 +16,7 @@ $events_rs = $events->get_events_current_future();
 //viewed on the screen for 2 hours after the last event
 $rs_event_max_time = $events->get_events_curdate_max_time();
 $row_event_max_time = $rs_event_max_time->fetch_assoc();
-//check if there is result for events, that mean if there is events currently or in the future
+//check if there is a result for the events, that means there is events currently or in the future
 if ($events_rs->num_rows != 0) {
     ?> 
     <!--Responsive table-->

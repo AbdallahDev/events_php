@@ -232,7 +232,9 @@
                         <label>القاعة</label>
                         <!--this select for the hall that the event will be in-->
                         <select id="hall" name="hall" class="w3-input w3-border right-dir">
-                            <option value="">اختر القاعة</option>
+                            <!--here i've made a default option with value 0
+                            so i can decide by that that the user has not chosen any hall-->
+                            <option value="0">اختر القاعة</option>
                             <?PHP
                             include_once '../BLL/halls.php';
                             $hall = new halls();

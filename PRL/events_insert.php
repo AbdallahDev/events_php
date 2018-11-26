@@ -18,8 +18,10 @@ $event_appointment = "";
 $subject = $_POST['subject'];
 //this variable to store the event date
 $event_date = "";
-//hall id variable, and i sat the default value to -1 coz there is a hall with id 0 and value empty string ""
-$hall_id = -1;
+//hall id variable, and i sat the default value to 0 so the name of the hall appear as empty string ""
+$hall_id = 0;
+//event place variable, this variable used when the user dosen't select a hall for the event
+$event_place = "";
 
 //bellow i'll check if the user choose the event entity from the event entities drop down menu or not
 //and that by checking the value from the event_entity_categroy_id drop down menu, coz if it's 0 
@@ -65,19 +67,15 @@ else {
 }
 
 //here i check if the hall has been choosed
-if ((isset($_POST['hall'])) && !empty(trim($_POST['hall']))) {
+//
+//if the hall choosed it's value will not be zero
+if ((isset($_POST['hall'])) && $_POST['hall'] != 0) {
     $hall_id = $_POST['hall'];
-    $event_place = '';
-} elseif (isset($_POST['event_place_textbox'])) {
-    //here i check if the hall hasn't been choosen, instead the text box filled 
-    //with the place of the event
-    if (!empty(trim($_POST['event_place_textbox']))) {
-        $event_place = $_POST['event_place_textbox'];
-        $hall_id = 0;
-    } else {
-        $event_place = '';
-        $hall_id = 0;
-    }
+}
+//here if the value of the event place text box sat, that means the user typed 
+//the event place in the text box
+elseif (isset($_POST['event_place_textbox'])) {
+    $event_place = $_POST['event_place_textbox'];
 }
 
 //here i check the status of the event, coz the status decide if the event will be shown on the screen or not

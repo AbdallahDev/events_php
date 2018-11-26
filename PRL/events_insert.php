@@ -33,7 +33,7 @@ $event_status = 0;
 //entity name in the textbox.
 if (isset($_POST['event_entity_category_id']) && $_POST['event_entity_category_id'] != 0) {
     //here i'll save the event entity id that chosen from the event entities drop down menu
-    $event_entity_ids = $_POST['committee'];
+    $event_entity_ids[] = $_POST['committee'];
 }
 //here i'll check if the event entity name typed in the event entity name text box and it's not empty
 //to use it as the event entity name, and to get all the event entities related to it from

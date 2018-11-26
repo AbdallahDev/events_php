@@ -18,6 +18,8 @@ $event_appointment = "";
 $subject = $_POST['subject'];
 //this variable to store the event date
 $event_date = "";
+//hall id variable, and i sat the default value to -1 coz there is a hall with id 0 and value empty string ""
+$hall_id = -1;
 
 //bellow i'll check if the user choose the event entity from the event entities drop down menu or not
 //and that by checking the value from the event_entity_categroy_id drop down menu, coz if it's 0 

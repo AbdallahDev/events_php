@@ -13,10 +13,10 @@ $event_entities_id = array();
 //that menas the user didn't choose anything from the dropdown menu, and typed the event
 //entity name in the textbox.
 if (isset($_POST['event_entity_category_id']) && $_POST['event_entity_category_id'] != 0) {
-    //here i chose the event entity id that chosen from the event entity dropdown
-    $event_entity_id = $_POST['committee'];
+    //here i'll save the event entity id that chosen from the event entities drop down menu
+    $event_entities_id = $_POST['committee'];
 
-    //here i make the event entity name empty, because the name chosen from the 
+    //here i make the event entity name empty, because the event entity already chosen from the 
     //event entity dropdown menu
     $event_entity_name = '';
 } else {

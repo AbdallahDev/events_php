@@ -7,7 +7,7 @@ include_once '../BLL/users.php';
 //and local language to arabic
 setlocale(LC_ALL, 'ar_AE.utf8');
 date_default_timezone_set('Asia/Amman');
-//user object to get the user who last edited the evet
+//user object to get the user who last edited the evetn
 $user = new users();
 //event object to get all the events
 $events = new events();

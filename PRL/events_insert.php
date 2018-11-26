@@ -87,8 +87,8 @@ if (isset($_POST['event_status'])) {
 }
 
 //this code insert a new event
-$event1 = new events();
-$event1->insert_event($event_entity_name, $event_time, $event_appointment, $subject
+$event = new events();
+$event->insert_event($event_entity_name, $event_time, $event_appointment, $subject
         , $event_date, $hall_id, $event_place, $user_id, $event_status);
 
 /* this inclusion for the eventNotificatoin file to send notifications when the 

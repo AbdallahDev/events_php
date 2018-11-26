@@ -10,18 +10,20 @@ $event_entities_id = array();
 //this variable to be used for the event_entity_name that typed in the event entity text box
 $event_entity_name = '';
 //this var to store the event time
-$time = $_POST['time'];
+$event_time = "";
 //this var to store the event appointment and that when the user dosen't want 
 //the real time to appear on the screen
 $event_appointment = "";
 //this var to store the event subject
-$subject = $_POST['subject'];
+$subject = nl2br($_POST['subject']);
 //this variable to store the event date
 $event_date = "";
 //hall id variable, and i sat the default value to 0 so the name of the hall appear as empty string ""
 $hall_id = 0;
 //event place variable, this variable used when the user dosen't select a hall for the event
 $event_place = "";
+//this variable for the user id and i'll get it from the session after the user login.
+$user_id = $_SESSION['user_id'];
 
 //bellow i'll check if the user choose the event entity from the event entities drop down menu or not
 //and that by checking the value from the event_entity_categroy_id drop down menu, coz if it's 0 
@@ -58,8 +60,6 @@ if (isset($_POST['event_appointment']) &&
 }
 //here when the event appointment is empty
 else {
-    //here the event appointment will be empty
-    $event_appointment = $_POST['event_appointment'];
     //here i set the value of the time from the form to the event_time variable 
     //as it's, because the events appointment has not set, so i won't need the 
     //increase the event time by one second
@@ -88,7 +88,7 @@ if (isset($_POST['event_status'])) {
 
 //this code insert a new event
 $event1 = new events();
-$event1->insert_event($event_entity_name, $time, $event_appointment, $subject
+$event1->insert_event($event_entity_name, $event_time, $event_appointment, $subject
         , $event_date, $hall_id, $event_place, $user_id, $event_status);
 
 /* this inclusion for the eventNotificatoin file to send notifications when the 

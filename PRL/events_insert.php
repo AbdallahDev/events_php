@@ -11,6 +11,11 @@ $event_entities_id = array();
 $event_entity_name = '';
 //this var to store the event time
 $time = $_POST['time'];
+//this var to store the event appointment and that when the user dosen't want 
+//the real time to appear on the screen
+$event_appointment = "";
+//this var to store the event subject
+$subject = $_POST['subject'];
 
 //bellow i'll check if the user choose the event entity from the event entities drop down menu or not
 //and that by checking the value from the event_entity_categroy_id drop down menu, coz if it's 0 

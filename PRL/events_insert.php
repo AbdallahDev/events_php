@@ -9,6 +9,8 @@ include_once '../BLL/events.php';
 $event_entities_id = array();
 //this variable to be used for the event_entity_name that typed in the event entity text box
 $event_entity_name = '';
+//this var to store the event time
+$time = $_POST['time'];
 
 //bellow i'll check if the user choose the event entity from the event entities drop down menu or not
 //and that by checking the value from the event_entity_categroy_id drop down menu, coz if it's 0 
@@ -78,10 +80,8 @@ if (isset($_POST['event_status'])) {
 
 //this code insert a new event
 $event1 = new events();
-$event1->insert_event($event_entity_id, $event_entity_name, $event_time
-        , $event_appointment, $hall_id, $event_place, nl2br($_POST['subject'])
-        , $_POST['event_date'], $event_status, $_SESSION['directorate']
-        , $_SESSION['user_id']);
+$event1->insert_event($event_entity_name, $time, $event_appointment, $subject
+        , $event_date, $hall_id, $event_place, $user_id, $event_status);
 
 /* this inclusion for the eventNotificatoin file to send notifications when the 
   event inserted in the db */

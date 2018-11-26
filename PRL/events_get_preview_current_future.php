@@ -25,7 +25,7 @@ if ($events_rs->num_rows != 0) {
             <caption>النشاطات الحالية/المستقبلية</caption>
             <thead>
                 <tr>
-                    <th scope="col">النشاط</th>
+                    <th scope="col">جهة النشاط</th>
                     <th scope="col">الوقت</th>
                     <th scope="col">المكان</th>
                     <th scope="col">الموضوع</th>
@@ -50,7 +50,7 @@ if ($events_rs->num_rows != 0) {
                 while ($events_row = $events_rs->fetch_assoc()) {
                     ?>
                     <tr>
-                        <td data-label="النشاط"><?php
+                        <td data-label="جهة النشاط"><?php
                             if ($events_row['committee_id'] > 4) {//here i check if the committee id is greater that 4, because 4 is the last id for the empty committees, and because that means that the event entity name is not choossed using the event entity dropdown menu saved using the event entity textbox
                                 echo $events_row['committee_name'];
                             } elseif ($events_row['event_entity_name'] != '') {

@@ -16,6 +16,8 @@ $time = $_POST['time'];
 $event_appointment = "";
 //this var to store the event subject
 $subject = $_POST['subject'];
+//this variable to store the event date
+$event_date = "";
 
 //bellow i'll check if the user choose the event entity from the event entities drop down menu or not
 //and that by checking the value from the event_entity_categroy_id drop down menu, coz if it's 0 

@@ -76,7 +76,7 @@ if (isset($_POST['event_status'])) {
     $event_status = 0;
 }
 
-//this code insert 
+//this code insert new event
 $event1 = new events();
 $event1->insert_event($event_entity_id, $event_entity_name, $event_time
         , $event_appointment, $hall_id, $event_place, nl2br($_POST['subject'])

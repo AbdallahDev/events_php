@@ -157,7 +157,8 @@
                         <select class="w3-input w3-border right-dir" id="event_entity_category_id" 
                                 name="event_entity_category_id">
                             <!--bellow i've added this option with value 0 so i can 
-                            in the logic page decide if the user did not chose anything-->
+                            in the logic page the events_insert_page.php decide 
+                            if the user did not chose anything-->
                             <option value="0">فئة جهة النشاط</option>
                             <?PHP
                             //bellow i'll view all the event entity catigories

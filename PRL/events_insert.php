@@ -7,6 +7,8 @@ include_once '../BLL/events.php';
 //
 //this array to store the id/ids of the event entity/event entities
 $event_entities_id = array();
+//this variable to be used for the event_entity_name that typed in the event entity text box
+$event_entity_name = '';
 
 //bellow i'll check if the user choose the event entity from the event entities drop down menu or not
 //and that by checking the value from the event_entity_categroy_id drop down menu, coz if it's 0 
@@ -15,10 +17,6 @@ $event_entities_id = array();
 if (isset($_POST['event_entity_category_id']) && $_POST['event_entity_category_id'] != 0) {
     //here i'll save the event entity id that chosen from the event entities drop down menu
     $event_entities_id = $_POST['committee'];
-
-    //here i make the event entity name empty, because the event entity already chosen from the 
-    //event entity dropdown menu
-    $event_entity_name = '';
 } else {
     //here i chose the event entity name that typed in the event entity textbox
     $event_entity_name = $_POST['event_entity_name'];

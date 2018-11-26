@@ -3,6 +3,11 @@
 include_once 'include/check_session.php';
 include_once '../BLL/events.php';
 
+//bellow i'll list the needed variables in the page.
+//
+//this array to store the id/ids of the event entity/event entities
+$event_entities_id = array();
+
 //bellow i'll check if the user choose the event entity from the event entities drop down menu or not
 //and that by checking the value from the event_entity_categroy_id drop down menu, coz if it's 0 
 //that menas the user didn't choose anything from the dropdown menu, and typed the event
@@ -74,8 +79,8 @@ $event1->insert_event($event_entity_id, $event_entity_name, $event_time
   event inserted in the db */
 //and i've made the inclusion directory like this because this file will be
 //included in the event_insert.php file
-//include_once '../android/BLL/device_token.php';
-//include_once '../android/apis/event_notification.php';
-//
-//header('location: events_preview_current_future.php');
+include_once '../android/BLL/device_token.php';
+include_once '../android/apis/event_notification.php';
+
+header('location: events_preview_current_future.php');
 

@@ -17,7 +17,7 @@ class events extends my_db {
     //this function get the id of the event after it has been inserted by the user, 
     //to take it and inserted again in the event_event_entity table with the related even entities
     function event_get_id($user_id) {
-        $query = "SELECT MAX(events.id) FROM `events` WHERE user_id_insert = ?";
+        $query = "SELECT MAX(events.id) AS 'event_id' FROM `events` WHERE user_id_insert = ?";
         return $this->get_data($query, 'i', array(&$user_id));
     }
 

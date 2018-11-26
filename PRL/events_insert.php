@@ -6,7 +6,7 @@ include_once '../BLL/events.php';
 //bellow i'll list the needed variables in the page.
 //
 //this array to store the id/ids of the event entity/event entities
-$event_entities_id = array();
+$event_entity_ids = array();
 //this variable to be used for the event_entity_name that typed in the event entity text box
 $event_entity_name = '';
 //this var to store the event time
@@ -33,7 +33,7 @@ $event_status = 0;
 //entity name in the textbox.
 if (isset($_POST['event_entity_category_id']) && $_POST['event_entity_category_id'] != 0) {
     //here i'll save the event entity id that chosen from the event entities drop down menu
-    $event_entities_id = $_POST['committee'];
+    $event_entity_ids = $_POST['committee'];
 }
 //here i'll check if the event entity name typed in the event entity name text box and it's not empty
 //to use it as the event entity name, and to get all the event entities related to it from
@@ -45,7 +45,7 @@ elseif (isset($_POST['event_entity_name']) && trim($_POST['event_entity_name']) 
     //bellow i'll check if the user choose any event entity from the event entity check boxes
     if (isset($_POST['event_entity_checkbox'])) {
         foreach ($_POST['event_entity_checkbox'] as $value) {
-            $event_entities_id[] = $value;
+            $event_entity_ids[] = $value;
         }
     }
 }
@@ -90,6 +90,23 @@ if (isset($_POST['event_status'])) {
 $event = new events();
 $event->insert_event($event_entity_name, $event_time, $event_appointment, $subject
         , $event_date, $hall_id, $event_place, $user_id, $event_status);
+
+//here i'll insert the event entity/entities related to it in the db after 
+//the it has been inserted
+//
+//first i need to get the id of the event to use it and insert it with the event 
+//related event entities in the db.
+$event_id_rs = $event->event_get_id($user_id);
+$event_id_row = $event_id_rs->fetch_assoc();
+$event_id = $event_id_row['event_id'];
+//bellow i'll insert the event with it's related event entities.
+include_once '../BLL/event_event_entity.php';
+$event_event_entity = new event_event_entity();
+//here i'll loop over the event entity ids coz it could be filled with multiple 
+//event entities for the same event
+foreach ($event_entity_ids as $value) {
+    $event_event_entity->event_event_entity_insert($event_id, $value);
+}
 
 /* this inclusion for the eventNotificatoin file to send notifications when the 
   event inserted in the db */

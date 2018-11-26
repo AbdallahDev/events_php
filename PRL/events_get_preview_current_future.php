@@ -51,7 +51,9 @@ if ($events_rs->num_rows != 0) {
                     ?>
                     <tr>
                         <td data-label="جهة النشاط"><?php
-                            if ($events_row['committee_id'] > 4) {//here i check if the committee id is greater that 4, because 4 is the last id for the empty committees, and because that means that the event entity name is not choossed using the event entity dropdown menu saved using the event entity textbox
+                            //i need to make an object for the event_event_entity class 
+                            //to get the proper event entity name
+                            if ($events_row['committee_id'] > 4) {
                                 echo $events_row['committee_name'];
                             } elseif ($events_row['event_entity_name'] != '') {
                                 echo $events_row['event_entity_name'];

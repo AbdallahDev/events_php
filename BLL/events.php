@@ -4,14 +4,14 @@ include_once '../DAL/my_db.php';
 
 class events extends my_db {
 
-    function insert_event($committee_id, $event_entity_name, $time, $event_appointment
-    , $hall_id, $event_place, $subject, $event_date, $event_status, $directorate_id, $user_id) {
-        $this->mod_data('insert into events(committee_id, event_entity_name, time, '
-                . 'event_appointment, hall_id, event_place, subject, event_date, '
-                . 'event_status, directorate_id, user_id_insert) '
-                . 'values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 'isssisssiii'
-                , array(&$committee_id, &$event_entity_name, &$time, &$event_appointment,
-            &$hall_id, &$event_place, &$subject, &$event_date, &$event_status, &$directorate_id, &$user_id));
+    function insert_event($event_entity_name, $time, $event_appointment
+    , $subject, $event_date, $hall_id, $event_place, $user_id, $event_status) {
+        $this->mod_data('insert into events(event_entity_name, time, '
+                . 'event_appointment, subject, event_date, hall_id, event_place, user_id_insert, '
+                . 'event_status) '
+                . 'values(?, ?, ?, ?, ?, ?, ?, ?, ?)', 'sssssisii'
+                , array(&$event_entity_name, &$time, &$event_appointment
+            , &$subject, &$event_date, &$hall_id, &$event_place, &$user_id, &$event_status));
     }
 
     function update_event($event_entity, $event_entity_name, $time, $event_appointment, $hall_id, $event_place, $subject, $event_date, $event_status, $event_edit_date, $directorate_id, $user_id_edit, $id) {

@@ -53,9 +53,10 @@ class events extends my_db {
         return $this->get_all_data('SELECT * FROM events WHERE DATE(event_date) >= CURDATE() ORDER BY time');
     }
 
-    //this function get the current and future evetns depend on the directorate
-    function get_events_current_future($directorate_id) {
-        return $this->get_data('SELECT events.id, events.event_entity_name, events.committee_id, committees.committee_name, events.time, events.subject, events.event_date, users.user_type, halls.hall_name, events.event_place, events.event_status, users.name, events.user_id_insert, events.event_insertion_date, events.user_id_edit, events.event_edit_date FROM events INNER JOIN users ON users.user_id = events.user_id_insert INNER JOIN halls ON halls.hall_id = events.hall_id INNER JOIN committees ON committees.committee_id = events.committee_id WHERE events.event_date >= CURDATE() and events.directorate_id = ? ORDER BY events.event_date desc, events.time ASC, events.committee_id ASC', 'i', array(&$directorate_id));
+    //this function get the current and future evetns, to view them for the website user.
+    function get_events_current_future() {
+        $query = 'SELECT events.id, events.event_entity_name, events.time, events.subject, events.event_date, users.user_type, halls.hall_name, events.event_place, events.event_status, users.name, events.user_id_insert, events.event_insertion_date, events.user_id_edit, events.event_edit_date FROM events INNER JOIN users ON users.user_id = events.user_id_insert INNER JOIN halls ON halls.hall_id = events.hall_id WHERE events.event_date >= CURDATE() ORDER BY events.event_date desc, events.time ASC';
+        return $this->get_all_data($query);
     }
 
     //this function get old evetns depend on the directorate

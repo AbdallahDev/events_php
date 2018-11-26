@@ -14,10 +14,11 @@ class events extends my_db {
             , &$subject, &$event_date, &$hall_id, &$event_place, &$user_id, &$event_status));
     }
 
-    //this function get the id of the event after it has been inserted, to take it and inserted again
-    //in the event_event_entity table with the related even entities
-    function event_get_id() {
-        return $this->get_all_data("SELECT MAX(events.id) FROM `events`");
+    //this function get the id of the event after it has been inserted by the user, 
+    //to take it and inserted again in the event_event_entity table with the related even entities
+    function event_get_id($user_id) {
+        $query = "SELECT MAX(events.id) FROM `events` WHERE user_id_insert = ?";
+        return $this->get_data($query, 'i', array(&$user_id));
     }
 
     function update_event($event_entity, $event_entity_name, $time, $event_appointment, $hall_id, $event_place, $subject, $event_date, $event_status, $event_edit_date, $directorate_id, $user_id_edit, $id) {

@@ -10,13 +10,14 @@ date_default_timezone_set('Asia/Amman');
 //user object to get the user who last edited the evet
 $user = new users();
 //event object to get all the events
-$event1 = new events();
-$rs = $event1->get_events_current_future($_SESSION['directorate']); //here i get all the current and the future events to preview it for the user
-//here i get the max time for the current date events to keep the enabled events viewed as proadcasted on the screen, and that for 2 hours after the last event
-$rs_event_max_time = $event1->get_events_curdate_max_time();
+$events = new events();
+$events_r = $events->get_events_current_future();
+//here i get the max time for the current date events to keep the enabled events 
+//viewed on the screen for 2 hours after the last event
+$rs_event_max_time = $events->get_events_curdate_max_time();
 $row_event_max_time = $rs_event_max_time->fetch_assoc();
 //check if there is result for events, that mean if there is events currently or in the future
-if ($rs->num_rows != 0) {
+if ($events_rs->num_rows != 0) {
     ?> 
     <!--Responsive table-->
     <div class="w3-container w3-padding-64 w3-center">
@@ -46,7 +47,7 @@ if ($rs->num_rows != 0) {
             </thead>
             <tbody>
                 <?php
-                while ($row = $rs->fetch_assoc()) {
+                while ($row = $events_rs->fetch_assoc()) {
                     ?>
                     <tr>
                         <td data-label="النشاط"><?php

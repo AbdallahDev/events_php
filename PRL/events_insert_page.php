@@ -83,7 +83,7 @@
                     }
                 });
 
-                //this event run when the dropdown value changes
+                //this event run when the hall dropdown value changes
                 $("#hall").change(function () {
                     //if the user choosed nothing from the dropdown
                     //the event place textbox will be enabled and showed

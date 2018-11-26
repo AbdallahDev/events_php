@@ -6,8 +6,14 @@ include_once '../DAL/my_db.php';
 //the event entity realted to the event
 class event_event_entity extends my_db {
 
-    public function event_event_entity_insert($event_id, $event_entity_id) {
+    function event_event_entity_insert($event_id, $event_entity_id) {
         return $this->mod_data("INSERT INTO `event_event_entity` (`event_id`, `event_entity_id`) VALUES (?, ?)", 'ii', array(&$event_id, &$event_entity_id));
+    }
+
+    //this function get the event entity name for the event with the deleverd event id.
+    function event_event_entity_name_get($event_id) {
+        $query = "SELECT event_event_entity.event_entity_id FROM `event_event_entity` WHERE event_event_entity.event_id = ?";
+        return $this->mod_data($query, 'i', array(&$event_id));
     }
 
 }

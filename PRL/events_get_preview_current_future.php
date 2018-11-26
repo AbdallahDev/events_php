@@ -11,7 +11,7 @@ date_default_timezone_set('Asia/Amman');
 $user = new users();
 //event object to get all the events
 $events = new events();
-$events_r = $events->get_events_current_future();
+$events_rs = $events->get_events_current_future();
 //here i get the max time for the current date events to keep the enabled events 
 //viewed on the screen for 2 hours after the last event
 $rs_event_max_time = $events->get_events_curdate_max_time();

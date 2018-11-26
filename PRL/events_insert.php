@@ -17,13 +17,15 @@ $event_appointment = "";
 //this var to store the event subject
 $subject = nl2br($_POST['subject']);
 //this variable to store the event date
-$event_date = "";
+$event_date = $_POST['event_date'];
 //hall id variable, and i sat the default value to 0 so the name of the hall appear as empty string ""
 $hall_id = 0;
 //event place variable, this variable used when the user dosen't select a hall for the event
 $event_place = "";
 //this variable for the user id and i'll get it from the session after the user login.
 $user_id = $_SESSION['user_id'];
+//this var for the status of the event and i'll make it with 0 default value for the casses it's not checked
+$event_status = 0;
 
 //bellow i'll check if the user choose the event entity from the event entities drop down menu or not
 //and that by checking the value from the event_entity_categroy_id drop down menu, coz if it's 0 
@@ -82,8 +84,6 @@ elseif (isset($_POST['event_place_textbox'])) {
 //here i check the status of the event, coz the status decide if the event will be shown on the screen or not
 if (isset($_POST['event_status'])) {
     $event_status = $_POST['event_status'];
-} else {
-    $event_status = 0;
 }
 
 //this code insert a new event
@@ -95,8 +95,8 @@ $event1->insert_event($event_entity_name, $event_time, $event_appointment, $subj
   event inserted in the db */
 //and i've made the inclusion directory like this because this file will be
 //included in the event_insert.php file
-include_once '../android/BLL/device_token.php';
-include_once '../android/apis/event_notification.php';
-
-header('location: events_preview_current_future.php');
+//include_once '../android/BLL/device_token.php';
+//include_once '../android/apis/event_notification.php';
+//
+//header('location: events_preview_current_future.php');
 

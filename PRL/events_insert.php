@@ -66,9 +66,10 @@ else {
     $event_time = $_POST['time'];
 }
 
-//here i check if the hall has been choosed
+//here i check if the hall has been chosen
 //
-//if the hall choosed it's value will not be zero
+//if the chosen hall id is not zero, that means the user chose the hall from the 
+//halls drop down menu
 if ((isset($_POST['hall'])) && $_POST['hall'] != 0) {
     $hall_id = $_POST['hall'];
 }

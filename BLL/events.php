@@ -42,12 +42,7 @@ class events extends my_db {
     }
 
     function get_events_curdate() {
-        return $this->get_all_data('SELECT committees.committee_id, committees.committee_name, '
-                . 'events.event_entity_name, events.time, events.event_appointment, '
-                . 'halls.hall_name, events.event_place, events.subject, events.id '
-                . 'FROM events INNER JOIN committees ON committees.committee_id= events.committee_id '
-                . 'INNER JOIN halls on halls.hall_id=events.hall_id '
-                . 'WHERE DATE(event_date) = CURDATE() and event_status = 1 ORDER BY time');
+        return $this->get_all_data('SELECT events.event_entity_name, events.time, events.event_appointment, halls.hall_name, events.event_place, events.subject, events.id FROM events INNER JOIN halls on halls.hall_id = events.hall_id WHERE DATE(event_date) = CURDATE() and event_status = 1 ORDER BY time');
     }
 
     function get_events_curdate_max_time() {

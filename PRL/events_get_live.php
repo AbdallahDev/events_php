@@ -34,34 +34,62 @@ if ($rs->num_rows > 0) {
                 <th>الموضوع</th>
             </tr>
             <?php
-            while ($row = $rs->fetch_assoc()) {
+            while ($events_row = $rs->fetch_assoc()) {
                 ?>
                 <tbody style="vertical-align: text-top; text-align: center; font-weight: bold;">
                     <tr>
+                        <!--this column to view the event entity name-->
                         <td style="width: <?php echo $row_table_live_design['table_live_design_event_entity_column_width'] ?>%"><?php
-                            if ($row['committee_id'] > 4) {//here i check if the committee id is greater that 4, because 4 is the last id for the empty committees, and because that means that the event entity name is not choossed using the event entity dropdown menu saved using the event entity textbox
-                                echo $row['committee_name'];
+                            //i need to make an object for the committees class 
+                            //to get the proper event entity name for the event
+                            include_once '../BLL/committees.php';
+                            $event_entities = new committees();
+                            $event_entities_rs = $event_entities->event_entity_name_get($events_row['id']);
+                            //i'll check if the result has rows less than 2, 
+                            //coz that means the event related to one event entity,
+                            //coz if it's related to more than that i should view
+                            //the event entity name that typed in the text box
+                            //even if it's empty.
+                            if ($event_entities_rs->num_rows < 2) {
+                                $event_entities_row = $event_entities_rs->fetch_assoc();
+                                //bellow i'll check if the name of the event entity exist
+                                //coz if it's not i'll check if it has instead of that 
+                                //a fixed entity name inserted in the event entity text box, 
+                                //but if it dosen't have anything one of those, that means 
+                                //the user chose to put it with no name
+                                if ($event_entities_row['committee_name'] != "") {
+                                    echo $event_entities_row['committee_name'];
+                                } elseif ($events_row['event_entity_name'] != '') {
+                                    echo $events_row['event_entity_name'];
+                                } else {
+                                    echo 'ـــــــــــــــ';
+                                }
                             } else {
-                                echo $row['event_entity_name'];
+                                if ($events_row['event_entity_name'] != '') {
+                                    echo $events_row['event_entity_name'];
+                                } else {
+                                    echo 'ـــــــــــــــ';
+                                }
                             }
-                            ?></td>
+                            ?>
+                        </td>
                         <td style="width: <?php echo $row_table_live_design['table_live_design_event_time_column_width']; ?>%; direction: ltr"><?php
-                            if ($row['event_appointment'] != "") {
-                                echo $row['event_appointment'];
+                            if ($events_row['event_appointment'] != "") {
+                                echo $events_row['event_appointment'];
                             } else {
-                                echo date('h:i A', strtotime($row['time']));
+                                echo date('h:i A', strtotime($events_row['time']));
                             }
                             ?></td>
                         <td style="width: <?php echo $row_table_live_design['table_live_design_event_place_column_width']; ?>%">
                             <?php
-                            if ($row['hall_name'] != "")
-                                echo $row['hall_name'];
+                            if ($events_row['hall_name'] != "")
+                                echo $events_row['hall_name'];
                             else
-                                echo $row['event_place'];
+                                echo $events_row['event_place'];
                             ?>
                         </td>
                         <td style="text-align: right;
-                            width: <?php echo $row_table_live_design['table_live_design_event_subject_column_width']; ?>%"><?php echo $row['subject'] ?></td>
+                            width: <?php echo $row_table_live_design['table_live_design_event_subject_column_width']; ?>%"><?php echo $events_row['subject'] ?></td>
                     </tr>
                 </tbody>
                 <?php

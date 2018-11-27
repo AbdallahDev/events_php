@@ -55,7 +55,13 @@ class events extends my_db {
 
     //this function get the current and future evetns, to view them for the website user.
     function get_events_current_future() {
-        $query = 'SELECT events.id, events.event_entity_name, events.time, events.subject, events.event_date, users.user_type, halls.hall_name, events.event_place, events.event_status, users.name, events.user_id_insert, events.event_insertion_date, events.user_id_edit, events.event_edit_date FROM events INNER JOIN users ON users.user_id = events.user_id_insert INNER JOIN halls ON halls.hall_id = events.hall_id WHERE events.event_date >= CURDATE() ORDER BY events.event_date desc, events.time ASC';
+        $query = 'SELECT events.id, events.event_entity_name, events.time, '
+                . 'events.subject, events.event_date, users.user_type, halls.hall_name, '
+                . 'events.event_place, events.event_status, users.name, events.user_id_insert, '
+                . 'events.event_insertion_date, events.user_id_edit, events.event_edit_date '
+                . 'FROM events INNER JOIN users ON users.user_id = events.user_id_insert '
+                . 'INNER JOIN halls ON halls.hall_id = events.hall_id '
+                . 'WHERE events.event_date >= CURDATE() ORDER BY events.event_date desc, events.time ASC';
         return $this->get_all_data($query);
     }
 

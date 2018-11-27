@@ -8,6 +8,8 @@ $events_row = $rs->fetch_assoc();
 
 //needed variables declaration
 $event_id = $_GET['id'];
+$event_entity_id = 0;
+$event_entity_catgory_id = 0;
 ?>
 <html>
     <head>
@@ -172,6 +174,25 @@ $event_id = $_GET['id'];
                 <div class="w3-section">
                     <select class="w3-input w3-border right-dir" id="event_entity_category_id" 
                             name="event_entity_category_id">
+                                <?php
+                                //bellow i'll select all the event entity ids that 
+                                //belong to this event
+                                include_once '../BLL/event_event_entity.php';
+                                $event_event_entity = new event_event_entity();
+                                $event_event_entity_rs = $event_event_entity->entity_id_get($event_id);
+                                //here i'll check if the result has just single row,
+                                //coz that means that the event belong to a single
+                                //event entity, so that means i should select for the 
+                                //user the event entity category that belong to that event entity
+                                if ($event_event_entity_rs->num_rows == 1) {
+                                    $event_event_entity_row = $event_event_entity_rs->fetch_assoc();
+                                    $event_entity_id = $event_event_entity_row['event_entity_id'];
+                                    //so here bellow depend on the event entity id
+                                    //i'll get the event entity category id to select it
+                                    //in the dropdown menu
+                                    
+                                }
+                                ?>
                         <!--bellow i've added this option with value 0 so i can 
                         in the logic page the events_insert_page.php decide 
                         if the user did not chose anything-->
@@ -188,7 +209,7 @@ $event_id = $_GET['id'];
                             ?>
                             <option value="
                                     <?php echo $row_event_entity_category['event_entity_category_id']; ?>">
-                                    <?php echo $row_event_entity_category['event_entity_category_name']; ?>
+                                        <?php echo $row_event_entity_category['event_entity_category_name']; ?>
                             </option>
                         <?php }
                         ?>
@@ -263,10 +284,10 @@ $event_id = $_GET['id'];
                     <label>نشر على الشاشة</label>
                     <!--this is if the event will be shown on the screen-->
                     <input type="checkbox" id="event_status" value="1" <?php
-                        if ($events_row['event_status'] == 1) {
-                            echo ' checked';
-                        }
-                        ?> class="w3-check">
+                    if ($events_row['event_status'] == 1) {
+                        echo ' checked';
+                    }
+                    ?> class="w3-check">
                 </div>
                 <button class="w3-button w3-right w3-theme" type="submit" id="edit" name="edit" value="تعديل">تعديل</button>
             </div>

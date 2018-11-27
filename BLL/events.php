@@ -66,8 +66,9 @@ class events extends my_db {
     }
 
     //this function get old evetns depend on the directorate
-    function get_events_old($directorate_id) {
-        return $this->get_data('SELECT events.id, events.event_entity_name, committees.committee_id, committees.committee_name, events.time, events.subject,  events.event_date, users.user_type, halls.hall_name, events.event_place, events.event_status, users.name, events.user_id_insert, events.event_insertion_date, events.user_id_edit, events.event_edit_date FROM events INNER JOIN users ON users.user_id = events.user_id_insert INNER JOIN halls ON halls.hall_id = events.hall_id INNER JOIN committees ON committees.committee_id = events.committee_id WHERE events.event_date < CURDATE() and events.directorate_id = ? ORDER BY events.event_date desc, events.time ASC, events.committee_id ASC', 'i', array(&$directorate_id));
+    function get_events_old() {
+        $query = 'SELECT events.id, events.event_entity_name, events.time, events.event_appointment, events.subject,  events.event_date, users.user_type, halls.hall_name, events.event_place, events.event_status, users.name, events.user_id_insert, events.event_insertion_date, events.user_id_edit, events.event_edit_date FROM events INNER JOIN users ON users.user_id = events.user_id_insert INNER JOIN halls ON halls.hall_id = events.hall_id WHERE events.event_date < CURDATE() ORDER BY events.event_date desc, events.time ASC';
+        return $this->get_all_data($query);
     }
 
     //this function get all the events related to the user, even if he inserted or edited them

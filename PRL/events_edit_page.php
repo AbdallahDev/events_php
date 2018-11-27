@@ -4,7 +4,7 @@
 include_once '../BLL/events.php';
 $event = new events();
 $rs = $event->get_event($_GET['id']);
-$row = $rs->fetch_assoc();
+$events_row = $rs->fetch_assoc();
 ?>
 <html>
     <head>
@@ -163,7 +163,7 @@ $row = $rs->fetch_assoc();
         <!--this form to edit the event-->
         <div class="w3-container w3-padding-64" id="contact">
             <div class="right-align-text w3-container w3-card-4 w3-padding-16 w3-white">
-                <input type="hidden" id="id" name="id" value="<?php echo $row['id'] ?>" class="w3-input w3-border">
+                <input type="hidden" id="id" name="id" value="<?php echo $events_row['id'] ?>" class="w3-input w3-border">
 
                 <!--this div for the event entity categories drop down list -->
                 <div class="w3-section">
@@ -202,28 +202,28 @@ $row = $rs->fetch_assoc();
                 
                 <div class="w3-section">
                     <!--this is the name of the event entity-->
-                    <input type="text" id="event_entity_name" name="event_entity_name" value="<?php echo $row['event_entity_name'] ?>" placeholder="جهة النشاط" class="w3-input w3-border right-dir">
+                    <input type="text" id="event_entity_name" name="event_entity_name" value="<?php echo $events_row['event_entity_name'] ?>" placeholder="جهة النشاط" class="w3-input w3-border right-dir">
                 </div>
                 <div class="w3-section">
                     <label>وقت النشاط</label>
                     <!--this is the time of the event-->
-                    <input type="time" id="time" name="time" placeholder="time" value="<?php echo $row['time'] ?>" class="w3-input w3-border right-align-text">
+                    <input type="time" id="time" name="time" placeholder="time" value="<?php echo $events_row['time'] ?>" class="w3-input w3-border right-align-text">
                 </div>
                 <div class="w3-section">
                     <label>موعد النشاط</label>
                     <!--this is the name of the event entity-->
-                    <input type="text" id="event_appointment" name="event_appointment" placeholder="موعد النشاط" value="<?php echo $row['event_appointment'] ?>" class="w3-input w3-border right-dir">
+                    <input type="text" id="event_appointment" name="event_appointment" placeholder="موعد النشاط" value="<?php echo $events_row['event_appointment'] ?>" class="w3-input w3-border right-dir">
                 </div>
                 <div class="w3-section">
                     <label>تاريخ النشاط</label>
                     <!--this is event date, when the event will be hold in-->
-                    <input type="date" id="event_date" name="event_date" placeholder="التاريخ" value="<?php echo $row['event_date'] ?>" class="w3-input w3-border right-dir right-align-text right-float"><br>
+                    <input type="date" id="event_date" name="event_date" placeholder="التاريخ" value="<?php echo $events_row['event_date'] ?>" class="w3-input w3-border right-dir right-align-text right-float"><br>
                 </div>
                 <br>
                 <div class="w3-section">
                     <label>الموضوع</label>
                     <!--this is event subject, it means what the event hold for-->
-                    <textarea style="text-align: right" rows="5" cols="48" id="subject" name="subject" placeholder="الموضوع" class="w3-input w3-border right-dir"><?php echo $row['subject'] ?></textarea>
+                    <textarea style="text-align: right" rows="5" cols="48" id="subject" name="subject" placeholder="الموضوع" class="w3-input w3-border right-dir"><?php echo $events_row['subject'] ?></textarea>
                 </div>
                 <div class="w3-section">
                     <label>القاعة</label>
@@ -240,7 +240,7 @@ $row = $rs->fetch_assoc();
                         while ($row_hall = $rs_hall->fetch_assoc()) {
                             if ($row_hall['hall_id'] != 0) {
                                 echo '<option value="' . $row_hall['hall_id'] . '"';
-                                if ($row_hall['hall_id'] == $row['hall_id']) {
+                                if ($row_hall['hall_id'] == $events_row['hall_id']) {
                                     echo ' selected';
                                 }
                                 echo '>';
@@ -254,13 +254,13 @@ $row = $rs->fetch_assoc();
                 <div class="w3-section">
                     <label>مكان الاجتماع</label>
                     <!--this is event place, and that when the event dosen't hold in a hall-->
-                    <input id="event_place_textbox" name="event_place_textbox" class="w3-input w3-border right-dir"  type="text" placeholder="مكان الاجتماع" value="<?php echo $row['event_place'] ?>">
+                    <input id="event_place_textbox" name="event_place_textbox" class="w3-input w3-border right-dir"  type="text" placeholder="مكان الاجتماع" value="<?php echo $events_row['event_place'] ?>">
                 </div>
                 <div class="w3-section">
                     <label>نشر على الشاشة</label>
                     <!--this is if the event will be shown on the screen-->
                     <input type="checkbox" id="event_status" value="1" <?php
-                    if ($row['event_status'] == 1) {
+                    if ($events_row['event_status'] == 1) {
                         echo ' checked';
                     }
                     ?> class="w3-check">

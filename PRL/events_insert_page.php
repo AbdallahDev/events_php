@@ -85,17 +85,14 @@
 
                 //this event run when the hall dropdown value changes
                 $("#hall").change(function () {
-                    //if the user choosed nothing from the dropdown
-                    //the event place textbox will be enabled and showed
-                    if ($("#hall").val() == '') {
-                        $("#event_place_textbox").prop("disabled", false);
-                        $("#event_place_textbox_div").show();
-                    }
                     //if the user choosed a hall from the dropdown
-                    //the event place textbox will be diabled and hiden if it's empty
-                    else {
+                    //the event place textbox will be disabled
+                    if ($("#hall").val() > 0) {
                         $("#event_place_textbox").prop("disabled", true);
-                        $("#event_place_textbox_div").hide();
+                    }
+                    //if the user chose nothing the event textbox will be enabled again.
+                    else {
+                        $("#event_place_textbox").prop("disabled", false);
                     }
                 });
 

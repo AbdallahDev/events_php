@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2018 at 09:07 AM
+-- Generation Time: Nov 27, 2018 at 09:24 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -140,6 +140,15 @@ CREATE TABLE `events` (
   `event_status` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`id`, `event_entity_name`, `time`, `event_appointment`, `subject`, `event_date`, `hall_id`, `event_place`, `event_insertion_date`, `user_id_insert`, `event_edit_date`, `user_id_edit`, `directorate_id`, `event_status`) VALUES
+(1, '', '10:10:00', '', '', '2018-11-27', 0, '', '2018-11-27 10:10:07', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(2, '', '10:10:00', '', '', '2018-11-27', 0, '', '2018-11-27 10:10:56', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(3, '', '10:11:00', '', '', '2018-11-28', 3, '', '2018-11-27 10:11:51', 30566, '0000-00-00 00:00:00', -1, 2, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -180,7 +189,10 @@ CREATE TABLE `event_event_entity` (
 
 INSERT INTO `event_event_entity` (`event_id`, `event_entity_id`) VALUES
 (964, 10),
-(964, 38);
+(964, 38),
+(1, 20),
+(2, 15),
+(3, 20);
 
 -- --------------------------------------------------------
 
@@ -198,6 +210,7 @@ CREATE TABLE `halls` (
 --
 
 INSERT INTO `halls` (`hall_id`, `hall_name`) VALUES
+(0, ''),
 (3, 'قاعة عبدالله الشريدة الطابق الاول'),
 (4, 'قاعة مصطفى خليفة الطابق الثاني'),
 (5, 'قاعة عبدالقادر التل الطابق الاول'),
@@ -597,7 +610,7 @@ ALTER TABLE `device_token`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `event_entity_category`
@@ -609,7 +622,7 @@ ALTER TABLE `event_entity_category`
 -- AUTO_INCREMENT for table `halls`
 --
 ALTER TABLE `halls`
-  MODIFY `hall_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `hall_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `pages`

@@ -28,7 +28,7 @@ if ($rs->num_rows > 0) {
         <div style="position: relative; top: 265px; font-size: 32px; font-weight: 900; color: balck"><?php echo ArabicDate(); ?></div>
         <table style="position: relative; top: 280px; font-size: <?php echo $row_table_live_design['table_live_design_font_size']; ?>px;">
             <tr>
-                <th>النشاط</th>
+                <th>جهة النشاط</th>
                 <th>الوقت</th>
                 <th>المكان</th>
                 <th>الموضوع</th>

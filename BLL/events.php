@@ -55,7 +55,7 @@ class events extends my_db {
 
     //this function get the current and future evetns, to view them for the website user.
     function get_events_current_future() {
-        $query = 'SELECT events.id, events.event_entity_name, events.time, '
+        $query = 'SELECT events.id, events.event_entity_name, events.time, events.event_appointment, '
                 . 'events.subject, events.event_date, users.user_type, halls.hall_name, '
                 . 'events.event_place, events.event_status, users.name, events.user_id_insert, '
                 . 'events.event_insertion_date, events.user_id_edit, events.event_edit_date '

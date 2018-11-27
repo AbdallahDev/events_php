@@ -84,7 +84,15 @@ if ($events_rs->num_rows != 0) {
                             }
                             ?>
                         </td>
-                        <td data-label="الوقت"><?php echo date('h:i A', strtotime($events_row['time'])); ?></td>
+                        <td data-label="الوقت"><?php
+                            //here i'll check if the event appointment column is empty
+                            //coz that means the user choose to view the real time instead of it
+                            if ($events_row['event_appointment'] == "") {
+                                echo date('h:i A', strtotime($events_row['time']));
+                            } else {
+                                echo $events_row['event_appointment'];
+                            }
+                            ?></td>
                         <td data-label="المكان" dir="rtl"><?php
                             if ($events_row['hall_name'] != '') {
                                 echo $events_row['hall_name'];

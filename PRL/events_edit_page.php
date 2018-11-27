@@ -125,7 +125,7 @@ $row = $rs->fetch_assoc();
             </div>
         </div>
 
-        <!--this form to choose and upload an image-->
+        <!--this form to edit the event-->
         <div class="w3-container w3-padding-64" id="contact">
             <div class="right-align-text w3-container w3-card-4 w3-padding-16 w3-white">
                 <input type="hidden" id="id" name="id" value="<?php echo $row['id'] ?>" class="w3-input w3-border">

@@ -157,44 +157,14 @@ $row = $rs->fetch_assoc();
                     </select>
                 </div>
 
+                <!--this div for the event entities drop down list -->
                 <div class="w3-section">
-                    <label>جهة النشاط</label>
                     <!--this select for the committees that the user can choose from-->
-                    <select id="committee" name="committee_id" class="w3-input w3-border right-dir">
+                    <select class="w3-input w3-border right-dir" id="committee" name="committee">
                         <option value="">اختر جهة النشاط</option>
-                        <?PHP
-                        //here view the committees that belong to
-                        //the legislative affairs directorate
-                        if ($_SESSION['directorate'] == 2) {
-                            include_once '../BLL/user_committee.php';
-                            $user_committee = new user_committee();
-                            $rs_user_committee = $user_committee->user_committees_get($_SESSION['user_id']);
-                            while ($row_user_committee = $rs_user_committee->fetch_assoc()) {
-                                ?>
-                                <option value="<?php echo $row_user_committee['committee_id'] ?>" <?php
-                                if ($row_user_committee['committee_id'] == $row['committee_id']) {//here i compare the user committee_id with the event committee id if they equal i'll view the matched committe name in the drop down menu
-                                    echo ' selected';
-                                }
-                                ?>><?php echo $row_user_committee['committee_name'] ?></option>
-                                        <?php
-                                    }
-                                }
-                                //here view the committees that belong to
-                                //the public relations directorate
-                                //or for the blocs depend on the directorate
-                                else {
-                                    include_once '../BLL/committees.php';
-                                    $committees = new committees();
-                                    $rs_committees = $committees->committees_all_get($_SESSION['directorate'], $_SESSION['directorate']);
-                                    while ($row_committees = $rs_committees->fetch_assoc()) {
-                                        echo '<option value="' . $row_committees['committee_id'] . '">'
-                                        . $row_committees['committee_name']
-                                        . '</option><br>';
-                                    }
-                                }
-                                ?>
                     </select>
                 </div>
+                
                 <div class="w3-section">
                     <label>جهة النشاط</label>
                     <!--this is the name of the event entity-->

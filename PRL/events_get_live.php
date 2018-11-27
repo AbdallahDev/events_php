@@ -75,10 +75,12 @@ if ($events_rs->num_rows > 0) {
                         </td>
                         <!--this column to view the event time or appointment-->
                         <td style="width: <?php echo $row_table_live_design['table_live_design_event_time_column_width']; ?>%; direction: ltr"><?php
-                            if ($events_row['event_appointment'] != "") {
-                                echo $events_row['event_appointment'];
-                            } else {
+                            //here i'll check if the event appointment column is empty
+                            //coz that means the user choose to view the real time instead of it
+                            if ($events_row['event_appointment'] == "") {
                                 echo date('h:i A', strtotime($events_row['time']));
+                            } else {
+                                echo $events_row['event_appointment'];
                             }
                             ?></td>
                         <td style="width: <?php echo $row_table_live_design['table_live_design_event_place_column_width']; ?>%">

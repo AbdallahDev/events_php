@@ -55,4 +55,9 @@ class committees extends my_db {
         return $this->get_data($query, 'i', array(&$event_id));
     }
 
+    function event_entity_category_id($event_entity_id) {
+        $query = "SELECT event_entity_category_id FROM `committees` WHERE committee_id = ?";
+        return $this->get_data($query, 'i', array(&$event_entity_id));
+    }
+
 }

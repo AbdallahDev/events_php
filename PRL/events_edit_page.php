@@ -129,6 +129,34 @@ $row = $rs->fetch_assoc();
         <div class="w3-container w3-padding-64" id="contact">
             <div class="right-align-text w3-container w3-card-4 w3-padding-16 w3-white">
                 <input type="hidden" id="id" name="id" value="<?php echo $row['id'] ?>" class="w3-input w3-border">
+
+                <!--this div for the event entity categories drop down list -->
+                <div class="w3-section">
+                    <select class="w3-input w3-border right-dir" id="event_entity_category_id" 
+                            name="event_entity_category_id">
+                        <!--bellow i've added this option with value 0 so i can 
+                        in the logic page the events_insert_page.php decide 
+                        if the user did not chose anything-->
+                        <option value="0">فئة جهة النشاط</option>
+                        <?PHP
+                        //bellow i'll view all the event entity catigories
+                        //
+                            //here is the php code to view the event entity 
+                        //categories in the drop down list
+                        include_once '../BLL/event_entity_category.php';
+                        $event_entity_category = new event_entity_category();
+                        $rs_event_entity_category = $event_entity_category->event_entity_category_get_all();
+                        while ($row_event_entity_category = $rs_event_entity_category->fetch_assoc()) {
+                            ?>
+                            <option value="
+                                    <?php echo $row_event_entity_category['event_entity_category_id']; ?>">
+                                        <?php echo $row_event_entity_category['event_entity_category_name']; ?>
+                            </option>
+                        <?php }
+                        ?>
+                    </select>
+                </div>
+
                 <div class="w3-section">
                     <label>جهة النشاط</label>
                     <!--this select for the committees that the user can choose from-->

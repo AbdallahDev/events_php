@@ -83,12 +83,16 @@ if ($events_rs->num_rows > 0) {
                                 echo $events_row['event_appointment'];
                             }
                             ?></td>
+                        <!--this column to view the event hall or place-->
                         <td style="width: <?php echo $row_table_live_design['table_live_design_event_place_column_width']; ?>%">
                             <?php
-                            if ($events_row['hall_name'] != "")
+                            if ($events_row['hall_name'] != '') {
                                 echo $events_row['hall_name'];
-                            else
+                            } elseif ($events_row['event_place'] != '') {
                                 echo $events_row['event_place'];
+                            } else {
+                                echo 'ـــــــــــــــ';
+                            }
                             ?>
                         </td>
                         <td style="text-align: right;

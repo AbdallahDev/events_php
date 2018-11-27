@@ -6,11 +6,11 @@ date_default_timezone_set('Asia/Amman');
 
 include_once 'include/arabicdate.php'; //this file to print the date as arabic date
 //get events
-$event = new events();
-$rs = $event->get_events_curdate();
+$events = new events();
+$events_rs = $events->get_events_curdate();
 
 //here i get the max time for the current date events to keep the events table viewed 2 hours after the last event
-$rs_event_max_time = $event->get_events_curdate_max_time();
+$rs_event_max_time = $events->get_events_curdate_max_time();
 $row_event_max_time = $rs_event_max_time->fetch_assoc();
 
 //bellow i'll get the data regared the table live design
@@ -22,7 +22,7 @@ $row_table_live_design = $rs_table_live_design->fetch_assoc();
 
 
 <?php
-if ($rs->num_rows > 0) {
+if ($events_rs->num_rows > 0) {
     if ((date('H:i') >= date('08:00')) && (date('H:i') <= $row_event_max_time['time'])) {
         ?> 
         <div style="position: relative; top: 265px; font-size: 32px; font-weight: 900; color: balck"><?php echo ArabicDate(); ?></div>
@@ -34,7 +34,7 @@ if ($rs->num_rows > 0) {
                 <th>الموضوع</th>
             </tr>
             <?php
-            while ($events_row = $rs->fetch_assoc()) {
+            while ($events_row = $events_rs->fetch_assoc()) {
                 ?>
                 <tbody style="vertical-align: text-top; text-align: center; font-weight: bold;">
                     <tr>

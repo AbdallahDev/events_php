@@ -73,6 +73,7 @@ if ($events_rs->num_rows > 0) {
                             }
                             ?>
                         </td>
+                        <!--this column to view the event time or appointment-->
                         <td style="width: <?php echo $row_table_live_design['table_live_design_event_time_column_width']; ?>%; direction: ltr"><?php
                             if ($events_row['event_appointment'] != "") {
                                 echo $events_row['event_appointment'];

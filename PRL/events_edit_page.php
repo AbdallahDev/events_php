@@ -201,7 +201,6 @@ $row = $rs->fetch_assoc();
                 </div>
                 
                 <div class="w3-section">
-                    <label>جهة النشاط</label>
                     <!--this is the name of the event entity-->
                     <input type="text" id="event_entity_name" name="event_entity_name" value="<?php echo $row['event_entity_name'] ?>" placeholder="جهة النشاط" class="w3-input w3-border right-dir">
                 </div>

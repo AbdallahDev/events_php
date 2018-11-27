@@ -76,32 +76,5 @@
     <body id="event_show">
         <div id="events"  >
         </div>
-        
-<!-- i've made this part hidden to make the background full, and because this part not used by the users
-
-<div id="bottom_container" class="w3-content">
-
-            <div id="date">
-                <div>
-                    <h2><a style="text-decoration:none;" href="#"/>
-                    </h2>
-                    <iframe id="iframe_date"src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=en&timezone=Asia%2FAmman" 
-                            width="100%" height="150" frameborder="0" seamless></iframe> 
-                </div>
-            </div>
-
-            this is a marquee to view the most urgent events
-            <div id="urgent_div" style = "margin-top: 0.1%; height: 14%; font-weight: bold; width: 74%; font-size: 22px; color: white;">
-                <marquee id="urgent" direction = "right" behavior=scroll direction="left" scrollamount="10"></marquee>
-            </div>
-
-            <div id="youtube" style="margin-bottom: -20%; margin-top: 0.1%">
-                <iframe width="420" height="136" frameBorder="0" src="https://www.youtube.com/embed/kTjw6vaJSOY?autoplay=1&loop=1&rel=0"></iframe>
-            </div>
-
-            <div id="session">
-            </div>
-        </div>-->
-    
     </body>
 </html>

@@ -53,7 +53,7 @@ $event_entity_catgory_id = 0;
                         }
                     })
                 });
-
+                
                 //here check if the event entity dropdown has value
                 if ($("#committee").val() != '') {//here i check if the event entity has been choosed from the dropdown menu
                     $("#event_entity_name").prop("disabled", true);//here i disable the event entity textbox
@@ -188,9 +188,13 @@ $event_entity_catgory_id = 0;
                                     $event_event_entity_row = $event_event_entity_rs->fetch_assoc();
                                     $event_entity_id = $event_event_entity_row['event_entity_id'];
                                     //so here bellow depend on the event entity id
-                                    //i'll get the event entity category id to select it
-                                    //in the dropdown menu
-                                    
+                                    //i'll get the event entity category id from the committees
+                                    //table to select it in the dropdown menu
+                                    include_once '../BLL/committees.php';
+                                    $committees = new committees();
+                                    $committees_rs = $committees->event_entity_category_id_get($event_entity_id);
+                                    $committees_row = $committees_rs->fetch_assoc();
+                                    $event_entity_catgory_id = $committees_row['event_entity_category_id'];
                                 }
                                 ?>
                         <!--bellow i've added this option with value 0 so i can 
@@ -208,7 +212,14 @@ $event_entity_catgory_id = 0;
                         while ($row_event_entity_category = $rs_event_entity_category->fetch_assoc()) {
                             ?>
                             <option value="
-                                    <?php echo $row_event_entity_category['event_entity_category_id']; ?>">
+                                    <?php echo $row_event_entity_category['event_entity_category_id']; ?>"
+                                    <?php
+                                    //here i'll select the event entity category 
+                                    //that match the one related to the event entity that belong to this event
+                                    if ($row_event_entity_category['event_entity_category_id'] == $event_entity_catgory_id) {
+                                        echo ' selected';
+                                    }
+                                    ?>>
                                         <?php echo $row_event_entity_category['event_entity_category_name']; ?>
                             </option>
                         <?php }

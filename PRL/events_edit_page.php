@@ -5,6 +5,9 @@ include_once '../BLL/events.php';
 $event = new events();
 $rs = $event->get_event($_GET['id']);
 $events_row = $rs->fetch_assoc();
+
+//needed variables declaration
+$event_id = $_GET['id'];
 ?>
 <html>
     <head>
@@ -48,7 +51,7 @@ $events_row = $rs->fetch_assoc();
                         }
                     })
                 });
-                
+
                 //here check if the event entity dropdown has value
                 if ($("#committee").val() != '') {//here i check if the event entity has been choosed from the dropdown menu
                     $("#event_entity_name").prop("disabled", true);//here i disable the event entity textbox
@@ -185,7 +188,7 @@ $events_row = $rs->fetch_assoc();
                             ?>
                             <option value="
                                     <?php echo $row_event_entity_category['event_entity_category_id']; ?>">
-                                        <?php echo $row_event_entity_category['event_entity_category_name']; ?>
+                                    <?php echo $row_event_entity_category['event_entity_category_name']; ?>
                             </option>
                         <?php }
                         ?>
@@ -199,7 +202,7 @@ $events_row = $rs->fetch_assoc();
                         <option value="">اختر جهة النشاط</option>
                     </select>
                 </div>
-                
+
                 <div class="w3-section">
                     <!--this is the name of the event entity-->
                     <input type="text" id="event_entity_name" name="event_entity_name" value="<?php echo $events_row['event_entity_name'] ?>" placeholder="جهة النشاط" class="w3-input w3-border right-dir">
@@ -260,10 +263,10 @@ $events_row = $rs->fetch_assoc();
                     <label>نشر على الشاشة</label>
                     <!--this is if the event will be shown on the screen-->
                     <input type="checkbox" id="event_status" value="1" <?php
-                    if ($events_row['event_status'] == 1) {
-                        echo ' checked';
-                    }
-                    ?> class="w3-check">
+                        if ($events_row['event_status'] == 1) {
+                            echo ' checked';
+                        }
+                        ?> class="w3-check">
                 </div>
                 <button class="w3-button w3-right w3-theme" type="submit" id="edit" name="edit" value="تعديل">تعديل</button>
             </div>

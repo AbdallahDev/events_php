@@ -82,7 +82,8 @@ if ($events_rs->num_rows != 0) {
                                     echo 'ـــــــــــــــ';
                                 }
                             }
-                            ?></td>
+                            ?>
+                        </td>
                         <td data-label="الوقت"><?php echo date('h:i A', strtotime($events_row['time'])); ?></td>
                         <td data-label="المكان" dir="rtl"><?php
                             if ($events_row['hall_name'] != '') {

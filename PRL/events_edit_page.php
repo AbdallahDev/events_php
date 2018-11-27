@@ -14,6 +14,41 @@ $row = $rs->fetch_assoc();
         <script src="../js/jquery-3.2.1.min.js" type="text/javascript"></script>
         <script>
             $(document).ready(function () {
+                //this event runs when the event entity categories dropdown value changes
+                //bellow i'll hide the committees dropdownlist, coz the user 
+                //has not yet chosen any category
+                $("#committee").hide();
+                $("#event_entity_category_id").change(function () {
+                    var event_entity_category_id = $("#event_entity_category_id").val();
+                    $.ajax({
+                        url: 'event_entities_get_category.php',
+                        method: 'post',
+                        data: "id=" + event_entity_category_id
+                    }).done(function (entities) {
+                        console.log(entities);
+                        entities = JSON.parse(entities);
+                        //here i emptying the element of it's content so it dosen't 
+                        //stack the new content on the old one every time they appended
+                        $("#committee").empty();
+                        if (entities.length !== 0) {
+                            $("#committee").show()
+                            //here i'll hide the event_entity_name textbox, 
+                            //coz the event entity name is exist in the dropdown menu, 
+                            //so he dosen't need to write it here
+                            $("#event_entity_name").hide()
+                            entities.forEach(function (entities) {
+                                $("#committee").append('<option value="' + entities.committee_id + '">' + entities.committee_name + '</option>')
+                            })
+                        } else if (entities.length === 0) {
+                            $("#committee").hide();
+                            //here i'll show the event_entity_name textbox, 
+                            //coz the event entity name dosen't exist in the dropdown menu, 
+                            //so he need to write it here
+                            $("#event_entity_name").show()
+                        }
+                    })
+                });
+                
                 //here check if the event entity dropdown has value
                 if ($("#committee").val() != '') {//here i check if the event entity has been choosed from the dropdown menu
                     $("#event_entity_name").prop("disabled", true);//here i disable the event entity textbox

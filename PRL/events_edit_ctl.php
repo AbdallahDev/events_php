@@ -30,7 +30,8 @@ $user_id = $_SESSION['user_id'];
 //this var for the status of the event and i'll make it with 0 default value for the casses it's not checked
 $event_status = 0;
 
-//bellow i'll check if the user choosed the event entity name (like committee) from the dropdown menu or typed it's name in the textbox
+//bellow i'll check if the user choosed the event entity name (like committee) 
+//from the dropdown menu or typed it's name in the textbox
 if (isset($_POST['committee_id']) && !empty(trim($_POST['committee_id']))) {//here i check the event entity has been choosed form the dropdown menu
     $event_entity = $_POST['committee_id']; //here i choose the event entity name that choosen from the dropdown to be inserted
     $event_entity_name = ''; //here i make the event entity name empty, because the name choosed from the dropdown

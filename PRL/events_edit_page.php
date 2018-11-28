@@ -84,7 +84,7 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
                                 $("#committee").show()
                                 //here i'll hide the event_entity_name textbox, 
                                 //coz the event entity name is exist in the dropdown menu, 
-                                //so he dosen't need to write it here
+                                //so the user dosen't need to write it here
                                 $("#event_entity_name").hide()
                                 entities.forEach(function (entities) {
                                     $("#committee").append('<option value="' + entities.committee_id + '">' + entities.committee_name + '</option>')

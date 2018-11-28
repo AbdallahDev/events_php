@@ -56,30 +56,21 @@ if ($events_rs->num_rows != 0) {
                             include_once '../BLL/committees.php';
                             $event_entities = new committees();
                             $event_entities_rs = $event_entities->event_entity_name_get($events_row['id']);
-                            //i'll check if the result has rows less than 2, 
-                            //coz that means the event related to one event entity,
-                            //coz if it's related to more than that i should view
-                            //the event entity name that typed in the text box
-                            //even if it's empty.
+                            //i'll check if the result has rows less than 2,
+                            //in that case i should check if the textbox filled
+                            //or not, coz if it's filled i'll view it's value
+                            //if it's not i'll view the value of the event entity 
+                            //from the dropdonw menu
                             if ($event_entities_rs->num_rows < 2) {
-                                $event_entities_row = $event_entities_rs->fetch_assoc();
-                                //bellow i'll check if the name of the event entity exist
-                                //coz if it's not i'll check if it has instead of that 
-                                //a fixed entity name inserted in the event entity text box, 
-                                //but if it dosen't have anything one of those, that means 
-                                //the user chose to put it with no name
-                                if ($event_entities_row['committee_name'] != "") {
+                                if ($events_row["event_entity_name"] == "") {
+                                    $event_entities_row = $event_entities_rs->fetch_assoc();
                                     echo $event_entities_row['committee_name'];
-                                } elseif ($events_row['event_entity_name'] != '') {
-                                    echo $events_row['event_entity_name'];
                                 } else {
-                                    echo 'ـــــــــــــــ';
+                                    echo $events_row['event_entity_name'];
                                 }
                             } else {
                                 if ($events_row['event_entity_name'] != '') {
                                     echo $events_row['event_entity_name'];
-                                } else {
-                                    echo 'ـــــــــــــــ';
                                 }
                             }
                             ?>

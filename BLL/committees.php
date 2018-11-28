@@ -49,9 +49,7 @@ class committees extends my_db {
 
     //this function get the event entity name for the event using the provided event id.
     public function event_entity_name_get($event_id) {
-        $query = "SELECT committees.committee_name FROM committees "
-                . "INNER JOIN event_event_entity ON event_event_entity.event_entity_id = committees.committee_id "
-                . "INNER JOIN events on events.id = event_event_entity.event_id WHERE events.id = ?";
+        $query = "SELECT committees.committee_name FROM committees INNER JOIN event_event_entity ON event_event_entity.event_entity_id = committees.committee_id INNER JOIN events on events.id = event_event_entity.event_id WHERE events.id = ?";
         return $this->get_data($query, 'i', array(&$event_id));
     }
 

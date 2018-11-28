@@ -45,6 +45,40 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
         <?php include_once 'include/header.php'; ?>
         <script src="../js/jquery-3.2.1.min.js" type="text/javascript"></script>
         <script>
+
+            //this function get the event entities from the db depend on the event entity category
+            function event_entities(event_entity_category_id) {
+                $.ajax({
+                    url: 'event_entities_get_category.php',
+                    method: 'post',
+                    data: "id=" + event_entity_category_id
+                }).done(function (entities) {
+                    console.log(entities);
+                    entities = JSON.parse(entities);
+                    //here i emptying the element of it's content so it dosen't 
+                    //stack the new content on the old one every time they appended
+                    $("#committee").empty();
+                    //here i'll check the result array length to see
+                    //if there is result or no
+                    if (entities.length !== 0) {
+                        $("#committee").show()
+                        //here i'll hide the event_entity_name textbox, 
+                        //coz the event entity name is exist in the dropdown menu, 
+                        //so the user dosen't need to write it here
+                        $("#event_entity_name").hide()
+                        entities.forEach(function (entities) {
+                            $("#committee").append('<option value="' + entities.committee_id + '">' + entities.committee_name + '</option>')
+                        })
+                    } else {
+                        $("#committee").hide();
+                        //here i'll show the event_entity_name textbox, 
+                        //coz the event entity name dosen't exist in the dropdown menu, 
+                        //so he need to write it here
+                        $("#event_entity_name").show()
+                    }
+                });
+            }
+
             $(document).ready(function () {
                 //this var to save the event entity catgeroy id
                 var event_entity_category_id = <?Php echo $event_entity_catgory_id; ?>;
@@ -68,35 +102,7 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
                     //here i'll check for the event_entity_category_id value
                     //coze if it's 0 i don't need to get the commitees from the db
                     if (event_entity_category_id !== 0) {
-                        $.ajax({
-                            url: 'event_entities_get_category.php',
-                            method: 'post',
-                            data: "id=" + event_entity_category_id
-                        }).done(function (entities) {
-                            console.log(entities);
-                            entities = JSON.parse(entities);
-                            //here i emptying the element of it's content so it dosen't 
-                            //stack the new content on the old one every time they appended
-                            $("#committee").empty();
-                            //here i'll check the result array length to see
-                            //if there is result or no
-                            if (entities.length !== 0) {
-                                $("#committee").show()
-                                //here i'll hide the event_entity_name textbox, 
-                                //coz the event entity name is exist in the dropdown menu, 
-                                //so the user dosen't need to write it here
-                                $("#event_entity_name").hide()
-                                entities.forEach(function (entities) {
-                                    $("#committee").append('<option value="' + entities.committee_id + '">' + entities.committee_name + '</option>')
-                                })
-                            } else {
-                                $("#committee").hide();
-                                //here i'll show the event_entity_name textbox, 
-                                //coz the event entity name dosen't exist in the dropdown menu, 
-                                //so he need to write it here
-                                $("#event_entity_name").show()
-                            }
-                        });
+                        event_entities(event_entity_category_id);
                     }
                 });
 

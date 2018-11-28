@@ -10,6 +10,33 @@ $events_row = $rs->fetch_assoc();
 $event_id = $_GET['id'];
 $event_entity_id = 0;
 $event_entity_catgory_id = 0;
+
+//the code bellow is to get the event entity category for the event entity that 
+//belong to the event if it has been selected from the event entity drop down menu
+//coz this value is needed to decide mutliple things
+//
+//bellow i'll select all the event entity ids that 
+//belong to this event
+include_once '../BLL/event_event_entity.php';
+$event_event_entity = new event_event_entity();
+$event_event_entity_rs = $event_event_entity->entity_id_get($event_id);
+//here i'll check if the result has just single row,
+//coz that means that the event belong to an
+//event entity selected form the event entity dropdown menu, 
+//coz of that i should select for the
+//user the event entity category that belong to that event entity
+if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] == "") {
+    $event_event_entity_row = $event_event_entity_rs->fetch_assoc();
+    $event_entity_id = $event_event_entity_row['event_entity_id'];
+    //so here bellow depend on the event entity id
+    //i'll get the event entity category id from the committees
+    //table to make it selected it in the dropdown menu
+    include_once '../BLL/committees.php';
+    $committees = new committees();
+    $committees_rs = $committees->event_entity_category_id_get($event_entity_id);
+    $committees_row = $committees_rs->fetch_assoc();
+    $event_entity_catgory_id = $committees_row['event_entity_category_id'];
+}
 ?>
 <html>
     <head>
@@ -19,44 +46,62 @@ $event_entity_catgory_id = 0;
         <script src="../js/jquery-3.2.1.min.js" type="text/javascript"></script>
         <script>
             $(document).ready(function () {
+                //this var to save the event entity catgeroy id
+                var event_entity_category_id = <?Php echo $event_entity_catgory_id; ?>;
+                //bellow i'll check for the event_entity_category_id value
+                //coz depend on it i'll decide to view the event entities dropdown meun
+                //or the event entity name text box
+                if (event_entity_category_id !== 0) {
+                    $("#committee").show();
+                    $("#event_entity_name").hide();
+                } else {
+                    $("#committee").hide();
+                    $("#event_entity_name").show();
+                    $("#event_entity_name").prop("disabled", false);
+                    $("#event_entity_category_id").prop("disabled", true);
+                }
+
                 //this event runs when the event entity categories dropdown value changes
-                //bellow i'll hide the committees dropdownlist, coz the user 
-                //has not yet chosen any category
-                $("#committee").hide();
                 $("#event_entity_category_id").change(function () {
                     var event_entity_category_id = $("#event_entity_category_id").val();
-                    $.ajax({
-                        url: 'event_entities_get_category.php',
-                        method: 'post',
-                        data: "id=" + event_entity_category_id
-                    }).done(function (entities) {
-                        console.log(entities);
-                        entities = JSON.parse(entities);
-                        //here i emptying the element of it's content so it dosen't 
-                        //stack the new content on the old one every time they appended
-                        $("#committee").empty();
-                        if (entities.length !== 0) {
-                            $("#committee").show()
-                            //here i'll hide the event_entity_name textbox, 
-                            //coz the event entity name is exist in the dropdown menu, 
-                            //so he dosen't need to write it here
-                            $("#event_entity_name").hide()
-                            entities.forEach(function (entities) {
-                                $("#committee").append('<option value="' + entities.committee_id + '">' + entities.committee_name + '</option>')
-                            })
-                        } else if (entities.length === 0) {
-                            $("#committee").hide();
-                            //here i'll show the event_entity_name textbox, 
-                            //coz the event entity name dosen't exist in the dropdown menu, 
-                            //so he need to write it here
-                            $("#event_entity_name").show()
-                        }
-                    })
+                    //here i'll check for the event_entity_category_id value
+                    //coze if it's 0 i don't need to get the commitees from the db
+                    if (event_entity_category_id !== 0) {
+                        $.ajax({
+                            url: 'event_entities_get_category.php',
+                            method: 'post',
+                            data: "id=" + event_entity_category_id
+                        }).done(function (entities) {
+                            console.log(entities);
+                            entities = JSON.parse(entities);
+                            //here i emptying the element of it's content so it dosen't 
+                            //stack the new content on the old one every time they appended
+                            $("#committee").empty();
+                            //here i'll check the result array length to see
+                            //if there is result or no
+                            if (entities.length !== 0) {
+                                $("#committee").show()
+                                //here i'll hide the event_entity_name textbox, 
+                                //coz the event entity name is exist in the dropdown menu, 
+                                //so he dosen't need to write it here
+                                $("#event_entity_name").hide()
+                                entities.forEach(function (entities) {
+                                    $("#committee").append('<option value="' + entities.committee_id + '">' + entities.committee_name + '</option>')
+                                })
+                            } else if (entities.length === 0) {
+                                $("#committee").hide();
+                                //here i'll show the event_entity_name textbox, 
+                                //coz the event entity name dosen't exist in the dropdown menu, 
+                                //so he need to write it here
+                                $("#event_entity_name").show()
+                            }
+                        });
+                    }
                 });
 
                 //here check if the event entity dropdown has value
                 if ($("#committee").val() != '') {//here i check if the event entity has been choosed from the dropdown menu
-                    $("#event_entity_name").prop("disabled", true);//here i disable the event entity textbox
+//                    $("#event_entity_name").prop("disabled", true);//here i disable the event entity textbox
                 } else if ($("#event_entity_name").val() != '') {//here i check if the event entity written in the textbox
                     $("#committee").prop("disabled", true);//here i disable the event entity dropdwon menu, because the event entity already has been choosen from the dropdown menu
                 }
@@ -69,19 +114,22 @@ $event_entity_catgory_id = 0;
                         $("#event_entity_name").prop("disabled", true);//i make the event entity textbox disabled
                     }
                 });
+
                 //bellow when the user focusin the event entity textbox the committe dropdown will be disabled, and that to prevent the user from choosing duplicated values
                 $("#event_entity_name").focusin(function () {
                     $("#committee").prop("disabled", true);
                 });
                 //here when the user focusout the event entity textbox, if it's has a value the dropdown will kept disabled but if it's empty the dropdown will be enabled
                 $("#event_entity_name").focusout(function () {
-                    if ($("#event_entity_name").val() == '') {
+                    if ($("#event_entity_name").val() === '') {
+                        $("#event_entity_category_id").prop("disabled", false);
                         $("#committee").prop("disabled", false);
                     } else {
                         $("#committee").prop("disabled", true);
                     }
                 });
                 //--------------------------------------------
+
                 //here check if the hall dropdown has value
                 if ($("#hall").val() != '') {//here i check if there is hall choosed from the dropdown menu
                     $("#event_place_textbox").prop("disabled", true);//here i disable the hall textbox
@@ -101,6 +149,7 @@ $event_entity_catgory_id = 0;
                         $("#event_place_textbox").prop("disabled", true);
                     }
                 });
+
                 //here when the user focusin the event place textbox
                 //the hall dropdown will be disabled
                 $("#event_place_textbox").focusin(function () {
@@ -116,6 +165,7 @@ $event_entity_catgory_id = 0;
                         $("#hall").prop("disabled", true);
                     }
                 });
+
                 $('#edit').click(function () {
                     $.post('events_edit_ctl.php', {
                         id: $('#id').val(),
@@ -174,29 +224,6 @@ $event_entity_catgory_id = 0;
                 <div class="w3-section">
                     <select class="w3-input w3-border right-dir" id="event_entity_category_id" 
                             name="event_entity_category_id">
-                                <?php
-                                //bellow i'll select all the event entity ids that 
-                                //belong to this event
-                                include_once '../BLL/event_event_entity.php';
-                                $event_event_entity = new event_event_entity();
-                                $event_event_entity_rs = $event_event_entity->entity_id_get($event_id);
-                                //here i'll check if the result has just single row,
-                                //coz that means that the event belong to a single
-                                //event entity, so that means i should select for the 
-                                //user the event entity category that belong to that event entity
-                                if ($event_event_entity_rs->num_rows == 1) {
-                                    $event_event_entity_row = $event_event_entity_rs->fetch_assoc();
-                                    $event_entity_id = $event_event_entity_row['event_entity_id'];
-                                    //so here bellow depend on the event entity id
-                                    //i'll get the event entity category id from the committees
-                                    //table to select it in the dropdown menu
-                                    include_once '../BLL/committees.php';
-                                    $committees = new committees();
-                                    $committees_rs = $committees->event_entity_category_id_get($event_entity_id);
-                                    $committees_row = $committees_rs->fetch_assoc();
-                                    $event_entity_catgory_id = $committees_row['event_entity_category_id'];
-                                }
-                                ?>
                         <!--bellow i've added this option with value 0 so i can 
                         in the logic page the events_insert_page.php decide 
                         if the user did not chose anything-->

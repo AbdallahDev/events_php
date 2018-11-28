@@ -170,6 +170,8 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
                     }
                 });
 
+                //this function send the values to the events_edit_ctl.php page 
+                //to edit the event
                 $('#edit').click(function () {
                     $.post('events_edit_ctl.php', {
                         id: $('#id').val(),

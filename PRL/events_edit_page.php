@@ -63,7 +63,7 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
 
                 //this event runs when the event entity categories dropdown value changes
                 $("#event_entity_category_id").change(function () {
-                    var event_entity_category_id = $("#event_entity_category_id").val();
+                    event_entity_category_id = $("#event_entity_category_id").val();
                     //here i'll check for the event_entity_category_id value
                     //coze if it's 0 i don't need to get the commitees from the db
                     if (event_entity_category_id !== 0) {

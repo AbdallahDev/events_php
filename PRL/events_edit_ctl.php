@@ -1,5 +1,6 @@
 <?php
 //this file to edit the event
+
 include_once 'include/check_session.php';
 include '../BLL/events.php';
 

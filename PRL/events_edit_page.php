@@ -88,6 +88,7 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
                 //or the event entity name text box
                 if (event_entity_category_id !== 0) {
                     $("#committee").show();
+                    event_entities(event_entity_category_id);
                     $("#event_entity_name").hide();
                 } else {
                     $("#committee").hide();

@@ -9,6 +9,8 @@ include '../BLL/events.php';
 //
 //this is the object of the event
 $event = new events();
+//this var to set the event id
+$event_id = $_POST['id'];
 //this array to store the id/ids of the event entity/event entities
 $event_entity_ids = array();
 //this variable to be used for the event_entity_name that typed in the event entity text box
@@ -92,4 +94,6 @@ if (isset($_POST['event_status'])) {
     $event_status = 0;
 }
 
-$event->update_event($event_entity, $event_entity_name, $event_time, $event_appointment, $hall_id, $event_place, nl2br($_POST['subject']), $_POST['event_date'], $event_status, date("Y-m-d H:i:s"), $_SESSION['directorate'], $_SESSION['user_id'], $_POST['id']);
+$event->update_event($event_entity_name, $event_time, $event_appointment, $hall_id
+        , $event_place, $subject, $event_date, $event_status, date("Y-m-d H:i:s")
+        , $user_id, $event_id);

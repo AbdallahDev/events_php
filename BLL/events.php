@@ -21,8 +21,16 @@ class events extends my_db {
         return $this->get_data($query, 'i', array(&$user_id));
     }
 
-    function update_event($event_entity, $event_entity_name, $time, $event_appointment, $hall_id, $event_place, $subject, $event_date, $event_status, $event_edit_date, $directorate_id, $user_id_edit, $id) {
-        $this->mod_data('update events set committee_id = ?, event_entity_name = ?, time = ?, event_appointment = ?, hall_id = ?, event_place = ?, subject = ?, event_date = ?, event_status = ?, event_edit_date = ?, directorate_id = ?, user_id_edit = ? where id = ?', 'isssisssisiii', array(&$event_entity, &$event_entity_name, &$time, &$event_appointment, &$hall_id, &$event_place, &$subject, &$event_date, &$event_status, &$event_edit_date, &$directorate_id, &$user_id_edit, &$id));
+    function update_event($event_entity_name, $time
+    , $event_appointment, $hall_id, $event_place, $subject, $event_date
+    , $event_status, $event_edit_date, $user_id_edit, $id) {
+        $query = 'update events set event_entity_name = ?, time = ?, '
+                . 'event_appointment = ?, hall_id = ?, event_place = ?, '
+                . 'subject = ?, event_date = ?, event_status = ?, event_edit_date = ?, '
+                . 'user_id_edit = ? where id = ?';
+        $this->mod_data($query, 'sssisssisii', array(&$event_entity_name
+            , &$time, &$event_appointment, &$hall_id, &$event_place, &$subject
+            , &$event_date, &$event_status, &$event_edit_date, &$user_id_edit, &$id));
     }
 
     function delete_event($id) {

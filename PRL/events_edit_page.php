@@ -175,6 +175,7 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
                 $('#edit').click(function () {
                     $.post('events_edit_ctl.php', {
                         id: $('#id').val(),
+                        event_entity_category_id: $('#event_entity_category_id').val(),
                         committee_id: $("#committee option:selected").val(),
                         event_entity_name: $("#event_entity_name").val(),
                         time: $('#time').val(),

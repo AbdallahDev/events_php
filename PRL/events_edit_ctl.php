@@ -4,7 +4,33 @@
 include_once 'include/check_session.php';
 include '../BLL/events.php';
 
+//needed variable declarations
+//
+//this is the object of the event
 $event = new events();
+//this array to store the id/ids of the event entity/event entities
+$event_entity_ids = array();
+//this variable to be used for the event_entity_name that typed in the event entity text box
+$event_entity_name = '';
+//this var to store the event time
+$event_time = "";
+//this var to store the event appointment, and that when the user dosen't want 
+//the real time to appear on the screen
+$event_appointment = "";
+//this var to store the event subject
+$subject = nl2br($_POST['subject']);
+//this variable to store the event date
+$event_date = $_POST['event_date'];
+//hall id variable, and i sat the default value to 0 so the name of the hall appear as an empty string ""
+$hall_id = 0;
+//event place variable, this variable used when the user dosen't select a hall for the event
+$event_place = "";
+//this variable for the user id and i'll get it from the session after the user login.
+$user_id = $_SESSION['user_id'];
+//this var for the status of the event and i'll make it with 0 default value for the casses it's not checked
+$event_status = 0;
+
+echo $_POST['committee_id'];
 
 //bellow i'll check if the user choosed the event entity name (like committee) from the dropdown menu or typed it's name in the textbox
 if (isset($_POST['committee_id']) && !empty(trim($_POST['committee_id']))) {//here i check the event entity has been choosed form the dropdown menu

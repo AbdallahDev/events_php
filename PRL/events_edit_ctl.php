@@ -9,8 +9,6 @@ include '../BLL/events.php';
 //
 //this is the object of the event
 $event = new events();
-//event entity category id variable
-$event_entity_catgory_id = $_POST['event_entity_category_id'];
 //this array to store the id/ids of the event entity/event entities
 $event_entity_ids = array();
 //this variable to be used for the event_entity_name that typed in the event entity text box
@@ -37,7 +35,7 @@ $event_status = 0;
 //and that by checking the value from the event_entity_categroy_id drop down menu, coz if it's 0 
 //that menas the user didn't choose anything from the dropdown menu, and typed the event
 //entity name in the textbox.
-if (isset($event_entity_catgory_id) && $event_entity_catgory_id != 0) {
+if (isset($_POST['event_entity_category_id']) && $_POST['event_entity_category_id'] != 0) {
     //here i'll save the event entity id that chosen from the event entities drop down menu
     $event_entity_ids[] = $_POST['committee'];
 }

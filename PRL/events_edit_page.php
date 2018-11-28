@@ -20,9 +20,6 @@ $event_entity_catgory_id = 0;
         <script>
             $(document).ready(function () {
                 //this event runs when the event entity categories dropdown value changes
-                //bellow i'll hide the committees dropdownlist, coz the user 
-                //has not yet chosen any category
-                $("#committee").hide();
                 $("#event_entity_category_id").change(function () {
                     var event_entity_category_id = $("#event_entity_category_id").val();
                     $.ajax({
@@ -53,7 +50,7 @@ $event_entity_catgory_id = 0;
                         }
                     })
                 });
-                
+
                 //here check if the event entity dropdown has value
                 if ($("#committee").val() != '') {//here i check if the event entity has been choosed from the dropdown menu
                     $("#event_entity_name").prop("disabled", true);//here i disable the event entity textbox
@@ -231,7 +228,7 @@ $event_entity_catgory_id = 0;
                 <div class="w3-section">
                     <!--this select for the committees that the user can choose from-->
                     <select class="w3-input w3-border right-dir" id="committee" name="committee">
-                        <option value="">اختر جهة النشاط</option>
+                        <option value="0">اختر جهة النشاط</option>
                     </select>
                 </div>
 

@@ -126,7 +126,7 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
                         $("#event_entity_category_id").prop("disabled", false);
                         $("#committee").prop("disabled", false);
                     } else {
-                        $("#committee").prop("disabled", true);
+                        $("#event_entity_category_id").prop("disabled", true);
                     }
                 });
                 //--------------------------------------------

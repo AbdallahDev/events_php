@@ -106,12 +106,6 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
                     }
                 });
 
-                //here check if the event entity dropdown has value
-                if ($("#committee").val() != '') {//here i check if the event entity has been choosed from the dropdown menu
-//                    $("#event_entity_name").prop("disabled", true);//here i disable the event entity textbox
-                } else if ($("#event_entity_name").val() != '') {//here i check if the event entity written in the textbox
-                    $("#committee").prop("disabled", true);//here i disable the event entity dropdwon menu, because the event entity already has been choosen from the dropdown menu
-                }
                 //this event run when the event entity name dropdown value changes
                 $("#committee").change(function () {
                     //if the user choosed nothing from the dropdown the event entity name textbox will be enabled

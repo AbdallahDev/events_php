@@ -20,6 +20,9 @@ $event_entity_catgory_id = 0;
         <script>
             $(document).ready(function () {
                 //this event runs when the event entity categories dropdown value changes
+                //bellow i'll hide the committees dropdownlist, coz the user 
+                //has not yet chosen any category
+                $("#committee").hide();
                 $("#event_entity_category_id").change(function () {
                     var event_entity_category_id = $("#event_entity_category_id").val();
                     $.ajax({

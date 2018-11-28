@@ -72,18 +72,17 @@ else {
     $event_time = $_POST['time'];
 }
 
-//bellow i'll check if the event hall is set or the event place is typed in the event place text box
-if ((isset($_POST['hall_id'])) && !empty(trim($_POST['hall_id']))) {//here i check if the hall has been choosed
-    $hall_id = $_POST['hall_id'];
-    $event_place = '';
-} elseif (isset($_POST['event_place_textbox'])) {
-    if (!empty(trim($_POST['event_place_textbox']))) {//here i check if the hall hasn't been choosen, instead the text box filled with the place of the event
-        $event_place = $_POST['event_place_textbox'];
-        $hall_id = 0;
-    } else {
-        $event_place = '';
-        $hall_id = 0;
-    }
+//here i check if the hall has been chosen
+//
+//if the chosen hall id is not zero, that means the user chose the hall from the 
+//halls drop down menu
+if ((isset($_POST['hall'])) && $_POST['hall'] != 0) {
+    $hall_id = $_POST['hall'];
+}
+//here if the value of the event place text box sat, that means the user typed 
+//the event place in the text box
+elseif (isset($_POST['event_place_textbox'])) {
+    $event_place = $_POST['event_place_textbox'];
 }
 
 //bellow i'll check for the event status

@@ -54,13 +54,22 @@ elseif (isset($_POST['event_entity_name']) && trim($_POST['event_entity_name']) 
     }
 }
 
-//bellow i'll check if the event appointment is set in the event appointemnt textbox, to view it in the live screen instead of the event time.
-if (isset($_POST['event_appointment']) && !empty(trim($_POST['event_appointment']))) {
+//bellow i'll check if the event appointment is set in the event appointemnt 
+//textbox, to view it in the live screen instead of the event time.
+if (isset($_POST['event_appointment']) &&
+        !empty(trim($_POST['event_appointment']))) {
     $event_appointment = $_POST['event_appointment'];
-    $event_time = date("H:i:s", strtotime($_POST['time']) + 1); //here i set the value of the time from the form to the event_time variable and increase it with one second so it can come on the live screen after the event that it should come after it
-} else {//here when the event appointment is empty
-    $event_appointment = $_POST['event_appointment']; //here the event appointment will be empty
-    $event_time = $_POST['time']; //here i set the value of the time from the form to the event_time variable as it's, because the events appointment has not set, so i won't need the increase the event time by one second
+    //here i set the value of the time from the form to the event_time variable 
+    //and increase it with one second so it can come on the live screen after 
+    //the event that it should come after it
+    $event_time = date("H:i:s", strtotime($_POST['time']) + 1);
+}
+//here when the event appointment is empty
+else {
+    //here i set the value of the time from the form to the event_time variable 
+    //as it's, because the events appointment has not set, so i won't need the 
+    //increase the event time by one second
+    $event_time = $_POST['time'];
 }
 
 //bellow i'll check if the event hall is set or the event place is typed in the event place text box

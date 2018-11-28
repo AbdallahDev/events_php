@@ -1,4 +1,5 @@
 <?php
+
 //this file to edit the event
 
 include_once 'include/check_session.php';
@@ -8,6 +9,8 @@ include '../BLL/events.php';
 //
 //this is the object of the event
 $event = new events();
+//event entity category id variable
+$event_entity_catgory_id = $_POST['event_entity_category_id'];
 //this array to store the id/ids of the event entity/event entities
 $event_entity_ids = array();
 //this variable to be used for the event_entity_name that typed in the event entity text box
@@ -30,19 +33,26 @@ $user_id = $_SESSION['user_id'];
 //this var for the status of the event and i'll make it with 0 default value for the casses it's not checked
 $event_status = 0;
 
-//bellow i'll check if the user choosed the event entity name (like committee) 
-//from the dropdown menu or typed it's name in the textbox
-if (isset($_POST['committee_id']) && !empty(trim($_POST['committee_id']))) {//here i check the event entity has been choosed form the dropdown menu
-    $event_entity = $_POST['committee_id']; //here i choose the event entity name that choosen from the dropdown to be inserted
-    $event_entity_name = ''; //here i make the event entity name empty, because the name choosed from the dropdown
-} else {
-    $event_entity_name = $_POST['event_entity_name']; //here i choose the event entity name that typed in the event entity textbox to be inserted
-    if ($_SESSION['directorate'] == 2) {//here i check if the directorate of the user is legislate affiars with value 2, to store 2 in the committee id
-        $event_entity = 2; //here i make the event entity to 2, because the name typed in the textbox
-    } elseif ($_SESSION['directorate'] == 3) {//here i check if the directorate of the user is general affairs with value 3, to store 3 in the committee id
-        $event_entity = 3; //here i make the event entity to 3, because the name typed in the textbox
-    } elseif ($_SESSION['directorate'] == 4) {//here i check if the directorate of the user is blocs with value 4, to store 4 in the entity event id
-        $event_entity = 4; //here i make the event entity to 4, because the name typed in the textbox
+//bellow i'll check if the user choose the event entity from the event entities drop down menu or not
+//and that by checking the value from the event_entity_categroy_id drop down menu, coz if it's 0 
+//that menas the user didn't choose anything from the dropdown menu, and typed the event
+//entity name in the textbox.
+if (isset($event_entity_catgory_id) && $event_entity_catgory_id != 0) {
+    //here i'll save the event entity id that chosen from the event entities drop down menu
+    $event_entity_ids[] = $_POST['committee'];
+}
+//here i'll check if the event entity name typed in the event entity name text box and it's not empty
+//to use it as the event entity name, and to get all the event entities related to it from
+//the check boxes.
+elseif (isset($_POST['event_entity_name']) && trim($_POST['event_entity_name']) != "") {
+    //here i chose the event entity name that typed in the event entity textbox
+    $event_entity_name = $_POST['event_entity_name'];
+
+    //bellow i'll check if the user choose any event entity from the event entity check boxes
+    if (isset($_POST['event_entity_checkbox'])) {
+        foreach ($_POST['event_entity_checkbox'] as $value) {
+            $event_entity_ids[] = $value;
+        }
     }
 }
 

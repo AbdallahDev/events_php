@@ -48,7 +48,7 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
             $(document).ready(function () {
                 //this var to save the event entity catgeroy id
                 var event_entity_category_id = <?Php echo $event_entity_catgory_id; ?>;
-                //
+                
                 //bellow i'll check the event_entity_category_id value
                 //coz depend on it i'll decide to view the event entities dropdown meun
                 //or the event entity name text box

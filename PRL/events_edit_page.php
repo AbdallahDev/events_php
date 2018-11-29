@@ -261,7 +261,7 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
                                             echo ' selected';
                                         }
                                         ?>>
-                                <?php echo $row_event_entity_category['event_entity_category_name']; ?>
+                                            <?php echo $row_event_entity_category['event_entity_category_name']; ?>
                                 </option>
                             <?php }
                             ?>
@@ -358,6 +358,6 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
         </div>
 
         <!--footer inclusion-->
-<?php include_once 'include/footer.php'; ?>
+        <?php include_once 'include/footer.php'; ?>
     </body>
 </html>

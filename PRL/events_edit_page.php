@@ -194,27 +194,6 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
                         $("#hall").prop("disabled", true);
                     }
                 });
-
-                //this function send the values to the events_edit_ctl.php page 
-                //to edit the event
-                $('#edit').click(function () {
-                    $.post('events_edit_ctl.php', {
-                        id: $('#id').val(),
-                        event_entity_category_id: $('#event_entity_category_id').val(),
-                        committee: $("#committee option:selected").val(),
-                        event_entity_name: $("#event_entity_name").val(),
-                        time: $('#time').val(),
-                        event_appointment: $('#event_appointment').val(),
-                        hall_id: $("#hall option:selected").val(),
-                        event_place_textbox: $("#event_place_textbox").val(),
-                        subject: $('#subject').val(),
-                        event_date: $('#event_date').val(),
-                        event_status: $('#event_status:checkbox:checked').val()
-                    }, function (data, status) {
-                        window.location = 'events_preview_current_future.php';
-//                        alert(data);
-                    });
-                });
             });
         </script>
     </head>
@@ -222,6 +201,7 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
 
         <!---top menu file inclusion-->
         <?php include 'include/menu.php' ?>        
+
 
         <!-- Sidebar menu and button -->
         <div>
@@ -249,131 +229,135 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
 
         <!--this form to edit the event-->
         <div class="w3-container w3-padding-64" id="contact">
-            <div class="right-align-text w3-container w3-card-4 w3-padding-16 w3-white">
-                <input type="hidden" id="id" name="id" value="<?php echo $events_row['id'] ?>" class="w3-input w3-border">
+            <div class="right-align-text">
 
-                <!--this div for the event entity categories drop down list -->
-                <div class="w3-section">
-                    <select class="w3-input w3-border right-dir" id="event_entity_category_id" 
-                            name="event_entity_category_id">
-                        <!--bellow i've added this option with value 0 so i can 
-                        in the logic page the events_insert_page.php decide 
-                        if the user did not chose anything-->
-                        <option value="0">فئة جهة النشاط</option>
-                        <?PHP
-                        //bellow i'll view all the event entity catigories
-                        //
+                <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="events_edit_ctl.php" method="post">
+                    <input type="hidden" id="id" name="id" value="<?php echo $events_row['id'] ?>" class="w3-input w3-border">
+
+                    <!--this div for the event entity categories drop down list -->
+                    <div class="w3-section">
+                        <select class="w3-input w3-border right-dir" id="event_entity_category_id" 
+                                name="event_entity_category_id">
+                            <!--bellow i've added this option with value 0 so i can 
+                            in the logic page the events_insert_page.php decide 
+                            if the user did not chose anything-->
+                            <option value="0">فئة جهة النشاط</option>
+                            <?PHP
+                            //bellow i'll view all the event entity catigories
+                            //
                         //here is the php code to view the event entity 
-                        //categories in the drop down list
-                        include_once '../BLL/event_entity_category.php';
-                        $event_entity_category = new event_entity_category();
-                        $rs_event_entity_category = $event_entity_category->event_entity_category_get_all();
-                        while ($row_event_entity_category = $rs_event_entity_category->fetch_assoc()) {
+                            //categories in the drop down list
+                            include_once '../BLL/event_entity_category.php';
+                            $event_entity_category = new event_entity_category();
+                            $rs_event_entity_category = $event_entity_category->event_entity_category_get_all();
+                            while ($row_event_entity_category = $rs_event_entity_category->fetch_assoc()) {
+                                ?>
+                                <option value="
+                                        <?php echo $row_event_entity_category['event_entity_category_id']; ?>"
+                                        <?php
+                                        //here i'll select the event entity category 
+                                        //that match the one related to the event entity that belong to this event
+                                        if ($row_event_entity_category['event_entity_category_id'] == $event_entity_catgory_id) {
+                                            echo ' selected';
+                                        }
+                                        ?>>
+                                <?php echo $row_event_entity_category['event_entity_category_name']; ?>
+                                </option>
+                            <?php }
                             ?>
-                            <option value="
-                                    <?php echo $row_event_entity_category['event_entity_category_id']; ?>"
-                                    <?php
-                                    //here i'll select the event entity category 
-                                    //that match the one related to the event entity that belong to this event
-                                    if ($row_event_entity_category['event_entity_category_id'] == $event_entity_catgory_id) {
+                        </select>
+                    </div>
+
+                    <!--this div for the event entities drop down list -->
+                    <div class="w3-section">
+                        <!--this select for the committees that the user can choose from-->
+                        <select class="w3-input w3-border right-dir" id="committee" name="committee">
+                            <option value="0">اختر جهة النشاط</option>
+                        </select>
+                    </div>
+
+                    <div class="w3-section">
+                        <!--this is the name of the event entity-->
+                        <input type="text" id="event_entity_name" name="event_entity_name" 
+                               value="<?php echo $events_row['event_entity_name'] ?>" 
+                               placeholder="جهة النشاط" class="w3-input w3-border right-dir">
+                    </div>
+
+                    <!--here i'll view all the event entities and render them 
+                    as check boxes, coz some events don't belong to a specific
+                    event entity, so he can chose to whom the event belong from here-->
+                    <div class="w3-section" id="event_entity_checkboxes">
+                        <ul class="chk" id="event_entity_checkboxes_ul"></ul>
+                    </div>
+
+                    <div class="w3-section">
+                        <label>وقت النشاط</label>
+                        <!--this is the time of the event-->
+                        <input type="time" id="time" name="time" placeholder="time" value="<?php echo $events_row['time'] ?>" class="w3-input w3-border right-align-text">
+                    </div>
+                    <div class="w3-section">
+                        <label>موعد النشاط</label>
+                        <!--this is the name of the event entity-->
+                        <input type="text" id="event_appointment" name="event_appointment" placeholder="موعد النشاط" value="<?php echo $events_row['event_appointment'] ?>" class="w3-input w3-border right-dir">
+                    </div>
+                    <div class="w3-section">
+                        <label>تاريخ النشاط</label>
+                        <!--this is event date, when the event will be hold in-->
+                        <input type="date" id="event_date" name="event_date" placeholder="التاريخ" value="<?php echo $events_row['event_date'] ?>" class="w3-input w3-border right-dir right-align-text right-float"><br>
+                    </div>
+                    <br>
+                    <div class="w3-section">
+                        <label>الموضوع</label>
+                        <!--this is event subject, it means what the event hold for-->
+                        <textarea style="text-align: right" rows="5" cols="48" id="subject" name="subject" placeholder="الموضوع" class="w3-input w3-border right-dir"><?php echo $events_row['subject'] ?></textarea>
+                    </div>
+                    <div class="w3-section">
+                        <label>القاعة</label>
+                        <!--this select for the hall that the event will be hold in-->
+                        <select id="hall" name="hall" class="w3-input w3-border right-dir">
+                            <option value="">اختر القاعة</option>
+                            <?PHP
+                            include_once '../BLL/halls.php';
+                            $hall = new halls();
+                            $rs_hall = $hall->halls_get_all();
+                            //fill the dropdown with halls 
+                            //and if the hall id mathces the event hall id
+                            //it will be selected
+                            while ($row_hall = $rs_hall->fetch_assoc()) {
+                                if ($row_hall['hall_id'] != 0) {
+                                    echo '<option value="' . $row_hall['hall_id'] . '"';
+                                    if ($row_hall['hall_id'] == $events_row['hall_id']) {
                                         echo ' selected';
                                     }
-                                    ?>>
-                                        <?php echo $row_event_entity_category['event_entity_category_name']; ?>
-                            </option>
-                        <?php }
-                        ?>
-                    </select>
-                </div>
-
-                <!--this div for the event entities drop down list -->
-                <div class="w3-section">
-                    <!--this select for the committees that the user can choose from-->
-                    <select class="w3-input w3-border right-dir" id="committee" name="committee">
-                        <option value="0">اختر جهة النشاط</option>
-                    </select>
-                </div>
-
-                <div class="w3-section">
-                    <!--this is the name of the event entity-->
-                    <input type="text" id="event_entity_name" name="event_entity_name" 
-                           value="<?php echo $events_row['event_entity_name'] ?>" 
-                           placeholder="جهة النشاط" class="w3-input w3-border right-dir">
-                </div>
-
-                <!--here i'll view all the event entities and render them 
-                as check boxes, coz some events don't belong to a specific
-                event entity, so he can chose to whom the event belong from here-->
-                <div class="w3-section" id="event_entity_checkboxes">
-                    <ul class="chk" id="event_entity_checkboxes_ul"></ul>
-                </div>
-
-                <div class="w3-section">
-                    <label>وقت النشاط</label>
-                    <!--this is the time of the event-->
-                    <input type="time" id="time" name="time" placeholder="time" value="<?php echo $events_row['time'] ?>" class="w3-input w3-border right-align-text">
-                </div>
-                <div class="w3-section">
-                    <label>موعد النشاط</label>
-                    <!--this is the name of the event entity-->
-                    <input type="text" id="event_appointment" name="event_appointment" placeholder="موعد النشاط" value="<?php echo $events_row['event_appointment'] ?>" class="w3-input w3-border right-dir">
-                </div>
-                <div class="w3-section">
-                    <label>تاريخ النشاط</label>
-                    <!--this is event date, when the event will be hold in-->
-                    <input type="date" id="event_date" name="event_date" placeholder="التاريخ" value="<?php echo $events_row['event_date'] ?>" class="w3-input w3-border right-dir right-align-text right-float"><br>
-                </div>
-                <br>
-                <div class="w3-section">
-                    <label>الموضوع</label>
-                    <!--this is event subject, it means what the event hold for-->
-                    <textarea style="text-align: right" rows="5" cols="48" id="subject" name="subject" placeholder="الموضوع" class="w3-input w3-border right-dir"><?php echo $events_row['subject'] ?></textarea>
-                </div>
-                <div class="w3-section">
-                    <label>القاعة</label>
-                    <!--this select for the hall that the event will be hold in-->
-                    <select id="hall" name="hall" class="w3-input w3-border right-dir">
-                        <option value="">اختر القاعة</option>
-                        <?PHP
-                        include_once '../BLL/halls.php';
-                        $hall = new halls();
-                        $rs_hall = $hall->halls_get_all();
-                        //fill the dropdown with halls 
-                        //and if the hall id mathces the event hall id
-                        //it will be selected
-                        while ($row_hall = $rs_hall->fetch_assoc()) {
-                            if ($row_hall['hall_id'] != 0) {
-                                echo '<option value="' . $row_hall['hall_id'] . '"';
-                                if ($row_hall['hall_id'] == $events_row['hall_id']) {
-                                    echo ' selected';
+                                    echo '>';
+                                    echo $row_hall['hall_name']
+                                    . '</option><br>';
                                 }
-                                echo '>';
-                                echo $row_hall['hall_name']
-                                . '</option><br>';
                             }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="w3-section">
+                        <label>مكان الاجتماع</label>
+                        <!--this is event place, and that when the event dosen't hold in a hall-->
+                        <input id="event_place_textbox" name="event_place_textbox" class="w3-input w3-border right-dir"  type="text" placeholder="مكان الاجتماع" value="<?php echo $events_row['event_place'] ?>">
+                    </div>
+                    <div class="w3-section">
+                        <label>نشر على الشاشة</label>
+                        <!--this is if the event will be shown on the screen-->
+                        <input type="checkbox" id="event_status" value="1" <?php
+                        if ($events_row['event_status'] == 1) {
+                            echo ' checked';
                         }
-                        ?>
-                    </select>
-                </div>
-                <div class="w3-section">
-                    <label>مكان الاجتماع</label>
-                    <!--this is event place, and that when the event dosen't hold in a hall-->
-                    <input id="event_place_textbox" name="event_place_textbox" class="w3-input w3-border right-dir"  type="text" placeholder="مكان الاجتماع" value="<?php echo $events_row['event_place'] ?>">
-                </div>
-                <div class="w3-section">
-                    <label>نشر على الشاشة</label>
-                    <!--this is if the event will be shown on the screen-->
-                    <input type="checkbox" id="event_status" value="1" <?php
-                    if ($events_row['event_status'] == 1) {
-                        echo ' checked';
-                    }
-                    ?> class="w3-check">
-                </div>
-                <button class="w3-button w3-right w3-theme" type="submit" id="edit" name="edit" value="تعديل">تعديل</button>
+                        ?> class="w3-check">
+                    </div>
+                    <button class="w3-button w3-right w3-theme" type="submit" id="edit" name="edit" value="تعديل">تعديل</button>
+
+                </form>
             </div>
         </div>
 
         <!--footer inclusion-->
-        <?php include_once 'include/footer.php'; ?>
+<?php include_once 'include/footer.php'; ?>
     </body>
 </html>

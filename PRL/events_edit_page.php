@@ -106,7 +106,7 @@ elseif ($event_event_entity_rs->num_rows >= 1 && $events_row['event_entity_name'
                     //stack the new content on the old one every time they appended
                     $("#event_entity_checkboxes_ul").empty();
                     entities.forEach(function (entities) {
-                        $("#event_entity_checkboxes_ul").append('<li><label>' + entities.committee_name + '</label>&nbsp;<input type="checkbox" id="" name="event_entity_checkbox[]" value="' + entities.committee_id + '" class="w3-check"></li>')
+                        $("#event_entity_checkboxes_ul").append('<li><label>' + entities.committee_name + '</label>&nbsp;<input type="checkbox" id="" name="event_entity_checkbox[]" value="' + entities.committee_id + '" class = "w3-check" > </li>');
                     })
                 });
             }

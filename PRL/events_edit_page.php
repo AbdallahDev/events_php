@@ -79,6 +79,26 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
                 });
             }
 
+            //this function render all the event entity check boxes
+            function event_entity_checkboxes() {
+                //bellow i'll get all the event entites to render them as 
+                //check boxes so the user can chose the right one for the event,
+                //coz it dosen't belong to a specific one from the event entites dropdown menu
+                $.ajax({
+                    url: 'event_entities_get_checkbox.php',
+                    method: 'post'
+                }).done(function (entities) {
+                    console.log(entities);
+                    entities = JSON.parse(entities);
+                    //here i emptying the element of it's content so it dosen't 
+                    //stack the new content on the old one every time they appended
+                    $("#event_entity_checkboxes_ul").empty();
+                    entities.forEach(function (entities) {
+                        $("#event_entity_checkboxes_ul").append('<li><label>' + entities.committee_name + '</label>&nbsp;<input type="checkbox" id="" name="event_entity_checkbox[]" value="' + entities.committee_id + '" class="w3-check"></li>')
+                    })
+                });
+            }
+
             $(document).ready(function () {
                 //this var to save the event entity catgeroy id
                 var event_entity_category_id = <?Php echo $event_entity_catgory_id; ?>;
@@ -97,6 +117,12 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
                     $("#event_entity_name").show();
                     $("#event_entity_name").prop("disabled", false);
                     $("#event_entity_category_id").prop("disabled", true);
+                }
+
+                //here i'll render all the event entity check boxes if 
+                //the event entity name text box filled with text
+                if ($("#event_entity_name").val() !== "") {
+                    event_entity_checkboxes();
                 }
 
                 //this event runs when the event entity categories dropdown value changes
@@ -133,22 +159,7 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
                         //the event entity name in the textbox
                         $("#event_entity_category_id").prop("disabled", true);
                         $("#event_entity_checkboxes").show();
-                        //bellow i'll get all the event entites to render them as 
-                        //check boxes so the user can chose the right one for the event,
-                        //coz it dosen't belong to a specific one from the event entites dropdown menu
-                        $.ajax({
-                            url: 'event_entities_get_checkbox.php',
-                            method: 'post'
-                        }).done(function (entities) {
-                            console.log(entities);
-                            entities = JSON.parse(entities);
-                            //here i emptying the element of it's content so it dosen't 
-                            //stack the new content on the old one every time they appended
-                            $("#event_entity_checkboxes_ul").empty();
-                            entities.forEach(function (entities) {
-                                $("#event_entity_checkboxes_ul").append('<li><label>' + entities.committee_name + '</label>&nbsp;<input type="checkbox" id="" name="event_entity_checkbox[]" value="' + entities.committee_id + '" class="w3-check"></li>')
-                            })
-                        })
+                        event_entity_checkboxes();
                     } else {
                         //here i'll show the event entity category id dropdown menu
                         //coz the user didn't write the event entity name in the textbox

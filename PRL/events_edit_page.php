@@ -123,13 +123,38 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
                 $("#event_entity_name").focusin(function () {
                     $("#committee").prop("disabled", true);
                 });
-                //here when the user focusout the event entity textbox, if it's has a value the dropdown will kept disabled but if it's empty the dropdown will be enabled
+                //here when the user focusout the event entity textbox, if it has a 
+                //value the event_entity_checkboxes will be enabled so the user
+                //can chose the event entity that the event belong to.
                 $("#event_entity_name").focusout(function () {
-                    if ($("#event_entity_name").val() === '') {
-                        $("#event_entity_category_id").prop("disabled", false);
-                        $("#committee").prop("disabled", false);
-                    } else {
+                    if ($("#event_entity_name").val() !== '') {
+                        //here i'll hide the event entity category id dropdown menu
+                        //coz the user can't chose from it if he decided to write 
+                        //the event entity name in the textbox
                         $("#event_entity_category_id").prop("disabled", true);
+                        $("#event_entity_checkboxes").show();
+                        //bellow i'll get all the event entites to render them as 
+                        //check boxes so the user can chose the right one for the event,
+                        //coz it dosen't belong to a specific one from the event entites dropdown menu
+                        $.ajax({
+                            url: 'event_entities_get_checkbox.php',
+                            method: 'post'
+                        }).done(function (entities) {
+                            console.log(entities);
+                            entities = JSON.parse(entities);
+                            //here i emptying the element of it's content so it dosen't 
+                            //stack the new content on the old one every time they appended
+                            $("#event_entity_checkboxes_ul").empty();
+                            entities.forEach(function (entities) {
+                                $("#event_entity_checkboxes_ul").append('<li><label>' + entities.committee_name + '</label>&nbsp;<input type="checkbox" id="" name="event_entity_checkbox[]" value="' + entities.committee_id + '" class="w3-check"></li>')
+                            })
+                        })
+                    } else {
+                        //here i'll show the event entity category id dropdown menu
+                        //coz the user didn't write the event entity name in the textbox
+                        //so he will chose it from the dropdown menu
+                        $("#event_entity_category_id").prop("disabled", false);
+                        $("#event_entity_checkboxes").hide();
                     }
                 });
                 //--------------------------------------------
@@ -186,8 +211,8 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
                         event_date: $('#event_date').val(),
                         event_status: $('#event_status:checkbox:checked').val()
                     }, function (data, status) {
-//                        window.location = 'events_preview_current_future.php';
-                        alert(data);
+                        window.location = 'events_preview_current_future.php';
+//                        alert(data);
                     });
                 });
             });
@@ -271,8 +296,18 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
 
                 <div class="w3-section">
                     <!--this is the name of the event entity-->
-                    <input type="text" id="event_entity_name" name="event_entity_name" value="<?php echo $events_row['event_entity_name'] ?>" placeholder="جهة النشاط" class="w3-input w3-border right-dir">
+                    <input type="text" id="event_entity_name" name="event_entity_name" 
+                           value="<?php echo $events_row['event_entity_name'] ?>" 
+                           placeholder="جهة النشاط" class="w3-input w3-border right-dir">
                 </div>
+
+                <!--here i'll view all the event entities and render them 
+                as check boxes, coz some events don't belong to a specific
+                event entity, so he can chose to whom the event belong from here-->
+                <div class="w3-section" id="event_entity_checkboxes">
+                    <ul class="chk" id="event_entity_checkboxes_ul"></ul>
+                </div>
+
                 <div class="w3-section">
                     <label>وقت النشاط</label>
                     <!--this is the time of the event-->

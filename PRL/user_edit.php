@@ -13,7 +13,7 @@ $rs_user = $user->get_user($_SESSION['user_id']);
 $row_user = $rs_user->fetch_assoc();
 //create new committee object
 $committee = new committees();
-$rs1 = $committee->committees_all_get($_SESSION['directorate'], $_SESSION['directorate']);//here i send the directorate id twice to get all the committees belong to the same direcotrate, and to exclude the empty committee that belong to the same directoraet so the user can't delete it by mistake, because it's used to view the event entity when it's saved using the event entity textbox
+$rs1 = $committee->entities_get_all($_SESSION['directorate'], $_SESSION['directorate']);//here i send the directorate id twice to get all the committees belong to the same direcotrate, and to exclude the empty committee that belong to the same directoraet so the user can't delete it by mistake, because it's used to view the event entity when it's saved using the event entity textbox
 //create new user committee object
 $user_committee = new user_committee();
 $rs2 = $user_committee->user_committees_get($_GET['userId']);

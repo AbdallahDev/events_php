@@ -15,7 +15,7 @@ class committees extends my_db {
     }
 
     //this function get all the event entities except the empty one
-    public function committees_all_get() {
+    public function entities_get_all() {
         return $this->get_all_data('SELECT `committee_id`, `committee_name`, '
                         . 'committees.`event_entity_category_id`, committees.committee_rank, '
                         . 'event_entity_category.event_entity_category_name '

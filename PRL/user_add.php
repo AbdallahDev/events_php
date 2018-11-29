@@ -3,7 +3,7 @@ include_once 'include/check_session.php';
 include_once '../BLL/committees.php';
 include_once '../BLL/users.php';
 $committee = new committees();
-$rs = $committee->committees_all_get($_SESSION['directorate'], $_SESSION['directorate']);
+$rs = $committee->entities_get_all($_SESSION['directorate'], $_SESSION['directorate']);
 $user = new users();
 $rs_user = $user->get_user($_SESSION['user_id']);
 $row_user = $rs_user->fetch_assoc();

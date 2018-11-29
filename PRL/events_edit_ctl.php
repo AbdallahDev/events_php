@@ -33,6 +33,12 @@ $user_id = $_SESSION['user_id'];
 //this var for the status of the event and i'll make it with 0 default value for the casses it's not checked
 $event_status = 0;
 
+//bellow i'll clear all the event entities related to a specific event
+//and that in case he changed them and chose new ones.
+include_once '../BLL/event_event_entity.php';
+$event_event_entity = new event_event_entity();
+$event_event_entity->event_event_entity_deletion($event_id);
+
 //bellow i'll check if the user choose the event entity from the event entities drop down menu or not
 //and that by checking the value from the event_entity_categroy_id drop down menu, coz if it's 0 
 //that menas the user didn't choose anything from the dropdown menu, and typed the event

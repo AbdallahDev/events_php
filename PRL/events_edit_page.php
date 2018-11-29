@@ -10,6 +10,8 @@ $events_row = $rs->fetch_assoc();
 $event_id = $_GET['id'];
 $event_entity_id = 0;
 $event_entity_catgory_id = 0;
+//this array to store all the event entity ids related to the event
+$event_entity_ids = array();
 
 //the code bellow is to get the event entity category for the event entity that 
 //belong to the event if it has been selected from the event entity drop down menu
@@ -36,6 +38,16 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
     $committees_rs = $committees->event_entity_category_id_get($event_entity_id);
     $committees_row = $committees_rs->fetch_assoc();
     $event_entity_catgory_id = $committees_row['event_entity_category_id'];
+}
+//but here if the returned result has one row or more and the event entity name 
+//text box filled with text i'll get all the event entities related to that event 
+//if they exist to make them checked in the check boxes
+elseif ($event_event_entity_rs->num_rows >= 1 && $events_row['event_entity_name'] != "") {
+    while ($event_event_entity_row = $event_event_entity_rs->fetch_assoc()) {
+        //here i'll add the event entity ids in the event_entity_ids array so i 
+        //can use it later to decide which check box should be checked
+        $event_entity_ids[] = $event_event_entity_row['event_entity_id'];
+    }
 }
 ?>
 <html>
@@ -213,7 +225,6 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
         <!---top menu file inclusion-->
         <?php include 'include/menu.php' ?>        
 
-
         <!-- Sidebar menu and button -->
         <div>
             <!-- Sidebar menu -->
@@ -241,7 +252,6 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
         <!--this form to edit the event-->
         <div class="w3-container w3-padding-64" id="contact">
             <div class="right-align-text">
-
                 <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="events_edit_ctl.php" method="post">
                     <input type="hidden" id="id" name="id" value="<?php echo $events_row['id'] ?>" class="w3-input w3-border">
 

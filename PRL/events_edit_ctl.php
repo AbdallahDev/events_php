@@ -104,6 +104,10 @@ include_once '../BLL/event_event_entity.php';
 $event_event_entity = new event_event_entity();
 $event_event_entity->event_event_entity_deletion($event_id);
 //and i'll add the new chosen entities
-$event_event_entity->event_event_entity_insert($event_id, $event_entity_ids);
+//here i'll loop over the event entity ids coz it could be filled with multiple 
+//event entities for the same event
+foreach ($event_entity_ids as $value) {
+    $event_event_entity->event_event_entity_insert($event_id, $value);
+}
 
 header('location: events_preview_current_future.php');

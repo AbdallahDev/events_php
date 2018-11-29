@@ -104,6 +104,7 @@ elseif ($event_event_entity_rs->num_rows >= 1 && $events_row['event_entity_name'
                     //element coz the event entity category already chosen
                     event_entities(event_entity_category_id);
                     $("#event_entity_name").hide();
+                    $("#event_entity_checkboxes").hide();
                 } else {
                     $("#committee").hide();
                     $("#event_entity_name").show();

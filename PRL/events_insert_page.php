@@ -58,22 +58,6 @@
                         //the event entity name in the textbox
                         $("#event_entity_category_id").prop("disabled", true);
                         $("#event_entity_checkboxes").show();
-                        //bellow i'll get all the event entites to render them as 
-                        //check boxes so the user can chose the right one for the event,
-                        //coz it dosen't belong to a specific one from the event entites dropdown menu
-                        $.ajax({
-                            url: 'event_entities_get_checkbox.php',
-                            method: 'post'
-                        }).done(function (entities) {
-                            console.log(entities);
-                            entities = JSON.parse(entities);
-                            //here i emptying the element of it's content so it dosen't 
-                            //stack the new content on the old one every time they appended
-                            $("#event_entity_checkboxes_ul").empty();
-                            entities.forEach(function (entities) {
-                                $("#event_entity_checkboxes_ul").append('<li><label>' + entities.committee_name + '</label>&nbsp;<input type="checkbox" id="" name="event_entity_checkbox[]" value="' + entities.committee_id + '" class="w3-check"></li>')
-                            })
-                        })
                     } else {
                         //here i'll show the event entity category id dropdown menu
                         //coz the user didn't write the event entity name in the textbox
@@ -197,7 +181,7 @@
                     as check boxes, coz some events don't belong to a specific
                     event entity, so he can chose to whom the event belong from here-->
                     <div class="w3-section" id="event_entity_checkboxes">
-                        <ul class="chk" id="event_entity_checkboxes_ul"></ul>
+                        <ul class="chk" id="event_entity_checkboxes_ul"><?php include_once 'event_entities_get_checkbox.php'; ?></ul>
                     </div>
 
                     <!--this is the time of the event element, and the user use it

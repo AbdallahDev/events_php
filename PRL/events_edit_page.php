@@ -253,6 +253,7 @@ elseif ($event_event_entity_rs->num_rows >= 1 && $events_row['event_entity_name'
         <div class="w3-container w3-padding-64" id="contact">
             <div class="right-align-text">
                 <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="events_edit_ctl.php" method="post">
+                    <!--this hidden input to send the event id on the form post-->
                     <input type="hidden" id="id" name="id" value="<?php echo $events_row['id'] ?>" class="w3-input w3-border">
 
                     <!--this div for the event entity categories drop down list -->

@@ -12,7 +12,16 @@ while ($event_entities_row = $event_entities_rs->fetch_assoc()) {
     ?>
     <li><label><?php echo $event_entities_row['committee_name'] ?></label>&nbsp;
         <input type="checkbox" id="event_entity_checkbox" 
-               name="event_entity_checkbox[]" value="<?php echo $event_entities_row['committee_id'] ?>" 
+               name="event_entity_checkbox[]" value="<?php echo $event_entities_row['committee_id'] ?>"
+               <?php
+               if (isset($event_entity_ids)) {
+                   foreach ($event_entity_ids as $value) {
+                       if ($value == $event_entities_row['committee_id']) {
+                           echo ' checked ';
+                       }
+                   }
+               }
+               ?>
                class = "w3-check" > </li>
     <?php
 }

@@ -176,7 +176,7 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
                     $.post('events_edit_ctl.php', {
                         id: $('#id').val(),
                         event_entity_category_id: $('#event_entity_category_id').val(),
-                        committee_id: $("#committee option:selected").val(),
+                        committee: $("#committee option:selected").val(),
                         event_entity_name: $("#event_entity_name").val(),
                         time: $('#time').val(),
                         event_appointment: $('#event_appointment').val(),
@@ -186,8 +186,8 @@ if ($event_event_entity_rs->num_rows == 1 && $events_row['event_entity_name'] ==
                         event_date: $('#event_date').val(),
                         event_status: $('#event_status:checkbox:checked').val()
                     }, function (data, status) {
-                        window.location = 'events_preview_current_future.php';
-//                        alert(data);
+//                        window.location = 'events_preview_current_future.php';
+                        alert(data);
                     });
                 });
             });

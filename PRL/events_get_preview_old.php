@@ -40,38 +40,65 @@ if ($rs->num_rows != 0) {
             </thead>
             <tbody>
                 <?php
-                while ($row = $rs->fetch_assoc()) {
+                while ($events_row = $rs->fetch_assoc()) {
                     ?>
                     <tr>
-                        <td data-label="النشاط"><?php
-                            if ($row['committee_id'] > 4) {//here i check if the committee id is greater that 4, because 4 is the last id for the empty committees, and because that means that the event entity name is not choossed using the event entity dropdown menu saved using the event entity textbox
-                                echo $row['committee_name'];
+                        <td data-label="جهة النشاط"><?php
+                            //i need to make an object for the committees class 
+                            //to get the proper event entity name for the event
+                            include_once '../BLL/committees.php';
+                            $event_entities = new committees();
+                            $event_entities_rs = $event_entities->event_entity_name_get($events_row['id']);
+                            //i'll check if the result has rows less than 2, 
+                            //coz that means the event related to one event entity,
+                            //coz if it's related to more than that i should view
+                            //the event entity name that typed in the text box
+                            //even if it's empty.
+                            if ($event_entities_rs->num_rows < 2) {
+                                $event_entities_row = $event_entities_rs->fetch_assoc();
+                                //bellow i'll check if the name of the event entity exist
+                                //coz if it's not i'll check if it has instead of that 
+                                //a fixed entity name inserted in the event entity text box, 
+                                //but if it dosen't have anything one of those, that means 
+                                //the user chose to put it with no name
+                                if ($event_entities_row['committee_name'] != "") {
+                                    echo $event_entities_row['committee_name'];
+                                } elseif ($events_row['event_entity_name'] != '') {
+                                    echo $events_row['event_entity_name'];
+                                } else {
+                                    echo 'ـــــــــــــــ';
+                                }
                             } else {
-                                echo $row['event_entity_name'];
-                            }
-                            ?></td>
-                        <td data-label="الوقت"><?php echo date('h:i A', strtotime($row['time'])); ?></td>
-                        <td data-label="المكان"><?php
-                            if ($row['hall_name'] != '') {
-                                echo $row['hall_name'];
-                            } else {
-                                echo $row['event_place'];
+                                if ($events_row['event_entity_name'] != '') {
+                                    echo $events_row['event_entity_name'];
+                                } else {
+                                    echo 'ـــــــــــــــ';
+                                }
                             }
                             ?>
                         </td>
-                        <td data-label="الموضوع"><?php echo $row['subject']; ?></td>
-                        <td data-label="تاريخ النشاط"><?php echo $row['event_date']; ?></td>
+                        <td data-label="الوقت"><?php echo date('h:i A', strtotime($events_row['time'])); ?></td>
+                        <td data-label="المكان"><?php
+                            if ($events_row['hall_name'] != '') {
+                                echo $events_row['hall_name'];
+                            } else {
+                                echo $events_row['event_place'];
+                            }
+                            ?>
+                        </td>
+                        <td data-label="الموضوع"><?php echo $events_row['subject']; ?></td>
+                        <td data-label="تاريخ النشاط"><?php echo $events_row['event_date']; ?></td>
                         <!--here i print the date of the event insertion-->
                         <td data-label="تاريخ الانشاء">
-        <?php echo date('d-m-Y / h:i A', strtotime($row['event_insertion_date'])); ?>
+                            <?php echo date('d-m-Y / h:i A', strtotime($events_row['event_insertion_date'])); ?>
                         </td>
                         <!--here i print the name of the user who inserted the event-->
-                        <td data-label="اسم المستخدم"><?php echo $row['name']; ?></td>
+                        <td data-label="اسم المستخدم"><?php echo $events_row['name']; ?></td>
                         <!--here i print the editing date of the event-->
                         <td data-label="تاريخ التعديل">
                             <?php
-                            if ($row['event_edit_date'] > 0) {
-                                echo date('d-m-Y / h:i A', strtotime($row['event_edit_date']));
+                            if ($events_row['event_edit_date'] > 0) {
+                                echo date('d-m-Y / h:i A', strtotime($events_row['event_edit_date']));
                             } else {//here i check if the event date is not set i'll print empty line
                                 echo 'ـــــــــــــــ';
                             }
@@ -80,8 +107,8 @@ if ($rs->num_rows != 0) {
                         <!--here i print the name of the user who last edited the event-->
                         <td data-label="اسم المستخدم">
                             <?php
-                            if ($row['user_id_edit'] >= 0) {
-                                $rs_user = $user->get_user($row['user_id_edit']);
+                            if ($events_row['user_id_edit'] >= 0) {
+                                $rs_user = $user->get_user($events_row['user_id_edit']);
                                 $row_user = $rs_user->fetch_assoc();
                                 echo $row_user['name'];
                             }
@@ -95,8 +122,8 @@ if ($rs->num_rows != 0) {
                         //check if the user is regular with usertype value = 2 to view the edit and delete tabs, while all other user types they will be hidden
                         if ($_SESSION['user_type'] == 2) {
                             ?>
-                            <td><a href="events_edit_page.php?id=<?php echo $row['id']; ?>">تعديل</a></td>
-                            <td><a href="events_delete.php?id=<?php echo $row['id']; ?>" 
+                            <td><a href="events_edit_page.php?id=<?php echo $events_row['id']; ?>">تعديل</a></td>
+                            <td><a href="events_delete.php?id=<?php echo $events_row['id']; ?>" 
                                    onclick="return confirm('هل انت متأكد من الحذف');">حذف</a></td>
                                 <?php
                             }

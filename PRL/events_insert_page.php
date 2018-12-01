@@ -8,7 +8,15 @@
         <script src="../js/jquery-3.2.1.min.js" type="text/javascript"></script>
         <script>
             $(document).ready(function () {
+                //i'll hide the event entity check boxes coz it's not needed
+                //at the begining, i'll view them just when the user type something
+                //in the event entity text box, so at that time he can chose from the check boxes
+                $("#event_entity_checkboxes").hide();
+
                 //this event runs when the event entity categories dropdown value changes
+                //bellow i'll hide the committees dropdownlist, coz the user 
+                //has not yet chosen any category
+                $("#committee").hide();
                 $("#event_entity_category_id").change(function () {
                     var event_entity_category_id = $("#event_entity_category_id").val();
                     $.ajax({
@@ -18,52 +26,61 @@
                     }).done(function (entities) {
                         console.log(entities);
                         entities = JSON.parse(entities);
+                        //here i emptying the element of it's content so it dosen't 
+                        //stack the new content on the old one every time they appended
                         $("#committee").empty();
-                        entities.forEach(function (entities) {
-                            $("#committee").append('<option>' + entities.committee_name + '</option>')
-                        })
+                        if (entities.length !== 0) {
+                            $("#committee").show()
+                            //here i'll hide the event_entity_name textbox, 
+                            //coz the event entity name is exist in the dropdown menu, 
+                            //so he dosen't need to write it here
+                            $("#event_entity_name").hide()
+                            entities.forEach(function (entities) {
+                                $("#committee").append('<option value="' + entities.committee_id + '">' + entities.committee_name + '</option>')
+                            })
+                        } else if (entities.length === 0) {
+                            $("#committee").hide();
+                            //here i'll show the event_entity_name textbox, 
+                            //coz the event entity name dosen't exist in the dropdown menu, 
+                            //so he need to write it here
+                            $("#event_entity_name").show()
+                        }
                     })
                 });
 
-                //this event run when the event entity name dropdown value changes
-                $("#committee").change(function () {
-                    //if the user choosed nothing from the dropdown the event entity name textbox will be enabled
-                    if ($("#committee").val() == '') {//here i check if user hasn't choose anything from the entity event dropdonw
-                        $("#event_entity_name").prop("disabled", false);//here i keep the event entity textbox enabled
-                    } else {//this code run when the user chooses event entity from the dropdown
-                        $("#event_entity_name").prop("disabled", true);//i make the event entity textbox disabled
-                    }
-                });
-
-                //bellow when the user focusin the event entity textbox the committe dropdown will be disabled, and that to prevent the user from choosing duplicated values
-                $("#event_entity_name").focusin(function () {
-                    $("#committee").prop("disabled", true);
-                });
-
-                //here when the user focusout the event entity textbox, if it's has a value the dropdown will kept disabled but if it's empty the dropdown will be enabled
+                //here when the user focusout the event entity textbox, if it has a 
+                //value the event_entity_checkboxes will be enabled so the user
+                //can chose the event entity that the event belong to.
                 $("#event_entity_name").focusout(function () {
-                    if ($("#event_entity_name").val() == '') {
-                        $("#committee").prop("disabled", false);
+                    if ($("#event_entity_name").val() !== '') {
+                        //here i'll hide the event entity category id dropdown menu
+                        //coz the user can't chose from it if he decided to write 
+                        //the event entity name in the textbox
+                        $("#event_entity_category_id").prop("disabled", true);
+                        $("#event_entity_checkboxes").show();
                     } else {
-                        $("#committee").prop("disabled", true);
+                        //here i'll show the event entity category id dropdown menu
+                        //coz the user didn't write the event entity name in the textbox
+                        //so he will chose it from the dropdown menu
+                        $("#event_entity_category_id").prop("disabled", false);
+                        $("#event_entity_checkboxes").hide();
                     }
                 });
 
-                //this event run when the dropdown value changes
+                //this event run when the hall dropdown value changes
                 $("#hall").change(function () {
-                    //if the user choosed nothing from the dropdown
-                    //the event place textbox will be enabled
-                    if ($("#hall").val() == '') {
-                        $("#event_place_textbox").prop("disabled", false);
-                    }
                     //if the user choosed a hall from the dropdown
-                    //the event place textbox will be diabled if it's empty
-                    else {
+                    //the event place textbox will be disabled
+                    if ($("#hall").val() > 0) {
                         $("#event_place_textbox").prop("disabled", true);
                     }
+                    //if the user chose nothing the event textbox will be enabled again.
+                    else {
+                        $("#event_place_textbox").prop("disabled", false);
+                    }
                 });
 
-                //here when the user focusin the event place textbox
+                //here when the user focus in the event place textbox
                 //the hall dropdown will be disabled
                 $("#event_place_textbox").focusin(function () {
                     $("#hall").prop("disabled", true);
@@ -73,17 +90,10 @@
                 //if it's has a value the dropdown will kept disabled
                 //but if it's empty the dropdown will be enabled
                 $("#event_place_textbox").focusout(function () {
-                    if ($("#event_place_textbox").val() == '') {
+                    if ($("#event_place_textbox").val() === '') {
                         $("#hall").prop("disabled", false);
                     } else {
                         $("#hall").prop("disabled", true);
-                    }
-                });
-                $("#new_event").click(function () {
-                    if (($("#form_div").is(":visible")) === true) {
-                        $("#form_div").hide();
-                    } else {
-                        $("#form_div").show();
                     }
                 });
             }
@@ -119,7 +129,7 @@
             </div>
         </div>
 
-        <!--this form to choose and upload an image-->
+        <!--this form to insert a new event-->
         <div class="w3-container w3-padding-64" id="contact">
             <div class="right-align-text">
                 <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="events_insert.php" method="post">
@@ -127,7 +137,10 @@
                     <div class="w3-section">
                         <select class="w3-input w3-border right-dir" id="event_entity_category_id" 
                                 name="event_entity_category_id">
-                            <option value="">فئة جهة النشاط</option>
+                            <!--bellow i've added this option with value 0 so i can 
+                            in the logic page the events_insert_page.php decide 
+                            if the user did not chose anything-->
+                            <option value="0">فئة جهة النشاط</option>
                             <?PHP
                             //bellow i'll view all the event entity catigories
                             //
@@ -152,22 +165,38 @@
                         <!--this select for the committees that the user can choose from-->
                         <select class="w3-input w3-border right-dir" id="committee" name="committee">
                             <option value="">اختر جهة النشاط</option>
-
                         </select>
                     </div>
+
+                    <!--this div to view the textbox of the event entity name, 
+                    and that for the event entities that don't have fixed name 
+                    in the db-->
                     <div class="w3-section">
                         <!--this is the name of the event entity-->
-                        <input type="text" id="event_entity_name" name="event_entity_name" placeholder="جهة النشاط" class="w3-input w3-border right-dir">
+                        <input type="text" id="event_entity_name" name="event_entity_name" 
+                               placeholder="جهة النشاط" class="w3-input w3-border right-dir">
                     </div>
-                    <div class="w3-section">
+
+                    <!--here i'll view all the event entities and render them 
+                    as check boxes, coz some events don't belong to a specific
+                    event entity, so he can chose to whom the event belong from here-->
+                    <div class="w3-section" id="event_entity_checkboxes">
+                        <ul class="chk" id="event_entity_checkboxes_ul"><?php include_once 'event_entities_get_checkbox.php'; ?></ul>
+                    </div>
+
+                    <!--this is the time of the event element, and the user use it
+                    when there is specific time for the event-->
+                    <div class="w3-section" id="time_div">
                         <label>وقت النشاط</label>
-                        <!--this is the time of the event-->
                         <input type="time" id="time" name="time" value="<?php echo date('H:i') ?>" class="w3-input w3-border right-align-text">
                     </div>
-                    <div class="w3-section">
-                        <!--this is the name of the event entity-->
+
+                    <!--this element for the event entity appontiment, 
+                    and it's needed when the event dosen't have specific time-->
+                    <div class="w3-section" id="event_appointment_div">
                         <input type="text" id="event_appointment" name="event_appointment" placeholder="موعد النشاط" class="w3-input w3-border right-dir">
                     </div>
+
                     <div class="w3-section">
                         <label>تاريخ النشاط</label>
                         <!--this is event date, when the event will be hold in-->
@@ -179,11 +208,14 @@
                         <!--this is event subject, it means what the event hold for-->
                         <textarea rows="5" cols="48" id="subject" name="subject" placeholder="الموضوع" class="w3-input w3-border right-dir right-align-text"></textarea>
                     </div>
+
                     <div class="w3-section">
                         <label>القاعة</label>
                         <!--this select for the hall that the event will be in-->
                         <select id="hall" name="hall" class="w3-input w3-border right-dir">
-                            <option value="">اختر القاعة</option>
+                            <!--here i've made a default option with value 0
+                            so i can decide by that that the user has not chosen any hall-->
+                            <option value="0">اختر القاعة</option>
                             <?PHP
                             include_once '../BLL/halls.php';
                             $hall = new halls();
@@ -198,12 +230,14 @@
                             ?>
                         </select>
                     </div>
-                    <div class="w3-section">
+
+                    <!--this div for the event place text box, and the user need it
+                    when there is no specific place in the dropdown menu-->
+                    <div class="w3-section" id="event_place_textbox_div">
                         <label>مكان الاجتماع</label>
                         <!--this is event place, and that when the event dosen't hold in a hall-->
                         <input id="event_place_textbox" name="event_place_textbox" class="w3-input w3-border right-dir" type="text" placeholder="مكان الاجتماع">
                     </div>
-
 
                     <div class="w3-section">
                         <label>نشر على الشاشة</label>

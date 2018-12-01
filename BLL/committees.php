@@ -15,7 +15,7 @@ class committees extends my_db {
     }
 
     //this function get all the event entities except the empty one
-    public function committees_all_get() {
+    public function entities_get_all() {
         return $this->get_all_data('SELECT `committee_id`, `committee_name`, '
                         . 'committees.`event_entity_category_id`, committees.committee_rank, '
                         . 'event_entity_category.event_entity_category_name '
@@ -29,7 +29,10 @@ class committees extends my_db {
 
     //this function get all the event entities related to a specific category
     public function event_entities_category_all_get($event_entity_category_id) {
-        return $this->get_data('SELECT `committee_id`, `committee_name`, committees.`event_entity_category_id`, committees.committee_rank FROM `committees` WHERE committees.event_entity_category_id != 0 AND committees.event_entity_category_id = ? ORDER BY `committees`.`committee_rank` ASC'
+        return $this->get_data('SELECT `committee_id`, `committee_name`, committees.`event_entity_category_id`, '
+                        . 'committees.committee_rank FROM `committees` '
+                        . 'WHERE committees.event_entity_category_id != 0 AND committees.event_entity_category_id = ? '
+                        . 'ORDER BY `committees`.`committee_rank` ASC'
                         , 'i', array(&$event_entity_category_id));
     }
 
@@ -42,6 +45,17 @@ class committees extends my_db {
     public function committee_delete($committee_id) {
         $this->mod_data('delete from committees where committee_id = ?'
                 , 'i', array(&$committee_id));
+    }
+
+    //this function get the event entity name for the event using the provided event id.
+    public function event_entity_name_get($event_id) {
+        $query = "SELECT committees.committee_name FROM committees INNER JOIN event_event_entity ON event_event_entity.event_entity_id = committees.committee_id INNER JOIN events on events.id = event_event_entity.event_id WHERE events.id = ?";
+        return $this->get_data($query, 'i', array(&$event_id));
+    }
+
+    function event_entity_category_id_get($event_entity_id) {
+        $query = "SELECT event_entity_category_id FROM `committees` WHERE committee_id = ?";
+        return $this->get_data($query, 'i', array(&$event_entity_id));
     }
 
 }

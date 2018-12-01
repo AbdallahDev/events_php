@@ -4,12 +4,33 @@ include_once '../DAL/my_db.php';
 
 class events extends my_db {
 
-    function insert_event($committee_id, $event_entity_name, $time, $event_appointment, $hall_id, $event_place, $subject, $event_date, $event_status, $directorate_id, $user_id) {
-        $this->mod_data('insert into events(committee_id, event_entity_name, time, event_appointment, hall_id, event_place, subject, event_date, event_status, directorate_id, user_id_insert) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 'isssisssiii', array(&$committee_id, &$event_entity_name, &$time, &$event_appointment, &$hall_id, &$event_place, &$subject, &$event_date, &$event_status, &$directorate_id, &$user_id));
+    function insert_event($event_entity_name, $time, $event_appointment
+    , $subject, $event_date, $hall_id, $event_place, $user_id, $event_status) {
+        $this->mod_data('insert into events(event_entity_name, time, '
+                . 'event_appointment, subject, event_date, hall_id, event_place, user_id_insert, '
+                . 'event_status) '
+                . 'values(?, ?, ?, ?, ?, ?, ?, ?, ?)', 'sssssisii'
+                , array(&$event_entity_name, &$time, &$event_appointment
+            , &$subject, &$event_date, &$hall_id, &$event_place, &$user_id, &$event_status));
     }
 
-    function update_event($event_entity, $event_entity_name, $time, $event_appointment, $hall_id, $event_place, $subject, $event_date, $event_status, $event_edit_date, $directorate_id, $user_id_edit, $id) {
-        $this->mod_data('update events set committee_id = ?, event_entity_name = ?, time = ?, event_appointment = ?, hall_id = ?, event_place = ?, subject = ?, event_date = ?, event_status = ?, event_edit_date = ?, directorate_id = ?, user_id_edit = ? where id = ?', 'isssisssisiii', array(&$event_entity, &$event_entity_name, &$time, &$event_appointment, &$hall_id, &$event_place, &$subject, &$event_date, &$event_status, &$event_edit_date, &$directorate_id, &$user_id_edit, &$id));
+    //this function get the id of the event after it has been inserted by the user, 
+    //to take it and inserted again in the event_event_entity table with the related even entities
+    function event_get_id($user_id) {
+        $query = "SELECT MAX(events.id) AS 'event_id' FROM `events` WHERE user_id_insert = ?";
+        return $this->get_data($query, 'i', array(&$user_id));
+    }
+
+    function update_event($event_entity_name, $time
+    , $event_appointment, $hall_id, $event_place, $subject, $event_date
+    , $event_status, $event_edit_date, $user_id_edit, $id) {
+        $query = 'update events set event_entity_name = ?, time = ?, '
+                . 'event_appointment = ?, hall_id = ?, event_place = ?, '
+                . 'subject = ?, event_date = ?, event_status = ?, event_edit_date = ?, '
+                . 'user_id_edit = ? where id = ?';
+        $this->mod_data($query, 'sssisssisii', array(&$event_entity_name
+            , &$time, &$event_appointment, &$hall_id, &$event_place, &$subject
+            , &$event_date, &$event_status, &$event_edit_date, &$user_id_edit, &$id));
     }
 
     function delete_event($id) {
@@ -29,7 +50,7 @@ class events extends my_db {
     }
 
     function get_events_curdate() {
-        return $this->get_all_data('SELECT committees.committee_id, committees.committee_name, events.event_entity_name, events.time, events.event_appointment, halls.hall_name, events.event_place, events.subject, events.id FROM events INNER JOIN committees ON committees.committee_id= events.committee_id INNER JOIN halls on halls.hall_id=events.hall_id WHERE DATE(event_date) = CURDATE() and event_status = 1 ORDER BY time');
+        return $this->get_all_data('SELECT events.event_entity_name, events.time, events.event_appointment, halls.hall_name, events.event_place, events.subject, events.id FROM events INNER JOIN halls on halls.hall_id = events.hall_id WHERE DATE(event_date) = CURDATE() and event_status = 1 ORDER BY time');
     }
 
     function get_events_curdate_max_time() {
@@ -40,14 +61,16 @@ class events extends my_db {
         return $this->get_all_data('SELECT * FROM events WHERE DATE(event_date) >= CURDATE() ORDER BY time');
     }
 
-    //this function get the current and future evetns depend on the directorate
-    function get_events_current_future($directorate_id) {
-        return $this->get_data('SELECT events.id, events.event_entity_name, events.committee_id, committees.committee_name, events.time, events.subject, events.event_date, users.user_type, halls.hall_name, events.event_place, events.event_status, users.name, events.user_id_insert, events.event_insertion_date, events.user_id_edit, events.event_edit_date FROM events INNER JOIN users ON users.user_id = events.user_id_insert INNER JOIN halls ON halls.hall_id = events.hall_id INNER JOIN committees ON committees.committee_id = events.committee_id WHERE events.event_date >= CURDATE() and events.directorate_id = ? ORDER BY events.event_date desc, events.time ASC, events.committee_id ASC', 'i', array(&$directorate_id));
+    //this function get the current and future evetns, to view them for the website user.
+    function get_events_current_future() {
+        $query = 'SELECT events.id, events.event_entity_name, events.time, events.event_appointment, events.subject, events.event_date, users.user_type, halls.hall_name, events.event_place, events.event_status, users.name, events.user_id_insert, events.event_insertion_date, events.user_id_edit, events.event_edit_date FROM events INNER JOIN users ON users.user_id = events.user_id_insert INNER JOIN halls ON halls.hall_id = events.hall_id WHERE events.event_date >= CURDATE() ORDER BY events.event_date desc, events.time ASC';
+        return $this->get_all_data($query);
     }
 
     //this function get old evetns depend on the directorate
-    function get_events_old($directorate_id) {
-        return $this->get_data('SELECT events.id, events.event_entity_name, committees.committee_id, committees.committee_name, events.time, events.subject,  events.event_date, users.user_type, halls.hall_name, events.event_place, events.event_status, users.name, events.user_id_insert, events.event_insertion_date, events.user_id_edit, events.event_edit_date FROM events INNER JOIN users ON users.user_id = events.user_id_insert INNER JOIN halls ON halls.hall_id = events.hall_id INNER JOIN committees ON committees.committee_id = events.committee_id WHERE events.event_date < CURDATE() and events.directorate_id = ? ORDER BY events.event_date desc, events.time ASC, events.committee_id ASC', 'i', array(&$directorate_id));
+    function get_events_old() {
+        $query = 'SELECT events.id, events.event_entity_name, events.time, events.event_appointment, events.subject,  events.event_date, users.user_type, halls.hall_name, events.event_place, events.event_status, users.name, events.user_id_insert, events.event_insertion_date, events.user_id_edit, events.event_edit_date FROM events INNER JOIN users ON users.user_id = events.user_id_insert INNER JOIN halls ON halls.hall_id = events.hall_id WHERE events.event_date < CURDATE() ORDER BY events.event_date desc, events.time ASC';
+        return $this->get_all_data($query);
     }
 
     //this function get all the events related to the user, even if he inserted or edited them

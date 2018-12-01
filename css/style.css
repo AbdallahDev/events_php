@@ -9,3 +9,14 @@
 .right-dir{
     direction: rtl;
 }
+
+/*this style for the event entity checkboxes group in the events_insert_page.php file*/
+.chk 
+{
+    width:100%;
+}
+.chk li
+{
+    display:inline-block;
+    width:35%;
+}

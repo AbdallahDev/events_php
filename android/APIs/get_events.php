@@ -11,7 +11,7 @@ $events_array = array();
 if ($committee_id == 0) {
     $rs_events_android = $events->get_events();
 } else {
-    $rs_events_android = $events->get_committee_events($committee_id);
+    $rs_events_android = $events->entity_events_get($committee_id);
 }
 while ($row_events_android = $rs_events_android->fetch_assoc()) {
     array_push($events_array, $row_events_android);

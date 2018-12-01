@@ -3,7 +3,7 @@ include_once 'include/check_session.php';
 
 include_once '../BLL/committees.php';
 $event_entity = new committees();
-$rs_event_entity = $event_entity->committees_all_get();
+$rs_event_entity = $event_entity->entities_get_all();
 ?> 
 <!--Responsive table-->
 <div class="w3-container w3-padding-64 w3-center">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2018 at 08:28 AM
+-- Generation Time: Nov 27, 2018 at 09:24 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -80,7 +80,7 @@ INSERT INTO `committees` (`committee_id`, `committee_name`, `event_entity_catego
 (21, 'لجنة الاخورة الاردنية الجزائرية', 3, 1, 3),
 (22, 'لجنة الاخوة الاردنية القطرية', 3, 1, 3),
 (23, 'لجنة الاخوة البرلمانية الاردنية اللبنانية', 3, 1, 3),
-(24, 'كتلة الوفاء والعهد', 2, 400, 4),
+(24, 'كتلة الوفاء والعهد', 2, 1, 4),
 (28, 'كتلة التجديد', 2, 1, 4),
 (31, 'لجنة الطاقة والثروة المعدنية', 1, 12, 2),
 (38, 'اللجنة المالية', 1, 2, 2),
@@ -92,11 +92,9 @@ INSERT INTO `committees` (`committee_id`, `committee_name`, `event_entity_catego
 (44, 'لجنة الريف والبادية', 1, 17, 2),
 (45, 'لجنة النظام والسلوك', 1, 18, 2),
 (46, 'لجنة المرأة وشؤون الأسرة', 1, 20, 2),
-(47, 'كتلة العدالة', 2, 400, 2),
+(47, 'كتلة العدالة', 2, 1, 2),
 (49, 'لجنة الاخوة الاردنية الاماراتية', 3, 1, 2),
-(50, 'لجنة الاخوة الاردنية المصرية', 3, 1, 2),
-(51, 'لجنة اختبار', 1, 1, 2),
-(52, 'لجنة العمل', 1, 1, 2);
+(50, 'لجنة الاخوة الاردنية المصرية', 3, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -127,19 +125,18 @@ INSERT INTO `device_token` (`device_token_id`, `device_token`) VALUES
 
 CREATE TABLE `events` (
   `id` int(11) NOT NULL,
-  `committee_id` int(11) NOT NULL,
-  `event_entity_name` varchar(150) NOT NULL,
+  `event_entity_name` varchar(150) NOT NULL DEFAULT '' COMMENT 'here i made the default value empty coz it''s not always filled',
   `time` time NOT NULL,
-  `event_appointment` varchar(30) DEFAULT NULL,
+  `event_appointment` varchar(30) DEFAULT '' COMMENT 'i''ll make it''s default value empty string "" coz it''s not always set',
   `subject` text NOT NULL,
   `event_date` date NOT NULL,
   `hall_id` int(11) NOT NULL,
-  `event_place` varchar(150) NOT NULL,
+  `event_place` varchar(150) NOT NULL DEFAULT '' COMMENT 'i''ll make it''s default value empty string "" coz it''s not always set',
   `event_insertion_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id_insert` int(11) NOT NULL,
   `event_edit_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `user_id_edit` int(11) NOT NULL DEFAULT '-1',
-  `directorate_id` int(11) NOT NULL,
+  `directorate_id` int(11) NOT NULL DEFAULT '2' COMMENT 'the default value of this column is 2 coz all the users are from the legislative affairs directorate, so i wan''t need to change the value by code later.',
   `event_status` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
@@ -147,12 +144,10 @@ CREATE TABLE `events` (
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`id`, `committee_id`, `event_entity_name`, `time`, `event_appointment`, `subject`, `event_date`, `hall_id`, `event_place`, `event_insertion_date`, `user_id_insert`, `event_edit_date`, `user_id_edit`, `directorate_id`, `event_status`) VALUES
-(819, 2, 'events', '10:16:00', '', '', '2018-11-15', 0, '', '2018-11-15 10:16:32', 30566, '0000-00-00 00:00:00', -1, 2, 0),
-(820, 2, 'لجنة مشتركة', '10:16:00', '', '', '2018-11-15', 0, '', '2018-11-15 10:16:50', 30566, '0000-00-00 00:00:00', -1, 2, 0),
-(821, 2, 'لجنة ذاتية', '10:17:00', '', 'لجنة ذاتية', '2018-11-15', 0, '', '2018-11-15 10:17:17', 30566, '0000-00-00 00:00:00', -1, 2, 0),
-(822, 10, '', '11:18:00', '', '', '2018-11-15', 0, '', '2018-11-15 11:18:25', 30566, '0000-00-00 00:00:00', -1, 2, 0),
-(823, 13, '', '15:05:00', '', '', '2018-11-15', 0, '', '2018-11-15 15:05:23', 30566, '0000-00-00 00:00:00', -1, 2, 0);
+INSERT INTO `events` (`id`, `event_entity_name`, `time`, `event_appointment`, `subject`, `event_date`, `hall_id`, `event_place`, `event_insertion_date`, `user_id_insert`, `event_edit_date`, `user_id_edit`, `directorate_id`, `event_status`) VALUES
+(1, '', '10:10:00', '', '', '2018-11-27', 0, '', '2018-11-27 10:10:07', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(2, '', '10:10:00', '', '', '2018-11-27', 0, '', '2018-11-27 10:10:56', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(3, '', '10:11:00', '', '', '2018-11-28', 3, '', '2018-11-27 10:11:51', 30566, '0000-00-00 00:00:00', -1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -176,6 +171,28 @@ INSERT INTO `event_entity_category` (`event_entity_category_id`, `event_entity_c
 (4, 'لجنة صداقة'),
 (5, 'مكتب دائم'),
 (6, 'مكتب تنفيذي');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event_event_entity`
+--
+
+CREATE TABLE `event_event_entity` (
+  `event_id` int(11) NOT NULL,
+  `event_entity_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='this table to store the events with the event entities related to them';
+
+--
+-- Dumping data for table `event_event_entity`
+--
+
+INSERT INTO `event_event_entity` (`event_id`, `event_entity_id`) VALUES
+(964, 10),
+(964, 38),
+(1, 20),
+(2, 15),
+(3, 20);
 
 -- --------------------------------------------------------
 
@@ -581,7 +598,7 @@ ALTER TABLE `backgrounds`
 -- AUTO_INCREMENT for table `committees`
 --
 ALTER TABLE `committees`
-  MODIFY `committee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `committee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `device_token`
@@ -593,7 +610,7 @@ ALTER TABLE `device_token`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=824;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `event_entity_category`
@@ -605,7 +622,7 @@ ALTER TABLE `event_entity_category`
 -- AUTO_INCREMENT for table `halls`
 --
 ALTER TABLE `halls`
-  MODIFY `hall_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `hall_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `pages`

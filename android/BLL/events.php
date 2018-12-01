@@ -7,11 +7,8 @@ class events extends my_db {
 
     //this function get all the events for all the committees
     function get_events() {
-        return $this->get_all_data("SELECT committees.committee_name, "
-                        . "events.event_entity_name, events.subject, events.event_date, "
-                        . "events.time FROM committees, events "
-                        . "WHERE committees.committee_id = events.committee_id "
-                        . "ORDER by events.event_date DESC, events.time DESC");
+        $query = "SELECT committees.committee_name, events.event_entity_name, events.subject, events.event_date, events.time FROM committees, events WHERE committees.committee_id = events.committee_id ORDER by events.event_date DESC, events.time DESC";
+        return $this->get_all_data($query);
     }
 
     //this function get all the events for a specific entity

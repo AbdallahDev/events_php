@@ -1,10 +1,12 @@
 <?php
 
-include_once '../BLL/committees.php';
-$committees = new committees();
-$committees_array = array();
-$rs_committees = $committees->committees_get();
-while ($row_committees = $rs_committees->fetch_assoc()) {
-    array_push($committees_array, $row_committees);
+//this file get all the entity categories for the phone app.
+
+include_once '../BLL/event_entity_category.php';
+$categories = new event_entity_category();
+$categories_array = array();
+$rs_categories = $categories->get_categories();
+while ($row_categories = $rs_categories->fetch_assoc()) {
+    array_push($categories_array, $row_categories);
 }
-echo json_encode($committees_array);
+echo json_encode($categories_array);

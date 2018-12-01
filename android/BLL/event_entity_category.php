@@ -7,7 +7,7 @@ include_once '../DAL/my_db.php';
 class event_entity_category extends my_db {
 
     //this function get all the entity categories
-    public function event_entity_category_get_all() {
+    public function get_categories() {
         return $this->get_all_data('SELECT * FROM `event_entity_category`');
     }
 

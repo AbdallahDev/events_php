@@ -1,4 +1,6 @@
 <?php
+//this file get all the events for all the entities or for a specific one.
+//and that for the phone app.
 
 include_once '../BLL/events.php';
 
@@ -10,7 +12,9 @@ $events_array = array();
 //wants to view all the events for all the committees
 if ($committee_id == 0) {
     $rs_events_android = $events->get_events();
-} else {
+}
+//here this means the user wants to view the events related to a specific entity.
+else {
     $rs_events_android = $events->entity_events_get($committee_id);
 }
 while ($row_events_android = $rs_events_android->fetch_assoc()) {

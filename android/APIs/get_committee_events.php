@@ -1,5 +1,7 @@
 <?php
 
+//this file to get all the events for a specific entity. 
+
 include_once '../BLL/events.php';
 
 $events = new events();

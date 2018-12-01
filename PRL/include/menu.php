@@ -158,7 +158,7 @@ else {
                             <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-hover-white w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
                             <a href="home.php" style="float: right" class="w3-bar-item w3-button w3-teal"><i class="fa fa-home w3-margin-right"></i>الرئيسية</a>
                             <a href="events_show.php" target="_blank" style="float: right" class="w3-bar-item w3-button w3-hide-small w3-hover-white">شاشة النشاطات</a>
-                            <a href="events_preview_current_future.php" style="float: right" class="w3-bar-item w3-button w3-hide-small w3-hover-white">نشاطات اللجان</a>
+                            <a href="events_preview_current_future.php" style="float: right" class="w3-bar-item w3-button w3-hide-small w3-hover-white">النشاطات</a>
                             <a href="users.php" style="float: right" class="w3-bar-item w3-button w3-hide-small w3-hover-white">معلومات المستخدم</a>
                             <a href="table_live_design_view.php" style="float: right" class="w3-bar-item w3-button w3-hide-small w3-hover-white">تصميم الجدول</a>
                             <a href="logout_page.php" style="float: right" class="w3-bar-item w3-button w3-hide-small w3-hover-white">تسجيل الخروج</a>
@@ -166,7 +166,7 @@ else {
                         <!-- Navbar on small screens -->
                         <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium">
                             <a href="events_show.php" target="_blank" style="text-align: right" class="w3-bar-item w3-button">شاشة النشاطات</a>
-                            <a href="events_preview_current_future.php" style="text-align: right" class="w3-bar-item w3-button">نشاطات اللجان</a>
+                            <a href="events_preview_current_future.php" style="text-align: right" class="w3-bar-item w3-button">النشاطات</a>
                             <a href="users.php" style="text-align: right" class="w3-bar-item w3-button">معلومات المستخدم</a>
                             <a href="table_live_design_view.php" style="text-align: right" class="w3-bar-item w3-button">تصميم الجدول</a>
                             <a href="logout_page.php" style="text-align: right" class="w3-bar-item w3-button">تسجيل الخروج</a>

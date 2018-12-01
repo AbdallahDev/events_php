@@ -7,7 +7,7 @@ include_once '../BLL/events.php';
 $events = new events();
 
 $events_array = array();
-$rs_events_android = $events->entity_events_get($_GET['committeeId']);
+$rs_events_android = $events->entity_events_get($_GET['entityId']);
 while ($row_events_android = $rs_events_android->fetch_assoc()) {
     array_push($events_array, $row_events_android);
 }

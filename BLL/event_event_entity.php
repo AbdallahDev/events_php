@@ -3,6 +3,7 @@
 include_once '../DAL/my_db.php';
 
 //this class to manage the event_event_entity table in the database
+//this for the web app
 class event_event_entity extends my_db {
 
     function event_event_entity_insert($event_id, $event_entity_id) {

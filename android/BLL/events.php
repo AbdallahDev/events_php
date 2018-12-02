@@ -6,7 +6,7 @@ include_once '../DAL/my_db.php';
 class events extends my_db {
 
     //this function get all the events for all the committees
-    function get_events() {
+    function get_all_events() {
         $query = "SELECT events.event_entity_name, events.subject, events.event_date, events.time, events.id FROM events ORDER by events.event_date DESC, events.time DESC";
         return $this->get_all_data($query);
     }

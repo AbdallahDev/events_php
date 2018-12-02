@@ -5,7 +5,6 @@
 
 include_once '../BLL/events.php';
 
-$committee_id = $_GET['committeeId'];
 $events = new events();
 $events_array = array();
 

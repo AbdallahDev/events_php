@@ -18,4 +18,12 @@ class committees extends my_db {
                         . "ORDER BY `committees`.`committee_rank`  ASC");
     }
 
+    //get the entity name depened on the entity id
+    function get_entity_name($entity_id) {
+        $query = "SELECT committee_name FROM `committees` WHERE committee_id = ?";
+        $datatypes = "i";
+        $vars = array(&$entity_id);
+        return $this->get_data($query, $datatypes, $vars);
+    }
+
 }

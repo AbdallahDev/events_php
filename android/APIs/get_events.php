@@ -1,7 +1,8 @@
 <?php
 
 //this file get all the events for all the categories and entities, 
-//or for a specific category or for a specific entity, and that depened on the provided category id and entity id. 
+//or for a specific category or for a specific entity, and that depened on the 
+//provided category id and entity id. 
 //and that for the phone app.
 
 include_once '../BLL/events.php';
@@ -9,6 +10,8 @@ include_once '../BLL/event_event_entity.php';
 include_once '../BLL/committees.php';
 
 //variable declarations
+$category_id_GET = $_GET['categoryId'];
+$entity_id_GET = $_GET['entityId'];
 $events = new events();
 $events_array = array();
 $entity_id_obj = new event_event_entity();

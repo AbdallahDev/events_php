@@ -35,7 +35,8 @@ while ($row_events_android = $rs_events_android->fetch_assoc()) {
         $entity_name = $entity_name_obj_row['committee_name'];
 
         //here i add the entity_name element to the events row, so it can appear 
-        //in the json result
+        //in the json result, coz some events related to entities without having 
+        //a specific entity name in the event_entity_name column
         $row_events_android["entity_name"] = $entity_name;
     }
     array_push($events_array, $row_events_android);

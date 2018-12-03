@@ -10,7 +10,9 @@ include_once '../BLL/event_event_entity.php';
 include_once '../BLL/committees.php';
 
 //variable declarations
+//this variable store the category id to get the events for the selected category
 $category_id_GET = $_GET['categoryId'];
+//this variable store the entity id to get the events for the selected entity
 $entity_id_GET = $_GET['entityId'];
 $events = new events();
 $events_array = array();
@@ -20,7 +22,7 @@ $entity_id = 0;
 $entity_name_obj = new committees();
 $entity_name = "";
 
-//here i get all the events in the db for all the intities
+//here i get all the events in the db for all the categories and intities
 $rs_events_android = $events->get_all_events();
 
 //i'll loop over the events result

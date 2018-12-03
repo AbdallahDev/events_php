@@ -1,6 +1,8 @@
 <?php
 
-//this file get all the events for all the entities for the phone app.
+//this file get all the events for all the categories and entities, 
+//or for a specific category or for a specific entity, and that depened on the provided category id and entity id. 
+//and that for the phone app.
 
 include_once '../BLL/events.php';
 include_once '../BLL/event_event_entity.php';

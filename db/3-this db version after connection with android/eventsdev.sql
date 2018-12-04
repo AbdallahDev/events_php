@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2018 at 09:24 AM
+-- Generation Time: Dec 04, 2018 at 11:42 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -115,7 +115,10 @@ INSERT INTO `device_token` (`device_token_id`, `device_token`) VALUES
 (17, 'cTN0UUwoH0c:APA91bGQBJS8zcFoMFCiEnj5_qsgawaIRbS0yKamBw2SJ5KBWlmRHxVob3FEBzezr9f9dlNqoE7jPC3PQzmsE7hvG2QAgiPCfaUMGHnk3NabeeY9we0FpUdPYEKFzmaH78KhqjCugJn7'),
 (18, 'fv95HohJHWg:APA91bGg7Cd5xlvQ4p2YqBagEfbJSnmjytsmtW9-JHwsjup-3gipV8Zva_x44zM_eGD4Ohy-y5bU-J2YDqeTvthkbkg6bZ75Ejafui639mwlTCXvh1jmORdBHWWiLC7JEqtzVEb6Gtgn'),
 (19, 'fmq09LCh4mI:APA91bEye7ApDh6xS7IYHcGha4a2zyxnV-81Mafht2SpvgNPvqzvgK8DiNk8DeGRcl0Kj4I2Z2c7mhHbmsZM6MSAwepzhZXHN1hMTIRFzybxAeOzm3TafhOFGWSXyomvGvmc1eh9wLqk'),
-(20, 'fG43ppv2nSA:APA91bH8E4dhlbakgtS0DngFM-LAPFY9-jbVD-2gO2N2m7L0oLdTfQ_AxLYd1VWtG9b1yuxeMjvZQExOv3SUjQliNYq9Uqg04DStGT8mRqRfzH66220F7_6ojSz7FQg_1yn0IcYPJnjQ');
+(20, 'fG43ppv2nSA:APA91bH8E4dhlbakgtS0DngFM-LAPFY9-jbVD-2gO2N2m7L0oLdTfQ_AxLYd1VWtG9b1yuxeMjvZQExOv3SUjQliNYq9Uqg04DStGT8mRqRfzH66220F7_6ojSz7FQg_1yn0IcYPJnjQ'),
+(21, 'ej63QLiSok0:APA91bHPDnxhVyJltFzFy7hTKcgOmJvbZNurkW58gVmKioQJ6lKuK5JF_n4qjqmLf81lxbqsrv04qTJ6m2-u9QBAJRxlaFhbLGkauyrCAv4T58MBVpwwEO3oUn9uiK9aeaVeLkpzG6Ef'),
+(22, 'c1FtHlLfN7g:APA91bGE9sqSXNM5myqBfr1V_wJC6dkAGKOUIp8n2prK3KkhH1m6nn4sURcKd0NMRcOAWwjBd_xO89bcPUWLeFfsY2NA0NPdphEHWPzNNFrl-H0Oeu6yQT2qVgqUksMh8GpnlFhvsbgr'),
+(23, 'dlbgwq2cu0g:APA91bElGbn6KmdoEtN212dHMawO6JXdOpxRGOGUD5TvmT18dEzxQR17axNFQTwSd0YHYhR62jtI4r3aWjxCCF9aU2fu3Xt5xyIOIXTg3HqMllVGGFLPDs7EMlScVuugwkBpHv4c2ERx');
 
 -- --------------------------------------------------------
 
@@ -145,9 +148,17 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `event_entity_name`, `time`, `event_appointment`, `subject`, `event_date`, `hall_id`, `event_place`, `event_insertion_date`, `user_id_insert`, `event_edit_date`, `user_id_edit`, `directorate_id`, `event_status`) VALUES
-(1, '', '10:10:00', '', '', '2018-11-27', 0, '', '2018-11-27 10:10:07', 30566, '0000-00-00 00:00:00', -1, 2, 0),
-(2, '', '10:10:00', '', '', '2018-11-27', 0, '', '2018-11-27 10:10:56', 30566, '0000-00-00 00:00:00', -1, 2, 0),
-(3, '', '10:11:00', '', '', '2018-11-28', 3, '', '2018-11-27 10:11:51', 30566, '0000-00-00 00:00:00', -1, 2, 0);
+(47, '', '13:19:00', '', 'لجنة دائمة اللجنة القانونية', '2018-12-03', 0, '', '2018-12-03 13:19:22', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(48, '', '13:19:00', '', 'كتلة - كتلة الوفاء والعهد', '2018-12-03', 0, '', '2018-12-03 13:19:50', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(49, 'اجتماع مشترك', '13:20:00', '', 'اجتماع مشترك اللجنة المالية وكتلة التجديد', '2018-12-03', 0, '', '2018-12-03 13:20:51', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(50, '', '13:22:00', '', 'اللجنة القانونية اجتماع 2', '2018-12-03', 0, '', '2018-12-03 13:22:41', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(51, '', '14:02:00', '', 'لجنة الاخوة الاردنية السعودية', '2018-12-03', 0, '', '2018-12-03 14:02:14', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(52, '', '17:44:00', '', 'تجتمع لجنة الاخوة الاردنية الجزائرية اليوم بعد الجلسة.', '2018-12-03', 8, '', '2018-12-03 17:48:21', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(53, 'لجنة الشؤون الخارجية مع لجنة الاخوة الاردنية السعودية', '17:49:00', '', 'لجنة الشؤون الخارجية مع لجنة الاخوة الاردنية السعودية', '2018-12-04', 0, '', '2018-12-03 17:50:40', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(54, '', '13:51:00', '', 'اجتماع لجنة الاخورة الاردنية اللبنانية', '2018-12-04', 3, '', '2018-12-03 17:52:27', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(55, '', '11:30:00', '', 'تجتمع كتلة العدالة بعد الغد مع رئيس هيئة الاركان', '2018-12-05', 0, 'هيئة الاركان', '2018-12-04 11:31:13', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(56, 'اجتماع الكتل', '12:35:00', '', 'تجمع الكتلة لمناقشة النظام الداخلي', '2018-12-06', 3, '', '2018-12-04 12:36:33', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(57, '', '12:41:00', '', 'اجتماع لجنة الاخوة الاردنية الاماراتية', '2018-12-04', 6, '', '2018-12-04 12:41:27', 30566, '0000-00-00 00:00:00', -1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -188,11 +199,21 @@ CREATE TABLE `event_event_entity` (
 --
 
 INSERT INTO `event_event_entity` (`event_id`, `event_entity_id`) VALUES
-(964, 10),
-(964, 38),
-(1, 20),
-(2, 15),
-(3, 20);
+(47, 10),
+(48, 24),
+(49, 38),
+(49, 28),
+(50, 10),
+(51, 20),
+(52, 21),
+(53, 13),
+(53, 20),
+(54, 23),
+(55, 47),
+(56, 47),
+(56, 28),
+(56, 24),
+(57, 49);
 
 -- --------------------------------------------------------
 
@@ -604,13 +625,13 @@ ALTER TABLE `committees`
 -- AUTO_INCREMENT for table `device_token`
 --
 ALTER TABLE `device_token`
-  MODIFY `device_token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `device_token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `event_entity_category`
@@ -622,7 +643,7 @@ ALTER TABLE `event_entity_category`
 -- AUTO_INCREMENT for table `halls`
 --
 ALTER TABLE `halls`
-  MODIFY `hall_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `hall_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `pages`

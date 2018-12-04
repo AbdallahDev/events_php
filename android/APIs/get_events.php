@@ -43,8 +43,10 @@ if ($category_id_GET == 0) {
         $event_id = $row_events_android["id"];
 
         //here i'll check if the event_entity_name column is empty to get the 
-        //entity name from the table event_event_entity for the entity related to the event
+        //entity name from the table event_event_entity for the entity related 
+        //to the event
         if (empty($row_events_android["event_entity_name"])) {
+
             //here i get the entity related to the event to get based on it's id 
             //it's name from the committees table
             $entity_id_obj_rs = $entity_id_obj->get_entity_id($event_id);

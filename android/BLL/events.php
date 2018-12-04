@@ -19,4 +19,12 @@ class events extends my_db {
         return $this->get_data($query, $datatypes, $vars);
     }
 
+    //this function get the details for the specified event
+    function get_event_by_id($event_id) {
+        $query = "SELECT events.id, events.event_entity_name, events.subject, events.event_date, events.time FROM events WHERE events.id = ? ORDER by events.event_date DESC, events.time DESC";
+        $datatypes = 'i';
+        $vars = array(&$event_id);
+        return $this->get_data($query, $datatypes, $vars);
+    }
+
 }

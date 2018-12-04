@@ -188,7 +188,7 @@
                     when there is specific time for the event-->
                     <div class="w3-section" id="time_div">
                         <label>وقت النشاط</label>
-                        <input type="time" id="time" name="time" value="<?php echo date('H:i') ?>" class="w3-input w3-border right-align-text">
+                        <input type="time" id="time" name="time" value="<?php echo date('H:i', time() + 86400) ?>" class="w3-input w3-border right-align-text">
                     </div>
 
                     <!--this element for the event entity appontiment, 
@@ -200,7 +200,12 @@
                     <div class="w3-section">
                         <label>تاريخ النشاط</label>
                         <!--this is event date, when the event will be hold in-->
-                        <input type="date" id="event_date" name="event_date" value="<?php echo date('Y-m-d'); ?>" class="w3-input w3-border right-dir right-align-text right-float">
+                        <input type="date" id="event_date" name="event_date" value="<?php
+                        //here i print out the current date plus 1 day, coz most 
+                        //of the events will be in the next day so the user 
+                        //dosen't have to chose next day.
+                        echo date('Y-m-d', time() + 24 * 60 * 60);
+                        ?>" class="w3-input w3-border right-dir right-align-text right-float">
                     </div>
                     <br>
                     <div class="w3-section">

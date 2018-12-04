@@ -33,9 +33,12 @@ $entity_ids = array();
 //here if the categoryId is 0 that means the user want to get all the events
 //coz there is no category and entity chosen
 if ($category_id_GET == 0) {
+
     //here i get all the events in the db for all the categories and intities
     $rs_events_android = $events->get_all_events();
+
     while ($row_events_android = $rs_events_android->fetch_assoc()) {
+
         //here i saved the event id to get all the entities related to it
         $event_id = $row_events_android["id"];
 
@@ -48,15 +51,10 @@ if ($category_id_GET == 0) {
             $entity_id_obj_row = $entity_id_obj_rs->fetch_assoc();
             $entity_id = $entity_id_obj_row['event_entity_id'];
 
-            //here i get the entity name from the committees table based on it's id
-            $entity_name_obj_rs = $entity_name_obj->get_entity_name($entity_id);
-            $entity_name_obj_row = $entity_name_obj_rs->fetch_assoc();
-            $entity_name = $entity_name_obj_row['committee_name'];
-
             //here i add the entity_name element to the events row, so it can appear 
-            //in the json result, coz some events related to entities without having 
+            //in the json result, coz some events related to the entities without having 
             //a specific entity name in the event_entity_name column
-            $row_events_android["entity_name"] = $entity_name;
+            $row_events_android["entity_name"] = get_entity_name($entity_id);
         }
         array_push($events_array, $row_events_android);
     }
@@ -83,15 +81,11 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
             //entity name from the table event_event_entity for the entity related 
             //to the event
             if (empty($row_event_entity["event_entity_name"])) {
-                //here i get the entity name from the committees table based on it's id
-                $entity_name_obj_rs = $entity_name_obj->get_entity_name($entity_id);
-                $entity_name_obj_row = $entity_name_obj_rs->fetch_assoc();
-                $entity_name = $entity_name_obj_row['committee_name'];
 
                 //here i add the entity_name element to the events row, so it can appear 
                 //in the json result, coz some events related to entities without having 
                 //a specific entity name in the event_entity_name column
-                $row_event_entity["entity_name"] = $entity_name;
+                $row_event_entity["entity_name"] = get_entity_name($entity_id);
             }
             array_push($events_array, $row_event_entity);
         }
@@ -117,17 +111,26 @@ else {
         //to the event
         if (empty($row_event_entity["event_entity_name"])) {
 
-            //here i get the entity name from the committees table based on it's id
-            $entity_name_obj_rs = $entity_name_obj->get_entity_name($entity_id);
-            $entity_name_obj_row = $entity_name_obj_rs->fetch_assoc();
-            $entity_name = $entity_name_obj_row['committee_name'];
-
-            //here i add the entity_name element to the events row, so it can appear 
             //in the json result, coz some events related to entities without having 
             //a specific entity name in the event_entity_name column
-            $row_event_entity["entity_name"] = $entity_name;
+            $row_event_entity["entity_name"] = get_entity_name($entity_id);
         }
         array_push($events_array, $row_event_entity);
     }
 }
+
+//this function return the name for the specified entity
+function get_entity_name($entity_id) {
+
+    $entity_name_obj = new committees();
+
+    //here i get the entity name from the committees table based on it's id
+    $entity_name_obj_rs = $entity_name_obj->get_entity_name($entity_id);
+    $entity_name_obj_row = $entity_name_obj_rs->fetch_assoc();
+    $entity_name = $entity_name_obj_row['committee_name'];
+
+    return $entity_name;
+}
+
+//this print the json result of the event details
 echo json_encode($events_array);

@@ -1,6 +1,6 @@
 <?php
 
-//this file get all the entities that related to a specific entities category.
+//this file get all the entities (committees) that related to a specific entities category.
 
 //this var store the entities category that provided by the url
 $category = $_GET['category'];

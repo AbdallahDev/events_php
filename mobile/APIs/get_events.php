@@ -1,5 +1,7 @@
 <?php
 
+//i think this is the main api that gets the events.
+
 //this file get all the events for all the categories and entities, 
 //or for a specific category or for a specific entity, and that depened on the 
 //provided category id and entity id. 

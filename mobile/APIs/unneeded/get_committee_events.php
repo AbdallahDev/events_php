@@ -1,5 +1,7 @@
 <?php
 
+//i think i don't need this file.
+
 //this file to get all the events for a specific entity for the app.
 
 include_once '../BLL/events.php';

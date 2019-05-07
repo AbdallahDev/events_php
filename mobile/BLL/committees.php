@@ -13,7 +13,7 @@ class committees extends my_db {
     //here i'll get the committee_id and the committee_name for all the 
     //committees in the database
     function committees_get() {
-        return $this->get_all_data("SELECT committee_id, committee_name FROM `committees` WHERE `committee_name` != '' ORDER BY `committees`.`committee_rank` ASC");
+        return $this->get_all_data("SELECT committee_id, committee_name, event_entity_category_id, committee_rank FROM `committees` WHERE `committee_name` != '' ORDER BY `committees`.`committee_rank` ASC");
     }
 
     //get the entity name depened on the entity id

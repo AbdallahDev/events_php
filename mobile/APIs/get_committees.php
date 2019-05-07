@@ -1,5 +1,7 @@
 <?php
 
+//this file will get the entities (eg. committees) from the phpmyadmin db
+//i'll send them to mobile app to be saved in the local db.
 //this file get all the entities (committees) that related to a specific entities category.
 
 //this var store the entities category that provided by the url

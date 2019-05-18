@@ -1,6 +1,5 @@
 <?php
-//solver branch conflict.
-//----------------------
+
 //i think this is the main api that gets the events.
 //
 //I'll make some changes in this API because now I want to get all the events 

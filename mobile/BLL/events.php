@@ -1,5 +1,7 @@
 <?php
 
+//This file is for the mobile app usage.
+
 include_once '../DAL/my_db.php';
 
 //this events class for the android events

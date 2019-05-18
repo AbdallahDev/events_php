@@ -1,5 +1,7 @@
 <?php
 
+//This file is for the mobile app usage.
+
 include_once '../DAL/my_db.php';
 
 //this class to manage the event_entity_category table in the database for the 

@@ -14,18 +14,23 @@ include_once '../BLL/event_entity_category.php';
 //variable declarations
 $events = new events();
 $events_array = array();
+//This variable will store the category id, I'll initialize it with 0 because 
+//it's the default value.
+$category_id_GET = 0;
+//This variable will store the entity id, I'll initialize it with 0 because 
+//it's the default value.
+$entity_id_GET = 0;
 $entity_id_obj = new event_event_entity();
 $event_id = 0;
 $entity_id = 0;
 $entity_name_obj = new committees();
 $entity_name = "";
-//this variable store the category id from the url to get the events for the 
-//selected category
-$category_id_GET = $_GET['categoryId'];
-//This variable store the entity id from the URL to get the events for the 
-//selected entity, if I call this API I should set it in the URL or the API 
-//won't work properly.
-$entity_id_GET = $_GET['entityId'];
+//I'll check if the value is set in the URL.
+if (isset($_GET['categoryId']))
+    $category_id_GET = $_GET['categoryId'];
+//I'll check if the value is set in the URL.
+if (isset($_GET['entityId']))
+    $entity_id_GET = $_GET['entityId'];
 $categories_obj = new event_entity_category();
 $entity_ids = array();
 

@@ -1,7 +1,6 @@
 <?php
 
 //i think this is the main api that gets the events.
-
 //this file get all the events for all the categories and entities, 
 //or for a specific category or for a specific entity, and that depened on the 
 //provided category id and entity id. 
@@ -23,8 +22,9 @@ $entity_name = "";
 //this variable store the category id from the url to get the events for the 
 //selected category
 $category_id_GET = $_GET['categoryId'];
-//this variable store the entity id from the url to get the events for the 
-//selected entity
+//This variable store the entity id from the URL to get the events for the 
+//selected entity, if I call this API I should set it in the URL or the API 
+//won't work properly.
 $entity_id_GET = $_GET['entityId'];
 $categories_obj = new event_entity_category();
 $entity_ids = array();

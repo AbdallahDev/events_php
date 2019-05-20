@@ -1,11 +1,6 @@
 <?php
 
 //i think this is the main api that gets the events.
-//
-//I'll make some changes in this API because now I want to get all the events 
-//with most of the data related to them from the phpmyadmin DB 
-//like (id, event_entity_name, time, event_appointment....) because I want 
-//to send them to the mobile app to be stored in the local DB.
 
 //this file get all the events for all the categories and entities, 
 //or for a specific category or for a specific entity, and that depened on the 

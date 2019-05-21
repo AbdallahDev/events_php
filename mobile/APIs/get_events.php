@@ -1,12 +1,6 @@
 <?php
 
 //i think this is the main api that gets the events.
-//
-//I'll make some changes in this API because now I want to get all the events 
-//with most of the data related to them from the phpmyadmin DB 
-//like (id, event_entity_name, time, event_appointment....) because I want 
-//to send them to the mobile app to be stored in the local DB.
-
 //this file get all the events for all the categories and entities, 
 //or for a specific category or for a specific entity, and that depened on the 
 //provided category id and entity id. 
@@ -20,17 +14,23 @@ include_once '../BLL/event_entity_category.php';
 //variable declarations
 $events = new events();
 $events_array = array();
+//This variable will store the category id, I'll initialize it with 0 because 
+//it's the default value.
+$category_id_GET = 0;
+//This variable will store the entity id, I'll initialize it with 0 because 
+//it's the default value.
+$entity_id_GET = 0;
 $entity_id_obj = new event_event_entity();
 $event_id = 0;
 $entity_id = 0;
 $entity_name_obj = new committees();
 $entity_name = "";
-//this variable store the category id from the url to get the events for the 
-//selected category
-$category_id_GET = $_GET['categoryId'];
-//this variable store the entity id from the url to get the events for the 
-//selected entity
-$entity_id_GET = $_GET['entityId'];
+//I'll check if the value is set in the URL.
+if (isset($_GET['categoryId']))
+    $category_id_GET = $_GET['categoryId'];
+//I'll check if the value is set in the URL.
+if (isset($_GET['entityId']))
+    $entity_id_GET = $_GET['entityId'];
 $categories_obj = new event_entity_category();
 $entity_ids = array();
 

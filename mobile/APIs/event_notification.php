@@ -29,7 +29,7 @@ if (empty(trim($event_entity_name))) {
 //console to send push notification
 //$registrationIds = ;
 define('API_ACCESS_KEY'
-        , 'AAAAysijQG4:APA91bEVna5UC6cvLu8zFogm5m2F0GMCgK7LQhyaUpPuS840I6nCKIeytCtlvssjB6Vhsahc1cVZBnhtR73ZYD0lsa8urcdoqwc8ssXmwY-hJdFZgkV9UYIjGgxPL9yACi7FWBP0LOTk');
+        , 'AAAAWbyrjRs:APA91bHk8ZzsFCwntw6FTGjIFfrsA4xPOxb1hDi0HlVUTyZw0rNmrVdjcSj7L_-ah7BKA9ZM2W6yfyaaLSjxgJp3LBcmI_SgUIcOjOKeUWlTm97VPLEWMSLx0HNr03gJc-la8BzocE3U');
 
 //bellow i'll select all the device tokens in the db to send them notifications
 

@@ -61,10 +61,18 @@ function send_notification($notification_title, $notification_subject
         'time' => $notification_time
     );
 
+    //I'll send this notification with the message because if the mobile app is 
+    //terminated the data will be lost, so, in that case, I'll show this message.
+    $notification = array(
+        'title' => $notification_title,
+        'body' => $notification_subject
+    );
+
     $fields = array
         (
         'to' => $device_token,
-        'data' => $data
+        'data' => $data,
+        'notification' => $notification
     );
 
     $headers = array

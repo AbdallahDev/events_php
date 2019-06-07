@@ -29,7 +29,7 @@ if (empty(trim($event_entity_name))) {
 //console to send push notification
 //$registrationIds = ;
 define('API_ACCESS_KEY'
-        , 'AAAAysijQG4:APA91bEVna5UC6cvLu8zFogm5m2F0GMCgK7LQhyaUpPuS840I6nCKIeytCtlvssjB6Vhsahc1cVZBnhtR73ZYD0lsa8urcdoqwc8ssXmwY-hJdFZgkV9UYIjGgxPL9yACi7FWBP0LOTk');
+        , 'AAAAU17sMTY:APA91bEN1tQzD7EFvVt-np4eBDJ_-vh6k_uGsKtr4aPBAHuaoBKblywO-BjlhA_2xuShgbx8s6ARgrexac5lxuEjfl33I823nhtT7vTDXjbm_zSsQP2Pp8Gcs_5XnOBuf4zNQ3DLAN_Q');
 
 //bellow i'll select all the device tokens in the db to send them notifications
 
@@ -61,10 +61,18 @@ function send_notification($notification_title, $notification_subject
         'time' => $notification_time
     );
 
+    //I'll send this notification with the message because if the mobile app is 
+    //terminated the data will be lost, so, in that case, I'll show this message.
+    $notification = array(
+        'title' => $notification_title,
+        'body' => $notification_subject
+    );
+
     $fields = array
         (
         'to' => $device_token,
-        'data' => $data
+        'data' => $data,
+        'notification' => $notification
     );
 
     $headers = array

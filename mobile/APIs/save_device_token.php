@@ -1,6 +1,6 @@
 <?php
 
-/* this file will be called from the mobile app to store the device token 
+/* this file will be called from the android app to store the device token 
   in the db */
 
 include_once '../BLL/device_token.php';

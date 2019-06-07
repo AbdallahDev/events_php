@@ -1,5 +1,7 @@
 <?php
 
+//This file related to mobile app APIs.
+
 include 'my_con.php';
 
 class my_db extends my_con {

@@ -44,6 +44,8 @@ if ($category_id_GET == 0) {
     //here i get all the events in the db for all the categories and intities
     $rs_events_android = $events->get_all_events();
 
+    //Here I'll loop over the events to get based on their IDs the entities that 
+    //belong to them.
     while ($row_events_android = $rs_events_android->fetch_assoc()) {
 
         //here i saved the event id to get all the entities related to it
@@ -54,8 +56,8 @@ if ($category_id_GET == 0) {
         //to the event
         if (empty($row_events_android["event_entity_name"])) {
 
-            //here i get the entity related to the event to get based on it's id 
-            //it's name from the committees table
+            //here i get the entity id related to the event from event_event_entity 
+            //table to get based on it it's name from the committees table
             $entity_id_obj_rs = $entity_id_obj->get_entity_id($event_id);
             $entity_id_obj_row = $entity_id_obj_rs->fetch_assoc();
             $entity_id = $entity_id_obj_row['event_entity_id'];

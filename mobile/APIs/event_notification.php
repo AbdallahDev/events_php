@@ -65,7 +65,8 @@ function send_notification($notification_title, $notification_subject
     //terminated the data will be lost, so, in that case, I'll show this message.
     $notification = array(
         'title' => $notification_title,
-        'body' => $notification_subject
+        'body' => $notification_subject,
+        'sound' => 'default'
     );
 
     $fields = array

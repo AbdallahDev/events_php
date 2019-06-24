@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2019 at 10:41 AM
+-- Generation Time: Jun 24, 2019 at 09:35 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -77,7 +77,7 @@ INSERT INTO `committees` (`committee_id`, `committee_name`, `event_entity_catego
 (17, 'لجنة الاقتصاد والاستثمار', 1, 3, 2),
 (19, 'لجنة السياحة والاثار', 1, 14, 2),
 (20, 'لجنة الاخوة الاردنية السعودية', 3, 1, 3),
-(21, 'لجنة الاخورة الاردنية الجزائرية', 3, 1, 3),
+(21, 'لجنة الاخوة الاردنية الجزائرية', 3, 1, 3),
 (22, 'لجنة الاخوة الاردنية القطرية', 3, 1, 3),
 (23, 'لجنة الاخوة البرلمانية الاردنية اللبنانية', 3, 1, 3),
 (24, 'كتلة الوفاء والعهد', 2, 1, 4),
@@ -117,13 +117,11 @@ CREATE TABLE `device_token` (
 --
 
 INSERT INTO `device_token` (`device_token_id`, `device_token`) VALUES
-(17, 'cTN0UUwoH0c:APA91bGQBJS8zcFoMFCiEnj5_qsgawaIRbS0yKamBw2SJ5KBWlmRHxVob3FEBzezr9f9dlNqoE7jPC3PQzmsE7hvG2QAgiPCfaUMGHnk3NabeeY9we0FpUdPYEKFzmaH78KhqjCugJn7'),
-(18, 'fv95HohJHWg:APA91bGg7Cd5xlvQ4p2YqBagEfbJSnmjytsmtW9-JHwsjup-3gipV8Zva_x44zM_eGD4Ohy-y5bU-J2YDqeTvthkbkg6bZ75Ejafui639mwlTCXvh1jmORdBHWWiLC7JEqtzVEb6Gtgn'),
-(19, 'fmq09LCh4mI:APA91bEye7ApDh6xS7IYHcGha4a2zyxnV-81Mafht2SpvgNPvqzvgK8DiNk8DeGRcl0Kj4I2Z2c7mhHbmsZM6MSAwepzhZXHN1hMTIRFzybxAeOzm3TafhOFGWSXyomvGvmc1eh9wLqk'),
-(20, 'fG43ppv2nSA:APA91bH8E4dhlbakgtS0DngFM-LAPFY9-jbVD-2gO2N2m7L0oLdTfQ_AxLYd1VWtG9b1yuxeMjvZQExOv3SUjQliNYq9Uqg04DStGT8mRqRfzH66220F7_6ojSz7FQg_1yn0IcYPJnjQ'),
-(21, 'ej63QLiSok0:APA91bHPDnxhVyJltFzFy7hTKcgOmJvbZNurkW58gVmKioQJ6lKuK5JF_n4qjqmLf81lxbqsrv04qTJ6m2-u9QBAJRxlaFhbLGkauyrCAv4T58MBVpwwEO3oUn9uiK9aeaVeLkpzG6Ef'),
-(22, 'c1FtHlLfN7g:APA91bGE9sqSXNM5myqBfr1V_wJC6dkAGKOUIp8n2prK3KkhH1m6nn4sURcKd0NMRcOAWwjBd_xO89bcPUWLeFfsY2NA0NPdphEHWPzNNFrl-H0Oeu6yQT2qVgqUksMh8GpnlFhvsbgr'),
-(23, 'dlbgwq2cu0g:APA91bElGbn6KmdoEtN212dHMawO6JXdOpxRGOGUD5TvmT18dEzxQR17axNFQTwSd0YHYhR62jtI4r3aWjxCCF9aU2fu3Xt5xyIOIXTg3HqMllVGGFLPDs7EMlScVuugwkBpHv4c2ERx');
+(148, 'cP9Sx3BsSqo:APA91bF-8GrrK4s3VaKa-LsfZGjxTcSxR88o88AH93VNkl15FQi4betb1wIo0tDG3nCBxet6dwCIrQtvfTubpwQR5t_zQoeY3foIOGFwzpRiDwVa-HZCg12qQCC3zOahf8cGIZHlKDSc'),
+(151, 'cW0EFnelt7k:APA91bGqUanQIQOtfX2u8kpkctrRJWKtodRZ4oD-NrakQmJrPw4JjnpnnEP3y1qGIfdec34f-v4RRo8cdG-_V_SfSb6kEcHSrXzSx3OtY_wzRpfPCELqnhM2SakTu2ru7y1DV-qwxCl_'),
+(152, 'eoA6CIazUTw:APA91bHQMkLuLQg00-578BfPmN6Fzyrx7YQeZhA8iGbJQaUo7uPd6PfX1VtsfyBNGEe4IowvJnqgWdkfyAXUYrkFYqlTuwd-GKSjiPJP_hHYPtBaBn7J5lRmA5gIsMzB8QQ84hPIuPoi'),
+(153, 'cqwORlkgFkI:APA91bH16Wvei-ykyFwPZxlE-oK5ofZgVRC4DprvezvC7oehgt2Tsa2SxX3xlqDV_xwFPedk3mJHWofoFwrGJMNY05r8SYdQvLhQQsBBM-4STtxOyVNl1WHaH63Id4yq5qDAg6ZXEc18'),
+(154, 'efgFeub6nb0:APA91bHOKRyBCGmp0BW9Fs3uY3o9-UmozlEtpvrA3BOaTz6RER__CQROmv-yU3NUhRZ7fIwRaj6VVYZH2c7rgRLWKSlJhgUEhSxYl5pe7LL6xo7hplbuC1spfeje2DxlW2yJHfkfRcbh');
 
 -- --------------------------------------------------------
 
@@ -153,13 +151,31 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `event_entity_name`, `time`, `event_appointment`, `subject`, `event_date`, `hall_id`, `event_place`, `event_insertion_date`, `user_id_insert`, `event_edit_date`, `user_id_edit`, `directorate_id`, `event_status`) VALUES
-(47, '', '13:19:00', '', 'لجنة دائمة اللجنة القانونية', '2018-12-03', 0, '', '2018-12-03 13:19:22', 30566, '0000-00-00 00:00:00', -1, 2, 0),
-(48, '', '13:19:00', '', 'كتلة - كتلة الوفاء والعهد', '2018-12-03', 0, '', '2018-12-03 13:19:50', 30566, '0000-00-00 00:00:00', -1, 2, 0),
-(53, 'لجنة الشؤون الخارجية مع لجنة الاخوة الاردنية السعودية', '17:49:00', '', 'لجنة الشؤون الخارجية مع لجنة الاخوة الاردنية السعودية', '2018-12-04', 0, '', '2018-12-03 17:50:40', 30566, '0000-00-00 00:00:00', -1, 2, 0),
-(78, '', '13:07:00', '', '----------- لجنة قانونية -------------', '2019-05-10', 0, '', '2019-05-09 13:07:31', 30566, '0000-00-00 00:00:00', -1, 2, 0),
-(79, '', '17:13:00', '', 'اجتماع المكتب الدائم', '2019-05-11', 0, '', '2019-05-10 17:14:33', 30566, '0000-00-00 00:00:00', -1, 2, 0),
-(80, '', '17:15:00', '', 'المكتب التنفيذي', '2019-05-11', 0, '', '2019-05-10 17:18:50', 30566, '2019-05-20 18:14:52', 30566, 2, 0),
-(81, '', '18:13:00', '', 'لجنة الصداقة الاردنية التركية', '2019-05-21', 0, '', '2019-05-20 18:13:54', 30566, '0000-00-00 00:00:00', -1, 2, 0);
+(5, '', '14:11:00', '', 'اجتماع اللجنة القانونية', '2019-06-11', 0, '', '2019-06-10 14:12:25', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(6, '', '14:13:00', '', 'اجتماع اللجنة المالية', '2019-06-11', 0, '', '2019-06-10 14:13:18', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(7, '', '14:13:00', '', 'اجتماع كتلة الوفاء والعهد', '2019-06-11', 0, '', '2019-06-10 14:14:01', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(8, '', '14:14:00', '', 'اجتماع لجنة الاخوة الاردنية السعودية', '2019-06-11', 0, '', '2019-06-10 14:16:19', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(9, 'المكتب الدائم ولجنة فلسطين', '14:23:00', '', 'اجتماع المكتب الدائم ولجنة فلسطين', '2019-06-11', 0, '', '2019-06-10 14:24:03', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(10, '', '09:03:00', '', 'اجتماع المكتب الدائم', '2019-06-12', 0, '', '2019-06-11 09:04:09', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(11, '', '12:13:00', '', 'اجتماع المكتب التنفيذي', '2019-06-12', 0, '', '2019-06-11 12:14:21', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(12, '', '12:41:00', '', 'اجتماع اللجنة القانونية 1', '2019-06-12', 0, '', '2019-06-11 12:42:05', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(13, '', '11:07:00', '', '1', '2019-06-14', 0, '', '2019-06-13 11:08:12', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(14, '', '11:08:00', '', '2', '2019-06-14', 0, '', '2019-06-13 11:08:32', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(15, '', '11:08:00', '', '3', '2019-06-14', 0, '', '2019-06-13 11:08:51', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(16, '', '11:09:00', '', '4', '2019-06-14', 0, '', '2019-06-13 11:09:37', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(17, '', '11:10:00', '', '5', '2019-06-14', 0, '', '2019-06-13 11:10:40', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(18, '', '11:10:00', '', '6', '2019-06-14', 0, '', '2019-06-13 11:11:04', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(19, '', '11:11:00', '', '7', '2019-06-14', 0, '', '2019-06-13 11:11:35', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(20, '', '11:11:00', '', '8', '2019-06-14', 0, '', '2019-06-13 11:11:52', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(21, '', '11:12:00', '', '9', '2019-06-14', 0, '', '2019-06-13 11:12:13', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(22, '', '11:13:00', '', '10', '2019-06-14', 0, '', '2019-06-13 11:13:26', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(23, '', '11:21:00', '', '11', '2019-06-14', 0, '', '2019-06-13 11:21:49', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(24, '', '11:22:00', '', '12', '2019-06-14', 0, '', '2019-06-13 11:22:18', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(25, '', '11:28:00', '', '13', '2019-06-14', 0, '', '2019-06-13 11:28:11', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(26, '', '11:29:00', '', '14', '2019-06-14', 0, '', '2019-06-13 11:29:26', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(27, '', '12:36:00', '', '1', '2019-06-14', 0, '', '2019-06-13 12:37:01', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(28, '', '12:37:00', '', '2', '2019-06-14', 0, '', '2019-06-13 12:37:18', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(29, '', '11:22:00', '', '2', '2019-06-19', 0, '', '2019-06-18 11:22:18', 30566, '0000-00-00 00:00:00', -1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -200,12 +216,32 @@ CREATE TABLE `event_event_entity` (
 --
 
 INSERT INTO `event_event_entity` (`event_id`, `event_entity_id`) VALUES
-(47, 10),
-(48, 24),
-(53, 13),
-(53, 20),
-(78, 10),
-(81, 51);
+(5, 10),
+(6, 38),
+(7, 24),
+(8, 20),
+(9, 43),
+(9, 54),
+(10, 54),
+(11, 55),
+(12, 10),
+(13, 17),
+(14, 10),
+(15, 10),
+(16, 10),
+(17, 10),
+(18, 10),
+(19, 10),
+(20, 10),
+(21, 10),
+(22, 10),
+(23, 10),
+(24, 10),
+(25, 10),
+(26, 10),
+(27, 10),
+(28, 10),
+(29, 38);
 
 -- --------------------------------------------------------
 
@@ -617,13 +653,13 @@ ALTER TABLE `committees`
 -- AUTO_INCREMENT for table `device_token`
 --
 ALTER TABLE `device_token`
-  MODIFY `device_token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `device_token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
 
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `event_entity_category`

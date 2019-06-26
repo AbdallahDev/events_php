@@ -86,7 +86,9 @@ if ($rs->num_rows != 0) {
                             }
                             ?>
                         </td>
-                        <td data-label="الموضوع"><?php echo $events_row['subject']; ?></td>
+                        <td data-label="الموضوع"><?php
+                            echo nl2br($events_row['subject']);
+                            ?></td>
                         <td data-label="تاريخ النشاط"><?php echo $events_row['event_date']; ?></td>
                         <!--here i print the date of the event insertion-->
                         <td data-label="تاريخ الانشاء">

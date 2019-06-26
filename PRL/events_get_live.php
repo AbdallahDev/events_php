@@ -96,7 +96,7 @@ if ($events_rs->num_rows > 0) {
                             ?>
                         </td>
                         <td style="text-align: right;
-                            width: <?php echo $row_table_live_design['table_live_design_event_subject_column_width']; ?>%"><?php echo $events_row['subject'] ?></td>
+                            width: <?php echo $row_table_live_design['table_live_design_event_subject_column_width']; ?>%"><?php echo nl2br($events_row['subject']) ?></td>
                     </tr>
                 </tbody>
                 <?php

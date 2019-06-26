@@ -14,8 +14,8 @@ $event_time = "";
 //this var to store the event appointment and that when the user dosen't want 
 //the real time to appear on the screen
 $event_appointment = "";
-//this var to store the event subject
-$subject = nl2br($_POST['subject']);
+//This var to store the event subject, and it will be saved with the new lines.
+$subject = $_POST['subject'];
 //this variable to store the event date
 $event_date = $_POST['event_date'];
 //hall id variable, and i sat the default value to 0 so the name of the hall appear as empty string ""

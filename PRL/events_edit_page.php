@@ -308,7 +308,14 @@ elseif ($event_event_entity_rs->num_rows >= 1 && $events_row['event_entity_name'
                     <div class="w3-section">
                         <label>الموضوع</label>
                         <!--this is event subject, it means what the event hold for-->
-                        <textarea style="text-align: right" rows="5" cols="48" id="subject" name="subject" placeholder="الموضوع" class="w3-input w3-border right-dir"><?php echo $events_row['subject'] ?></textarea>
+                        <textarea style="text-align: right" rows="5" cols="48" id="subject" name="subject" placeholder="الموضوع" class="w3-input w3-border right-dir"><?php
+                            //here I've used preg_replace to get rid of the <br /> 
+                            //tags that been inserted by nl2br function for new lines, 
+                            //then used strip_tags function to get rid of the tags <> 
+                            //that been produced after removing the break tags.
+                            preg_replace("<br />", "", $events_row['subject']);
+                            echo strip_tags($events_row['subject']);
+                            ?></textarea>
                     </div>
                     <div class="w3-section">
                         <label>القاعة</label>

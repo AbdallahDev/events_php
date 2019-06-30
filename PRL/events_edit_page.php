@@ -369,7 +369,7 @@ elseif ($event_event_entity_rs->num_rows >= 1 && $events_row['event_entity_name'
                     <div class="w3-section">
                         <label>نشر على الشاشة</label>
                         <!--this is if the event will be shown on the screen-->
-                        <input type="checkbox" id="event_status" value="1" <?php
+                        <input type="checkbox" id="event_status" name="event_status" value="1" <?php
                         if ($events_row['event_status'] == 1) {
                             echo ' checked';
                         }

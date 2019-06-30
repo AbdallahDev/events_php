@@ -31,7 +31,7 @@ $event_place = "";
 //this variable for the user id and i'll get it from the session after the user login.
 $user_id = $_SESSION['user_id'];
 //this var for the status of the event and i'll make it with 0 default value for the casses it's not checked
-$event_status = 0;
+$event_status = $_POST['event_status'];
 
 //bellow i'll check if the user choose the event entity from the event entities drop down menu or not
 //and that by checking the value from the event_entity_categroy_id drop down menu, coz if it's 0 

@@ -87,6 +87,9 @@ elseif ($event_event_entity_rs->num_rows >= 1 && $events_row['event_entity_name'
                             //js variable to use it for selecting the entity in 
                             //the entities drop down menu.
                             var selected_event_entity_id = <?php echo $event_entity_id; ?>;
+                            //This js variable stores the id of the entity that 
+                            //is being looped.
+                            var event_entity_id = entities.committee_id;
                             $("#committee").append('<option value="' + entities.committee_id + '">' + entities.committee_name + '</option>')
                         })
                     } else {

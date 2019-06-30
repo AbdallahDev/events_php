@@ -90,7 +90,15 @@ elseif ($event_event_entity_rs->num_rows >= 1 && $events_row['event_entity_name'
                             //This js variable stores the id of the entity that 
                             //is being looped.
                             var event_entity_id = entities.committee_id;
-                            $("#committee").append('<option value="' + entities.committee_id + '">' + entities.committee_name + '</option>')
+                            //I've checked if the looped entity id is equal to 
+                            //entity id that belongs to the edited event.
+                            //If that right I'll render the dropdown option with 
+                            //the selected tag to be selected because it represents 
+                            //the entity that belongs to the edited event.
+                            if (event_entity_id == selected_event_entity_id)
+                                $("#committee").append('<option value="' + event_entity_id + '" selected>' + entities.committee_name + '</option>');
+                            else
+                                $("#committee").append('<option value="' + event_entity_id + '" >' + entities.committee_name + '</option>');
                         })
                     } else {
                         $("#committee").hide();

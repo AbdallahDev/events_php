@@ -65,7 +65,6 @@ elseif ($event_event_entity_rs->num_rows >= 1 && $events_row['event_entity_name'
                     method: 'post',
                     data: "id=" + event_entity_category_id
                 }).done(function (entities) {
-                    console.log(entities);
                     entities = JSON.parse(entities);
                     //here i emptying the element of it's content so it dosen't 
                     //stack the new content on the old one every time they appended

@@ -79,6 +79,9 @@ elseif ($event_event_entity_rs->num_rows >= 1 && $events_row['event_entity_name'
                         //so the user dosen't need to write it here
                         $("#event_entity_name").hide();
                         entities.forEach(function (entities) {
+                            //Below, I will display the entities as drop-down 
+                            //options, and the entity that belongs to the chosen 
+                            //event I'll make it selected.
                             $("#committee").append('<option value="' + entities.committee_id + '">' + entities.committee_name + '</option>')
                         })
                     } else {

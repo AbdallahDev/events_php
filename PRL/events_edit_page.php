@@ -244,7 +244,7 @@ elseif ($event_event_entity_rs->num_rows >= 1 && $events_row['event_entity_name'
                             <?PHP
                             //bellow i'll view all the event entity catigories
                             //
-                        //here is the php code to view the event entity 
+                            //here is the php code to view the event entity 
                             //categories in the drop down list
                             include_once '../BLL/event_entity_category.php';
                             $event_entity_category = new event_entity_category();

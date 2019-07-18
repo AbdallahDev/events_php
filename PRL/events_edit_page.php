@@ -65,7 +65,6 @@ elseif ($event_event_entity_rs->num_rows >= 1 && $events_row['event_entity_name'
                     method: 'post',
                     data: "id=" + event_entity_category_id
                 }).done(function (entities) {
-                    console.log(entities);
                     entities = JSON.parse(entities);
                     //here i emptying the element of it's content so it dosen't 
                     //stack the new content on the old one every time they appended
@@ -80,7 +79,26 @@ elseif ($event_event_entity_rs->num_rows >= 1 && $events_row['event_entity_name'
                         //so the user dosen't need to write it here
                         $("#event_entity_name").hide();
                         entities.forEach(function (entities) {
-                            $("#committee").append('<option value="' + entities.committee_id + '">' + entities.committee_name + '</option>')
+                            //Below, I will display the entities as drop-down 
+                            //options, and the entity that belongs to the chosen 
+                            //event I'll make it selected.
+                            //
+                            //Below I'll save the entity id for the event in a 
+                            //js variable to use it for selecting the entity in 
+                            //the entities drop down menu.
+                            var selected_event_entity_id = <?php echo $event_entity_id; ?>;
+                            //This js variable stores the id of the entity that 
+                            //is being looped.
+                            var event_entity_id = entities.committee_id;
+                            //I've checked if the looped entity id is equal to 
+                            //entity id that belongs to the edited event.
+                            //If that right I'll render the dropdown option with 
+                            //the selected tag to be selected because it represents 
+                            //the entity that belongs to the edited event.
+                            if (event_entity_id == selected_event_entity_id)
+                                $("#committee").append('<option value="' + event_entity_id + '" selected>' + entities.committee_name + '</option>');
+                            else
+                                $("#committee").append('<option value="' + event_entity_id + '" >' + entities.committee_name + '</option>');
                         })
                     } else {
                         $("#committee").hide();
@@ -351,7 +369,7 @@ elseif ($event_event_entity_rs->num_rows >= 1 && $events_row['event_entity_name'
                     <div class="w3-section">
                         <label>نشر على الشاشة</label>
                         <!--this is if the event will be shown on the screen-->
-                        <input type="checkbox" id="event_status" value="1" <?php
+                        <input type="checkbox" id="event_status" name="event_status" value="1" <?php
                         if ($events_row['event_status'] == 1) {
                             echo ' checked';
                         }

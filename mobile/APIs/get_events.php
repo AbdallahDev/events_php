@@ -20,7 +20,9 @@ $category_id_GET = 0;
 //This variable will store the entity id, I'll initialize it with 0 because 
 //it's the default value.
 $entity_id_GET = 0;
-$entity_id_obj = new event_event_entity();
+//This object is for dealing with the event_event_entity class that deals with 
+//the event_event_entity DB table.
+$event_event_entity_obj = new event_event_entity();
 $event_id = 0;
 $entity_id = 0;
 $entity_name_obj = new committees();
@@ -58,7 +60,7 @@ if ($category_id_GET == 0) {
 
             //here i get the entity id related to the event from event_event_entity 
             //table to get based on it it's name from the committees table
-            $entity_id_obj_rs = $entity_id_obj->get_entity_id($event_id);
+            $entity_id_obj_rs = $event_event_entity_obj->get_entity_id($event_id);
             $entity_id_obj_row = $entity_id_obj_rs->fetch_assoc();
             $entity_id = $entity_id_obj_row['event_entity_id'];
 
@@ -132,7 +134,7 @@ else {
     //here i stored the entity id from the url to get all the event ids related 
     //to that entity
     $entity_id = $entity_id_GET;
-    $entity_events_rs = $entity_id_obj->get_event_id($entity_id);
+    $entity_events_rs = $event_event_entity_obj->get_event_id($entity_id);
 
     while ($entity_events_row = $entity_events_rs->fetch_assoc()) {
 

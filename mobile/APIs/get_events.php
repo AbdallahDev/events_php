@@ -103,6 +103,7 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
         //Here for every entity id, I'll add a condition to the query.
         $query .= " OR event_entity_id = $entity_id";
 
+        //this While needs to be deleted later.
         while ($entity_events_row = $entity_events_rs->fetch_assoc()) {
 
             //here i got the event id so i can based on it get the event details

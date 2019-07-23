@@ -77,12 +77,26 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
     //to fetch based on them the details of the events that belong to them.
     $entity_ids_obj = $entity_name_obj->get_entities_specific_category($category_id_GET);
 
+    //I've created this variable to store the query that will be sent to the 
+    //function that will fetch the event details for all the entities for the 
+    //specified category.
+    //And I've joined the committee's table to get the entity name that related 
+    //to the event.
+    //And I've made the last where condition as 0 because later I'll add more 
+    //conditions for each entity id.
+    $query = "SELECT event_id, events.event_date, events.time, "
+            . "committees.committee_name "
+            . "FROM `event_event_entity` "
+            . "INNER JOIN events ON events.id = event_event_entity.event_id "
+            . "INNER JOIN committees ON committees.committee_id = event_event_entity.event_entity_id "
+            . "WHERE event_entity_id = 0";
+
     //Here I'll loop over each entity id to add to the query the condition that 
     //based on it.
-    while ($entity_id_obj_row = $entity_ids_obj->fetch_array()) {
+    while ($entity_ids_obj_row = $entity_ids_obj->fetch_array()) {
 
-        //here i got the entity id so i can based on it get the event ids related to it
-        $entity_id = $entity_id_obj_row['committee_id'];
+        //Here I get the entity id to add it with a condition to the query.
+        $entity_id = $entity_ids_obj_row['committee_id'];
         $entity_events_rs = $entity_id_obj->get_event_id($entity_id);
 
         while ($entity_events_row = $entity_events_rs->fetch_assoc()) {

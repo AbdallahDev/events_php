@@ -97,6 +97,8 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
 
         //Here I get the entity id to add it with a condition to the query.
         $entity_id = $entity_ids_obj_row['committee_id'];
+        //Here for every entity id, I'll add a condition to the query.
+        $query .= " OR event_entity_id = $entity_id";
         $entity_events_rs = $entity_id_obj->get_event_id($entity_id);
 
         while ($entity_events_row = $entity_events_rs->fetch_assoc()) {

@@ -92,7 +92,7 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
             . "WHERE event_entity_id = 0";
 
     //Here I'll loop over each entity id to add to the query the condition that 
-    //based on it.
+    //related to it.
     while ($entity_ids_obj_row = $entity_ids_obj->fetch_array()) {
 
         //Here I get the entity id to add it with a condition to the query.

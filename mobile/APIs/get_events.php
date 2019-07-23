@@ -73,6 +73,8 @@ if ($category_id_GET == 0) {
 //bellow if the categoryId is not 0 and the entityId is 0 that means i should get 
 //all the events for all the entities in that specific category
 elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
+    //Here I'll get all the entity ids that belong to the specified category, 
+    //to fetch based on them the details of the events that belong to them.
     $entity_id_obj_rs = $entity_name_obj->get_entities_specific_category($category_id_GET);
 
     while ($entity_id_obj_row = $entity_id_obj_rs->fetch_array()) {

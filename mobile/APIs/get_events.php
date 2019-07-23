@@ -121,6 +121,10 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
             array_push($events_array, $row_event_entity);
         }
     }
+    
+    //This is the last concatenation for the query, to get all the events for 
+    //all the entities in the specified
+    $query .= " ORDER BY events.event_date DESC, events.time DESC";
 }
 //here in this case i should get all the events for a specified entity
 else {

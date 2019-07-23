@@ -75,9 +75,11 @@ if ($category_id_GET == 0) {
 elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
     //Here I'll get all the entity ids that belong to the specified category, 
     //to fetch based on them the details of the events that belong to them.
-    $entity_id_obj_rs = $entity_name_obj->get_entities_specific_category($category_id_GET);
+    $entity_ids_obj = $entity_name_obj->get_entities_specific_category($category_id_GET);
 
-    while ($entity_id_obj_row = $entity_id_obj_rs->fetch_array()) {
+    //Here I'll loop over each entity id to add to the query the condition that 
+    //based on it.
+    while ($entity_id_obj_row = $entity_ids_obj->fetch_array()) {
 
         //here i got the entity id so i can based on it get the event ids related to it
         $entity_id = $entity_id_obj_row['committee_id'];

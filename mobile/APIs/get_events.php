@@ -88,7 +88,8 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
     //to the event.
     //And I've made the last where condition as 0 because later I'll add more 
     //conditions for each entity id.
-    $query = "SELECT event_id, events.event_date, events.time, "
+    $query = "SELECT event_id, events.event_entity_name, events.subject, "
+            . "events.event_date, events.time, "
             . "committees.committee_name "
             . "FROM `event_event_entity` "
             . "INNER JOIN events ON events.id = event_event_entity.event_id "

@@ -28,11 +28,13 @@ $entity_id = 0;
 $entity_name_obj = new committees();
 $entity_name = "";
 //I'll check if the value is set in the URL.
-if (isset($_GET['categoryId']))
+if (isset($_GET['categoryId'])) {
     $category_id_GET = $_GET['categoryId'];
+}
 //I'll check if the value is set in the URL.
-if (isset($_GET['entityId']))
+if (isset($_GET['entityId'])) {
     $entity_id_GET = $_GET['entityId'];
+}
 $categories_obj = new event_entity_category();
 $entity_ids = array();
 
@@ -99,35 +101,44 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
 
         //Here I get the entity id to add it with a condition to the query.
         $entity_id = $entity_ids_obj_row['committee_id'];
-        
+
         //Here for every entity id, I'll add a condition to the query.
         $query .= " OR event_entity_id = $entity_id";
 
         //this While needs to be deleted later.
-        while ($entity_events_row = $entity_events_rs->fetch_assoc()) {
-
-            //here i got the event id so i can based on it get the event details
-            $event_id = $entity_events_row['event_id'];
-            $rs_events_android = $events->get_event_by_id($event_id);
-            $row_event_entity = $rs_events_android->fetch_assoc();
-
-            //here i'll check if the event_entity_name column is empty to get the 
-            //entity name from the table event_event_entity for the entity related 
-            //to the event
-            if (empty($row_event_entity["event_entity_name"])) {
-
-                //here i add the entity_name element to the events row, so it can appear 
-                //in the json result, coz some events related to entities without having 
-                //a specific entity name in the event_entity_name column
-                $row_event_entity["entity_name"] = get_entity_name($entity_id);
-            }
-            array_push($events_array, $row_event_entity);
-        }
+        //--------------------------
+        //here i got the event id so i can based on it get the event details
+//        $event_id = $entity_events_row['event_id'];
+//        $rs_events_android = $events->get_event_by_id($event_id);
+//        $row_event_entity = $rs_events_android->fetch_assoc();
+//
+//        //here i'll check if the event_entity_name column is empty to get the 
+//        //entity name from the table event_event_entity for the entity related 
+//        //to the event
+//        if (empty($row_event_entity["event_entity_name"])) {
+//
+//            //here i add the entity_name element to the events row, so it can appear 
+//            //in the json result, coz some events related to entities without having 
+//            //a specific entity name in the event_entity_name column
+//            $row_event_entity["entity_name"] = get_entity_name($entity_id);
+//        }
+//        array_push($events_array, $row_event_entity);
+        //-----------------
     }
-    
+
     //This is the last concatenation for the query, to get all the events for 
     //all the entities in the specified
     $query .= " ORDER BY events.event_date DESC, events.time DESC";
+
+    //Here I'll fetch all the event details then store the result in the 
+    //$event_details variable.
+    $event_details = $event_event_entity_obj->get_event_details_based_on_entity_ids($query);
+
+    //Here I'll loop over the result fetched regard the event details to store 
+    //each row of it in the $events_array array.
+    while ($event_details_row = $event_details->fetch_assoc()) {
+        
+    }
 }
 //here in this case i should get all the events for a specified entity
 else {

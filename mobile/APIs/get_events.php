@@ -108,26 +108,6 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
 
         //Here for every entity id, I'll add a condition to the query.
         $query .= " OR event_entity_id = $entity_id";
-
-        //this While needs to be deleted later.
-        //--------------------------
-        //here i got the event id so i can based on it get the event details
-//        $event_id = $entity_events_row['event_id'];
-//        $rs_events_android = $events->get_event_by_id($event_id);
-//        $row_event_entity = $rs_events_android->fetch_assoc();
-//
-//        //here i'll check if the event_entity_name column is empty to get the 
-//        //entity name from the table event_event_entity for the entity related 
-//        //to the event
-//        if (empty($row_event_entity["event_entity_name"])) {
-//
-//            //here i add the entity_name element to the events row, so it can appear 
-//            //in the json result, coz some events related to entities without having 
-//            //a specific entity name in the event_entity_name column
-//            $row_event_entity["entity_name"] = get_entity_name($entity_id);
-//        }
-//        array_push($events_array, $row_event_entity);
-        //-----------------
     }
 
     //This is the last concatenation for the query, to get all the events for 

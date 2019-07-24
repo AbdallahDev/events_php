@@ -90,7 +90,10 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
     //conditions for each entity id.
     $query = "SELECT event_id, events.event_entity_name, events.subject, "
             . "events.event_date, events.time, "
-            . "committees.committee_name "
+            //below, I'll select the committee name as 'entity_name' because I 
+            //want the column to be recognized like that in the final JSON 
+            //result because in the Android model it's recognized like that.
+            . "committees.committee_name AS entity_name "
             . "FROM `event_event_entity` "
             . "INNER JOIN events ON events.id = event_event_entity.event_id "
             . "INNER JOIN committees ON committees.committee_id = event_event_entity.event_entity_id "

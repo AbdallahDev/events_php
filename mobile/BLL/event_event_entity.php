@@ -15,8 +15,15 @@ class event_event_entity extends my_db {
     function get_event_id($entity_id) {
         $query = "SELECT event_id, events.event_date, events.time "
                 . "FROM `event_event_entity` INNER JOIN events ON event_event_entity.event_id = events.id "
-                . "WHERE event_entity_id = ? ORDER BY events.event_date DESC, events.time DESC";
+                . "WHERE event_entity_id = ? "
+                . "ORDER BY events.event_date DESC, events.time DESC";
         return $this->get_data($query, 'i', array(&$entity_id));
+    }
+    
+    //This function fetches from the DB all the event details for all the 
+    //entities based on their ids that specified in the query.
+    function get_event_details_based_on_entity_ids($query) {
+        return $this->get_all_data($query);
     }
 
     //this function get the entity id related to a specific event

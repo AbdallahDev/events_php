@@ -137,7 +137,9 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
     //Here I'll loop over the result fetched regard the event details to store 
     //each row of it in the $events_array array.
     while ($event_details_row = $event_details->fetch_assoc()) {
-        
+        //Here I'll push each row that contains one event details to the events 
+        //array.
+        array_push($events_array, $event_details_row);
     }
 }
 //here in this case i should get all the events for a specified entity

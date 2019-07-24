@@ -53,8 +53,10 @@ class events extends my_db {
         return $this->get_all_data('SELECT events.event_entity_name, events.time, events.event_appointment, halls.hall_name, events.event_place, events.subject, events.id FROM events INNER JOIN halls on halls.hall_id = events.hall_id WHERE DATE(event_date) = CURDATE() and event_status = 1 ORDER BY time');
     }
 
+    //This function gets the max time of the current day events and adds 5 hours 
+    //to that time because based on that result the events table will exist.
     function get_events_curdate_max_time() {
-        return $this->get_all_data('SELECT date_add(MAX(time), INTERVAL 1 hour) AS time FROM events WHERE `event_date` = CURRENT_DATE AND `event_status` = 1');
+        return $this->get_all_data('SELECT date_add(MAX(time), INTERVAL 5 hour) AS time FROM events WHERE `event_date` = CURRENT_DATE AND `event_status` = 1');
     }
 
     public function events_get_new() {

@@ -9,9 +9,10 @@ include_once '../BLL/device_token.php';
 $device_token_get = $_GET['deviceToken'];
 //This variable will store the device identifier that sent with the URL from the 
 //mobile app.
-$device_identifier = $_GET['deviceIdentifier'];
+$device_identifier_get = $_GET['deviceIdentifier'];
 $device_token = new device_token();
-//Here I'll delete all the duplicate device tokens from the DB.
-$device_token->delete_duplicated_tokens($device_token_get);
+//Here I'll delete all the duplicate device tokens from the DB, and that based 
+//on the device identifier.
+$device_token->delete_duplicated_tokens($device_identifier_get);
 //Here I'll store the device token in the DB.
 $device_token->store_device_token($device_token_get);

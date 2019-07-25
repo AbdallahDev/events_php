@@ -14,5 +14,5 @@ $device_token = new device_token();
 //Here I'll delete all the duplicate device tokens from the DB, and that based 
 //on the device identifier.
 $device_token->delete_duplicated_tokens($device_identifier_get);
-//Here I'll store the device token in the DB.
-$device_token->store_device_token($device_token_get);
+//Here I'll store the device token in the DB with the device identifier.
+$device_token->store_device_token($device_token_get, $device_identifier_get);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2019 at 11:52 AM
+-- Generation Time: Jul 25, 2019 at 01:03 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -109,20 +109,17 @@ INSERT INTO `committees` (`committee_id`, `committee_name`, `event_entity_catego
 
 CREATE TABLE `device_token` (
   `device_token_id` int(11) NOT NULL,
-  `device_token` varchar(200) NOT NULL
+  `device_token` varchar(200) NOT NULL,
+  `device_identifier` varchar(20) NOT NULL,
+  `dateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `device_token`
 --
 
-INSERT INTO `device_token` (`device_token_id`, `device_token`) VALUES
-(148, 'cP9Sx3BsSqo:APA91bF-8GrrK4s3VaKa-LsfZGjxTcSxR88o88AH93VNkl15FQi4betb1wIo0tDG3nCBxet6dwCIrQtvfTubpwQR5t_zQoeY3foIOGFwzpRiDwVa-HZCg12qQCC3zOahf8cGIZHlKDSc'),
-(151, 'cW0EFnelt7k:APA91bGqUanQIQOtfX2u8kpkctrRJWKtodRZ4oD-NrakQmJrPw4JjnpnnEP3y1qGIfdec34f-v4RRo8cdG-_V_SfSb6kEcHSrXzSx3OtY_wzRpfPCELqnhM2SakTu2ru7y1DV-qwxCl_'),
-(152, 'eoA6CIazUTw:APA91bHQMkLuLQg00-578BfPmN6Fzyrx7YQeZhA8iGbJQaUo7uPd6PfX1VtsfyBNGEe4IowvJnqgWdkfyAXUYrkFYqlTuwd-GKSjiPJP_hHYPtBaBn7J5lRmA5gIsMzB8QQ84hPIuPoi'),
-(153, 'cqwORlkgFkI:APA91bH16Wvei-ykyFwPZxlE-oK5ofZgVRC4DprvezvC7oehgt2Tsa2SxX3xlqDV_xwFPedk3mJHWofoFwrGJMNY05r8SYdQvLhQQsBBM-4STtxOyVNl1WHaH63Id4yq5qDAg6ZXEc18'),
-(154, 'efgFeub6nb0:APA91bHOKRyBCGmp0BW9Fs3uY3o9-UmozlEtpvrA3BOaTz6RER__CQROmv-yU3NUhRZ7fIwRaj6VVYZH2c7rgRLWKSlJhgUEhSxYl5pe7LL6xo7hplbuC1spfeje2DxlW2yJHfkfRcbh'),
-(169, 'dK4-2BF2lT4:APA91bE9qfMosYU_YBdBI4xqMJOppxtxF6YPhnp-OZbbNONJ6SCAKuNVN8_5uz0PhBLisSQi8PcFioYEddkjAg2eSDQlGTZFWWCRYJHujJPZmF4wWrxxeF9X7O7JJD-9JfFvWXbgTqN4');
+INSERT INTO `device_token` (`device_token_id`, `device_token`, `device_identifier`, `dateTime`) VALUES
+(179, 'fabMZO5bY24:APA91bFwehESETKTD9dItnN3jVQaHyMwWtL4ohXglqkWSdvyKpxbXk5f8LowP07JekrSPHbW6InqQjC8m2g3p6fx7UcTRHRnjE_BZjCC5Yll77-a276lHVFZXE96Y3607KVf_RO7AxBL', '6f143a8ec048342e', '2019-07-25 10:46:42');
 
 -- --------------------------------------------------------
 
@@ -615,7 +612,7 @@ ALTER TABLE `committees`
 -- AUTO_INCREMENT for table `device_token`
 --
 ALTER TABLE `device_token`
-  MODIFY `device_token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
+  MODIFY `device_token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=180;
 
 --
 -- AUTO_INCREMENT for table `events`

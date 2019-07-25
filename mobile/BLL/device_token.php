@@ -11,13 +11,13 @@ class device_token extends my_db {
         return $this->get_all_data('SELECT device_token FROM `device_token`');
     }
 
-    //this function will delete all the tokens that are the same as the new one 
-    //that will be stored.
+    //this function will delete all the duplicated tokens and that based on the 
+    //device identifier.
     //Because if there is duplication in the DB the same message will be 
     //sent multiple times for the same device.
-    function delete_duplicated_tokens($device_token) {
-        $this->mod_data('DELETE FROM `device_token` WHERE device_token.device_token = ?'
-                , 's', array(&$device_token));
+    function delete_duplicated_tokens($device_identifier) {
+        $this->mod_data('DELETE FROM `device_token` WHERE device_identifier = ?'
+                , 's', array(&$device_identifier));
     }
 
     //This function will store the mobile device token in the DB to be able to 

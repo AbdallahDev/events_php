@@ -24,7 +24,7 @@ class device_token extends my_db {
     //receive FCM messages, and also will save the device identifier to use it 
     //to identify all the duplicated tokens.
     function store_device_token($device_token, $device_identifier) {
-        /* here i'll store the device_token and the device_identifier in the table, 
+        /* here i'll store the device_token and the device_identifier in the DB, 
          * and i'll get the values from the url */
         $this->mod_data("INSERT INTO `device_token`(`device_token`, `device_identifier`) "
                 . "VALUES (?,?)", 'ss', array(&$device_token, &$device_identifier));

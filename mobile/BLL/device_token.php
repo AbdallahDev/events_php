@@ -21,12 +21,13 @@ class device_token extends my_db {
     }
 
     //This function will store the mobile device token in the DB to be able to 
-    //receive FCM messages.
-    function store_device_token($device_token) {
-        /* here i'll store the device_token in the table, and i'll get the value 
-          from the url */
-        $this->mod_data("INSERT INTO `device_token`(`device_token`) VALUES (?)"
-                , 's', array(&$device_token));
+    //receive FCM messages, and also will save the device identifier to use it 
+    //to identify all the duplicated tokens.
+    function store_device_token($device_token, $device_identifier) {
+        /* here i'll store the device_token and the device_identifier in the table, 
+         * and i'll get the values from the url */
+        $this->mod_data("INSERT INTO `device_token`(`device_token`, `device_identifier`) "
+                . "VALUES (?,?)", 'ss', array(&$device_token, &$device_identifier));
     }
 
 }

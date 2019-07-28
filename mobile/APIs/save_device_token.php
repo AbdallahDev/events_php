@@ -14,6 +14,9 @@ $device_identifier = $_GET['deviceIdentifier'];
 //This object used to access the functions in the device_token class.
 $device_token_obj = new device_token();
 
+//Here I'll call the function that checks if the identifier exists.
+$identifier_check_rs = $device_token_obj->check_identifier($device_identifier);
+
 //Here I'll delete all the duplicate device tokens from the DB, and that based 
 //on the device identifier.
 $device_token_obj->delete_duplicated_tokens($device_identifier);

@@ -30,9 +30,3 @@ if ($device_identifier_check_rs->num_rows > 0) {
     //than zero and that means the specified identifier does not exist in the DB.
     $device_token_obj->store_device_token($device_token, $device_identifier);
 }
-
-//Here I'll delete all the duplicate device tokens from the DB, and that based 
-//on the device identifier.
-$device_token_obj->delete_duplicated_tokens($device_identifier);
-//Here I'll store the device token in the DB with the device identifier.
-$device_token_obj->store_device_token($device_token, $device_identifier);

@@ -19,6 +19,14 @@ class device_token extends my_db {
         return $this->get_data($query, "s", array(&$device_identifier));
     }
 
+    //This function will update the current token with a new one for the 
+    //specified device identifier.
+    function update_token($device_token, $device_identifier) {
+        $query = "UPDATE `device_token` SET `device_token`= ?,`dateTime`= CURRENT_TIMESTAMP "
+                . "WHERE device_identifier = ?";
+        return $this->mod_data($query, "ss", array(&$device_token, &$device_identifier));
+    }
+
     //this function will delete all the duplicated tokens and that based on the 
     //device identifier.
     //Because if there is duplication in the DB the same message will be 

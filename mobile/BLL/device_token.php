@@ -11,22 +11,39 @@ class device_token extends my_db {
         return $this->get_all_data('SELECT device_token FROM `device_token`');
     }
 
-    //this function will delete all the tokens that are the same as the new one 
-    //that will be stored.
+    //This function will check for the device identifier existence, if its exist 
+    //I'll update the token connected with it, and if its not I'll insert a new 
+    //entry for that identifier with a new entry.
+    function check_identifier($device_identifier) {
+        $query = "SELECT device_token_id FROM `device_token` WHERE device_identifier = ?";
+        return $this->get_data($query, "s", array(&$device_identifier));
+    }
+
+    //This function will update the current token with a new one for the 
+    //specified device identifier.
+    function update_token($device_token, $device_identifier) {
+        $query = "UPDATE `device_token` SET `device_token`= ?,`dateTime`= CURRENT_TIMESTAMP "
+                . "WHERE device_identifier = ?";
+        return $this->mod_data($query, "ss", array(&$device_token, &$device_identifier));
+    }
+
+    //this function will delete all the duplicated tokens and that based on the 
+    //device identifier.
     //Because if there is duplication in the DB the same message will be 
     //sent multiple times for the same device.
-    function delete_duplicated_tokens($device_token) {
-        $this->mod_data('DELETE FROM `device_token` WHERE device_token.device_token = ?'
-                , 's', array(&$device_token));
+    function delete_duplicated_tokens($device_identifier) {
+        $this->mod_data('DELETE FROM `device_token` WHERE device_identifier = ?'
+                , 's', array(&$device_identifier));
     }
 
     //This function will store the mobile device token in the DB to be able to 
-    //receive FCM messages.
-    function store_device_token($device_token) {
-        /* here i'll store the device_token in the table, and i'll get the value 
-          from the url */
-        $this->mod_data("INSERT INTO `device_token`(`device_token`) VALUES (?)"
-                , 's', array(&$device_token));
+    //receive FCM messages, and also will save the device identifier to use it 
+    //to identify all the duplicated tokens.
+    function store_device_token($device_token, $device_identifier) {
+        /* here i'll store the device_token and the device_identifier in the DB, 
+         * and i'll get the values from the url */
+        $this->mod_data("INSERT INTO `device_token`(`device_token`, `device_identifier`) "
+                . "VALUES (?,?)", 'ss', array(&$device_token, &$device_identifier));
     }
 
 }

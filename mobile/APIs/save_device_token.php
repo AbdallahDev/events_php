@@ -10,9 +10,11 @@ $device_token_get = $_GET['deviceToken'];
 //This variable will store the device identifier that sent with the URL from the 
 //mobile app.
 $device_identifier_get = $_GET['deviceIdentifier'];
-$device_token = new device_token();
+
+//This object used to access the functions in the device_token class.
+$device_token_obj = new device_token();
 //Here I'll delete all the duplicate device tokens from the DB, and that based 
 //on the device identifier.
-$device_token->delete_duplicated_tokens($device_identifier_get);
+$device_token_obj->delete_duplicated_tokens($device_identifier_get);
 //Here I'll store the device token in the DB with the device identifier.
-$device_token->store_device_token($device_token_get, $device_identifier_get);
+$device_token_obj->store_device_token($device_token_get, $device_identifier_get);

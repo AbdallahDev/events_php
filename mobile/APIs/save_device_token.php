@@ -19,7 +19,7 @@ $identifier_check_rs = $device_token_obj->check_identifier($device_identifier);
 
 //Here I'll check if the result after calling the function that checks for the 
 //device identifier has data by checking for the row numbers.
-if ($device_identifier_check_rs->num_rows > 0) {
+if ($identifier_check_rs->num_rows > 0) {
     //Here I'll call the function that updates the token for the specified 
     //identifier because the number of rows is more than zero and that means the 
     //identifier already exists.

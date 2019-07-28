@@ -11,6 +11,14 @@ class device_token extends my_db {
         return $this->get_all_data('SELECT device_token FROM `device_token`');
     }
 
+    //This function will check for the device identifier existence, if its exist 
+    //I'll update the token connected with it, and if its not I'll insert a new 
+    //entry for that identifier with a new entry.
+    function check_identifier($device_identifier) {
+        $query = "SELECT device_token_id FROM `device_token` WHERE device_identifier = ?";
+        return $this->get_data($query, "s", array(&$device_identifier));
+    }
+
     //this function will delete all the duplicated tokens and that based on the 
     //device identifier.
     //Because if there is duplication in the DB the same message will be 

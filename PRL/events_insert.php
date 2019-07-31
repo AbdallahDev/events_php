@@ -120,8 +120,5 @@ header('location: events_preview_current_future.php');
   event inserted in the db */
 //and i've made the inclusion directory like this because this file will be
 //included in the event_insert.php file
-//
-//I'll disable the functionality of sending fcm messages temporarily until I 
-//find a solution for the system delay when trying sending the messages to the apps. 
-//include_once '../mobile/BLL/device_token.php';
-//include_once '../mobile/apis/event_notification.php';
+include_once '../mobile/BLL/device_token.php';
+include_once '../mobile/apis/event_notification.php';

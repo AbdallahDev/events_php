@@ -41,18 +41,22 @@ $registration_ids = array();
 //Below I'll loop over the device tokens to store them in the registration_ids 
 //array.
 while ($row_device_token = $rs_device_token->fetch_assoc()) {
-    //this variable to store all the needed information for the notification
-    //like the event title, subject, date and time.
-    $notification_title = $committee_name;
-    $notification_subject = $_POST['subject'];
-    $notification_date = $_POST['event_date'];
-    //this variable event time declared in the events_insert.php file
-    $notification_time = $event_time;
-    $device_token = $row_device_token['device_token'];
-
-    send_notification($notification_title, $notification_subject
-            , $notification_date, $notification_time, $device_token);
+    $registration_ids[] = $row_device_token['device_token'];
 }
+
+//These variables are to store all the needed information for the notification
+//like the event title, subject, date and time.
+$notification_title = $committee_name;
+$notification_subject = $_POST['subject'];
+$notification_date = $_POST['event_date'];
+//This is the 'event time' variable that declared in the events_insert.php file 
+//to store the time when the event will be held.
+$notification_time = $event_time;
+
+//Here I'll call the function that will send the FCM notification to the mobile 
+//devices.
+send_notification($notification_title, $notification_subject
+        , $notification_date, $notification_time, $registration_ids);
 
 //this function to send the push notification
 function send_notification($notification_title, $notification_subject

@@ -82,7 +82,7 @@ function send_notification($notification_title, $notification_subject
     //specifies for how long the message will be alive before it disappears 
     //because some times the devices will be offline or turned off.
     $android = array(
-        //Here I'll set time to 36 hours before the message dies.
+        //Here I'll set time to 36 hours (129600 seconds) before the message dies.
         'ttl' => "129600");
 
     $fields = array

@@ -91,7 +91,8 @@ function send_notification($notification_title, $notification_subject
         //send the FCM messages to multiple devices at once.
         'to' => $registration_ids,
         'data' => $data,
-        'notification' => $notification
+        'notification' => $notification,
+        'android' => $android
     );
 
     $headers = array

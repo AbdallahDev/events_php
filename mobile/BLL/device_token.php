@@ -7,8 +7,12 @@ include_once '../DAL/my_db.php';
 //this class to make modifications on the user_token table.
 class device_token extends my_db {
 
+    //This function will select all the device token from the device_token table, 
+    //and it will order the result by dateTime column to get the latest updated 
+    //tokens at first because that will give them the priority to receive the 
+    //message early.
     public function get_all_device_token() {
-        return $this->get_all_data('SELECT device_token FROM `device_token`');
+        return $this->get_all_data('SELECT device_token FROM `device_token` ORDER BY dateTime DESC');
     }
 
     //This function will check for the device identifier existence, if its exist 

@@ -35,23 +35,32 @@ define('API_ACCESS_KEY'
 
 $device_token = new device_token();
 $rs_device_token = $device_token->get_all_device_token();
+//This array declaration is to store the devices tokens to send them at once to 
+//the FCM sending function, instead of sending each token alone.
+$registration_ids = array();
+//Below I'll loop over the device tokens to store them in the registration_ids 
+//array.
 while ($row_device_token = $rs_device_token->fetch_assoc()) {
-    //this variable to store all the needed information for the notification
-    //like the event title, subject, date and time.
-    $notification_title = $committee_name;
-    $notification_subject = $_POST['subject'];
-    $notification_date = $_POST['event_date'];
-    //this variable event time declared in the events_insert.php file
-    $notification_time = $event_time;
-    $device_token = $row_device_token['device_token'];
-
-    send_notification($notification_title, $notification_subject
-            , $notification_date, $notification_time, $device_token);
+    $registration_ids[] = $row_device_token['device_token'];
 }
+
+//These variables are to store all the needed information for the notification
+//like the event title, subject, date and time.
+$notification_title = $committee_name;
+$notification_subject = $_POST['subject'];
+$notification_date = $_POST['event_date'];
+//This is the 'event time' variable that declared in the events_insert.php file 
+//to store the time when the event will be held.
+$notification_time = $event_time;
+
+//Here I'll call the function that will send the FCM notification to the mobile 
+//devices.
+send_notification($notification_title, $notification_subject
+        , $notification_date, $notification_time, $registration_ids);
 
 //this function to send the push notification
 function send_notification($notification_title, $notification_subject
-, $notification_date, $notification_time, $device_token) {
+, $notification_date, $notification_time, $registration_ids) {
     //this data represents the data that will be sent to user when the firebase
     //notification sent
     $data = array(
@@ -69,11 +78,21 @@ function send_notification($notification_title, $notification_subject
         'sound' => 'default'
     );
 
+    //This field is to set the "time_to_live" for the FCM message, that 
+    //specifies for how long the message will be alive before it disappears 
+    //because some times the devices will be offline or turned off.
+    $android = array(
+        //Here I'll set time to 36 hours (129600 seconds) before the message dies.
+        'ttl' => "129600");
+
     $fields = array
         (
-        'to' => $device_token,
+        //Below I've sat the registration ids array for the 'to' field, so I can 
+        //send the FCM messages to multiple devices at once.
+        'registration_ids' => $registration_ids,
         'data' => $data,
-        'notification' => $notification
+        'notification' => $notification,
+        'android' => $android
     );
 
     $headers = array

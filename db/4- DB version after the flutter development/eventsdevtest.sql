@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.7.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 29, 2019 at 01:29 PM
--- Server version: 10.1.36-MariaDB
--- PHP Version: 7.2.10
+-- Generation Time: Sep 04, 2019 at 12:45 PM
+-- Server version: 10.1.26-MariaDB
+-- PHP Version: 7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -111,6 +111,9 @@ CREATE TABLE `device_token` (
   `device_token_id` int(11) NOT NULL,
   `device_token` varchar(200) NOT NULL,
   `device_identifier` varchar(50) NOT NULL,
+  `device_name` varchar(50) NOT NULL,
+  `device_model` varchar(50) NOT NULL,
+  `device_isPhysical` varchar(50) NOT NULL,
   `dateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -118,9 +121,9 @@ CREATE TABLE `device_token` (
 -- Dumping data for table `device_token`
 --
 
-INSERT INTO `device_token` (`device_token_id`, `device_token`, `device_identifier`, `dateTime`) VALUES
-(9773, 'cgT4QUoYg8I:APA91bElaPabkir5uUPdlkqcLDLBKogRVbxvFccZwfcdlXZf6HrLb6Zq09cCU5RVi2MwsZwBez644JGrXwT5XIS8R8jBq2dJN69LQ18p68eUA0m_pwyjctSy_sCPnO4uKPbbDv0VO4R7', 'F90FC193-5D77-425E-8659-D45E80B37E6B', '2019-08-29 11:26:07'),
-(9774, 'cBsbxqJvsPs:APA91bGpKVQ_WPALuc2sNhDlQTNdO2tZK6XLSB9Q2x9Sm58ZUBAHcq2YvDLAbn9svj3VvEp7Er9-3UlQz8DJnK-TquyF8hxFiIztjbojMlRilh0o2MKVOCtrurefouH0wG3RBM_6sC0s', '75d8944d15f9b050', '2019-08-29 11:19:52');
+INSERT INTO `device_token` (`device_token_id`, `device_token`, `device_identifier`, `device_name`, `device_model`, `device_isPhysical`, `dateTime`) VALUES
+(9781, 'fFvIoENDvDE:APA91bEkSsZ_DlQbhXHil1C_E6oR6OT0SirDo6HGKgWW07knGzZxuM8Hu1vC6TUm7Wcnwn7yq1i6dCX2fPHnM4uHDRbLj3QR-wJWEAoMGxMSlLIsDouE4w8BKELZ_NJf7DuZrXpO55Ik', 'f8bf9bb64453d638', 'generic_x86', 'Android SDK built for x86', 'false', '2019-09-04 08:29:02'),
+(9782, 'd-AjkBLyEsc:APA91bEHIEco8M8rRVL6fxOfv2ORoqESfBIjSvxpra2uDnTX8f0uOmXbWUM_3LrelMajTmEeabUQnWhK9Uh6689RPdWJf-T31Xo4iL4BX-E0cUMlqAzR3pgNCog5ou9tfTw0o9AhUHwv', '5881efe6d38c34bd', 'generic_x86', 'Android SDK built for x86', 'false', '2019-09-04 08:52:02');
 
 -- --------------------------------------------------------
 
@@ -223,7 +226,9 @@ INSERT INTO `events` (`id`, `event_entity_name`, `time`, `event_appointment`, `s
 (301, '', '13:28:00', '', 'لجنة الاقتصاد والاستثمار', '2019-08-30', 0, '', '2019-08-29 13:28:48', 30566, '0000-00-00 00:00:00', -1, 2, 0),
 (302, '', '14:21:00', '', 'الشؤون الخارجية', '2019-08-30', 0, '', '2019-08-29 14:21:54', 30566, '0000-00-00 00:00:00', -1, 2, 0),
 (303, '', '14:22:00', '', 'الادارية', '2019-08-30', 0, '', '2019-08-29 14:22:12', 30566, '0000-00-00 00:00:00', -1, 2, 0),
-(304, '', '14:26:00', '', 'التربية', '2019-08-30', 0, '', '2019-08-29 14:26:34', 30566, '0000-00-00 00:00:00', -1, 2, 0);
+(304, '', '14:26:00', '', 'التربية', '2019-08-30', 0, '', '2019-08-29 14:26:34', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(305, '', '13:05:00', '', '11-11', '2019-09-02', 0, '', '2019-09-01 13:05:49', 30566, '0000-00-00 00:00:00', -1, 2, 0),
+(306, '', '13:05:00', '', 'لجنة الاخوؤة', '2019-09-02', 0, '', '2019-09-01 13:06:40', 30566, '0000-00-00 00:00:00', -1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -337,7 +342,9 @@ INSERT INTO `event_event_entity` (`event_id`, `event_entity_id`) VALUES
 (301, 17),
 (302, 13),
 (303, 39),
-(304, 12);
+(304, 12),
+(305, 24),
+(306, 20);
 
 -- --------------------------------------------------------
 
@@ -749,13 +756,13 @@ ALTER TABLE `committees`
 -- AUTO_INCREMENT for table `device_token`
 --
 ALTER TABLE `device_token`
-  MODIFY `device_token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9775;
+  MODIFY `device_token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9783;
 
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=305;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=307;
 
 --
 -- AUTO_INCREMENT for table `event_entity_category`

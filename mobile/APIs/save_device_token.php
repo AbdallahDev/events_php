@@ -10,6 +10,10 @@ $device_token = $_GET['deviceToken'];
 //This variable will store the device identifier that sent with the URL from the 
 //mobile app.
 $device_identifier = $_GET['deviceIdentifier'];
+//I've declared the 3 below instances to distinguish the devices in the database.
+$device_name = $_GET['deviceName'];
+$device_model = $_GET['deviceModel'];
+$device_isPhysical = $_GET['deviceIsPhysical'];
 
 //This object used to access the functions in the device_token class.
 $device_token_obj = new device_token();

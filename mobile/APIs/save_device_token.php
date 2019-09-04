@@ -10,6 +10,10 @@ $device_token = $_GET['deviceToken'];
 //This variable will store the device identifier that sent with the URL from the 
 //mobile app.
 $device_identifier = $_GET['deviceIdentifier'];
+//I've declared the 3 below instances to distinguish the devices in the database.
+$device_name = $_GET['deviceName'];
+$device_model = $_GET['deviceModel'];
+$device_isPhysical = $_GET['deviceIsPhysical'];
 
 //This object used to access the functions in the device_token class.
 $device_token_obj = new device_token();
@@ -26,7 +30,10 @@ if ($identifier_check_rs->num_rows > 0) {
     $device_token_obj->update_token($device_token, $device_identifier);
 } else {
     //Here I'll call the function that inserts a new entry for the specified 
-    //identifier with a new token, and that because the number of rows is less 
-    //than zero and that means the specified identifier does not exist in the DB.
-    $device_token_obj->store_device_token($device_token, $device_identifier);
+    //identifier with a new token, and a new device info, like (name, model, 
+    //is physical), And this function has been called because the number of rows 
+    //is less than zero and that means the specified identifier does not exist 
+    //in the DB.
+    $device_token_obj->store_device_token($device_token, $device_identifier
+            , $device_name, $device_model, $device_isPhysical);
 }

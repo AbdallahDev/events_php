@@ -75,7 +75,8 @@ function send_notification($notification_title, $notification_subject
     $notification = array(
         'title' => $notification_title,
         'body' => $notification_subject,
-        'sound' => 'default'
+        'sound' => 'default',
+        'badge' => 1,
     );
 
     //This field is to set the "time_to_live" for the FCM message, that 

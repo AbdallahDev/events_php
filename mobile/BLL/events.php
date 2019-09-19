@@ -9,7 +9,10 @@ class events extends my_db {
 
     //this function get all the events for all the committees
     function get_all_events() {
-        $query = "SELECT events.id, events.event_entity_name, events.subject, events.event_date, events.time FROM events ORDER by events.event_date DESC, events.time DESC";
+        //In the query, I've joined the halls table to get the hall_name to view 
+        //it in the mobile app, and I've selected the event place from the 
+        //events table in case the hall not chosen.
+        $query = "SELECT events.id, events.event_entity_name, events.subject, events.event_date, events.time, events.hall_id, halls.hall_name, event_place FROM events INNER JOIN halls ON events.hall_id = halls.hall_id ORDER by events.event_date DESC, events.time DESC";
         return $this->get_all_data($query);
     }
 

@@ -1,5 +1,8 @@
 <?php
 
+//This file will be continuous for the events_insert.php file because it's 
+//included there.
+
 //bellow is all the code related the push notification
 //and i but it down here so i can get the variables from the form with conditions
 //applied to it above, like the appointment time and event date.

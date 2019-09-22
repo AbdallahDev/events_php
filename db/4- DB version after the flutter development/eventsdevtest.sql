@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.7.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 19, 2019 at 11:09 AM
--- Server version: 10.1.36-MariaDB
--- PHP Version: 7.2.10
+-- Generation Time: Sep 22, 2019 at 09:48 AM
+-- Server version: 10.1.26-MariaDB
+-- PHP Version: 7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -291,7 +291,7 @@ INSERT INTO `event_entity_category` (`event_entity_category_id`, `event_entity_c
 (1, 'اللجان الدائمة'),
 (2, 'الكتل'),
 (3, 'لجان الاخوة'),
-(4, 'لجان الصداقة'),
+(4, 'جمعيات الصداقة'),
 (5, 'المكتب دائم'),
 (6, 'المكتب تنفيذي');
 
@@ -575,7 +575,7 @@ INSERT INTO `users` (`user_id`, `password`, `user_type`, `name`, `directorate`, 
 (41, '356a192b7913b04c54574d18c28d46e6395428ab', 2, 'نادر', 4, 0),
 (351, '17ba0791499db908433b80f37c5fbc89b870084b', 2, 'فلان 1', 3, 0),
 (30563, '15afd7262ebd18f6f7c1401f13249c2afd747402', 2, 'عبدالعزيز السرور', 2, 1),
-(30566, '6e80b0dd7715f4a4f185cdab085bc6ad65df8672', 2, 'عبدالله', 2, 1),
+(30566, '45005e5be35a4051ed56c72d03679e256508009f', 2, 'عبدالله', 2, 1),
 (30629, '356a192b7913b04c54574d18c28d46e6395428ab', 2, 'محمد أبو جودة', 2, 1);
 
 -- --------------------------------------------------------

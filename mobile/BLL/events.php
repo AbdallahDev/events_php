@@ -26,7 +26,17 @@ class events extends my_db {
 
     //this function get the details for the specified event
     function get_event_by_id($event_id) {
-        $query = "SELECT events.id, events.event_entity_name, events.subject, events.event_date, events.time FROM events WHERE events.id = ? ORDER by events.event_date DESC, events.time DESC";
+        $query = "SELECT events.id, events.event_entity_name, events.subject, "
+                . "events.event_date, events.time, "
+                //Below, I've fetched the hall name and the event place, 
+                //and that to show where the event will behold.
+                . "halls.hall_name, events.event_place "
+                . "FROM events "
+                //Below I've joined the halls table to get the hall name if the 
+                //event beholds in one of them.
+                . "INNER JOIN halls on halls.hall_id = events.hall_id "
+                . "WHERE events.id = ? "
+                . "ORDER by events.event_date DESC, events.time DESC";
         $datatypes = 'i';
         $vars = array(&$event_id);
         return $this->get_data($query, $datatypes, $vars);

@@ -90,12 +90,18 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
     //conditions for each entity id.
     $query = "SELECT event_id, events.event_entity_name, events.subject, "
             . "events.event_date, events.time, "
+            //Below, I've fetched the hall name and the event place, and that to 
+            //show where the event will behold.
+            . "halls.hall_name, events.event_place, "
             //below, I'll select the committee name as 'entity_name' because I 
             //want the column to be recognized like that in the final JSON 
             //result because in the Android model it's recognized like that.
             . "committees.committee_name AS entity_name "
             . "FROM `event_event_entity` "
             . "INNER JOIN events ON events.id = event_event_entity.event_id "
+            //Below I've joined the halls table to get the hall name if the 
+            //event beholds in one of them.
+            . "INNER JOIN halls on halls.hall_id = events.hall_id "
             . "INNER JOIN committees ON committees.committee_id = event_event_entity.event_entity_id "
             . "WHERE event_entity_id = 0";
 

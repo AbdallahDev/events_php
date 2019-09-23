@@ -20,6 +20,12 @@ $category_id_GET = 0;
 //This variable will store the entity id, I'll initialize it with 0 because 
 //it's the default value.
 $entity_id_GET = 0;
+//This variable will store the current date events status, I'll use it to decide 
+//if the mobile app wants to view the events for the current date or for all the 
+//dates. And I've initialized it with True value because I want to show the 
+//events of the current date as the default state.
+$events_date_status_GET = "false";
+$events_date_statement = "WHERE events.event_date = CURRENT_DATE";
 //This object is for dealing with the event_event_entity class that deals with 
 //the event_event_entity DB table.
 $event_event_entity_obj = new event_event_entity();
@@ -35,6 +41,10 @@ if (isset($_GET['categoryId'])) {
 if (isset($_GET['entityId'])) {
     $entity_id_GET = $_GET['entityId'];
 }
+//Here I'll check if the value of the event date from the get is set or not.
+if (isset($_GET['eventsDateStatus'])) {
+    $events_date_status_GET = $_GET['eventsDateStatus'];
+}
 $categories_obj = new event_entity_category();
 $entity_ids = array();
 
@@ -45,8 +55,14 @@ $entity_ids = array();
 //coz there is no category and entity chosen
 if ($category_id_GET == 0) {
 
-    //here i get all the events in the db for all the categories and intities
-    $rs_events_android = $events->get_all_events();
+    //Here I'll get all the events in the DB for all the categories and entities. 
+    //And I've sent the current date events status to the function, based on 
+    //that value the function will get the events of the current date or for all 
+    //the days.
+    if ($events_date_status_GET == "true") {
+        $events_date_statement = "";
+    }
+    $rs_events_android = $events->get_all_events($events_date_statement);
 
     //Here I'll loop over the events to get based on their IDs the entities that 
     //belong to them.

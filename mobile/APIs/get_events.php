@@ -115,7 +115,7 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
     //"true", that means the function should fetch the events for all the dates, 
     //so I set the statement like "1" because I should add something between 
     //the "WHERE" and the "AND".
-    if ($events_date_status_GET == TRUE) {
+    if ($events_date_status_GET == "true") {
         $events_date_statement = "1";
     }
 

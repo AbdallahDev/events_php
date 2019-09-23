@@ -25,7 +25,11 @@ $entity_id_GET = 0;
 //dates. And I've initialized it with True value because I want to show the 
 //events of the current date as the default state.
 $events_date_status_GET = "false";
-$events_date_statement = "WHERE events.event_date = CURRENT_DATE";
+//This variable will store the statement that is used to decide to fetch the 
+//events of the current date or for all the dates, and I've initialized it the 
+//statement "events.event_date = CURRENT_DATE" because the default state is for 
+//fetching the events of the current date.
+$events_date_statement = "events.event_date = CURRENT_DATE";
 //This object is for dealing with the event_event_entity class that deals with 
 //the event_event_entity DB table.
 $event_event_entity_obj = new event_event_entity();
@@ -55,13 +59,23 @@ $entity_ids = array();
 //coz there is no category and entity chosen
 if ($category_id_GET == 0) {
 
+    //Here I'll check if the variable "$events_date_status_GET" has the 
+    //value "false", in that case, I'll add "WHERE" to the value of the 
+    //variable "$events_date_statement" because that will add the condition that 
+    //fetches the events for the current date, but if the values is "true", 
+    //in that case, I'll set the variable "$events_date_statement" with an empty 
+    //string, to make the function that fetches the events to fetch them for all 
+    //the dates.
+    if ($events_date_status_GET == "false") {
+        $events_date_statement = "WHERE " . $events_date_statement;
+    } else {
+        $events_date_statement = "";
+    }
+
     //Here I'll get all the events in the DB for all the categories and entities. 
     //And I've sent the current date events status to the function, based on 
     //that value the function will get the events of the current date or for all 
     //the days.
-    if ($events_date_status_GET == "true") {
-        $events_date_statement = "";
-    }
     $rs_events_android = $events->get_all_events($events_date_statement);
 
     //Here I'll loop over the events to get based on their IDs the entities that 
@@ -97,6 +111,14 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
     //to fetch based on them the details of the events that belong to them.
     $entity_ids_obj = $entity_name_obj->get_entities_specific_category($category_id_GET);
 
+    //Here I'll check if the value of the variable "$events_date_status_GET" is 
+    //"true", that means the function should fetch the events for all the dates, 
+    //so I set the statement like "1" because I should add something between 
+    //the "WHERE" and the "AND".
+    if ($events_date_status_GET == TRUE) {
+        $events_date_statement = "1";
+    }
+
     //I've created this variable to store the query that will be sent to the 
     //function that will fetch the event details for all the entities for the 
     //specified category.
@@ -119,7 +141,17 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
             //event beholds in one of them.
             . "INNER JOIN halls on halls.hall_id = events.hall_id "
             . "INNER JOIN committees ON committees.committee_id = event_event_entity.event_entity_id "
-            . "WHERE event_entity_id = 0";
+            //Here I've concatenated the variable "$events_date_statement", 
+            //to decide based on its value to get the events of the current 
+            //date or all the dates for all the entities that belong to 
+            //a specific category.
+            . "WHERE $events_date_statement "
+            //I've added the start bracket after the AND operator and I'll add 
+            //the end one later because I want to group all the conditions that 
+            //come after the AND operator, and that because I want them to be 
+            //treated as a single unity, because if I don't do that the query 
+            //will not operate successfully.
+            . "AND (event_entity_id = 0";
 
     //Here I'll loop over each entity id to add to the query the condition that 
     //related to it.
@@ -134,7 +166,12 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
 
     //This is the last concatenation for the query, to get all the events for 
     //all the entities in the specified
-    $query .= " ORDER BY events.event_date DESC, events.time DESC";
+    //
+    //Here I've added the end bracket to close the group of the conditions that 
+    //come after the AND operator. And I've done it like that because I want the 
+    //conditions that related to each entity from the above while to be added to 
+    //that group.
+    $query .= ") ORDER BY events.event_date DESC, events.time DESC";
 
     //Here I'll fetch all the event details then store the result in the 
     //$event_details variable.
@@ -151,7 +188,7 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
 //here in this case i should get all the events for a specified entity
 else {
 
-    //here i stored the entity id from the url to get all the event ids related 
+    //Here i stored the entity id from the url to get all the event ids related 
     //to that entity
     $entity_id = $entity_id_GET;
     $entity_events_rs = $event_event_entity_obj->get_event_id($entity_id);
@@ -160,6 +197,7 @@ else {
 
         //here i got the event id to use it to get the event details
         $event_id = $entity_events_row['event_id'];
+        //
         $rs_events_android = $events->get_event_by_id($event_id);
         $row_event_entity = $rs_events_android->fetch_assoc();
 

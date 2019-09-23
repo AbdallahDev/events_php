@@ -28,7 +28,9 @@ class committees extends my_db {
 
     //this function get the entities for a specific category
     function get_entities_specific_category($category) {
-        $query = "SELECT committee_id, committee_name FROM `committees` WHERE committees.event_entity_category_id = ? ORDER BY `committees`.`committee_rank` ASC";
+        $query = "SELECT committee_id, committee_name FROM `committees` "
+                . "WHERE committees.event_entity_category_id = ? "
+                . "ORDER BY `committees`.`committee_rank` ASC";
         $datatypes = "i";
         $vars = array(&$category);
         return $this->get_data($query, $datatypes, $vars);

@@ -7,7 +7,10 @@ include_once '../DAL/my_db.php';
 //this events class for the android events
 class events extends my_db {
 
-    //this function get all the events for all the committees
+    //this function get all the events for all the committees,
+    //This function will receive the "$events_date_statement" parameter to 
+    //decide based on it to get the event ids on the current date or the other 
+    //dates.
     function get_all_events($events_date_statement) {
         //In the query, I've joined the halls table to get the hall_name to view 
         //it in the mobile app, and I've selected the event place from the 
@@ -17,7 +20,11 @@ class events extends my_db {
                 . "halls.hall_name, event_place "
                 . "FROM events "
                 . "INNER JOIN halls ON events.hall_id = halls.hall_id "
-                . "$events_date_statement "
+                //The value of the parameter will be "1" if the wanted events 
+                //are for the other dates, and will be 
+                //"events.event_date = CURRENT_DATE" for the events on the 
+                //current date.
+                . "WHERE $events_date_statement "
                 . "ORDER by events.event_date DESC, events.time DESC";
         return $this->get_all_data($query);
     }
@@ -33,7 +40,7 @@ class events extends my_db {
         return $this->get_data($query, $datatypes, $vars);
     }
 
-    //this function get the details for the specified event
+    //This function get the details for the specified event.
     function get_event_by_id($event_id) {
         $query = "SELECT events.id, events.event_entity_name, events.subject, "
                 . "events.event_date, events.time, "

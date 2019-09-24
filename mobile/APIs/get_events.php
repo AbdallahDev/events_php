@@ -48,6 +48,14 @@ if (isset($_GET['entityId'])) {
 //Here I'll check if the value of the event date from the get is set or not.
 if (isset($_GET['eventsDateStatus'])) {
     $events_date_status_GET = $_GET['eventsDateStatus'];
+
+    //Here I'll check if the value of the variable "$events_date_status_GET" is 
+    //"true", that means the function should fetch the events for all the dates, 
+    //so I set the statement like "1" because I should add something after 
+    //the "WHERE" condition.
+    if ($events_date_status_GET == "true") {
+        $events_date_statement = "1";
+    }
 }
 $categories_obj = new event_entity_category();
 $entity_ids = array();
@@ -58,19 +66,6 @@ $entity_ids = array();
 //here if the categoryId is 0 that means the user want to get all the events
 //coz there is no category and entity chosen
 if ($category_id_GET == 0) {
-
-    //Here I'll check if the variable "$events_date_status_GET" has the 
-    //value "false", in that case, I'll add "WHERE" to the value of the 
-    //variable "$events_date_statement" because that will add the condition that 
-    //fetches the events for the current date, but if the values is "true", 
-    //in that case, I'll set the variable "$events_date_statement" with an empty 
-    //string, to make the function that fetches the events to fetch them for all 
-    //the dates.
-    if ($events_date_status_GET == "false") {
-        $events_date_statement = "WHERE " . $events_date_statement;
-    } else {
-        $events_date_statement = "";
-    }
 
     //Here I'll get all the events in the DB for all the categories and entities. 
     //And I've sent the current date events status to the function, based on 
@@ -110,14 +105,6 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
     //Here I'll get all the entity ids that belong to the specified category, 
     //to fetch based on them the details of the events that belong to them.
     $entity_ids_obj = $entity_name_obj->get_entities_specific_category($category_id_GET);
-
-    //Here I'll check if the value of the variable "$events_date_status_GET" is 
-    //"true", that means the function should fetch the events for all the dates, 
-    //so I set the statement like "1" because I should add something between 
-    //the "WHERE" and the "AND".
-    if ($events_date_status_GET == "true") {
-        $events_date_statement = "1";
-    }
 
     //I've created this variable to store the query that will be sent to the 
     //function that will fetch the event details for all the entities for the 
@@ -191,13 +178,15 @@ else {
     //Here i stored the entity id from the url to get all the event ids related 
     //to that entity
     $entity_id = $entity_id_GET;
-    $entity_events_rs = $event_event_entity_obj->get_event_id($entity_id);
+    $entity_events_rs = $event_event_entity_obj->get_event_id($entity_id
+            , $events_date_statement);
 
+    //Here I'll loop over the event ids that related to the specified entity, 
+    //and that to get the event details
     while ($entity_events_row = $entity_events_rs->fetch_assoc()) {
 
         //here i got the event id to use it to get the event details
         $event_id = $entity_events_row['event_id'];
-        //
         $rs_events_android = $events->get_event_by_id($event_id);
         $row_event_entity = $rs_events_android->fetch_assoc();
 
@@ -206,8 +195,10 @@ else {
         //to the event
         if (empty($row_event_entity["event_entity_name"])) {
 
-            //in the json result, coz some events related to entities without having 
-            //a specific entity name in the event_entity_name column
+            //Here I'll add an entry to the JSON result contains the entity name, 
+            //and that when the event doesn't have an entity name typed in the 
+            //entity name text box in the web system. That name will be fetched 
+            //from the event_event_entity table.
             $row_event_entity["entity_name"] = get_entity_name($entity_id);
         }
         array_push($events_array, $row_event_entity);

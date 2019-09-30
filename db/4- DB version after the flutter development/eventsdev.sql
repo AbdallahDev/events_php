@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2019 at 01:48 PM
+-- Generation Time: Sep 30, 2019 at 09:57 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -125,21 +125,48 @@ CREATE TABLE `device_token` (
 --
 
 INSERT INTO `device_token` (`device_token_id`, `device_token`, `device_identifier`, `device_name`, `device_model`, `device_isPhysical`, `dateTime`) VALUES
-(584, 'dikuyfNwwLg:APA91bGgXx_wE0-KSFu2S9j8D-HM0i6bT3Sz2eCu9-TJLP2_ZS5YnYNv-SzESdv8Z2n9ubvSmXjZ0Hi0wCbpaSv0SC_oluynIZcWK_7ge5sDui7LXZJ7e9MhsA0c-N0Zi2TYehDvTfnT', '18d13abfd46e6006', 'lavender', 'Redmi Note 7', 'true', '2019-09-22 06:14:19'),
+(584, 'dikuyfNwwLg:APA91bGgXx_wE0-KSFu2S9j8D-HM0i6bT3Sz2eCu9-TJLP2_ZS5YnYNv-SzESdv8Z2n9ubvSmXjZ0Hi0wCbpaSv0SC_oluynIZcWK_7ge5sDui7LXZJ7e9MhsA0c-N0Zi2TYehDvTfnT', '18d13abfd46e6006', 'lavender', 'Redmi Note 7', 'true', '2019-09-30 07:47:38'),
 (586, 'cRZ7I_k3_3k:APA91bH30U3r4DUfKLDodsuTe1Ar0RX4mvHK4CYsWimyvuPo7zbDdONju3ob0tDvI_tUVKIJfdHgUA4LtGwnsMfvn7HCGSj4skz9QzgYUaPc514lkam_rvbNCp73RMc0B62G6S7s6bpe', '5955b07031fc368b', 'blueline', 'Pixel 3', 'true', '2019-09-05 08:32:22'),
-(587, 'ckN6uk0wERw:APA91bFSPZC2usJyaK7zxGmq1BYfiKFAcQo14DQtbMCrR4re0sxsC1kuWWwLBdT5s0Wzf0ybhwZk8oVFctNmea2ZfVq5EkEAl_QWSUC8HDrOPyszYYjMS1CSTwP5ZENFH3CaXy6mATvv', '380b42e7576687a0', 'HWMHA', 'MHA-L29', 'true', '2019-09-05 08:32:27'),
-(589, 'esPdA5q9YdI:APA91bEQvDPbmdfUzzoXIlu5n9gIgbB1REpoZHzw4XXpBTYZhxJaWiw__CWXIfK1YKo4VKs_ig6qpL_8cezxzNSKtMkf8ZVGsoji1HF_j4Nd4BtO5i5RpxSMOk2SQzF7Evt_NXNxJ-TE', '34c63bc20c9c15b2', 'G8441', 'G8441', 'true', '2019-09-05 08:32:34'),
+(587, 'c_bwOB2mdpo:APA91bGuwsqPDkEsBzOdyV-BL5EfsJPiORrjTRSKOV-k8ppzlnGyMt1K_I-kFZBbIXX3UuIA_inArdbpUY6q7iUE87aB5Fh4UsJJMbTHHFgIbsrNOdcDqvhqYyw2dThS4U3Q1aClueVZ', '380b42e7576687a0', 'HWMHA', 'MHA-L29', 'true', '2019-09-26 09:30:08'),
+(589, 'ehrz5Q6qn4Q:APA91bFsosD-Z2oFxn5jtMXsJlz-HS8vKkeOpyiXhdS7qWaxRYOd8Laa1Nk8ekA9ac6DRX68RETnXaVTzmEVM6nq00HCU4VOVJ7qnFvet8NVB2fWvJUME8LcHbMFz_cmD8aeIusx3SXV', '34c63bc20c9c15b2', 'G8441', 'G8441', 'true', '2019-09-26 09:30:16'),
 (590, 'ezIwG4agZ5I:APA91bH5vkN4145Q6qIl3lolJgSrPf3Ds8jE_5edjNsspA-antZWZ2iJgDi7Nj9lXgoECSGNJzOp7MmzOaB4WtDPai5sPOYGzXglrN6k9oP6x_WHhNTh5LyoId0ngmNcWkNsVO51MQ6T', '811e8ce8e7e3e2b3', 'walleye', 'Pixel 2', 'true', '2019-09-05 08:32:43'),
-(593, 'fNnT-Ym0gb8:APA91bGO6OQut9-RRg9-HIFjWnDYqqijmYXs8lBXVR5D2AhXJZYkYHdowv4VJ9_1LO2yEwueSknm68wJcmQmYF5FDMNBTLSbzvLojqh5wNo55Z5phmE0NG6rWqTVe_oEwYeBznzQ2Nln', '92ba31861c45febc', 'harpia', 'Moto G Play', 'true', '2019-09-05 08:32:57'),
-(594, 'cH6jR2lpLic:APA91bHLUZynuvhOqkYKi1MnPoY9XgumVCLfpu0aF6F5FqBH8R4q2635zUvz6YqKYXU_ZHmf6D-ogR9vL6q9GtgMzFSHxnbe6eab5kFmZ6FhP_85253fqRFlONv9j2UnLu6zXueush2Q', '41b2ab47f20c0028', 'griffin', 'XT1650', 'true', '2019-09-05 08:33:48'),
-(595, 'cyAJI9e-51c:APA91bFsZh7tlqD9VonYWn-yUGt6DG79_qUT6elcOuPbq5HKxKYOk5t7m16u4o6zFGcsGlxBBD-OSIuhY86Bjt4J0yma2MEtIMz3_tgTNZkV2jn8NkotRrrRzRZLXgMgzL4M_w-48gU4', '0c28114197a342ad', 'FRT', 'Nokia 1', 'true', '2019-09-05 08:33:30'),
-(597, 'ekgteWtrwio:APA91bFjhTt3GTone_JgQ3sz1SJFhHsVM_5OJbMgzP7vtxKmCMIENEglkkjmWfWRngWWpJocNC7YwB3x3dZBijwmfYDgP9FPkdy06DunMrsaKAxcczU-ZW6vmey1b3cFuZ03w7seoA6i', '4366461f92513537', 'm0', 'GT-I9300', 'true', '2019-09-05 08:35:12'),
+(593, 'duOS_7Jmnbs:APA91bFUGeCuncca-_gHXtbYBXWTqJZ3t91f1jDlEqOI5YTS9c_D2Zd4z4S0R7hZH-wA8mkybgk-afkiZd01tZHev28m7XxhiP0Fq4Ldk5R21D_ztO5o2yWIds87FBlkvhNF8Q8DswIC', '92ba31861c45febc', 'harpia', 'Moto G Play', 'true', '2019-09-26 09:30:46'),
+(594, 'fnZlxJMFJxk:APA91bEcm-8iIoF733gKWAF6X3X_eMzxAQ-mONn4kyt6HeE_Stkj0wOz2I07LOzNSqF_ADVZVwVLw5CQpHhHF1P4a_Umt890zCptcBC5n5F0yOSXtjNAfIjBBswyJx1akVfIbatR9dLT', '41b2ab47f20c0028', 'griffin', 'XT1650', 'true', '2019-09-26 09:30:09'),
+(595, 'dAbfJLKqox8:APA91bEG0uBAWrNpY2x7fzyOIGOVxZRxcutOAzPlZaBUT_yi4id41D5C9q8XvKGuD14WSrEfznvH4N0y_s0QFVj-tBV62GGiaAJ9IBRlC5GMy7_K_xG4jmMT1kqADXBraAmsH4w2qg5F', '0c28114197a342ad', 'FRT', 'Nokia 1', 'true', '2019-09-26 09:31:04'),
+(597, 'dre9YACr08Y:APA91bHP-wI1Rj0TzP1VsL2ljAcA7pl7eZTzvxFw0waTMM6ijGU4g37cqZwlVlGLKKWJdJbLZQ_2hR4CGcR7BgEITeKUzYvIo6twALjyzBDz6CJoZfaWzg06jJYHFk5GOv7pffl97EJU', '4366461f92513537', 'm0', 'GT-I9300', 'true', '2019-09-26 09:31:54'),
 (602, 'cre67O6Gv3c:APA91bG78ikKTBGlhwvKbhW6ULn-80BQ8Vv3Zc1d_y-F_cd53Witj8vZCST7j9RlT7J4wSQYzylHVVfJgJLSK7hyt3heNo9F0fX440S9YHNMVyDYO06PIJfNsgArwnGPGa0LUa-xGhTW', 'a03d749a6a207ab1', 'HWJKM-H', 'JKM-LX1', 'true', '2019-09-19 11:04:10'),
 (603, 'cWM7HCOG3js:APA91bGVpAqaMgLo8fMNhBugRYqqBJZPVhTNRqIXNg69ZK2wIcjp2HB4j5HNgoPfnCuwiYMJdP2DMPyAoIIcDoYbSNWQxrIEKWsw3leRFsKzZJ8Iv8ajEHmcwEDfaZkCBlcEsohzb1Zd', '7E124796-D8B2-4F34-B887-9DE7DF7AFD3B', 'iPad', 'iPad', 'true', '2019-09-17 09:35:15'),
 (604, 'cjA4n-wH9Ms:APA91bFJkcU2dD591ZQhsm31-2z6gxPhRzSUxr7nTjdXgEfPikGE2Ki2UvmAvjdktC6Z1sClkL050QxhGyuKA2Rxy-HRlRsLNdWaj8g-Z0qJa-WzFadMQyPge0FAVKJ_z-7m7-jkMG_i', '41840C1F-D189-4426-A0C4-6222D1BD9D37', ' AR iPhone XR ', 'iPhone', 'true', '2019-09-18 22:30:16'),
-(606, 'd3fuaJ57MWA:APA91bGWvQv7NUdSfeTC0DuSpVm22HDBS4xvSE0DpmYJAQVlMir7ppZziCQ8NVVhqclwrQ2pCKWRPBOrQAJBo8XVOfd0cP4zo_sWGK7FYw1qZ-_0WME_UGYCN5WzclbIYGRLmMAUwUaW', '10F26CCE-C57D-49D0-9DC6-7F7701DDCF70', 'Ammar.Awamleh', 'iPhone', 'true', '2019-09-24 07:13:31'),
-(607, 'dbay5xuqLBA:APA91bFBc30h37b6pjd26ANmhLDR4IXbHp-qqgvVsUv88c9BAOYjyUQ-g1d84X9WAPribi9yudFcZj44LePHhXPnx1Nw0t7Tgfk2JbXqRNTrLdqBMAYNU4fMuEvImcKh09i_w4hwqhFO', '6EB37A45-079D-4914-B173-D20FF870343E', 'iPhone SE', 'iPhone', 'true', '2019-09-24 11:11:25'),
-(610, 'dnwM-Bok-a0:APA91bFlrnJNBnFc0uf-juudbVouqjFN5Pe7X0MGOXAkVGUn3cklP7i33Ti0CltwH1P2mCMmK65loehJsSV8nWtTyi2tka_9cyJJcyp-VBapBiZ8qTyXE1qx3CwhRsBlTzotnWUKWX2a', '233295bf9f52562f', 'CPH1819', 'CPH1819', 'true', '2019-09-21 21:35:45');
+(606, 'd3fuaJ57MWA:APA91bGWvQv7NUdSfeTC0DuSpVm22HDBS4xvSE0DpmYJAQVlMir7ppZziCQ8NVVhqclwrQ2pCKWRPBOrQAJBo8XVOfd0cP4zo_sWGK7FYw1qZ-_0WME_UGYCN5WzclbIYGRLmMAUwUaW', '10F26CCE-C57D-49D0-9DC6-7F7701DDCF70', 'Ammar.Awamleh', 'iPhone', 'true', '2019-09-29 03:57:00'),
+(607, 'dbay5xuqLBA:APA91bFBc30h37b6pjd26ANmhLDR4IXbHp-qqgvVsUv88c9BAOYjyUQ-g1d84X9WAPribi9yudFcZj44LePHhXPnx1Nw0t7Tgfk2JbXqRNTrLdqBMAYNU4fMuEvImcKh09i_w4hwqhFO', '6EB37A45-079D-4914-B173-D20FF870343E', 'iPhone SE', 'iPhone', 'true', '2019-09-25 19:51:18'),
+(610, 'dnwM-Bok-a0:APA91bFlrnJNBnFc0uf-juudbVouqjFN5Pe7X0MGOXAkVGUn3cklP7i33Ti0CltwH1P2mCMmK65loehJsSV8nWtTyi2tka_9cyJJcyp-VBapBiZ8qTyXE1qx3CwhRsBlTzotnWUKWX2a', '233295bf9f52562f', 'CPH1819', 'CPH1819', 'true', '2019-09-26 10:27:51'),
+(611, 'fvzr83241WA:APA91bEg4XqLtnHnS3QJ_zb2SoerwECgziAQnD6P7h9xS-iSgJlIufTPyApx2W1l63ODWrRR2PFcCrjpGsiqO1TCm2KzPFptsKwr--UAL3V6655RKFcWYlF8dSHHBDNnsqc1TkhEHO8E', 'da1eacad1374f44e', 'walleye', 'Pixel 2', 'true', '2019-09-26 09:30:12'),
+(612, 'fvbv2mJCqkY:APA91bGf1tSKk5OkaqTkjB0sdpsb4vANY-x5_bydGZJNrm0-QCETHvEnlE05VLbXerdDg3T9-ToREfFM-y9MfwCFu0EkOXxhoyZM1NfNDLXF9M7N363T7yA5H1vuhGQ4T4X-s6vfo-W4', 'c57c753487db7965', 'walleye', 'Pixel 2', 'true', '2019-09-26 09:30:04'),
+(613, 'cTnv1ZO_PhU:APA91bGQpZejyAZ-ziASR0Cm8gZvffDetCV98FvxJ_gfDXqMF25CQl7LZEVfFbmhnpLwe67eBP11tyd-4Qhs0LuACtU0BaO36dAlZ74SuLhL4tCF3KRzh6xP11DWP6OcGYlwoe9LNlgz', 'e56c1bf3be9297aa', 'sailfish', 'Pixel', 'true', '2019-09-26 09:31:46'),
+(614, 'null', 'd6b5f96a8e3f7880', 'starqlteue', 'SM-G960U1', 'true', '2019-09-24 12:33:28'),
+(615, 'null', 'e334121d486a1492', 'starqlteue', 'SM-G960U1', 'true', '2019-09-24 12:33:32'),
+(616, 'dqkOPq6Xrf8:APA91bEcVj16NSZxPnF25fKWXGaZF_ewnatgv0_xRhDvsGHjpHnplLv1CcQyr2ZKuowX206rSeWQjopFsc--MahOsmvhE7OcTOwvqzWWPir20_G_nJd09G6rP2qG_TuIStEge3hFtA2V', 'cefaed1cd06b840d', 'blueline', 'Pixel 3', 'true', '2019-09-26 09:30:55'),
+(617, 'null', 'fc8d0bd37a9a04e', 'lv0', 'LG-AS110', 'true', '2019-09-26 09:33:36'),
+(618, 'c2qgDHk7Hpw:APA91bGOTKuC6cZg7k-W1jGibBcKyUGTbfwsGaLtlaabJxWriEMBhoywcfUuJlk1dnnu5LR0g2RuSulaHkcJTUHVU5fDJpbf5yp2qW4Z0fGFlGsjYXHmSawG7Wjdq4pqSZ8woy5X6vTy', 'dcde25d554b1b746', 'calypso', 'WindsongAOB', 'false', '2019-09-24 12:36:53'),
+(619, 'cLgLP6Z2m34:APA91bEdL7blSiyjb6tKpnXOJPgzMpq8GEtXKDgMpzZepcFobii-gClwAi3jpYgeaL5Rm31zarDZ0ifP4fgkAZUru_H3rqwoBNkYGPZWzOc89d-pOCIrIzMPYisXBXffRLdHZTaXUHo8', '27A09FA4-6479-4202-9EBF-8119AD189E03', 'IT', 'iPad', 'true', '2019-09-25 10:58:53'),
+(620, 'e3iLtAGPRew:APA91bHjyI1eVv4OHwDsgoHojlv0ApJ0mO8CcXHm9DTrt8GcWH0tjU_SOr-r2lY7PYNJ9H3jK84vhlkljqUPzmWO4_YP0SPD_yf19hm0XkArrNNpvEnj-Hc8lkjFDll39iZd4dj6XeGi', '3AC8B3F4-3F2B-4C69-8E3F-E05962D97C50', 'iPhone', 'iPhone', 'true', '2019-09-25 11:22:42'),
+(621, 'e5PtbwyyU4Y:APA91bE_gDW3HK2Se0mUbb_qjfDCrE61-JAUTdHtuJzQRqXETjFnJiNh0QJ5M1l0sHE_GxeLZxNlemurFRzHjMwfD-isZ6pWJxHOGSrC7SnivW1sFQP5upzm5BzCiGD2PFXoENb7h7AL', '32F8690C-D4FF-456E-8ACF-4D21EA344769', 'IT', 'iPad', 'true', '2019-09-25 11:47:33'),
+(622, 'emjGp3JjiH0:APA91bH4tF0P4_PWuDPL9xqNBiBQpmmlLqO87xZe27RWLapgh8IsHa5j9XkvYozCYTu1loBynJ9TtwMPMp1JnsUSkuXaMXzTMMy7-hgDro1TB8dQHgujNI3iTcZjzY6XJAZK_Z82NpHg', '0B29C2DB-CF1E-4911-B71E-40DB69981C7E', 'iPhone 11 Pro Max', 'iPhone', 'false', '2019-09-30 07:02:57'),
+(623, 'fFvIoENDvDE:APA91bEkSsZ_DlQbhXHil1C_E6oR6OT0SirDo6HGKgWW07knGzZxuM8Hu1vC6TUm7Wcnwn7yq1i6dCX2fPHnM4uHDRbLj3QR-wJWEAoMGxMSlLIsDouE4w8BKELZ_NJf7DuZrXpO55Ik', 'f8bf9bb64453d638', 'generic_x86', 'Android SDK built for x86', 'false', '2019-09-30 07:33:40'),
+(624, 'fXeM2sFUwv4:APA91bEe6BA4D2SxBp230I7zvJhnbIK3jbEmiW8kxnNbreSmX556swgMz3FKiroczz1yd-UUh0_glRvtLgqXTT5ovylzOpou5ar9Ow6uq4R3XzQvMMo_yQBNz_hrI2FPPYtbyDc9y_Y_', '7F762494-907B-4FEE-9CA3-6896CAAC4B8D', 'App’s iPad', 'iPad', 'true', '2019-09-26 04:13:02'),
+(625, 'ep8M27bESqg:APA91bGxwj0fL-LL4PymQPrznCwWsZeCQ6MMnTdm6FNe-JRNU41uEnjJGuFWqzHoz5RSy9yRDZ58vQLlJV1c6YsVyBqu2Icn7BBzRBMmp08uT8oCPJ73JMnRkYqcsg-4pV0gCwn2A9Mg', 'DB3365C1-3C10-4940-B074-7142A7C473B9', 'IT', 'iPad', 'true', '2019-09-30 06:21:41'),
+(626, 'fN4n3ZIx91s:APA91bEww20ZxlbhFaB0oJaV5z4o7uEB5XT0t5d6nGfhxsuDBRJDi3KlUmv9Oulf4oYWjyI1FhIBaS361Wg8jUCao5rtoi64e9jd4SwJB3INf-W_i5leiVD3YRL-3K9uxF9tTNwP1kzj', '3086de3d9896d10d', 'calypso', 'WindsongAOB', 'false', '2019-09-26 09:30:16'),
+(627, 'null', 'c977afc652876107', 'starqlteue', 'SM-G960U1', 'true', '2019-09-26 09:30:43'),
+(628, 'null', '2941a41c415fad19', 'starqlteue', 'SM-G960U1', 'true', '2019-09-26 09:30:45'),
+(629, 'eH2SCbziH-Q:APA91bGaFiO_d4Vp5JrFlTI3UzaUb1vwnAE8XEMcTTSyEy52YbM3aqEOVH6XHvcuz5bMzgSXW4Hc5SsMwk0c5DcAZOK80s0SPj0i5di_A0rEMI9vBFgFrkVQVioaHNbVSMF1OkbezZVO', '5b6158f3c89169f', 'hwALE-H', 'ALE-L23', 'true', '2019-09-26 09:33:05'),
+(630, 'null', '9f525715270743e3', 'bullhead', 'Nexus 5X', 'true', '2019-09-26 09:34:05'),
+(631, 'null', '1eb5a7a482321e6f', 'bullhead', 'Nexus 5X', 'true', '2019-09-26 09:34:15'),
+(632, 'cb9OpsGk8Eo:APA91bGVzK5GEuQ3qOojMLVOW2rA0BtYWysV-a3sW5qlD13IhHQcJLP3aFAT3LbawPxJNsDoEy-xBbn-kuRmeio9J7kOTJRSRuzpPMNDI3BcNtP7Flx9dFEgiK1Mm3L0pwJYQy3ypKsY', 'ED827D63-E469-4AE1-A4B2-8E63144D0BA0', 'iPhone', 'iPhone', 'true', '2019-09-26 10:26:45'),
+(633, 'd8wSkLcTBe4:APA91bHSXjMcTxUNKIrZ6Ru3DQz1tQ0qCXUSfd3ZxFbLgVqr7fpXe88XQabRGDSLKBv1pILNHRQ_P8oLonoq41Mfq61Hc9-MLT1pATZmdPi7RLwIbmIUF4N0gw5m3c3juAJ_1nOJcazV', '5FD21526-83AB-4CEE-848D-7CE025D34A66', 'iPad (5)', 'iPad', 'true', '2019-09-26 23:19:55'),
+(634, 'fSHtThAaqlU:APA91bGjAomv9GJpX03oKTkEjMJR-MLVTE2vwJK7US8q-jVWfIUGWCeEj4dqcP3dLQB923xbvlP1YxyKJZxU5npAZefWNcCUsr3WJBtprKfZ96f_-1J5zGSiWgEhb8bvpr4P4gUOH9lA', 'e4382a4ca75a12c9', 'zenlte', 'SM-G928C', 'true', '2019-09-27 07:50:18'),
+(635, 'dsLcq8KlO_c:APA91bEXFkdXmsi1dGkuD82WYOfxGebrwpCHl38WvM8f-OMKvutggaDTUNyfyet73TXoCs912UTtt7y-OnsA4Lan8Wqige3qvy5bi54_3VsNG9TyAsSCSHWh09XMRCt6LB7s6SXHgsQ2', 'A91BC3F0-5C7A-4E27-A9D1-605F9EDC0A05', 'IT', 'iPad', 'true', '2019-09-30 06:25:09'),
+(636, 'c4MVWmQFdAk:APA91bEQ1MEZQo9vsPCKOp98lUuCdKPCxmd-JeLaYqXP_NEZhFyAUkJGenkkVNxsFpesKdLmvOMEkUgy4DpwLAfcBDQL7VOKCjGi5HrLFP7_0O2alW7_j9GQghC7eWqMIW6XRcuFE2rk', '7E1F2AAF-9A82-4893-9E55-813BF969303A', 'Ammar.Awamleh', 'iPhone', 'true', '2019-09-30 06:28:26'),
+(637, 'ct_0rgve6hk:APA91bF57O2PoIjbSZIsRVycRf05xmSq9V9mozQ0a8awRDmcgyWLvSnpah8WAfnuwfLRwf04P-0OM_CxW_dodqHnsyNfUwgEVrXzs_Tl216zgcbuoDEf8Vxjut85IQ4TJUHwX3ZYmtld', 'AF67E0DF-FB0C-4700-83E0-F6D1481E1186', 'iPhone SE', 'iPhone', 'true', '2019-09-30 06:42:16');
 
 -- --------------------------------------------------------
 
@@ -286,7 +313,10 @@ INSERT INTO `events` (`id`, `event_entity_name`, `time`, `event_appointment`, `s
 (189, '', '11:00:00', '', 'ندوة بعنوان (تمكين الشباب سياسياً واقتصادياً).', '2019-09-19', 0, 'بيت شباب عجلون', '2019-09-19 09:27:41', 30563, '2019-09-19 09:28:21', 30563, 2, 1),
 (190, '', '12:30:00', '', 'لقاء مع وفد من البنك الاوروبي لإعادة الاعمار للتباحث بشأن تعزيز الاطار القانوني للوساطة المالية لتسوية النزاعات لاسيما التجارية منها.', '2019-09-22', 4, '', '2019-09-22 09:50:40', 30563, '0000-00-00 00:00:00', -1, 2, 1),
 (191, '', '10:30:00', '', 'زيارة الى الطريق الصحراوي، للاطلاع على واقع العمل في الطريق الصحراوي.\r\n\r\n-التحرك من امام وزارة الاشغال العامة والاسكان الساعة 10:30 صباحاً.', '2019-09-24', 0, '******', '2019-09-24 09:48:30', 30563, '0000-00-00 00:00:00', -1, 2, 1),
-(192, '', '11:00:00', '', 'لقاء مع الفريق الاقتصادي الحكومي ومحافظ البنك المركزي ورئيس هيئة الاستثمار لمناقشة: قرارات الحكومة لتحسين الادارة المالية ،الايرادات الحكومية لشهر 7,8 لعام 2019، اسباب تخفيض النفقات الرأسمالية، الية اجراءات الحجز ومنع السفر على المستثمرين، مشاريع وتوصيات مؤتمر لندن.', '2019-09-24', 4, '', '2019-09-24 09:52:44', 30563, '0000-00-00 00:00:00', -1, 2, 1);
+(192, '', '11:00:00', '', 'لقاء مع الفريق الاقتصادي الحكومي ومحافظ البنك المركزي ورئيس هيئة الاستثمار لمناقشة: قرارات الحكومة لتحسين الادارة المالية ،الايرادات الحكومية لشهر 7,8 لعام 2019، اسباب تخفيض النفقات الرأسمالية، الية اجراءات الحجز ومنع السفر على المستثمرين، مشاريع وتوصيات مؤتمر لندن.', '2019-09-24', 4, '', '2019-09-24 09:52:44', 30563, '0000-00-00 00:00:00', -1, 2, 1),
+(193, '', '12:00:00', '', 'لقاء مع سعادة السفير الإيطالي المعتمد لدى المملكة.', '2019-09-26', 10, '', '2019-09-25 22:48:40', 30563, '0000-00-00 00:00:00', -1, 2, 1),
+(194, 'جمعية الصداقة البرلمانية الأردنية-التركية', '14:00:00', '', 'زيارة رسمية لسعادة السفير التركي لدى المملكة الأردنية الهاشمية.\r\n -التحرك من المجلس الساعة 1:30 ظهراً.\r\n', '2019-09-29', 0, 'السفارة التركية', '2019-09-29 00:11:29', 30563, '0000-00-00 00:00:00', -1, 2, 1),
+(195, 'لجنة الأخوة البرلمانية الأردنية-الجزائرية', '14:30:00', '', 'زيارة الى السفارة الجزائرية في عمان والالتقاء بسعادة السفير الجزائري.\r\n-التحرك من المجلس الساعة 2:00 بعد الظهر.\r\n', '2019-09-29', 0, 'السفارة الجزائرية', '2019-09-29 00:12:44', 30563, '0000-00-00 00:00:00', -1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -305,7 +335,7 @@ CREATE TABLE `event_entity_category` (
 
 INSERT INTO `event_entity_category` (`event_entity_category_id`, `event_entity_category_name`) VALUES
 (1, 'اللجان الدائمة'),
-(2, 'الكتل'),
+(2, 'الكتل النيابية'),
 (3, 'لجان الاخوة'),
 (4, 'جمعيات الصداقة'),
 (5, 'المكتب دائم'),
@@ -410,7 +440,8 @@ INSERT INTO `event_event_entity` (`event_id`, `event_entity_id`) VALUES
 (188, 43),
 (190, 10),
 (191, 11),
-(192, 38);
+(192, 38),
+(193, 13);
 
 -- --------------------------------------------------------
 
@@ -822,13 +853,13 @@ ALTER TABLE `committees`
 -- AUTO_INCREMENT for table `device_token`
 --
 ALTER TABLE `device_token`
-  MODIFY `device_token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=611;
+  MODIFY `device_token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=638;
 
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
 
 --
 -- AUTO_INCREMENT for table `event_entity_category`

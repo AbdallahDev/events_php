@@ -12,14 +12,20 @@ class event_event_entity extends my_db {
     //and also I've selected the event date and time, because If I don't do that 
     //the selected events will be shown in the app as the latest event shown in 
     //the last and the old one in the first.
-    function get_event_id($entity_id) {
+    function get_event_id($entity_id, $events_date_statement) {
         $query = "SELECT event_id, events.event_date, events.time "
-                . "FROM `event_event_entity` INNER JOIN events ON event_event_entity.event_id = events.id "
-                . "WHERE event_entity_id = ? "
+                . "FROM `event_event_entity` "
+                . "INNER JOIN events ON event_event_entity.event_id = events.id "
+                //The value of the parameter will be "1" if the wanted events 
+                //are for the other dates, and will be 
+                //"events.event_date = CURRENT_DATE" for the events on the 
+                //current date.
+                . "WHERE $events_date_statement "
+                . "AND event_entity_id = ? "
                 . "ORDER BY events.event_date DESC, events.time DESC";
         return $this->get_data($query, 'i', array(&$entity_id));
     }
-    
+
     //This function fetches from the DB all the event details for all the 
     //entities based on their ids that specified in the query.
     function get_event_details_based_on_entity_ids($query) {

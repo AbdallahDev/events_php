@@ -114,7 +114,10 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
     //And I've made the last where condition as 0 because later I'll add more 
     //conditions for each entity id.
     $query = "SELECT event_id, events.event_entity_name, events.subject, "
-            . "events.event_date, events.time, "
+            . "events.event_date, "
+            //below I'll format the selected time to make it appears in the 
+            //mobile app without seconds.
+            . "DATE_FORMAT(events.time, '%H:%i') AS `time`, "
             //Below, I've fetched the hall name and the event place, and that to 
             //show where the event will behold.
             . "halls.hall_name, events.event_place, "

@@ -16,7 +16,10 @@ class events extends my_db {
         //it in the mobile app, and I've selected the event place from the 
         //events table in case the hall not chosen.
         $query = "SELECT events.id, events.event_entity_name, events.subject, "
-                . "events.event_date, events.time, "
+                . "events.event_date, "
+                //below I'll format the selected time to make it appears in the 
+                //mobile app without seconds.
+                . "DATE_FORMAT(events.time, '%H:%i') AS `time`, "
                 . "halls.hall_name, event_place "
                 . "FROM events "
                 . "INNER JOIN halls ON events.hall_id = halls.hall_id "
@@ -43,7 +46,10 @@ class events extends my_db {
     //This function get the details for the specified event.
     function get_event_by_id($event_id) {
         $query = "SELECT events.id, events.event_entity_name, events.subject, "
-                . "events.event_date, events.time, "
+                . "events.event_date, "
+                //below I'll format the selected time to make it appears in the 
+                //mobile app without seconds.
+                . "DATE_FORMAT(events.time, '%H:%i') AS `time`, "
                 //Below, I've fetched the hall name and the event place, 
                 //and that to show where the event will behold.
                 . "halls.hall_name, events.event_place "

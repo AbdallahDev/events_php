@@ -91,11 +91,22 @@ if ($category_id_GET == 0) {
             $entity_id_obj_row = $entity_id_obj_rs->fetch_assoc();
             $entity_id = $entity_id_obj_row['event_entity_id'];
 
-            //here i add the entity_name element to the events row, so it can appear 
-            //in the json result, coz some events related to the entities without having 
-            //a specific entity name in the event_entity_name column
+            //here i add the entity_name element to the events row, so it can 
+            //appear in the json result, coz some events related to the entities 
+            //without having a specific entity name in the event_entity_name 
+            //column
             $row_events_android["entity_name"] = get_entity_name($entity_id);
         }
+
+        //Here I'll check for the value of the event appointment that selected 
+        //from the DB if it's not empty I'll assign it to the JSON field 
+        //'eventtime', else I'll assign the value of the time.
+        if (!empty($row_events_android['event_appointment'])) {
+            $row_events_android['event_time'] = $row_events_android['event_appointment'];
+        } else {
+            $row_events_android['event_time'] = $row_events_android['time'];
+        }
+
         array_push($events_array, $row_events_android);
     }
 }

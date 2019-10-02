@@ -20,6 +20,10 @@ class events extends my_db {
                 //below I'll format the selected time to make it appears in the 
                 //mobile app without seconds.
                 . "DATE_FORMAT(events.time, '%H:%i') AS `time`, "
+                //I've selected the event appointment because the event 
+                //sometimes has a time filled in the appointment text box in the 
+                //events web system, so I need to show it in the mobile app.
+                . "events.event_appointment, "
                 . "halls.hall_name, event_place "
                 . "FROM events "
                 . "INNER JOIN halls ON events.hall_id = halls.hall_id "
@@ -50,6 +54,10 @@ class events extends my_db {
                 //below I'll format the selected time to make it appears in the 
                 //mobile app without seconds.
                 . "DATE_FORMAT(events.time, '%H:%i') AS `time`, "
+                //I've selected the event appointment because the event 
+                //sometimes has a time filled in the appointment text box in the 
+                //events web system, so I need to show it in the mobile app.
+                . "events.event_appointment, "
                 //Below, I've fetched the hall name and the event place, 
                 //and that to show where the event will behold.
                 . "halls.hall_name, events.event_place "

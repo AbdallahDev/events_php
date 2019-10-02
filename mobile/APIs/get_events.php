@@ -91,16 +91,27 @@ if ($category_id_GET == 0) {
             $entity_id_obj_row = $entity_id_obj_rs->fetch_assoc();
             $entity_id = $entity_id_obj_row['event_entity_id'];
 
-            //here i add the entity_name element to the events row, so it can appear 
-            //in the json result, coz some events related to the entities without having 
-            //a specific entity name in the event_entity_name column
+            //here i add the entity_name element to the events row, so it can 
+            //appear in the json result, coz some events related to the entities 
+            //without having a specific entity name in the event_entity_name 
+            //column
             $row_events_android["entity_name"] = get_entity_name($entity_id);
         }
+
+        //Here I'll check for the value of the event appointment that selected 
+        //from the DB if it's not empty I'll assign it to the JSON field 
+        //'eventtime', else I'll assign the value of the time.
+        if (!empty($row_events_android['event_appointment'])) {
+            $row_events_android['event_time'] = $row_events_android['event_appointment'];
+        } else {
+            $row_events_android['event_time'] = $row_events_android['time'];
+        }
+
         array_push($events_array, $row_events_android);
     }
 }
-//bellow if the categoryId is not 0 and the entityId is 0 that means i should get 
-//all the events for all the entities in that specific category
+//bellow if the categoryId is not 0 and the entityId is 0 that means i should 
+//get all the events for all the entities in that specific category
 elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
     //Here I'll get all the entity ids that belong to the specified category, 
     //to fetch based on them the details of the events that belong to them.
@@ -118,6 +129,10 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
             //below I'll format the selected time to make it appears in the 
             //mobile app without seconds.
             . "DATE_FORMAT(events.time, '%H:%i') AS `time`, "
+            //I've selected the event appointment because the event 
+            //sometimes has a time filled in the appointment text box in the 
+            //events web system, so I need to show it in the mobile app.
+            . "events.event_appointment, "
             //Below, I've fetched the hall name and the event place, and that to 
             //show where the event will behold.
             . "halls.hall_name, events.event_place, "
@@ -163,13 +178,24 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
     //that group.
     $query .= ") ORDER BY events.event_date DESC, events.time DESC";
 
-    //Here I'll fetch all the event details then store the result in the 
+    //Here I'll fetch all the event details for all the entity ids that 
+    //concatenated with the query, then I'll store the result in the 
     //$event_details variable.
     $event_details = $event_event_entity_obj->get_event_details_based_on_entity_ids($query);
 
     //Here I'll loop over the result fetched regard the event details to store 
     //each row of it in the $events_array array.
     while ($event_details_row = $event_details->fetch_assoc()) {
+        //Here I'll check for the value of the event appointment that selected 
+        //from the DB if it's not empty I'll assign it to the JSON field 
+        //'event_time', else I'll assign the value of the time that selected 
+        //from the DB.
+        if (!empty($event_details_row['event_appointment'])) {
+            $event_details_row['event_time'] = $event_details_row['event_appointment'];
+        } else {
+            $event_details_row['event_time'] = $event_details_row['time'];
+        }
+        
         //Here I'll push each row that contains one event details to the events 
         //array.
         array_push($events_array, $event_details_row);
@@ -204,6 +230,17 @@ else {
             //from the event_event_entity table.
             $row_event_entity["entity_name"] = get_entity_name($entity_id);
         }
+        
+        //Here I'll check for the value of the event appointment that selected 
+        //from the DB if it's not empty I'll assign it to the JSON field 
+        //'event_time', else I'll assign the value of the time that selected 
+        //from the DB.
+        if (!empty($row_event_entity['event_appointment'])) {
+            $row_event_entity['event_time'] = $row_event_entity['event_appointment'];
+        } else {
+            $row_event_entity['event_time'] = $row_event_entity['time'];
+        }
+        
         array_push($events_array, $row_event_entity);
     }
 }

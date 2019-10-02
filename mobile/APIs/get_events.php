@@ -230,6 +230,17 @@ else {
             //from the event_event_entity table.
             $row_event_entity["entity_name"] = get_entity_name($entity_id);
         }
+        
+        //Here I'll check for the value of the event appointment that selected 
+        //from the DB if it's not empty I'll assign it to the JSON field 
+        //'event_time', else I'll assign the value of the time that selected 
+        //from the DB.
+        if (!empty($row_event_entity['event_appointment'])) {
+            $row_event_entity['event_time'] = $row_event_entity['event_appointment'];
+        } else {
+            $row_event_entity['event_time'] = $row_event_entity['time'];
+        }
+        
         array_push($events_array, $row_event_entity);
     }
 }

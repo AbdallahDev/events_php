@@ -35,6 +35,26 @@ class device_token extends my_db {
                     , &$device_identifier));
     }
 
+    //This function will delete the outdated tokens from the DB, all the tokens 
+    //that have not been updated for a long time will be deleted because that 
+    //means the app has not been used by the user for a long time or the app has 
+    //been deleted or the same device that the app installed in is has 
+    //a duplicated entry in the DB.
+    function delete_outdated_tokens() {
+        //This variable is used as an argument to be sent to the mod_data 
+        //function because the function requires arguments to be sent to it, 
+        //so I've created this dummy argument, and I made its value as 1 because 
+        //I don't want to affect the condition.
+        $argument = 1;
+        $query = "DELETE FROM `device_token` "
+                . "WHERE "
+                . "device_token.dateTime < CURRENT_DATE - INTERVAL 1 MONTH "
+                //I've added this condition because it's required to send an 
+                //argument to the mod_data function.
+                . "AND ?";
+        $this->mod_data($query, "i", array(&$argument));
+    }
+
     //this function will delete all the duplicated tokens and that based on the 
     //device identifier.
     //Because if there is duplication in the DB the same message will be 

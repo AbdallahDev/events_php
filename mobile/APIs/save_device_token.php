@@ -18,6 +18,9 @@ $device_isPhysical = $_GET['deviceIsPhysical'];
 //This object used to access the functions in the device_token class.
 $device_token_obj = new device_token();
 
+//Here I'll call the function that deletes the outdated tokens.
+$device_token_obj->delete_outdated_tokens();
+
 //Here I'll call the function that checks if the identifier exists.
 $identifier_check_rs = $device_token_obj->check_identifier($device_identifier);
 

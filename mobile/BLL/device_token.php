@@ -12,30 +12,54 @@ class device_token extends my_db {
     //tokens at first because that will give them the priority to receive the 
     //message early.
     public function get_all_device_token() {
-        return $this->get_all_data('SELECT device_token FROM `device_token` ORDER BY dateTime DESC');
+        return $this->get_all_data('SELECT device_token FROM `device_token` '
+                        . 'ORDER BY dateTime DESC');
     }
 
     //This function will check for the device identifier existence, if its exist 
     //I'll update the token connected with it, and if its not I'll insert a new 
     //entry for that identifier with a new entry.
     function check_identifier($device_identifier) {
-        $query = "SELECT device_token_id FROM `device_token` WHERE device_identifier = ?";
+        $query = "SELECT device_token_id FROM `device_token` "
+                . "WHERE device_identifier = ?";
         return $this->get_data($query, "s", array(&$device_identifier));
     }
 
     //This function will update the current token with a new one for the 
     //specified device identifier.
     function update_token($device_token, $device_identifier) {
-        $query = "UPDATE `device_token` SET `device_token`= ?,`dateTime`= CURRENT_TIMESTAMP "
+        $query = "UPDATE `device_token` SET `device_token`= ?, "
+                . "`dateTime`= CURRENT_TIMESTAMP "
                 . "WHERE device_identifier = ?";
-        return $this->mod_data($query, "ss", array(&$device_token, &$device_identifier));
+        return $this->mod_data($query, "ss", array(&$device_token
+                    , &$device_identifier));
+    }
+
+    //This function will delete the outdated tokens from the DB, all the tokens 
+    //that have not been updated for a long time will be deleted because that 
+    //means the app has not been used by the user for a long time or the app has 
+    //been deleted or the same device that the app installed in is has 
+    //a duplicated entry in the DB.
+    function delete_outdated_tokens() {
+        //This variable is used as an argument to be sent to the mod_data 
+        //function because the function requires arguments to be sent to it, 
+        //so I've created this dummy argument, and I made its value as 1 because 
+        //I don't want to affect the condition.
+        $argument = 1;
+        $query = "DELETE FROM `device_token` "
+                . "WHERE "
+                . "device_token.dateTime < CURRENT_DATE - INTERVAL 1 MONTH "
+                //I've added this condition because it's required to send an 
+                //argument to the mod_data function.
+                . "AND ?";
+        $this->mod_data($query, "i", array(&$argument));
     }
 
     //this function will delete all the duplicated tokens and that based on the 
     //device identifier.
     //Because if there is duplication in the DB the same message will be 
     //sent multiple times for the same device.
-    function delete_duplicated_tokens($device_identifier) {
+    function delete_duplicated_tokens($device_name, $device_model) {
         $this->mod_data('DELETE FROM `device_token` WHERE device_identifier = ?'
                 , 's', array(&$device_identifier));
     }
@@ -51,7 +75,8 @@ class device_token extends my_db {
          * device_model and device_isPhysical in the DB, and i'll get the values 
          * from the url */
         $query = "INSERT INTO `device_token`(`device_token`, `device_identifier`, "
-                . "`device_name`, `device_model`, `device_isPhysical`) VALUES (?,?,?,?,?)";
+                . "`device_name`, `device_model`, `device_isPhysical`) "
+                . "VALUES (?,?,?,?,?)";
         $this->mod_data($query, 'sssss', array(&$device_token, &$device_identifier,
             &$device_name, &$device_model, &$device_isPhysical));
     }

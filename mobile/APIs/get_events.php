@@ -50,15 +50,19 @@ $event_id = 0;
 $entity_id = 0;
 $entity_name_obj = new committees();
 $entity_name = "";
+
 //I'll check if the value is set in the URL.
 if (isset($_GET['categoryId'])) {
     $category_id_GET = $_GET['categoryId'];
 }
+
 //I'll check if the value is set in the URL.
 if (isset($_GET['entityId'])) {
     $entity_id_GET = $_GET['entityId'];
 }
-//Here I'll check if the value of the event date from the get is set or not.
+
+//Here I'll check if the value of the showAllEvents variable from the GET is set 
+//or not.
 if (isset($_GET['showAllEvents'])) {
     $show_all_events = $_GET['showAllEvents'];
 
@@ -70,6 +74,7 @@ if (isset($_GET['showAllEvents'])) {
         $events_date_statement = "1";
     }
 }
+
 $categories_obj = new event_entity_category();
 $entity_ids = array();
 

@@ -59,8 +59,8 @@ if (isset($_GET['entityId'])) {
     $entity_id_GET = $_GET['entityId'];
 }
 //Here I'll check if the value of the event date from the get is set or not.
-if (isset($_GET['show_all_events'])) {
-    $show_all_events = $_GET['show_all_events'];
+if (isset($_GET['showAllEvents'])) {
+    $show_all_events = $_GET['showAllEvents'];
 
     //Here I'll check if the value of the variable "$events_date_status_GET" is 
     //"true", that means the function should fetch the events for all the dates, 

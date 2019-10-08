@@ -69,9 +69,27 @@ if (isset($_GET['showAllEvents'])) {
     //Here I'll check if the value of the variable "$events_date_status_GET" is 
     //"true", that means the function should fetch the events for all the dates, 
     //so I set the statement like "1" because I should add something after 
-    //the "WHERE" condition.
+    //the "WHERE" condition, and 1 will not affect the condition because 1 means 
+    //TRUE.
     if ($show_all_events == "true") {
+        //Here I'll assign the number one (1) value to the variable 
+        //"$events_date_statement" because it will mean in the MySQL query that 
+        //I want to fetch all the events for all the dates because 1 after the 
+        //where condition means TRUE and that will not affect the condition.
         $events_date_statement = "1";
+    } else {
+        if (isset($_GET['eventsDate'])) {
+            //Here I'll assign the date from the GET that chosen from the date 
+            //picker in the mobile app to the variable $events_date because I'll 
+            //use it in the MYSQL query to get the events for that date.
+            $events_date = $_GET['eventsDate'];
+        }
+        //Here I'll assign to the variable $events_date_statement the statement 
+        //that decides the date for the events that will be fetched from the DB.
+        //And I've put the value of the variable $events_date between two single 
+        //quotes because the string values in the MYSQL query should be between 
+        //quotes to run them correctly.
+        $events_date_statement = "events.event_date = '$events_date'";
     }
 }
 

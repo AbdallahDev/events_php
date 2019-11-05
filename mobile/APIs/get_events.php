@@ -20,16 +20,29 @@ $category_id_GET = 0;
 //This variable will store the entity id, I'll initialize it with 0 because 
 //it's the default value.
 $entity_id_GET = 0;
-//This variable will store the current date events status, I'll use it to decide 
-//if the mobile app wants to view the events for the current date or for all the 
-//dates. And I've initialized it with True value because I want to show the 
-//events of the current date as the default state.
-$events_date_status_GET = "false";
-//This variable will store the statement that is used to decide to fetch the 
-//events of the current date or for all the dates, and I've initialized it the 
-//statement "events.event_date = CURRENT_DATE" because the default state is for 
-//fetching the events of the current date.
-$events_date_statement = "events.event_date = CURRENT_DATE";
+
+//This variable will store the value that I'll use it to decide if the mobile 
+//app wants to view all the events for all the dates. because if it is true I'll 
+//show all events for all the dates, and if it's true I'll show the events for 
+//the specified date by the GET from the URL. And I've initialized it with false 
+//value because I want to show the events of the current date as the default 
+//state.
+$show_all_events = "false";
+
+//this variable will store the date of the events that the app want to show, and 
+//I've made the default value "CURRENT_DATE" because I want to fetch the events 
+//for the current date as the default case, but it could store the date of other 
+//days if the user choose another date from the date picker in the mobile app.
+$events_date = "CURRENT_DATE";
+
+//This variable will store the statement that will be used to decide to fetch 
+//the events for all the dates or for a specific date like the current date, 
+//and I've initialized it the statement "events.event_date = $events_date" 
+//because the default state will be for fetching the events of the current date.
+//And I've concatenated the value of the variable $events_date because it will 
+//decide the specific date for the events that the app wants to show.
+$events_date_statement = "events.event_date = $events_date";
+
 //This object is for dealing with the event_event_entity class that deals with 
 //the event_event_entity DB table.
 $event_event_entity_obj = new event_event_entity();
@@ -37,26 +50,49 @@ $event_id = 0;
 $entity_id = 0;
 $entity_name_obj = new committees();
 $entity_name = "";
+
 //I'll check if the value is set in the URL.
 if (isset($_GET['categoryId'])) {
     $category_id_GET = $_GET['categoryId'];
 }
+
 //I'll check if the value is set in the URL.
 if (isset($_GET['entityId'])) {
     $entity_id_GET = $_GET['entityId'];
 }
-//Here I'll check if the value of the event date from the get is set or not.
-if (isset($_GET['eventsDateStatus'])) {
-    $events_date_status_GET = $_GET['eventsDateStatus'];
+
+//Here I'll check if the value of the showAllEvents variable from the GET is set 
+//or not.
+if (isset($_GET['showAllEvents'])) {
+    $show_all_events = $_GET['showAllEvents'];
 
     //Here I'll check if the value of the variable "$events_date_status_GET" is 
     //"true", that means the function should fetch the events for all the dates, 
     //so I set the statement like "1" because I should add something after 
-    //the "WHERE" condition.
-    if ($events_date_status_GET == "true") {
+    //the "WHERE" condition, and 1 will not affect the condition because 1 means 
+    //TRUE.
+    if ($show_all_events == "true") {
+        //Here I'll assign the number one (1) value to the variable 
+        //"$events_date_statement" because it will mean in the MySQL query that 
+        //I want to fetch all the events for all the dates because 1 after the 
+        //where condition means TRUE and that will not affect the condition.
         $events_date_statement = "1";
+    } else {
+        if (isset($_GET['eventsDate'])) {
+            //Here I'll assign the date from the GET that chosen from the date 
+            //picker in the mobile app to the variable $events_date because I'll 
+            //use it in the MYSQL query to get the events for that date.
+            $events_date = $_GET['eventsDate'];
+        }
+        //Here I'll assign to the variable $events_date_statement the statement 
+        //that decides the date for the events that will be fetched from the DB.
+        //And I've put the value of the variable $events_date between two single 
+        //quotes because the string values in the MYSQL query should be between 
+        //quotes to run them correctly.
+        $events_date_statement = "events.event_date = '$events_date'";
     }
 }
+
 $categories_obj = new event_entity_category();
 $entity_ids = array();
 
@@ -195,7 +231,7 @@ elseif ($category_id_GET != 0 && $entity_id_GET == 0) {
         } else {
             $event_details_row['event_time'] = $event_details_row['time'];
         }
-        
+
         //Here I'll push each row that contains one event details to the events 
         //array.
         array_push($events_array, $event_details_row);
@@ -230,7 +266,7 @@ else {
             //from the event_event_entity table.
             $row_event_entity["entity_name"] = get_entity_name($entity_id);
         }
-        
+
         //Here I'll check for the value of the event appointment that selected 
         //from the DB if it's not empty I'll assign it to the JSON field 
         //'event_time', else I'll assign the value of the time that selected 
@@ -240,7 +276,7 @@ else {
         } else {
             $row_event_entity['event_time'] = $row_event_entity['time'];
         }
-        
+
         array_push($events_array, $row_event_entity);
     }
 }

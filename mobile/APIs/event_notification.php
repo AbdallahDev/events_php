@@ -46,6 +46,9 @@ $rs_device_token = $device_token->get_all_device_token();
 //This array declaration is to store the devices tokens to send them at once to 
 //the FCM sending function, instead of sending each token alone.
 $registration_ids = array();
+//This array will store the data like(device_token, device_identifier, 
+//badge_count) that related to the devices that has IOS.
+$registration_ids_ios = array();
 //Below I'll loop over the device tokens to store them in the registration_ids 
 //array.
 while ($row_device_token = $rs_device_token->fetch_assoc()) {

@@ -98,6 +98,33 @@
                 });
             }
             );
+
+            //This function will send the form data to the page 
+            //events_insert.php to insert a new event in the database and to 
+            //send notifications for it.
+            function submit()
+            {
+                //This variable will store the form data.
+                var data = $("form").serialize();
+                //I've created this ajax function because I want to save the 
+                //newly created event in the database then navigate the user to 
+                //the page that shows the current events and that without the 
+                //need to wait for the system to finish sending all the 
+                //notifications, because in the past the user needed to wait 
+                //until the notifications being sent before he being navigated 
+                //to the page that shows the inserted events.
+                $.ajax(
+                        {
+                            type: "POST",
+                            url: "events_insert.php",
+                            data: data, // data to send to above script page if any
+                            cache: false
+                        });
+                //This function will navigate the user to the indicated page 
+                //after the event inserted instantly without the need to wait 
+                //for the system to finish sending all the notifications.
+                window.location.href = "events_preview_current_future.php";
+            }
         </script>
     </head>
     <body>
@@ -249,7 +276,9 @@
                         <!--this is if the event will be shown on the screen-->
                         <input type="checkbox" id="event_status" name="event_status" value="1" class="w3-check">
                     </div>
-                    <button class="w3-button w3-right w3-theme" type="submit" id="add" name="add" value="انشاء">انشاء</button>
+                    <!--I've made the button type as button because I want to 
+                    submit the form data using ajax -->
+                    <button class="w3-button w3-right w3-theme" type="button" onclick="submit();" id="add" name="add" value="انشاء">انشاء</button>
                 </form>
             </div>
         </div>

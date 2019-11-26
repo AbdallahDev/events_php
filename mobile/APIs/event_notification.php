@@ -1,5 +1,10 @@
 <?php
 
+//I've added the session abort function to let the user use the system while 
+//it's sending the notifications because in the past he couldn't do that, he 
+//had to wait until the sending finished.
+session_abort();
+
 //This file will be continuous for the events_insert.php file because it's 
 //included there.
 

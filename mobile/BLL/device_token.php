@@ -69,16 +69,20 @@ class device_token extends my_db {
     //to identify all the duplicate tokens, and will save 
     //the device (name, model, is physical) to be able to recognize the device 
     //in the database.
+    //And will save the device_is_IOS parameter value to recognize the devices 
+    //that have IOS to deal with their app badge when they receive a new 
+    //notification.
     function store_device_token($device_token, $device_identifier, $device_name
-    , $device_model, $device_isPhysical) {
+    , $device_model, $device_isPhysical, $device_is_IOS) {
         /* here i'll store the device_token, device_identifier, device_name, 
-         * device_model and device_isPhysical in the DB, and i'll get the values 
-         * from the url */
-        $query = "INSERT INTO `device_token`(`device_token`, `device_identifier`, "
-                . "`device_name`, `device_model`, `device_isPhysical`) "
-                . "VALUES (?,?,?,?,?)";
-        $this->mod_data($query, 'sssss', array(&$device_token, &$device_identifier,
-            &$device_name, &$device_model, &$device_isPhysical));
+         * device_model, device_isPhysical and device_is_IOS in the DB, and 
+         * i'll get the values from the url in the file save_device_token.php */
+        $query = "INSERT INTO `device_token`(`device_token`, "
+                . "`device_identifier`, `device_name`, `device_model`, "
+                . "`device_isPhysical`, `device_is_IOS`) VALUES (?,?,?,?,?,?)";
+        $this->mod_data($query, 'sssssi', array(&$device_token,
+            &$device_identifier, &$device_name, &$device_model,
+            &$device_isPhysical, &$device_is_IOS));
     }
 
 }

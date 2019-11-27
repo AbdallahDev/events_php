@@ -155,5 +155,8 @@ function send_notification($notification_title, $notification_subject
 //Here I'll loop over the IOS devices data in the $registration_ids_IOS array 
 //to send them notifications.
 foreach ($registration_ids_IOS as $id) {
-    
+    //This variable $badge_count will store the current badge count from the 
+    //database plus 1 to show it in the IOS app.
+    //This $id[2] has the current badge count for the current IOS device.
+    $badge_count = $id[2] + 1;
 }

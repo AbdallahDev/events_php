@@ -146,3 +146,6 @@ function send_notification($notification_title, $notification_subject
     echo $result;
     curl_close($ch);
 }
+
+//All the below code related to the IOS devices.
+//

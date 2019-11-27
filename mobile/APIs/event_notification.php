@@ -159,4 +159,9 @@ foreach ($registration_ids_IOS as $id) {
     //database plus 1 to show it in the IOS app.
     //This $id[2] has the current badge count for the current IOS device.
     $badge_count = $id[2] + 1;
+    //Here I'll call the function that will increase the badge counter for the 
+    //current device in the database.
+    //And I've sent to it the device identifier to recognize it in the database, 
+    //the variable $id[1] has the device identifier value.
+    $device_token->increaseBadgeCount($id[1]);
 }

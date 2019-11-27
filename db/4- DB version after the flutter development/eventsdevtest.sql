@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2019 at 11:24 AM
+-- Generation Time: Nov 27, 2019 at 12:43 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -117,8 +117,8 @@ CREATE TABLE `device_token` (
   `device_name` varchar(50) NOT NULL,
   `device_model` varchar(50) NOT NULL,
   `device_isPhysical` varchar(50) NOT NULL,
-  `device_is_IOS` int(11) NOT NULL DEFAULT '0',
-  `badge_count` int(11) NOT NULL DEFAULT '0',
+  `device_is_ios` int(11) NOT NULL DEFAULT '0',
+  `badge_counter` int(11) NOT NULL DEFAULT '0',
   `dateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -126,7 +126,7 @@ CREATE TABLE `device_token` (
 -- Dumping data for table `device_token`
 --
 
-INSERT INTO `device_token` (`device_token_id`, `device_token`, `device_identifier`, `device_name`, `device_model`, `device_isPhysical`, `device_is_IOS`, `badge_count`, `dateTime`) VALUES
+INSERT INTO `device_token` (`device_token_id`, `device_token`, `device_identifier`, `device_name`, `device_model`, `device_isPhysical`, `device_is_ios`, `badge_counter`, `dateTime`) VALUES
 (620, 'f81dEr0mTLo:APA91bG29idWyjvNsePIYsJNqnKViVfgmU6ewy3LNlCcxZe_haighu8JoFUOrMGz0a75-J3vYcLWqDNnoBG7qtkO1jKb-Ah08x6O_twk1Bp_g7lHbScvS3Mwnoxk0aolbBpR-9WXlsyS', '2DA6E19C-3F22-4749-991B-97E06E44A04C', 'IT', 'iPad', 'true', 0, 0, '2019-09-19 09:09:43');
 
 -- --------------------------------------------------------

@@ -84,11 +84,11 @@ $notification_date = $_POST['event_date'];
 $notification_time = $event_time;
 
 //Here I'll call the function that will send the FCM notification to the mobile 
-//devices.
+//devices has android.
 send_notification($notification_title, $notification_subject
         , $notification_date, $notification_time, $registration_ids);
 
-//this function to send the push notification
+//this function to send the push notification to the android devices.
 function send_notification($notification_title, $notification_subject
 , $notification_date, $notification_time, $registration_ids) {
     //this data represents the data that will be sent to user when the firebase

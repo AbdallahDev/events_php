@@ -52,7 +52,10 @@ $registration_ids_IOS = array();
 //Below I'll loop over all the device tokens stored in the db.
 while ($row_device_token = $rs_device_token->fetch_assoc()) {
     //Here I'll check if the token belongs to a device has IOS, to store its 
-    //data in the $registration_ids_ios array.
+    //data in the $registration_ids_ios array, and I've separated them from the 
+    //Android devices to add the ability of increasing the app badge counter in 
+    //the IOS devices, because in IOS devices the app badge counter doesn't 
+    //increase automatically like the Android.
     if ($row_device_token['device_is_IOS'] == 1) {
         //This is a temporary array to store the data related to the devices 
         //that have IOS.

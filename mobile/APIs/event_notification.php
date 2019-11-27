@@ -66,7 +66,7 @@ while ($row_device_token = $rs_device_token->fetch_assoc()) {
         //$registration_ids_IOS array to loop over it later when I want to send 
         //a notification.
         $registration_ids_IOS[] = $iOS_devices;
-    } 
+    }
     //Here I'll store the tokens of the android devices in the 
     //$registration_ids to send them notifications later.
     else {
@@ -83,6 +83,8 @@ $notification_date = $_POST['event_date'];
 //to store the time when the event will be held.
 $notification_time = $event_time;
 
+//All the below code related to the android devices.
+//
 //Here I'll call the function that will send the FCM notification to the mobile 
 //devices has android.
 send_notification($notification_title, $notification_subject

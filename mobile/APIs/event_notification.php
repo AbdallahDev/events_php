@@ -49,10 +49,13 @@ $registration_ids = array();
 //This array will store the data like(device_token, device_identifier, 
 //badge_count) that related to the devices that has IOS.
 $registration_ids_ios = array();
-//Below I'll loop over the device tokens to store them in the registration_ids 
-//array.
+//Below I'll loop over all the device tokens stored in the db.
 while ($row_device_token = $rs_device_token->fetch_assoc()) {
-    $registration_ids[] = $row_device_token['device_token'];
+    //Here I'll check if the token belongs to a device has IOS, to store its 
+    //data in the $registration_ids_ios array.
+    if ($row_device_token['device_is_IOS'] == 1) {
+        
+    }
 }
 
 //These variables are to store all the needed information for the notification

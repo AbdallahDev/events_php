@@ -2,11 +2,6 @@
 
 //This file will be continuous for the events_insert.php file because it's 
 //included there.
-//
-//I've added the session abort function to let the user use the system while 
-//it's sending the notifications because in the past he couldn't do that, he 
-//had to wait until the sending finished.
-session_abort();
 
 //bellow is all the code related the push notification
 //and i but it down here so i can get the variables from the form with conditions
@@ -46,35 +41,10 @@ $rs_device_token = $device_token->get_all_device_token();
 //This array declaration is to store the devices tokens to send them at once to 
 //the FCM sending function, instead of sending each token alone.
 $registration_ids = array();
-//This array will store the data like(device_token, device_identifier, 
-//badge_count) that related to the devices that has IOS.
-$registration_ids_IOS = array();
-//Below I'll loop over all the device tokens stored in the db.
+//Below I'll loop over the device tokens to store them in the registration_ids 
+//array.
 while ($row_device_token = $rs_device_token->fetch_assoc()) {
-    //Here I'll check if the token belongs to a device has IOS, to store its 
-    //data in the $registration_ids_ios array, and I've separated them from the 
-    //Android devices to add the ability of increasing the app badge counter in 
-    //the IOS devices, because in IOS devices the app badge counter doesn't 
-    //increase automatically like the Android.
-    if ($row_device_token['device_is_IOS'] == 1) {
-        //This is a temporary array to store the data related to the devices 
-        //that have IOS.
-        $iOS_devices = array();
-        //Below I'll store the data related to the devices that have IOS in the 
-        //array.
-        $iOS_devices[] = $row_device_token['device_token'];
-        $iOS_devices[] = $row_device_token['device_identifier'];
-        $iOS_devices[] = $row_device_token['badgeCount'];
-        //Here I'll store the ios device array data in the 
-        //$registration_ids_IOS array to loop over it later when I want to send 
-        //a notification.
-        $registration_ids_IOS[] = $iOS_devices;
-    }
-    //Here I'll store the tokens of the android devices in the 
-    //$registration_ids to send them notifications later.
-    else {
-        $registration_ids[] = $row_device_token['device_token'];
-    }
+    $registration_ids[] = $row_device_token['device_token'];
 }
 
 //These variables are to store all the needed information for the notification
@@ -86,14 +56,12 @@ $notification_date = $_POST['event_date'];
 //to store the time when the event will be held.
 $notification_time = $event_time;
 
-//All the below code related to the android devices.
-//
 //Here I'll call the function that will send the FCM notification to the mobile 
-//devices has android.
+//devices.
 send_notification($notification_title, $notification_subject
         , $notification_date, $notification_time, $registration_ids);
 
-//this function to send the push notification to the android devices.
+//this function to send the push notification
 function send_notification($notification_title, $notification_subject
 , $notification_date, $notification_time, $registration_ids) {
     //this data represents the data that will be sent to user when the firebase
@@ -148,20 +116,4 @@ function send_notification($notification_title, $notification_subject
     $result = curl_exec($ch);
     echo $result;
     curl_close($ch);
-}
-
-//All the below code related to the IOS devices.
-//
-//Here I'll loop over the IOS devices data in the $registration_ids_IOS array 
-//to send them notifications.
-foreach ($registration_ids_IOS as $id) {
-    //This variable $badge_count will store the current badge count from the 
-    //database plus 1 to show it in the IOS app.
-    //This $id[2] has the current badge count for the current IOS device.
-    $badge_count = $id[2] + 1;
-    //Here I'll call the function that will increase the badge counter for the 
-    //current device in the database.
-    //And I've sent to it the device identifier to recognize it in the database, 
-    //the variable $id[1] has the device identifier value.
-    $device_token->increase_badge_counter($id[1]);
 }

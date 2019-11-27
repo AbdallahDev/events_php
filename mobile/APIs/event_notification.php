@@ -149,3 +149,8 @@ function send_notification($notification_title, $notification_subject
 
 //All the below code related to the IOS devices.
 //
+//Here I'll loop over the IOS devices data in the $registration_ids_IOS array 
+//to send them notifications.
+foreach ($registration_ids_IOS as $id) {
+    
+}

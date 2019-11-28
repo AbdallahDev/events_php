@@ -38,13 +38,14 @@ define('API_ACCESS_KEY'
 include_once '../mobile/BLL/device_token.php';
 $device_token = new device_token();
 $rs_devices_data = $device_token->get_all_device_token();
-//This array declaration is to store the devices tokens to send them at once to 
-//the FCM sending function, instead of sending each token alone.
-$registration_ids = array();
+//This array instance is to store the devices tokens that don't have ios to 
+//send them at once to the FCM sending function, instead of sending 
+//a notification to each one separately.
+$android_tokens = array();
 //Below I'll loop over the device tokens to store them in the registration_ids 
 //array.
 while ($row_device_token = $rs_devices_data->fetch_assoc()) {
-    $registration_ids[] = $row_device_token['device_token'];
+    $android_tokens[] = $row_device_token['device_token'];
 }
 
 //These variables are to store all the needed information for the notification
@@ -59,7 +60,7 @@ $notification_time = $event_time;
 //Here I'll call the function that will send the FCM notification to the mobile 
 //devices.
 send_notification($notification_title, $notification_subject
-        , $notification_date, $notification_time, $registration_ids);
+        , $notification_date, $notification_time, $android_tokens);
 
 //this function to send the push notification
 function send_notification($notification_title, $notification_subject

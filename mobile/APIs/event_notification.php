@@ -55,6 +55,13 @@ while ($row_devices_data = $rs_devices_data->fetch_assoc()) {
         //This is a temporary array to store the data related to the device that 
         //has IOS.
         $ios_device_data = array();
+        $ios_device_data[] = $row_devices_data['device_token'];
+        $ios_device_data[] = $row_devices_data['device_identifier'];
+        $ios_device_data[] = $row_devices_data['badge_counter'];
+        //Here I'll store the ios device row data in the $ios_data array to 
+        //loop over it later when I want to send a notification to all of the 
+        //devices.
+        $ios_data[] = $ios_device_data;
     }
 }
 

@@ -108,9 +108,6 @@ foreach ($event_entity_ids as $value) {
     $event_event_entity->event_event_entity_insert($event_id, $value);
 }
 
-//This header will be removed, because now I'll use the Ajax to navigate the user.
-header('location: events_preview_current_future.php');
-
 /* Below I've included the eventNotificatoin file to send notifications after 
   the event being inserted in the db. */
 include_once '../mobile/apis/event_notification.php';

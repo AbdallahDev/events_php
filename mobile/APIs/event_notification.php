@@ -52,7 +52,9 @@ while ($row_devices_data = $rs_devices_data->fetch_assoc()) {
     //Here I'll check if the row belongs to a device that has ios, to store its 
     //data in the array $ios_data.
     if ($row_devices_data['device_is_ios'] == 1) {
-        
+        //This is a temporary array to store the data related to the device that 
+        //has IOS.
+        $ios_device_data = array();
     }
 }
 

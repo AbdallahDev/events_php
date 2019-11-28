@@ -63,6 +63,11 @@ while ($row_devices_data = $rs_devices_data->fetch_assoc()) {
         //devices.
         $ios_data[] = $ios_device_data;
     }
+    //Here I'll store the tokens of the android devices in the $android_tokens 
+    //array to send them notifications later at once.
+    else {
+        $android_tokens[] = $row_devices_data['device_token'];
+    }
 }
 
 //These variables are to store all the needed information for the notification

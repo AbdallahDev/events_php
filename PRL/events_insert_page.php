@@ -30,22 +30,22 @@
                         //stack the new content on the old one every time they appended
                         $("#committee").empty();
                         if (entities.length !== 0) {
-                            $("#committee").show()
+                            $("#committee").show();
                             //here i'll hide the event_entity_name textbox, 
                             //coz the event entity name is exist in the dropdown menu, 
                             //so he dosen't need to write it here
-                            $("#event_entity_name").hide()
+                            $("#event_entity_name").hide();
                             entities.forEach(function (entities) {
-                                $("#committee").append('<option value="' + entities.committee_id + '">' + entities.committee_name + '</option>')
-                            })
+                                $("#committee").append('<option value="' + entities.committee_id + '">' + entities.committee_name + '</option>');
+                            });
                         } else if (entities.length === 0) {
                             $("#committee").hide();
                             //here i'll show the event_entity_name textbox, 
                             //coz the event entity name dosen't exist in the dropdown menu, 
                             //so he need to write it here
-                            $("#event_entity_name").show()
+                            $("#event_entity_name").show();
                         }
-                    })
+                    });
                 });
 
                 //here when the user focusout the event entity textbox, if it has a 

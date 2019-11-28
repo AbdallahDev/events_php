@@ -45,9 +45,15 @@ $android_tokens = array();
 //This array instance used to store the device's data that have ios to send 
 //them FCM notification and to increase the app badge.
 $ios_data = array();
-//Below I'll loop over the device tokens to store them in the registration_ids array.
+//Below I'll loop over the device's data to store them in the two different 
+//arrays ($android_tokens, $ios_data) based if the data belong to a device has 
+//ios or not.
 while ($row_devices_data = $rs_devices_data->fetch_assoc()) {
-    $android_tokens[] = $row_devices_data['device_token'];
+    //Here I'll check if the row belongs to a device that has ios, to store its 
+    //data in the array $ios_data.
+    if ($row_devices_data['device_is_ios'] == 1) {
+        
+    }
 }
 
 //These variables are to store all the needed information for the notification

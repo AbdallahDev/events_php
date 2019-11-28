@@ -130,6 +130,19 @@ function send_notification_ios($notification_title, $notification_subject
         //device.
         'badge' => $ios_data[2]
     ];
+
+    //This array instance will store just the (to and the notification) fields 
+    //because the notification that will be sent to the ios devices is 
+    //different from the one that will be sent the android one.
+    $fields = array
+        (
+        //Below I've sat the registration ids array for the 'to' field, so I can 
+        //send the FCM messages to multiple devices at once.
+        'to' => $ios_data[0],
+        'notification' => $notification,
+    );
+
+    response_to_firebase($fields);
 }
 
 //this api key for the firebase server, this api key has been taken from the firebase

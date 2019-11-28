@@ -42,8 +42,10 @@ $rs_devices_data = $device_token->get_all_device_token();
 //send them at once to the FCM sending function, instead of sending 
 //a notification to each one separately.
 $android_tokens = array();
-//Below I'll loop over the device tokens to store them in the registration_ids 
-//array.
+//This array instance used to store the device's data that have ios to send 
+//them FCM notification and to increase the app badge.
+$ios_data = array();
+//Below I'll loop over the device tokens to store them in the registration_ids array.
 while ($row_device_token = $rs_devices_data->fetch_assoc()) {
     $android_tokens[] = $row_device_token['device_token'];
 }

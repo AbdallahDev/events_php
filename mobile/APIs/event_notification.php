@@ -2,7 +2,6 @@
 
 //This file will be continuous for the events_insert.php file because it's 
 //included there.
-
 //bellow is all the code related the push notification
 //and i but it down here so i can get the variables from the form with conditions
 //applied to it above, like the appointment time and event date.
@@ -36,6 +35,7 @@ define('API_ACCESS_KEY'
 
 //bellow i'll select all the device tokens in the db to send them notifications
 
+include_once '../mobile/BLL/device_token.php';
 $device_token = new device_token();
 $rs_device_token = $device_token->get_all_device_token();
 //This array declaration is to store the devices tokens to send them at once to 

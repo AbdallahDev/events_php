@@ -108,17 +108,9 @@ foreach ($event_entity_ids as $value) {
     $event_event_entity->event_event_entity_insert($event_id, $value);
 }
 
+//This header will be removed, because now I'll use the Ajax to navigate the user.
 header('location: events_preview_current_future.php');
 
-/*
-  I've made the device token and the push notification files inclusion after the
-  //header, because if I don't do that the page will keep loading until the app
-  //sends all the push notifications, but now it will direct the user to the events
-  page and in the background, it will continue sending the push notifications.
- */
-/* this inclusion for the eventNotificatoin file to send notifications when the 
-  event inserted in the db */
-//and i've made the inclusion directory like this because this file will be
-//included in the event_insert.php file
-include_once '../mobile/BLL/device_token.php';
+/* Below I've included the eventNotificatoin file to send notifications after 
+  the event being inserted in the db. */
 include_once '../mobile/apis/event_notification.php';

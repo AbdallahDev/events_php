@@ -64,21 +64,24 @@ class device_token extends my_db {
                 , 's', array(&$device_identifier));
     }
 
-    //This function will store the mobile device token in the DB to be able to 
-    //receive FCM messages, and also will save the device identifier to use it 
-    //to identify all the duplicate tokens, and will save 
-    //the device (name, model, is physical) to be able to recognize the device 
-    //in the database.
+    /* This function will store the mobile device token in the DB to be able to 
+     * receive FCM messages, and also I will save the device identifier to use 
+     * it to identify all the duplicate tokens, and I will save the 
+     * device (name, model, is physical, is ios) to be able to recognize the 
+     * device in the database. */
+
     function store_device_token($device_token, $device_identifier, $device_name
-    , $device_model, $device_isPhysical) {
-        /* here i'll store the device_token, device_identifier, device_name, 
-         * device_model and device_isPhysical in the DB, and i'll get the values 
-         * from the url */
-        $query = "INSERT INTO `device_token`(`device_token`, `device_identifier`, "
-                . "`device_name`, `device_model`, `device_isPhysical`) "
-                . "VALUES (?,?,?,?,?)";
-        $this->mod_data($query, 'sssss', array(&$device_token, &$device_identifier,
-            &$device_name, &$device_model, &$device_isPhysical));
+    , $device_model, $device_isPhysical, $device_is_ios) {
+        /* Here I'll store the device_token, device_identifier, device_name, 
+         * device_model, device_isPhysical and device_is_ios in the DB, 
+         * and I'll get the values from the URL. */
+        $query = "INSERT INTO `device_token`(`device_token`, "
+                . "`device_identifier`, `device_name`, `device_model`, "
+                . "`device_isPhysical`, `device_is_ios`) "
+                . "VALUES (?,?,?,?,?,?)";
+        $this->mod_data($query, 'sssssi', array(&$device_token,
+            &$device_identifier, &$device_name, &$device_model,
+            &$device_isPhysical, &$device_is_ios));
     }
 
 }

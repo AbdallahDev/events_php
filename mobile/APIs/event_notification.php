@@ -73,6 +73,12 @@ $notification_date = filter_input(INPUT_POST, 'event_date');
 //to store the time when the event will be held.
 $notification_time = $event_time;
 
+//this api key for the firebase server, this api key has been taken from the firebase
+//console to send push notification
+//$registrationIds = ;
+define('API_ACCESS_KEY'
+        , 'AAAAeotQvx8:APA91bF0Llvsw2XqmQ4IW-HJMEEgVriiBO2qbKIsrdZt2EKN2Lq66Vec2V9faJi89gQkoN4FBd6_jynTc3vPm8TFrYcW_NhopsDBFJvbkcuWv16G2-hj2_Nsa-qrof0FmShfYN1A9L79');
+
 //Here I'll call the function that will send the FCM notification to the 
 //android devices.
 send_notification_android($notification_title, $notification_subject
@@ -144,12 +150,6 @@ function send_notification_ios($notification_title, $notification_subject
 
     response_to_firebase($fields);
 }
-
-//this api key for the firebase server, this api key has been taken from the firebase
-//console to send push notification
-//$registrationIds = ;
-define('API_ACCESS_KEY'
-        , 'AAAAeotQvx8:APA91bF0Llvsw2XqmQ4IW-HJMEEgVriiBO2qbKIsrdZt2EKN2Lq66Vec2V9faJi89gQkoN4FBd6_jynTc3vPm8TFrYcW_NhopsDBFJvbkcuWv16G2-hj2_Nsa-qrof0FmShfYN1A9L79');
 
 //This function will combine the code related to sending the response to 
 //firebase, I've combined it here because I don't want it to be duplicated in 

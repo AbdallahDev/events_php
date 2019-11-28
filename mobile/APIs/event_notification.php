@@ -117,6 +117,12 @@ function send_notification_android($notification_title, $notification_subject
     response_to_firebase($fields);
 }
 
+//This function will send the FCM notification to the device that has ios.
+function send_notification_ios($notification_title, $notification_subject
+, $ios_data) {
+    
+}
+
 //this api key for the firebase server, this api key has been taken from the firebase
 //console to send push notification
 //$registrationIds = ;

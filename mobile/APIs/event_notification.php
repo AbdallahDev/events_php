@@ -120,7 +120,16 @@ function send_notification_android($notification_title, $notification_subject
 //This function will send the FCM notification to the device that has ios.
 function send_notification_ios($notification_title, $notification_subject
 , $ios_data) {
-    
+    //This variable stores the fields related to notification that will be sent 
+    //to ios device.
+    $notification = [
+        'title' => $notification_title,
+        'body' => $notification_subject,
+        'sound' => 'default',
+        //This field will take the value of the badge counter for the specified 
+        //device.
+        'badge' => $ios_data[2]
+    ];
 }
 
 //this api key for the firebase server, this api key has been taken from the firebase

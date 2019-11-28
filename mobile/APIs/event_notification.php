@@ -79,13 +79,13 @@ $notification_date = $_POST['event_date'];
 //to store the time when the event will be held.
 $notification_time = $event_time;
 
-//Here I'll call the function that will send the FCM notification to the mobile 
-//devices.
-send_notification($notification_title, $notification_subject
+//Here I'll call the function that will send the FCM notification to the 
+//android devices.
+send_notification_android($notification_title, $notification_subject
         , $notification_date, $notification_time, $android_tokens);
 
-//this function to send the push notification
-function send_notification($notification_title, $notification_subject
+//This function to send the push notification to the android devices.
+function send_notification_android($notification_title, $notification_subject
 , $notification_date, $notification_time, $registration_ids) {
     //this data represents the data that will be sent to user when the firebase
     //notification sent

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2019 at 12:43 PM
+-- Generation Time: Nov 28, 2019 at 10:23 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -118,7 +118,7 @@ CREATE TABLE `device_token` (
   `device_model` varchar(50) NOT NULL,
   `device_isPhysical` varchar(50) NOT NULL,
   `device_is_ios` int(11) NOT NULL DEFAULT '0',
-  `badge_counter` int(11) NOT NULL DEFAULT '0',
+  `badge_counter` int(11) NOT NULL DEFAULT '1',
   `dateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

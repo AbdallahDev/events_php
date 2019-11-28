@@ -123,6 +123,12 @@ function send_notification_android($notification_title, $notification_subject
     response_to_firebase($fields);
 }
 
+//Here I've looped over the $ios_data array that contains the data for all the 
+//ios devices to send them notifications.
+foreach ($ios_data as $data) {
+    send_notification_ios($notification_title, $notification_subject, $data);
+}
+
 //This function will send the FCM notification to the device that has ios.
 function send_notification_ios($notification_title, $notification_subject
 , $ios_data) {

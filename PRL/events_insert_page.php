@@ -98,6 +98,24 @@
                 });
             }
             );
+
+            //This function will send the form data to the 
+            //file events_insert.php, and I use it because I want to use Ajax 
+            //because it will help me to send the form data to insert the event 
+            //and then sending the FCM notification then it will navigate the 
+            //user the page that views the events without the need to make him 
+            //waits for the system to finish the notifications sending.
+            function submit()
+            {
+                var data = $("form").serialize();
+                $.ajax(
+                        {
+                            type: "POST",
+                            url: "events_insert.php",
+                            data: data
+                        });
+                window.location.href = "events_preview_current_future.php";
+            }
         </script>
     </head>
     <body>
@@ -249,7 +267,10 @@
                         <!--this is if the event will be shown on the screen-->
                         <input type="checkbox" id="event_status" name="event_status" value="1" class="w3-check">
                     </div>
-                    <button class="w3-button w3-right w3-theme" type="submit" id="add" name="add" value="انشاء">انشاء</button>
+                    <!-- I've modified the type of the button to "button" to 
+                    enable the ability to call the javascript function that 
+                    named "submit" -->
+                    <button class="w3-button w3-right w3-theme" type="button" onclick="submit()" id="add" name="add" value="انشاء">انشاء</button>
                 </form>
             </div>
         </div>

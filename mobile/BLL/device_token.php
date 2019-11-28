@@ -12,8 +12,10 @@ class device_token extends my_db {
     //latest updated tokens at first because that will give them the priority 
     //to receive the message early.
     public function get_devices_data() {
-        return $this->get_all_data('SELECT device_token FROM `device_token` '
-                        . 'ORDER BY dateTime DESC');
+        return $this->get_all_data('SELECT `device_token`, '
+                        . '`device_identifier`, `device_is_ios`, '
+                        . '`badge_counter` '
+                        . 'FROM `device_token` ORDER BY dateTime DESC');
     }
 
     //This function will check for the device identifier existence, if its exist 

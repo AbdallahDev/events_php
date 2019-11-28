@@ -31,7 +31,7 @@ if (empty(trim($event_entity_name))) {
 //
 include_once '../mobile/BLL/device_token.php';
 $devices_data = new device_token();
-$rs_devices_data = $devices_data->get_all_device_token();
+$rs_devices_data = $devices_data->get_devices_data();
 //This array instance is to store the devices tokens that don't have ios to 
 //send them at once to the FCM sending function, instead of sending 
 //a notification to each one separately.

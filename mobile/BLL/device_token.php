@@ -55,15 +55,6 @@ class device_token extends my_db {
         $this->mod_data($query, "i", array(&$argument));
     }
 
-    //this function will delete all the duplicated tokens and that based on the 
-    //device identifier.
-    //Because if there is duplication in the DB the same message will be 
-    //sent multiple times for the same device.
-    function delete_duplicated_tokens($device_name, $device_model) {
-        $this->mod_data('DELETE FROM `device_token` WHERE device_identifier = ?'
-                , 's', array(&$device_identifier));
-    }
-
     /* This function will store the mobile device token in the DB to be able to 
      * receive FCM messages, and also I will save the device identifier to use 
      * it to identify all the duplicate tokens, and I will save the 

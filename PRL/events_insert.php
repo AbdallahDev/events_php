@@ -81,7 +81,8 @@ elseif (isset($_POST['event_place_textbox'])) {
     $event_place = $_POST['event_place_textbox'];
 }
 
-//here i check the status of the event, coz the status decide if the event will be shown on the screen or not
+//Here I'll check for the status of the event, coz the status decides if the 
+//event will be shown on the screen or not.
 if (isset($_POST['event_status'])) {
     $event_status = $_POST['event_status'];
 }

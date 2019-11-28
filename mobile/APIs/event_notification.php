@@ -27,12 +27,6 @@ if (empty(trim($event_entity_name))) {
     $committee_name = $event_entity_name;
 }
 
-//this api key for the firebase server, this api key has been taken from the firebase
-//console to send push notification
-//$registrationIds = ;
-define('API_ACCESS_KEY'
-        , 'AAAAeotQvx8:APA91bF0Llvsw2XqmQ4IW-HJMEEgVriiBO2qbKIsrdZt2EKN2Lq66Vec2V9faJi89gQkoN4FBd6_jynTc3vPm8TFrYcW_NhopsDBFJvbkcuWv16G2-hj2_Nsa-qrof0FmShfYN1A9L79');
-
 //Below I'll select all the devices data from the DB to send them notifications.
 //
 include_once '../mobile/BLL/device_token.php';
@@ -89,8 +83,7 @@ function send_notification_android($notification_title, $notification_subject
 , $notification_date, $notification_time, $registration_ids) {
     //this data represents the data that will be sent to user when the firebase
     //notification sent
-    $data = array(
-        'title' => $notification_title,
+    $data = array('title' => $notification_title,
         'body' => $notification_subject,
         'date' => $notification_date,
         'time' => $notification_time
@@ -121,6 +114,22 @@ function send_notification_android($notification_title, $notification_subject
         'android' => $android
     );
 
+    response_to_firebase($fields);
+}
+
+//this api key for the firebase server, this api key has been taken from the firebase
+//console to send push notification
+//$registrationIds = ;
+define('API_ACCESS_KEY'
+        , 'AAAAeotQvx8:APA91bF0Llvsw2XqmQ4IW-HJMEEgVriiBO2qbKIsrdZt2EKN2Lq66Vec2V9faJi89gQkoN4FBd6_jynTc3vPm8TFrYcW_NhopsDBFJvbkcuWv16G2-hj2_Nsa-qrof0FmShfYN1A9L79');
+
+//This function will combine the code related to sending the response to 
+//firebase, I've combined it here because I don't want it to be duplicated in 
+//the function that sends the notification to android devices and the function 
+//that sends to ios devices.
+//It will take the parameter "fields" that have the data related to the 
+//notification that will be sent.
+function response_to_firebase($fields) {
     $headers = array
         (
         'Authorization: key=' . API_ACCESS_KEY,

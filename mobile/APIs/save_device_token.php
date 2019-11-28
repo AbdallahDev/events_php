@@ -35,10 +35,10 @@ if ($identifier_check_rs->num_rows > 0) {
     $device_token_obj->update_token($device_token, $device_identifier);
 } else {
     //Here I'll call the function that inserts a new entry for the specified 
-    //identifier with a new token, and a new device info, like (name, model, 
-    //is physical), And this function has been called because the number of rows 
-    //is less than zero and that means the specified identifier does not exist 
-    //in the DB.
+    //identifier with a new token, and a new device info, 
+    //like (name, model, is physical, is ios), And this function has been 
+    //called because the number of rows is less than zero and that means the 
+    //specified identifier does not exist in the DB.
     $device_token_obj->store_device_token($device_token, $device_identifier
-            , $device_name, $device_model, $device_isPhysical);
+            , $device_name, $device_model, $device_isPhysical, $device_is_ios);
 }

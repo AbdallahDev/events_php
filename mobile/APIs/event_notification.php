@@ -18,7 +18,7 @@ if (empty(trim($event_entity_name))) {
     //bellow i'll select the committee name to send it with the notificaiton
     include_once '../BLL/committees.php';
     $committee = new committees();
-    $rs_committee = $committee->committee_get($_POST['committee']);
+    $rs_committee = $committee->committee_get(filter_input(INPUT_POST, 'committee'));
     $row_committee = $rs_committee->fetch_assoc();
     $committee_name = $row_committee['committee_name'];
 } else {
@@ -67,8 +67,8 @@ while ($row_devices_data = $rs_devices_data->fetch_assoc()) {
 //These variables are to store all the needed information for the notification
 //like the event title, subject, date and time.
 $notification_title = $committee_name;
-$notification_subject = $_POST['subject'];
-$notification_date = $_POST['event_date'];
+$notification_subject = filter_input(INPUT_POST, 'subject');
+$notification_date = filter_input(INPUT_POST, 'event_date');
 //This is the 'event time' variable that declared in the events_insert.php file 
 //to store the time when the event will be held.
 $notification_time = $event_time;

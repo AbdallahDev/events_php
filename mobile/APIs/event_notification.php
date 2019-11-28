@@ -36,8 +36,8 @@ define('API_ACCESS_KEY'
 //Below I'll select all the devices data from the DB to send them notifications.
 //
 include_once '../mobile/BLL/device_token.php';
-$device_token = new device_token();
-$rs_devices_data = $device_token->get_all_device_token();
+$devices_data = new device_token();
+$rs_devices_data = $devices_data->get_all_device_token();
 //This array instance is to store the devices tokens that don't have ios to 
 //send them at once to the FCM sending function, instead of sending 
 //a notification to each one separately.

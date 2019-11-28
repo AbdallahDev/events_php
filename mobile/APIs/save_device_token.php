@@ -14,6 +14,8 @@ $device_identifier = $_GET['deviceIdentifier'];
 $device_name = $_GET['deviceName'];
 $device_model = $_GET['deviceModel'];
 $device_isPhysical = $_GET['deviceIsPhysical'];
+//This variable stores the value that indicates that the device has IOS.
+$device_is_ios = filter_input(INPUT_GET, 'deviceIsIOS');
 
 //This object used to access the functions in the device_token class.
 $device_token_obj = new device_token();

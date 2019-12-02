@@ -408,7 +408,9 @@ elseif ($event_event_entity_rs->num_rows >= 1 && $events_row['event_entity_name'
                         }
                         ?> class="w3-check">
                     </div>
-                    <!--<button class="w3-button w3-right w3-theme" type="submit" id="edit" name="edit" value="تعديل">تعديل</button>-->
+                    <!-- I've modified the type of the button to "button" to 
+                    enable the ability to call the javascript function that 
+                    named "submitform" -->
                     <button class="w3-button w3-right w3-theme" type="button" onclick="submitform();" id="edit" name="edit" value="تعديل">تعديل</button>
                 </form>
             </div>

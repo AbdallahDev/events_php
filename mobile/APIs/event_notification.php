@@ -131,6 +131,8 @@ function send_notification_android($notification_title, $notification_subject
 //Here I've looped over the $ios_data array that contains the data for all the 
 //ios devices to send them notifications.
 foreach ($ios_data as $data) {
+    //Here I'll call the function that increases the ios app badge.
+    $devices_data->increase_badge_counter($data[1]);
     send_notification_ios($notification_title, $notification_subject, $data);
 }
 

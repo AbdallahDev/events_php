@@ -77,4 +77,12 @@ class device_token extends my_db {
             &$device_isPhysical, &$device_is_ios));
     }
 
+    //This function will increase the current badge counter for the specified 
+    //device identifier, and that just for the ios devices.
+    function increase_badge_counter($device_identifier) {
+        $query = "UPDATE `device_token` SET `badge_counter`=`badge_counter`+1 "
+                . "WHERE `device_identifier` = ?";
+        return $this->mod_data($query, "s", array(&$device_identifier));
+    }
+
 }

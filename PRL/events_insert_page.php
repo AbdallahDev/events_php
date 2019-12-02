@@ -284,7 +284,7 @@
                     </div>
                     <!-- I've modified the type of the button to "button" to 
                     enable the ability to call the javascript function that 
-                    named "submit" -->
+                    named "submitform" -->
                     <button class="w3-button w3-right w3-theme" type="button" onclick="submitform();" id="add" name="add" value="انشاء">انشاء</button>
                 </form>
             </div>

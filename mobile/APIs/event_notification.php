@@ -2,6 +2,11 @@
 
 //This file will be continuous for the events_insert.php file because it's 
 //included there.
+//I've added the session abort because I want the system to direct the user to 
+//the events page without holding him until the messages being sent.
+session_abort();
+
+
 //bellow is all the code related the push notification
 //and i but it down here so i can get the variables from the form with conditions
 //applied to it above, like the appointment time and event date.

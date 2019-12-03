@@ -31,7 +31,7 @@ class device_token extends my_db {
     //specified device identifier.
     function update_token($device_token, $device_identifier) {
         $query = "UPDATE `device_token` SET `device_token`= ?, "
-                . "`dateTime`= CURRENT_TIMESTAMP "
+                . "`badge_counter`=1,`dateTime`= CURRENT_TIMESTAMP "
                 . "WHERE device_identifier = ?";
         return $this->mod_data($query, "ss", array(&$device_token
                     , &$device_identifier));

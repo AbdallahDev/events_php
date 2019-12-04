@@ -4,7 +4,7 @@
 //entities category.
 //
 //this var store the entities category id that provided by the url
-$categoryId = filter_input(INPUT_POST, 'categoryId');
+$categoryId = filter_input(INPUT_GET, 'categoryId');
 
 include_once '../BLL/committees.php';
 $committees = new committees();

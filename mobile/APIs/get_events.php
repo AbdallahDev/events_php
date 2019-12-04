@@ -52,7 +52,7 @@ $entity_name_obj = new committees();
 $entity_name = "";
 
 //I'll check if the value is set in the URL.
-if (null !== filter_input(INPUT_POST, 'categoryId')) {
+if (null !== filter_input(INPUT_GET, 'categoryId')) {
     $category_id_GET = $_GET['categoryId'];
 }
 

@@ -1,9 +1,10 @@
 <?php
 
-//this file get all the entities (committees) that related to a specific entities category.
+//this file get all the entities (committees) that related to a specific 
+//entities category.
 //
 //this var store the entities category id that provided by the url
-$categoryId = $_GET['categoryId'];
+$categoryId = filter_input(INPUT_POST, 'categoryId');
 
 include_once '../BLL/committees.php';
 $committees = new committees();

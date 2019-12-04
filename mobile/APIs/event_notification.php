@@ -2,6 +2,10 @@
 
 //This file will be continuous for the events_insert.php file because it's 
 //included there.
+//I've added the session abort because I want the system to direct the user to 
+//the events page without holding him until the messages being sent.
+session_abort();
+
 
 //bellow is all the code related the push notification
 //and i but it down here so i can get the variables from the form with conditions
@@ -19,7 +23,7 @@ if (empty(trim($event_entity_name))) {
     //bellow i'll select the committee name to send it with the notificaiton
     include_once '../BLL/committees.php';
     $committee = new committees();
-    $rs_committee = $committee->committee_get($_POST['committee']);
+    $rs_committee = $committee->committee_get(filter_input(INPUT_POST, 'committee'));
     $row_committee = $rs_committee->fetch_assoc();
     $committee_name = $row_committee['committee_name'];
 } else {
@@ -28,46 +32,69 @@ if (empty(trim($event_entity_name))) {
     $committee_name = $event_entity_name;
 }
 
+//Below I'll select all the devices data from the DB to send them notifications.
+//
+include_once '../mobile/BLL/device_token.php';
+$devices_data = new device_token();
+$rs_devices_data = $devices_data->get_devices_data();
+//This array instance is to store the devices tokens that don't have ios to 
+//send them at once to the FCM sending function, instead of sending 
+//a notification to each one separately.
+$android_tokens = array();
+//This array instance used to store the device's data that have ios to send 
+//them FCM notification and to increase the app badge.
+$ios_data = array();
+//Below I'll loop over the device's data to store them in the two different 
+//arrays ($android_tokens, $ios_data) based if the data belong to a device has 
+//ios or not.
+while ($row_devices_data = $rs_devices_data->fetch_assoc()) {
+    //Here I'll check if the row belongs to a device that has ios, to store its 
+    //data in the array $ios_data.
+    if ($row_devices_data['device_is_ios'] == 1) {
+        //This is a temporary array to store the data related to the device that 
+        //has IOS.
+        $ios_device_data = array();
+        $ios_device_data[] = $row_devices_data['device_token'];
+        $ios_device_data[] = $row_devices_data['device_identifier'];
+        $ios_device_data[] = $row_devices_data['badge_counter'];
+        //Here I'll store the ios device row data in the $ios_data array to 
+        //loop over it later when I want to send a notification to all of the 
+        //devices.
+        $ios_data[] = $ios_device_data;
+    }
+    //Here I'll store the tokens of the android devices in the $android_tokens 
+    //array to send them notifications later at once.
+    else {
+        $android_tokens[] = $row_devices_data['device_token'];
+    }
+}
+
+//These variables are to store all the needed information for the notification
+//like the event title, subject, date and time.
+$notification_title = $committee_name;
+$notification_subject = filter_input(INPUT_POST, 'subject');
+$notification_date = filter_input(INPUT_POST, 'event_date');
+//This is the 'event time' variable that declared in the events_insert.php file 
+//to store the time when the event will be held.
+$notification_time = $event_time;
+
 //this api key for the firebase server, this api key has been taken from the firebase
 //console to send push notification
 //$registrationIds = ;
 define('API_ACCESS_KEY'
         , 'AAAAeotQvx8:APA91bF0Llvsw2XqmQ4IW-HJMEEgVriiBO2qbKIsrdZt2EKN2Lq66Vec2V9faJi89gQkoN4FBd6_jynTc3vPm8TFrYcW_NhopsDBFJvbkcuWv16G2-hj2_Nsa-qrof0FmShfYN1A9L79');
 
-//bellow i'll select all the device tokens in the db to send them notifications
+//Here I'll call the function that will send the FCM notification to the 
+//android devices.
+send_notification_android($notification_title, $notification_subject
+        , $notification_date, $notification_time, $android_tokens);
 
-$device_token = new device_token();
-$rs_device_token = $device_token->get_all_device_token();
-//This array declaration is to store the devices tokens to send them at once to 
-//the FCM sending function, instead of sending each token alone.
-$registration_ids = array();
-//Below I'll loop over the device tokens to store them in the registration_ids 
-//array.
-while ($row_device_token = $rs_device_token->fetch_assoc()) {
-    $registration_ids[] = $row_device_token['device_token'];
-}
-
-//These variables are to store all the needed information for the notification
-//like the event title, subject, date and time.
-$notification_title = $committee_name;
-$notification_subject = $_POST['subject'];
-$notification_date = $_POST['event_date'];
-//This is the 'event time' variable that declared in the events_insert.php file 
-//to store the time when the event will be held.
-$notification_time = $event_time;
-
-//Here I'll call the function that will send the FCM notification to the mobile 
-//devices.
-send_notification($notification_title, $notification_subject
-        , $notification_date, $notification_time, $registration_ids);
-
-//this function to send the push notification
-function send_notification($notification_title, $notification_subject
+//This function to send the push notification to the android devices.
+function send_notification_android($notification_title, $notification_subject
 , $notification_date, $notification_time, $registration_ids) {
     //this data represents the data that will be sent to user when the firebase
     //notification sent
-    $data = array(
-        'title' => $notification_title,
+    $data = array('title' => $notification_title,
         'body' => $notification_subject,
         'date' => $notification_date,
         'time' => $notification_time
@@ -78,8 +105,7 @@ function send_notification($notification_title, $notification_subject
     $notification = array(
         'title' => $notification_title,
         'body' => $notification_subject,
-        'sound' => 'default',
-        'badge' => 1,
+        'sound' => 'default'
     );
 
     //This field is to set the "time_to_live" for the FCM message, that 
@@ -99,6 +125,52 @@ function send_notification($notification_title, $notification_subject
         'android' => $android
     );
 
+    response_to_firebase($fields);
+}
+
+//Here I've looped over the $ios_data array that contains the data for all the 
+//ios devices to send them notifications.
+foreach ($ios_data as $data) {
+    //Here I'll call the function that increases the ios app badge.
+    $devices_data->increase_badge_counter($data[1]);
+    send_notification_ios($notification_title, $notification_subject, $data);
+}
+
+//This function will send the FCM notification to the device that has ios.
+function send_notification_ios($notification_title, $notification_subject
+, $ios_data) {
+    //This variable stores the fields related to notification that will be sent 
+    //to ios device.
+    $notification = [
+        'title' => $notification_title,
+        'body' => $notification_subject,
+        'sound' => 'default',
+        //This field will take the value of the badge counter for the specified 
+        //device.
+        'badge' => $ios_data[2]
+    ];
+
+    //This array instance will store just the (to and the notification) fields 
+    //because the notification that will be sent to the ios devices is 
+    //different from the one that will be sent the android one.
+    $fields = array
+        (
+        //Below I've sat the registration ids array for the 'to' field, so I can 
+        //send the FCM messages to multiple devices at once.
+        'to' => $ios_data[0],
+        'notification' => $notification,
+    );
+
+    response_to_firebase($fields);
+}
+
+//This function will combine the code related to sending the response to 
+//firebase, I've combined it here because I don't want it to be duplicated in 
+//the function that sends the notification to android devices and the function 
+//that sends to ios devices.
+//It will take the parameter "fields" that have the data related to the 
+//notification that will be sent.
+function response_to_firebase($fields) {
     $headers = array
         (
         'Authorization: key=' . API_ACCESS_KEY,

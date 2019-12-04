@@ -213,6 +213,39 @@ elseif ($event_event_entity_rs->num_rows >= 1 && $events_row['event_entity_name'
                     }
                 });
             });
+
+            //This function will send the form data to the file 
+            //events_insert.php, and I use it because I want to use Ajax 
+            //because it will help me to send the form data to edit the event 
+            //and then sending the FCM notification then it will direct the 
+            //user to the page that views the events without the need to make 
+            //him waits for the system to finish the notifications sending.
+            function submitform()
+            {
+                //This variable will store the form data.
+                var data = $("form").serialize();
+                //I've created this Ajax function because I want to save the 
+                //edited event in the database then direct the user to 
+                //the page that shows the current events and that without 
+                //waiting for the system to finish sending all the 
+                //notifications, because in the past the user needed to wait 
+                //until the notifications being sent before he being directed 
+                //to the page that views the inserted events.
+                $.ajax(
+                        {
+                            type: "POST",
+                            url: "events_edit_ctl.php",
+                            data: data, // data to send to above script page if any
+                            cache: false,
+                            success: function (response)
+                            {
+                                console.log(response);
+                            }
+                        }).done(function (data) {
+                    console.log(data);
+                });
+                window.location.href = "events_preview_current_future.php";
+            }
         </script>
     </head>
     <body>
@@ -375,8 +408,10 @@ elseif ($event_event_entity_rs->num_rows >= 1 && $events_row['event_entity_name'
                         }
                         ?> class="w3-check">
                     </div>
-                    <button class="w3-button w3-right w3-theme" type="submit" id="edit" name="edit" value="تعديل">تعديل</button>
-
+                    <!-- I've modified the type of the button to "button" to 
+                    enable the ability to call the javascript function that 
+                    named "submitform" -->
+                    <button class="w3-button w3-right w3-theme" type="button" onclick="submitform();" id="edit" name="edit" value="تعديل">تعديل</button>
                 </form>
             </div>
         </div>

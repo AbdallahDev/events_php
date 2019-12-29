@@ -111,25 +111,23 @@ define('API_ACCESS_KEY'
 
 //Here I'll call the function that will send the FCM notification to the 
 //android devices.
-send_notification_android($notification_title, $notification_subject
-        , $notification_date, $notification_time, $android_tokens);
+send_notification_android($notification_title, $notification_body
+        , $android_tokens);
 
 //This function to send the push notification to the android devices.
-function send_notification_android($notification_title, $notification_subject
-, $notification_date, $notification_time, $registration_ids) {
+function send_notification_android($notification_title, $notification_body
+, $registration_ids) {
     //this data represents the data that will be sent to user when the firebase
     //notification sent
     $data = array('title' => $notification_title,
-        'body' => $notification_subject,
-        'date' => $notification_date,
-        'time' => $notification_time
+        'body' => $notification_body,
     );
 
     //I'll send this notification with the message because if the mobile app is 
     //terminated the data will be lost, so, in that case, I'll show this message.
     $notification = array(
         'title' => $notification_title,
-        'body' => $notification_subject,
+        'body' => $notification_body,
         'sound' => 'default'
     );
 

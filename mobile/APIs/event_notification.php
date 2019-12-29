@@ -156,17 +156,17 @@ function send_notification_android($notification_title, $notification_body
 foreach ($ios_data as $data) {
     //Here I'll call the function that increases the ios app badge.
     $devices_data->increase_badge_counter($data[1]);
-    send_notification_ios($notification_title, $notification_subject, $data);
+    send_notification_ios($notification_title, $notification_body, $data);
 }
 
 //This function will send the FCM notification to the device that has ios.
-function send_notification_ios($notification_title, $notification_subject
+function send_notification_ios($notification_title, $notification_body
 , $ios_data) {
     //This variable stores the fields related to notification that will be sent 
     //to ios device.
     $notification = [
         'title' => $notification_title,
-        'body' => $notification_subject,
+        'body' => $notification_body,
         'sound' => 'default',
         //This field will take the value of the badge counter for the specified 
         //device.

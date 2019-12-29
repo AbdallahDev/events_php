@@ -39,7 +39,7 @@ if (empty(trim($event_entity_name))) {
 //in the event place text box.
 if ($event_place != "") {
     $notification_place = $event_place;
-} 
+}
 //Here this means the user has chosen the event place from the halls drop-down menu.
 else {
     //This inclusion is for the halls file, and it will be accessed from the 
@@ -97,6 +97,11 @@ $notification_date = filter_input(INPUT_POST, 'event_date');
 //This is the 'event time' variable that declared in the events_insert.php file 
 //to store the time when the event will be held.
 $notification_time = $event_time;
+//This instance will have the notification message body to show all the event 
+//details like the subject, date and time, event place, and I've grouped all 
+//these details in one text because the notification array takes just the event 
+//title and the event body.
+$notification_body = "الموضوع: " . $notification_subject . "\n" . "التاريخ-الوقت: " . $notification_date . " - " . $notification_time . "\n" . "مكان الاجتماع: " . "$notification_place";
 
 //this api key for the firebase server, this api key has been taken from the firebase
 //console to send push notification

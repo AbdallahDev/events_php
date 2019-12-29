@@ -32,6 +32,26 @@ if (empty(trim($event_entity_name))) {
     $committee_name = $event_entity_name;
 }
 
+//Here I'll check for the event place, because there are two cases for it, 
+//either chosen by the drop-down menu or typed in the event place text box.
+//
+//Here if the variable $event_place is not empty that means the user typed it 
+//in the event place text box.
+if ($event_place != "") {
+    $notification_place = $event_place;
+} 
+//Here this means the user has chosen the event place from the halls drop-down menu.
+else {
+    //This inclusion is for the halls file, and it will be accessed from the 
+    //event insert or event edit page.
+    include_once '../BLL/halls.php';
+    $hall = new halls();
+    $rs_hall_name = $hall->hall_name_get($hall_id);
+    $row_hall_name = $rs_hall_name->fetch_assoc();
+    $hall_name = $row_hall_name['hall_name'];
+    $notification_place = $hall_name;
+}
+
 //Below I'll select all the devices data from the DB to send them notifications.
 //
 include_once '../mobile/BLL/device_token.php';

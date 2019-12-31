@@ -32,6 +32,26 @@ if (empty(trim($event_entity_name))) {
     $committee_name = $event_entity_name;
 }
 
+//Here I'll check for the event place, because there are two cases for it, 
+//either chosen by the drop-down menu or typed in the event place text box.
+//
+//Here if the variable $event_place is not empty that means the user typed it 
+//in the event place text box.
+if ($event_place != "") {
+    $notification_place = $event_place;
+}
+//Here this means the user has chosen the event place from the halls drop-down menu.
+else {
+    //This inclusion is for the halls file, and it will be accessed from the 
+    //event insert or event edit page.
+    include_once '../BLL/halls.php';
+    $hall = new halls();
+    $rs_hall_name = $hall->hall_name_get($hall_id);
+    $row_hall_name = $rs_hall_name->fetch_assoc();
+    $hall_name = $row_hall_name['hall_name'];
+    $notification_place = $hall_name;
+}
+
 //Below I'll select all the devices data from the DB to send them notifications.
 //
 include_once '../mobile/BLL/device_token.php';
@@ -77,6 +97,11 @@ $notification_date = filter_input(INPUT_POST, 'event_date');
 //This is the 'event time' variable that declared in the events_insert.php file 
 //to store the time when the event will be held.
 $notification_time = $event_time;
+//This instance will have the notification message body to show all the event 
+//details like the subject, date and time, event place, and I've grouped all 
+//these details in one text because the notification array takes just the event 
+//title and the event body.
+$notification_body = "الموضوع: " . $notification_subject . "\n" . "التاريخ-الوقت: " . $notification_date . " - " . $notification_time . "\n" . "مكان الاجتماع: " . "$notification_place";
 
 //this api key for the firebase server, this api key has been taken from the firebase
 //console to send push notification
@@ -86,25 +111,23 @@ define('API_ACCESS_KEY'
 
 //Here I'll call the function that will send the FCM notification to the 
 //android devices.
-send_notification_android($notification_title, $notification_subject
-        , $notification_date, $notification_time, $android_tokens);
+send_notification_android($notification_title, $notification_body
+        , $android_tokens);
 
 //This function to send the push notification to the android devices.
-function send_notification_android($notification_title, $notification_subject
-, $notification_date, $notification_time, $registration_ids) {
+function send_notification_android($notification_title, $notification_body
+, $registration_ids) {
     //this data represents the data that will be sent to user when the firebase
     //notification sent
     $data = array('title' => $notification_title,
-        'body' => $notification_subject,
-        'date' => $notification_date,
-        'time' => $notification_time
+        'body' => $notification_body,
     );
 
     //I'll send this notification with the message because if the mobile app is 
     //terminated the data will be lost, so, in that case, I'll show this message.
     $notification = array(
         'title' => $notification_title,
-        'body' => $notification_subject,
+        'body' => $notification_body,
         'sound' => 'default'
     );
 
@@ -133,17 +156,17 @@ function send_notification_android($notification_title, $notification_subject
 foreach ($ios_data as $data) {
     //Here I'll call the function that increases the ios app badge.
     $devices_data->increase_badge_counter($data[1]);
-    send_notification_ios($notification_title, $notification_subject, $data);
+    send_notification_ios($notification_title, $notification_body, $data);
 }
 
 //This function will send the FCM notification to the device that has ios.
-function send_notification_ios($notification_title, $notification_subject
+function send_notification_ios($notification_title, $notification_body
 , $ios_data) {
     //This variable stores the fields related to notification that will be sent 
     //to ios device.
     $notification = [
         'title' => $notification_title,
-        'body' => $notification_subject,
+        'body' => $notification_body,
         'sound' => 'default',
         //This field will take the value of the badge counter for the specified 
         //device.

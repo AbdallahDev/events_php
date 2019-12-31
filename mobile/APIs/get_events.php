@@ -23,7 +23,7 @@ $entity_id_GET = 0;
 
 //This variable will store the value that I'll use it to decide if the mobile 
 //app wants to view all the events for all the dates. because if it is true I'll 
-//show all events for all the dates, and if it's true I'll show the events for 
+//show all events for all the dates, and if it's false I'll show the events for 
 //the specified date by the GET from the URL. And I've initialized it with false 
 //value because I want to show the events of the current date as the default 
 //state.

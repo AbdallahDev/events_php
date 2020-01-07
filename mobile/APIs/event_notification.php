@@ -94,9 +94,26 @@ while ($row_devices_data = $rs_devices_data->fetch_assoc()) {
 $notification_title = $committee_name;
 $notification_subject = filter_input(INPUT_POST, 'subject');
 $notification_date = filter_input(INPUT_POST, 'event_date');
-//This is the 'event time' variable that declared in the events_insert.php file 
-//to store the time when the event will be held.
-$notification_time = $event_time;
+//Here I'll check if the user has sat the time of the event using the time 
+//picker or typed it in the event appointment text box, Because if he typed it 
+//I'll show that text within the time parameter in the notification else I'll 
+//show the time that been chosen from the time picker. If the post value of the 
+//event_appointment instance is empty that means he has chosen the time using 
+//the time picker, but if it is not empty that means that he has specified the 
+//time using the event appointment textbox.
+if (NULL !== filter_input(INPUT_POST, 'event_appointment') &&
+        !empty(trim(filter_input(INPUT_POST, 'event_appointment')))) {
+    //This variable '$notification_time' will be shown in the app FCM 
+    //notification, and in this case, it will have the value of the event 
+    //appointment that typed in the event appointment text box.
+    $notification_time = filter_input(INPUT_POST, 'event_appointment');
+} else {
+    //Here the variable '$notification_time' will have the value of the event 
+    //time chosen from the event time picker.
+    //This is the 'event time' variable that declared in the events_insert.php 
+    //file to store the time when the event will be held.
+    $notification_time = $event_time;
+}
 //This instance will have the notification message body to show all the event 
 //details like the subject, date and time, event place, and I've grouped all 
 //these details in one text because the notification array takes just the event 

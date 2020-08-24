@@ -8,5 +8,3 @@ made the server to stop from working because it was out of space.
 
 The altered values:
 a- Change "LogLevel warn" and "LogLevel info" entries to "LogLevel emerg".
-b- Change "CustomLog logs/access.log common" and  "CustomLog logs/access.log combined" entries 
-    to "#CustomLog logs/access.log combined".

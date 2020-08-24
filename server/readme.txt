@@ -1,5 +1,7 @@
-This folder contains the file "httpd.conf" that located at the 
-location "xampp\apache\conf\" on the xampp
+This folder contains two copies for the file "httpd.conf" that located at the 
+location "xampp\apache\conf\" on the xampp, one is the original before it's being 
+altered one after being altered. 
+
 I've taken this file as a backup from the events app server because I've altered 
 some values in it to stop the log file from getting bigger in size because that 
 made the server to stop from working because it was out of space.

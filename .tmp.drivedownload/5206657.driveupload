@@ -1,0 +1,13 @@
+diff --git a/mobile/APIs/get_events.php b/mobile/APIs/get_events.php
+index 898aff6..d4a0f1d 100644
+--- a/mobile/APIs/get_events.php
++++ b/mobile/APIs/get_events.php
+@@ -6,7 +6,6 @@
+ //with most of the data related to them from the phpmyadmin DB 
+ //like (id, event_entity_name, time, event_appointment....) because I want 
+ //to send them to the mobile app to be stored in the local DB.
+-//test merge 1
+ 
+ //this file get all the events for all the categories and entities, 
+ //or for a specific category or for a specific entity, and that depened on the 
+

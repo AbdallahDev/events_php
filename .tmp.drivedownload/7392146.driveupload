@@ -1,0 +1,10 @@
+# Created by EGit: rebasing 0680af4a0bb50c0309c0548df85ac04366fb6e27 onto 8d95e7b7a71a61d2803ae9ff793b820c874d9fe8
+pick c00b0b0 this is a branch conflict test
+pick 46fc4c2 I've added a newly exported file for the DB because after working on flutter I've made some enhancements on it.
+pick c92ce46 I've added some comments within some of the files that belong to the mobile app APIs, that says they are related to the mobile app APIs.
+pick 2ce2c73 I've removed a comment that I've used it for testing.
+pick 7b4ed0e I've removed a comment.
+pick 7460dd8 I've Modified some of the comments in the file.
+pick 6ef645c I've added a comment to describe the entity id.
+pick 4373c48 I've initialized the category id and the entity id variables with their default values and then I've checked for their existence in the URL before assigning them.
+pick 7c6acdd I've added a new version of the DB because I've modified some of the categories data.

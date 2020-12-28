@@ -1,0 +1,231 @@
+<?php
+
+//This file will be continuous for the events_insert.php file because it's 
+//included there.
+//I've added the session abort because I want the system to direct the user to 
+//the events page without holding him until the messages being sent.
+session_abort();
+
+
+//bellow is all the code related the push notification
+//and i but it down here so i can get the variables from the form with conditions
+//applied to it above, like the appointment time and event date.
+//
+//here i'll send notification with the event details
+//
+//bellow i'll check if the user choosed the entity name from the event entity 
+//dropdwon menu or typed it the event entity textbox
+if (empty(trim($event_entity_name))) {
+    //this means here that the user choosed the event entity name from the 
+    //dropdown menu, coz the $event_entity_name variable value is empty, 
+    //that means the value in the event entity textbox is empty.
+    //
+    //bellow i'll select the committee name to send it with the notificaiton
+    include_once '../BLL/committees.php';
+    $committee = new committees();
+    $rs_committee = $committee->committee_get(filter_input(INPUT_POST, 'committee'));
+    $row_committee = $rs_committee->fetch_assoc();
+    $committee_name = $row_committee['committee_name'];
+} else {
+    //this means here that the user typed the event entity name in the 
+    //event entity textbox.
+    $committee_name = $event_entity_name;
+}
+
+//Here I'll check for the event place, because there are two cases for it, 
+//either chosen by the drop-down menu or typed in the event place text box.
+//
+//Here if the variable $event_place is not empty that means the user typed it 
+//in the event place text box.
+if ($event_place != "") {
+    $notification_place = $event_place;
+}
+//Here this means the user has chosen the event place from the halls drop-down menu.
+else {
+    //This inclusion is for the halls file, and it will be accessed from the 
+    //event insert or event edit page.
+    include_once '../BLL/halls.php';
+    $hall = new halls();
+    $rs_hall_name = $hall->hall_name_get($hall_id);
+    $row_hall_name = $rs_hall_name->fetch_assoc();
+    $hall_name = $row_hall_name['hall_name'];
+    $notification_place = $hall_name;
+}
+
+//Below I'll select all the devices data from the DB to send them notifications.
+//
+include_once '../mobile/BLL/device_token.php';
+$devices_data = new device_token();
+$rs_devices_data = $devices_data->get_devices_data();
+//This array instance is to store the devices tokens that don't have ios to 
+//send them at once to the FCM sending function, instead of sending 
+//a notification to each one separately.
+$android_tokens = array();
+//This array instance used to store the device's data that have ios to send 
+//them FCM notification and to increase the app badge.
+$ios_data = array();
+//Below I'll loop over the device's data to store them in the two different 
+//arrays ($android_tokens, $ios_data) based if the data belong to a device has 
+//ios or not.
+while ($row_devices_data = $rs_devices_data->fetch_assoc()) {
+    //Here I'll check if the row belongs to a device that has ios, to store its 
+    //data in the array $ios_data.
+    if ($row_devices_data['device_is_ios'] == 1) {
+        //This is a temporary array to store the data related to the device that 
+        //has IOS.
+        $ios_device_data = array();
+        $ios_device_data[] = $row_devices_data['device_token'];
+        $ios_device_data[] = $row_devices_data['device_identifier'];
+        $ios_device_data[] = $row_devices_data['badge_counter'];
+        //Here I'll store the ios device row data in the $ios_data array to 
+        //loop over it later when I want to send a notification to all of the 
+        //devices.
+        $ios_data[] = $ios_device_data;
+    }
+    //Here I'll store the tokens of the android devices in the $android_tokens 
+    //array to send them notifications later at once.
+    else {
+        $android_tokens[] = $row_devices_data['device_token'];
+    }
+}
+
+//These variables are to store all the needed information for the notification
+//like the event title, subject, date and time.
+$notification_title = $committee_name;
+$notification_subject = filter_input(INPUT_POST, 'subject');
+$notification_date = filter_input(INPUT_POST, 'event_date');
+//Here I'll check if the user has sat the time of the event using the time 
+//picker or typed it in the event appointment text box, Because if he typed it 
+//I'll show that text within the time parameter in the notification else I'll 
+//show the time that been chosen from the time picker. If the post value of the 
+//event_appointment instance is empty that means he has chosen the time using 
+//the time picker, but if it is not empty that means that he has specified the 
+//time using the event appointment textbox.
+if (NULL !== filter_input(INPUT_POST, 'event_appointment') &&
+        !empty(trim(filter_input(INPUT_POST, 'event_appointment')))) {
+    //This variable '$notification_time' will be shown in the app FCM 
+    //notification, and in this case, it will have the value of the event 
+    //appointment that typed in the event appointment text box.
+    $notification_time = filter_input(INPUT_POST, 'event_appointment');
+} else {
+    //Here the variable '$notification_time' will have the value of the event 
+    //time chosen from the event time picker.
+    //This is the 'event time' variable that declared in the events_insert.php 
+    //file to store the time when the event will be held.
+    $notification_time = $event_time;
+}
+//This instance will have the notification message body to show all the event 
+//details like the subject, date and time, event place, and I've grouped all 
+//these details in one text because the notification array takes just the event 
+//title and the event body.
+$notification_body = "الموضوع: " . $notification_subject . "\n" . "التاريخ-الوقت: " . $notification_date . " - " . $notification_time . "\n" . "مكان الاجتماع: " . "$notification_place";
+
+//this api key for the firebase server, this api key has been taken from the firebase
+//console to send push notification
+//$registrationIds = ;
+define('API_ACCESS_KEY'
+        , 'AAAAeotQvx8:APA91bF0Llvsw2XqmQ4IW-HJMEEgVriiBO2qbKIsrdZt2EKN2Lq66Vec2V9faJi89gQkoN4FBd6_jynTc3vPm8TFrYcW_NhopsDBFJvbkcuWv16G2-hj2_Nsa-qrof0FmShfYN1A9L79');
+
+//Here I'll call the function that will send the FCM notification to the 
+//android devices.
+send_notification_android($notification_title, $notification_body
+        , $android_tokens);
+
+//This function to send the push notification to the android devices.
+function send_notification_android($notification_title, $notification_body
+, $registration_ids) {
+    //this data represents the data that will be sent to user when the firebase
+    //notification sent
+    $data = array('title' => $notification_title,
+        'body' => $notification_body,
+    );
+
+    //I'll send this notification with the message because if the mobile app is 
+    //terminated the data will be lost, so, in that case, I'll show this message.
+    $notification = array(
+        'title' => $notification_title,
+        'body' => $notification_body,
+        'sound' => 'default'
+    );
+
+    //This field is to set the "time_to_live" for the FCM message, that 
+    //specifies for how long the message will be alive before it disappears 
+    //because some times the devices will be offline or turned off.
+    $android = array(
+        //Here I'll set time to 36 hours (129600 seconds) before the message dies.
+        'ttl' => "129600");
+
+    $fields = array
+        (
+        //Below I've sat the registration ids array for the 'to' field, so I can 
+        //send the FCM messages to multiple devices at once.
+        'registration_ids' => $registration_ids,
+        'data' => $data,
+        'notification' => $notification,
+        'android' => $android
+    );
+
+    response_to_firebase($fields);
+}
+
+//Here I've looped over the $ios_data array that contains the data for all the 
+//ios devices to send them notifications.
+foreach ($ios_data as $data) {
+    //Here I'll call the function that increases the ios app badge.
+    $devices_data->increase_badge_counter($data[1]);
+    send_notification_ios($notification_title, $notification_body, $data);
+}
+
+//This function will send the FCM notification to the device that has ios.
+function send_notification_ios($notification_title, $notification_body
+, $ios_data) {
+    //This variable stores the fields related to notification that will be sent 
+    //to ios device.
+    $notification = [
+        'title' => $notification_title,
+        'body' => $notification_body,
+        'sound' => 'default',
+        //This field will take the value of the badge counter for the specified 
+        //device.
+        'badge' => $ios_data[2]
+    ];
+
+    //This array instance will store just the (to and the notification) fields 
+    //because the notification that will be sent to the ios devices is 
+    //different from the one that will be sent the android one.
+    $fields = array
+        (
+        //Below I've sat the registration ids array for the 'to' field, so I can 
+        //send the FCM messages to multiple devices at once.
+        'to' => $ios_data[0],
+        'notification' => $notification,
+    );
+
+    response_to_firebase($fields);
+}
+
+//This function will combine the code related to sending the response to 
+//firebase, I've combined it here because I don't want it to be duplicated in 
+//the function that sends the notification to android devices and the function 
+//that sends to ios devices.
+//It will take the parameter "fields" that have the data related to the 
+//notification that will be sent.
+function response_to_firebase($fields) {
+    $headers = array
+        (
+        'Authorization: key=' . API_ACCESS_KEY,
+        'Content-Type: application/json'
+    );
+
+#Send Reponse To FireBase Server	
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+    $result = curl_exec($ch);
+    echo $result;
+    curl_close($ch);
+}
